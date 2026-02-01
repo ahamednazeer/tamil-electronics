@@ -117,23 +117,19 @@
   }
 }
 
-html {
-  /* Allow native scroll */
-  width: 100%;
-  overflow-x: hidden;
-  background-color: #000510;
-  overscroll-behavior-y: none;
-  /* Try to prevent bounce chain */
-}
-
+html,
 body {
-  /* Restore document flow */
   width: 100%;
-  min-height: 100vh;
   overflow-x: hidden;
+  max-width: 100vw;
   background-color: #000510;
   color: white;
+  overscroll-behavior-y: none;
   @apply bg-darkmode;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 section {
