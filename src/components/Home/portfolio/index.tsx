@@ -37,7 +37,7 @@ const productsData = [
 
 const Portfolio = () => {
   return (
-    <section className='lg:pt-48 md:pt-32 sm:pt-24 pt-16' id='brands'>
+    <section className='lg:pt-48 md:pt-32 sm:pt-24 pt-16 min-h-[600px]' id='brands'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}

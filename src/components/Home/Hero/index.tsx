@@ -81,14 +81,12 @@ const Hero = () => {
                 <div className='absolute inset-1 rounded-2xl border border-white/5 pointer-events-none'></div>
 
                 {/* LCP Image with aggressive optimization */}
-                <img
+                <Image
                   src='/images/hero/banner-image.png'
                   alt='Electrical Products'
                   width={1150}
                   height={1150}
-                  loading='eager'
-                  decoding='async'
-                  fetchPriority='high'
+                  priority
                   className='w-full h-auto rounded-2xl relative z-10 group-hover:scale-[1.02] transition-transform duration-500'
                 />
               </div>

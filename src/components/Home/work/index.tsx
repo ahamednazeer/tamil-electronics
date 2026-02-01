@@ -92,6 +92,7 @@ const Work = () => {
                   alt='Electrical Products Display'
                   width={600}
                   height={425}
+                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 500px'
                   className='w-full max-w-md lg:max-w-none lg:w-full rounded-2xl relative z-10 shadow-lg group-hover:scale-[1.02] transition-transform duration-500'
                 />
               </div>

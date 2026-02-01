@@ -12,7 +12,14 @@ const Perks = () => {
           <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium'>
             Visit <span className='text-primary'>Tamil Electricals</span> Today!
           </h2>
-          <div className='mt-8 sm:mt-12 lg:mt-16 border border-border/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-8 sm:py-12 lg:py-16 gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-10 lg:px-20 rounded-2xl sm:rounded-3xl sm:bg-perk bg-dark_grey/35 lg:bg-bottom bg-center bg-no-repeat'>
+          <div className='relative overflow-hidden mt-8 sm:mt-12 lg:mt-16 border border-border/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-8 sm:py-12 lg:py-16 gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-10 lg:px-20 rounded-2xl sm:rounded-3xl bg-dark_grey/35'>
+            <Image
+              src='/images/perks/perk-bg.png'
+              alt='Background'
+              width={1600}
+              height={400}
+              className='absolute bottom-0 left-0 w-full h-auto -z-10 hidden sm:block'
+            />
             {perksData.map((item, index) => (
               <div
                 key={index}
