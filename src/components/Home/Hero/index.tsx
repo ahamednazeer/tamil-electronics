@@ -12,13 +12,13 @@ const CardSlider = dynamic(() => import('./slider'), {
 const Hero = () => {
   return (
     <section
-      className='relative md:pt-32 lg:pt-40 md:pb-20 lg:pb-28 pt-16 pb-12 overflow-hidden z-1'
+      className='relative md:pt-32 lg:pt-40 md:pb-20 lg:pb-28 pt-24 pb-12 overflow-hidden z-1'
       id='main-banner'>
       <div className='container px-4 sm:px-6'>
         <div className='grid grid-cols-12 gap-4'>
           {/* Left content - no render-blocking animations */}
           <div className='lg:col-span-5 col-span-12 animate-fade-in'>
-            <div className='flex gap-3 sm:gap-6 items-center lg:justify-start justify-center mb-4 sm:mb-5 mt-8 sm:mt-16 lg:mt-24'>
+            <div className='flex gap-3 sm:gap-6 items-center lg:justify-start justify-center mb-4 sm:mb-5 mt-4 sm:mt-16 lg:mt-24'>
               <Image
                 src='/images/icons/icon-bag.svg'
                 alt='icon'
@@ -35,7 +35,7 @@ const Hero = () => {
               All <span className='text-primary'>Electrical</span> Materials{' '}
               <span className='text-primary'>Available</span> Here!
             </h1>
-            <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-6 sm:mb-8 lg:mb-10 px-2 sm:px-0'>
+            <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-4 sm:mb-8 lg:mb-10 px-2 sm:px-0'>
               Wires • Switches • LED Lights • Fans • MCB • Industrial Electrical Items
             </p>
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-8'>

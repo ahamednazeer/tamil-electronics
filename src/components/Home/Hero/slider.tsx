@@ -26,14 +26,14 @@ const CardSlider = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3, // Increased from 2 to 3 for better proportion
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 640,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4, // Increased from 3 to 4
           slidesToScroll: 1,
         },
       },
@@ -47,20 +47,20 @@ const CardSlider = () => {
     ],
   }
   return (
-    <div className='mt-12 sm:mt-16 lg:mt-20 pt-6 sm:pt-8 lg:pt-10'>
-      <p className='text-muted text-center mb-4 sm:mb-6 lg:mb-8 text-sm sm:text-base lg:text-lg'>
+    <div className='mt-8 sm:mt-16 lg:mt-20 pt-6 sm:pt-8 lg:pt-10'>
+      <p className='text-muted text-center mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-base lg:text-lg'>
         Trusted Brands We Carry
       </p>
       <Slider {...settings}>
         {brandsData.map((item, index) => (
-          <div key={index} className='px-2 sm:px-3'>
-            <div className='px-3 sm:px-4 lg:px-6 py-3 sm:py-4 lg:py-5 bg-white rounded-lg sm:rounded-xl flex items-center justify-center h-16 sm:h-20 lg:h-24'>
+          <div key={index} className='px-1 sm:px-3'>
+            <div className='px-2 sm:px-4 lg:px-6 py-2 sm:py-4 lg:py-5 bg-white rounded-lg sm:rounded-xl flex items-center justify-center h-12 sm:h-20 lg:h-24'>
               <Image
                 src={item.logo}
                 alt={item.name}
                 width={120}
                 height={50}
-                className='object-contain max-h-8 sm:max-h-10 lg:max-h-14 w-auto'
+                className='object-contain max-h-6 sm:max-h-10 lg:max-h-14 w-auto'
               />
             </div>
           </div>
