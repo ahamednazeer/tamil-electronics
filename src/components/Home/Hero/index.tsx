@@ -1,31 +1,23 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import CardSlider from './slider'
+import dynamic from 'next/dynamic'
+
+// Dynamically import slider to reduce initial JS bundle size
+const CardSlider = dynamic(() => import('./slider'), {
+  ssr: false, // Slider is client-side mostly anyway
+  loading: () => <div className="h-24 w-full bg-transparent"></div> // Prevent layout shift
+})
 
 const Hero = () => {
-  const leftAnimation = {
-    initial: { x: '-100%', opacity: 0 },
-    animate: { x: 0, opacity: 1 },
-    exit: { x: '-100%', opacity: 0 },
-    transition: { duration: 0.6 },
-  }
-
-  const rightAnimation = {
-    initial: { x: '100%', opacity: 0 },
-    animate: { x: 0, opacity: 1 },
-    exit: { x: '100%', opacity: 0 },
-    transition: { duration: 0.6 },
-  }
-
   return (
     <section
       className='relative md:pt-32 lg:pt-40 md:pb-20 lg:pb-28 pt-16 pb-12 overflow-hidden z-1'
       id='main-banner'>
       <div className='container px-4 sm:px-6'>
         <div className='grid grid-cols-12 gap-4'>
-          <motion.div {...leftAnimation} className='lg:col-span-5 col-span-12'>
+          {/* Left content - no render-blocking animations */}
+          <div className='lg:col-span-5 col-span-12 animate-fade-in'>
             <div className='flex gap-3 sm:gap-6 items-center lg:justify-start justify-center mb-4 sm:mb-5 mt-8 sm:mt-16 lg:mt-24'>
               <Image
                 src='/images/icons/icon-bag.svg'
@@ -74,10 +66,9 @@ const Hero = () => {
                 <p className='text-muted text-xs sm:text-sm'>Brands Available</p>
               </div>
             </div>
-          </motion.div>
-          <motion.div
-            {...rightAnimation}
-            className='col-span-7 lg:block hidden'>
+          </div>
+          {/* Right content - hero image */}
+          <div className='col-span-7 lg:block hidden animate-fade-in'>
             <div className='ml-10 xl:ml-20 -mr-32 xl:-mr-64 flex justify-center relative'>
               {/* Creative card container with premium styling */}
               <div className='relative p-3 sm:p-4 lg:p-5 border border-primary/10 rounded-3xl bg-gradient-to-br from-dark_grey/50 to-dark_grey/20 backdrop-blur-md shadow-2xl shadow-primary/5 group hover:border-primary/30 transition-all duration-500'>
@@ -89,18 +80,20 @@ const Hero = () => {
                 {/* Inner glow ring */}
                 <div className='absolute inset-1 rounded-2xl border border-white/5 pointer-events-none'></div>
 
-                <Image
+                {/* LCP Image with aggressive optimization */}
+                <img
                   src='/images/hero/banner-image.png'
                   alt='Electrical Products'
                   width={1150}
                   height={1150}
-                  priority // Preload this image - it's the LCP element
-                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1150px'
+                  loading='eager'
+                  decoding='async'
+                  fetchPriority='high'
                   className='w-full h-auto rounded-2xl relative z-10 group-hover:scale-[1.02] transition-transform duration-500'
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
         <CardSlider />
       </div>
@@ -110,3 +103,4 @@ const Hero = () => {
 }
 
 export default Hero
+
