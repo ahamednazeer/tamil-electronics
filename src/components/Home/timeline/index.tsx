@@ -2,11 +2,10 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
-import { useInView } from 'framer-motion'
+
 
 const TimeLine = () => {
   const ref = useRef(null)
-  const inView = useInView(ref)
 
   const features = [
     {

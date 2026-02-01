@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import BlogCard from './blogCard'
+import { Blog as BlogType } from '@/types/blog'
 import { getAllPosts } from '@/utils/markdown'
 
 const Blog: React.FC = () => {
@@ -11,7 +12,7 @@ const Blog: React.FC = () => {
     'excerpt',
     'coverImage',
     'slug',
-  ]).slice(0, 3)
+  ]).slice(0, 3) as unknown as BlogType[]
 
   return (
     <section className='flex flex-wrap justify-center py-24 ' id='blog'>

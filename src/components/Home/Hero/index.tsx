@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import CardSlider from './slider'
@@ -77,14 +77,25 @@ const Hero = () => {
           <motion.div
             {...rightAnimation}
             className='col-span-7 lg:block hidden'>
-            <div className='ml-10 xl:ml-20 -mr-32 xl:-mr-64'>
-              <Image
-                src='/images/hero/banner-image.png'
-                alt='Electrical Products'
-                width={1150}
-                height={1150}
-                className='w-full h-auto'
-              />
+            <div className='ml-10 xl:ml-20 -mr-32 xl:-mr-64 flex justify-center relative'>
+              {/* Creative card container with premium styling */}
+              <div className='relative p-3 sm:p-4 lg:p-5 border border-primary/10 rounded-3xl bg-gradient-to-br from-dark_grey/50 to-dark_grey/20 backdrop-blur-md shadow-2xl shadow-primary/5 group hover:border-primary/30 transition-all duration-500'>
+                {/* Decorative blur orbs - animated on hover */}
+                <div className='absolute -top-16 -right-16 w-32 h-32 bg-primary/25 rounded-full blur-3xl group-hover:bg-primary/35 transition-all duration-700'></div>
+                <div className='absolute -bottom-12 -left-12 w-28 h-28 bg-tealGreen/20 rounded-full blur-2xl group-hover:bg-tealGreen/30 transition-all duration-700'></div>
+                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/5 rounded-full blur-3xl'></div>
+
+                {/* Inner glow ring */}
+                <div className='absolute inset-1 rounded-2xl border border-white/5 pointer-events-none'></div>
+
+                <Image
+                  src='/images/hero/banner-image.png'
+                  alt='Electrical Products'
+                  width={1150}
+                  height={1150}
+                  className='w-full h-auto rounded-2xl relative z-10 group-hover:scale-[1.02] transition-transform duration-500'
+                />
+              </div>
             </div>
           </motion.div>
         </div>

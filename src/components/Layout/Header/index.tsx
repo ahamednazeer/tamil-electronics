@@ -1,39 +1,33 @@
 'use client'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { headerData } from '../Header/Navigation/menuData'
 import Logo from './Logo'
 import HeaderLink from '../Header/Navigation/HeaderLink'
 import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
-import { useTheme } from 'next-themes'
-import { Icon } from '@iconify/react/dist/iconify.js'
+
 
 const Header: React.FC = () => {
-  const pathUrl = usePathname()
-  const { theme, setTheme } = useTheme()
-
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
 
-  const navbarRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   const handleScroll = () => {
     setSticky(window.scrollY >= 80)
   }
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      mobileMenuRef.current &&
-      !mobileMenuRef.current.contains(event.target as Node) &&
-      navbarOpen
-    ) {
-      setNavbarOpen(false)
-    }
-  }
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        navbarOpen
+      ) {
+        setNavbarOpen(false)
+      }
+    }
+
     window.addEventListener('scroll', handleScroll)
     document.addEventListener('mousedown', handleClickOutside)
     return () => {

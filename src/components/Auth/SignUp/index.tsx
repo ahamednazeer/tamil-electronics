@@ -10,7 +10,7 @@ const SignUp = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     setLoading(true)
@@ -26,7 +26,7 @@ const SignUp = () => {
       body: JSON.stringify(finalData),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         toast.success('Successfully registered')
         setLoading(false)
         router.push('/signin')
@@ -90,13 +90,13 @@ const SignUp = () => {
 
       <p className='text-body-secondary mb-4 text-white text-base'>
         By creating an account you are agree with our{' '}
-        <a href='/#' className='text-primary hover:underline'>
+        <Link href='/#' className='text-primary hover:underline'>
           Privacy
-        </a>{' '}
+        </Link>{' '}
         and{' '}
-        <a href='/#' className='text-primary hover:underline'>
+        <Link href='/#' className='text-primary hover:underline'>
           Policy
-        </a>
+        </Link>
       </p>
 
       <p className='text-body-secondary text-white text-base'>

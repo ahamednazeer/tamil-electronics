@@ -46,7 +46,7 @@ const Upgrade = () => {
                   />
                 ))}
               </div>
-              <p className='text-muted text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 italic'>"{item.quote}"</p>
+              <p className='text-muted text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 italic'>&quot;{item.quote}&quot;</p>
               <div className='flex items-center gap-3 sm:gap-4'>
                 <div className='w-10 h-10 sm:w-12 sm:h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0'>
                   <Icon icon='mdi:account' width='20' height='20' className='text-primary sm:w-6 sm:h-6' />
