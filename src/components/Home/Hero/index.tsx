@@ -32,6 +32,7 @@ const Hero = () => {
                 alt='icon'
                 width={32}
                 height={32}
+                priority
                 className='w-8 h-8 sm:w-10 sm:h-10'
               />
               <p className='text-white text-base sm:text-xl lg:text-28 mb-0'>
@@ -93,6 +94,8 @@ const Hero = () => {
                   alt='Electrical Products'
                   width={1150}
                   height={1150}
+                  priority // Preload this image - it's the LCP element
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1150px'
                   className='w-full h-auto rounded-2xl relative z-10 group-hover:scale-[1.02] transition-transform duration-500'
                 />
               </div>
