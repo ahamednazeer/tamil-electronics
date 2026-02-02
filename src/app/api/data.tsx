@@ -2,7 +2,7 @@
 
 export const footerlabels: { label: string; herf: string }[] = [
   { label: "Working Hours: 9 AM - 9 PM", herf: "#" },
-  { label: "Serving Since 2015", herf: "#" },
+  // { label: "Serving Since 2015", herf: "#" },
   { label: "All Brands Available", herf: "#" },
   { label: "Home & Industrial Products", herf: "#" },
 ];

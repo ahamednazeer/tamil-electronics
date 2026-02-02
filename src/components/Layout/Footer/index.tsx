@@ -37,7 +37,7 @@ const Footer: FC = () => {
                   className='text-white group-hover:text-primary sm:w-6 sm:h-6'
                 />
               </Link>
-              <Link href='https://wa.me/91XXXXXXXXXX' className='group'>
+              <Link href='https://wa.me/919363897989' className='group'>
                 <Icon
                   icon='fa6-brands:whatsapp'
                   width='20'
@@ -83,27 +83,27 @@ const Footer: FC = () => {
 
           {/* Contact */}
           <div className='col-span-2 sm:col-span-2 md:col-span-12 lg:col-span-4'>
-            <h3 className='text-white text-base sm:text-lg lg:text-xl font-medium'>{t('footer.contact_us')}</h3>
-            <div className='mt-4 sm:mt-5 space-y-3 sm:space-y-4'>
-              <div className='flex items-start gap-2 sm:gap-3'>
-                <Icon icon='mdi:map-marker' width='20' height='20' className='text-primary mt-1 flex-shrink-0 sm:w-6 sm:h-6' />
-                <div>
-                  <p className='text-muted/80 text-sm sm:text-base'>{t('footer.shop_address')}</p>
-                  <p className='text-muted/60 text-xs sm:text-sm'>[Your Street Name]<br />[Town Name], [State]</p>
+            <h3 className='text-white text-base sm:text-lg lg:text-xl font-medium mb-4 sm:mb-5'>{t('footer.contact_us')}</h3>
+            <div className='space-y-4 sm:space-y-6'>
+              <div className='flex items-start gap-3 sm:gap-4'>
+                <Icon icon='mdi:map-marker' className='text-primary mt-1 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6' />
+                <div className='flex flex-col gap-1'>
+                  <p className='text-muted/80 text-sm sm:text-base font-medium'>{t('footer.shop_address')}</p>
+                  <p className='text-muted/60 text-sm leading-relaxed'>805A, Junction Rd, College Nagar<br />Virudhachalam, Tamil Nadu, 606001</p>
                 </div>
               </div>
-              <div className='flex items-center gap-2 sm:gap-3'>
-                <Icon icon='mdi:phone' width='20' height='20' className='text-primary flex-shrink-0 sm:w-6 sm:h-6' />
-                <div>
-                  <p className='text-muted/80 text-sm sm:text-base'>{t('footer.phone')}</p>
-                  <Link href='tel:+91XXXXXXXXXX' className='text-primary text-xs sm:text-sm hover:underline'>+91 XXXXX XXXXX</Link>
+              <div className='flex items-start gap-3 sm:gap-4'>
+                <Icon icon='mdi:phone' className='text-primary mt-1 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6' />
+                <div className='flex flex-col gap-1'>
+                  <p className='text-muted/80 text-sm sm:text-base font-medium'>{t('footer.phone')}</p>
+                  <Link href='tel:+919363897989' className='text-muted/60 hover:text-primary text-sm transition-colors'>+91 93638 97989</Link>
                 </div>
               </div>
-              <div className='flex items-center gap-2 sm:gap-3'>
-                <Icon icon='mdi:clock-outline' width='20' height='20' className='text-primary flex-shrink-0 sm:w-6 sm:h-6' />
-                <div>
-                  <p className='text-muted/80 text-sm sm:text-base'>{t('footer.working_hours')}</p>
-                  <p className='text-muted/60 text-xs sm:text-sm'>9:00 AM – 9:00 PM</p>
+              <div className='flex items-start gap-3 sm:gap-4'>
+                <Icon icon='mdi:clock-outline' className='text-primary mt-1 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6' />
+                <div className='flex flex-col gap-1'>
+                  <p className='text-muted/80 text-sm sm:text-base font-medium'>{t('footer.working_hours')}</p>
+                  <p className='text-muted/60 text-sm'>9:00 AM – 9:00 PM</p>
                 </div>
               </div>
             </div>

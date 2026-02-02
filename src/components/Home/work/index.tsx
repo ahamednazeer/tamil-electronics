@@ -42,7 +42,7 @@ const Work = () => {
             {/* CTA Buttons - Exactly like reference */}
             <div className='flex flex-wrap items-center gap-4'>
               <a
-                href='tel:+91XXXXXXXXXX'
+                href='tel:+919363897989'
                 className='bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-primary-dark transition-all'>
                 {t('work.contact_us')}
               </a>

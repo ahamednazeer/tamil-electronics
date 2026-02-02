@@ -69,13 +69,13 @@ const Header: React.FC = () => {
             <ThemeToggle />
             <LanguageToggle />
             <Link
-              href='tel:+91XXXXXXXXXX'
+              href='tel:+919363897989'
               className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary px-4 py-2 rounded-lg font-medium transition-colors'
               style={{ color: 'var(--theme-primary)' }}>
               {t('hero.call_now')}
             </Link>
             <Link
-              href='https://wa.me/91XXXXXXXXXX'
+              href='https://wa.me/919363897989'
               target='_blank'
               rel='noopener noreferrer'
               className='hidden lg:block bg-primary px-4 py-2 rounded-lg hover:opacity-90 font-medium transition-all'
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
             ))}
             <div className='mt-4 flex flex-col gap-4 w-full'>
               <Link
-                href='tel:+91XXXXXXXXXX'
+                href='tel:+919363897989'
                 className='bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-darkmode font-medium text-center transition-colors'
                 onClick={() => {
                   setNavbarOpen(false)
@@ -124,7 +124,7 @@ const Header: React.FC = () => {
                 {t('hero.call_now')}
               </Link>
               <Link
-                href='https://wa.me/91XXXXXXXXXX'
+                href='https://wa.me/919363897989'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='bg-primary text-darkmode px-4 py-2 rounded-lg hover:bg-transparent hover:text-primary border border-primary font-medium text-center transition-colors'

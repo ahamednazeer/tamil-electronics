@@ -35,12 +35,12 @@ const Hero = () => {
             </p>
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-8'>
               <a
-                href='tel:+91XXXXXXXXXX'
+                href='tel:+919363897989'
                 className='w-full sm:w-auto bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary text-darkmode py-3 sm:py-2 px-6 sm:px-7 z-50 text-center transition-all'>
                 {t('hero.call_now')}
               </a>
               <a
-                href='https://wa.me/91XXXXXXXXXX'
+                href='https://wa.me/919363897989'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='w-full sm:w-auto bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-primary hover:text-darkmode text-primary py-3 sm:py-2 px-6 sm:px-7 text-center transition-all'>
@@ -117,7 +117,7 @@ const Hero = () => {
               {/* Card 4: Google Map - Spans 2 columns */}
               <div className='bento-map bento-card overflow-hidden'>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5974!2d80.2707!3d13.0827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA0JzU3LjciTiA4MMKwMTYnMTQuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d476.9153092930677!2d79.3236843607538!3d11.521112888557493!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bab4b2bc8d39e8d%3A0x84de949adf490e30!2sTamil%20Electricals!5e1!3m2!1sen!2sus!4v1770064556705!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
                   style={{ border: 0, borderRadius: '20px' }}
