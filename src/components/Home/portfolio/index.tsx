@@ -37,12 +37,13 @@ const productsData = [
 
 const Portfolio = () => {
   return (
-    <section className='lg:pt-48 md:pt-32 sm:pt-24 pt-16 min-h-[600px]' id='brands'>
+    <section className='lg:pt-48 md:pt-32 sm:pt-24 pt-16 min-h-0 sm:min-h-[400px] lg:min-h-[600px]' id='brands'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}
-          initial={{ y: '-100%', opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ y: -50, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           className='text-center mb-8 sm:mb-12 lg:mb-16'>
           <p className='text-lg sm:text-xl lg:text-28 text-muted mb-2 sm:mb-4'>
             Our <span className='text-primary'>Products</span>
@@ -58,8 +59,9 @@ const Portfolio = () => {
 
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}
-          initial={{ y: '100%', opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 50, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.2 }}
           className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
           {productsData.map((item, index) => (
             <div key={index} className='bg-light_grey/10 rounded-xl sm:rounded-2xl overflow-hidden hover:bg-light_grey/20 transition-all duration-300 group'>

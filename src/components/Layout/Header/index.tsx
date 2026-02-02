@@ -46,7 +46,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${sticky ? ' shadow-lg bg-darkmode pt-5' : 'shadow-none md:pt-14 pt-5 bg-darkmode/60 backdrop-blur-md'
+      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${sticky ? 'shadow-lg bg-darkmode/80 backdrop-blur-md pt-5' : 'shadow-none md:pt-14 pt-5 bg-transparent'
         }`}>
       <div className='lg:py-0 py-2'>
         <div className='container px-4 flex items-center justify-between px-4'>
