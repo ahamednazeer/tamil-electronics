@@ -1,0 +1,105 @@
+{
+    "hero": {
+        "your_trusted": "Your Trusted",
+        "electrical": "Electrical",
+        "partner": "Partner",
+        "all_materials": "All",
+        "materials": "Materials",
+        "available": "Available",
+        "here": "Here!",
+        "items_list": "Wires • Switches • LED Lights • Fans • MCB • Industrial Electrical Items",
+        "call_now": "Call Now",
+        "whatsapp_us": "WhatsApp Us",
+        "grand_opening": "Grand Opening",
+        "brands_count": "50+",
+        "brands": "Brands",
+        "quality_pct": "100%",
+        "quality": "Quality",
+        "guaranteed": "Guaranteed"
+    },
+    "work": {
+        "title_start": "Tamil Electricals Offers The Best",
+        "title_highlight": "Electrical Products",
+        "title_end": "",
+        "description": "We provide genuine electrical products from top brands at competitive prices. Quality materials for all your electrical needs - wires, switches, fans, and more.",
+        "contact_us": "Contact Us",
+        "view_video": "View Video"
+    },
+    "platform": {
+        "title_start": "Need",
+        "title_highlight": "Electrical",
+        "title_end": "Materials?",
+        "description_start": "Contact Tamil Electricals Today for quality products",
+        "description_end": "at competitive prices.",
+        "call_now": "Call Now"
+    },
+    "portfolio": {
+        "subheading_start": "Our",
+        "subheading_highlight": "Products",
+        "title_start": "Quality Electrical Materials for",
+        "title_highlight": "Every Need",
+        "description": "We provide a wide range of electrical products from trusted brands.",
+        "items": {
+            "led": {
+                "title": "LED Lights",
+                "description": "Energy-efficient lighting solutions for homes and businesses."
+            },
+            "wires": {
+                "title": "Wires & Cables",
+                "description": "High-quality wiring materials for safe electrical connections."
+            },
+            "switches": {
+                "title": "Switch Boards",
+                "description": "Modern and durable switch solutions."
+            },
+            "fans": {
+                "title": "Fans & Appliances",
+                "description": "Ceiling fans and essential electrical appliances."
+            },
+            "mcb": {
+                "title": "MCB & Accessories",
+                "description": "Circuit protection and safety devices."
+            },
+            "pipes": {
+                "title": "Electrical Pipes & Fittings",
+                "description": "Complete wiring support materials."
+            }
+        }
+    },
+    "testimonials": {
+        "subheading": "Testimonials",
+        "title": "What Our Customers Say",
+        "description": "Trusted by hundreds of satisfied customers across the region.",
+        "items": [
+            {
+                "quote": "Best electrical shop in town. Good quality materials and fair price.",
+                "role": "Home Owner"
+            },
+            {
+                "quote": "Very friendly service. All items available in one place.",
+                "role": "Interior Designer"
+            },
+            {
+                "quote": "Affordable price and genuine products. Highly recommended!",
+                "role": "Contractor"
+            }
+        ]
+    },
+    "portfolio_slider": {
+        "subheading_start": "Always By",
+        "subheading_highlight": "Your Side",
+        "title_start": "Visit",
+        "title_highlight": "Tamil Electricals",
+        "title_end": "Today!"
+    },
+    "footer": {
+        "trusted_partner": "Your Trusted Electrical Partner",
+        "now_open_desc": "Now open! Quality electrical materials for all your needs.",
+        "quick_links": "Quick Links",
+        "information": "Information",
+        "contact_us": "Contact Us",
+        "shop_address": "Shop Address",
+        "phone": "Phone",
+        "working_hours": "Working Hours"
+    }
+}

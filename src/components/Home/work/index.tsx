@@ -3,10 +3,12 @@ import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Icon } from '@iconify/react'
+import { useLanguage } from '@/context/LanguageContext'
 
 const Work = () => {
   const ref = useRef(null)
   const inView = useInView(ref)
+  const { t } = useLanguage()
 
   const fadeInLeft = {
     initial: { x: -50, opacity: 0 },
@@ -29,12 +31,12 @@ const Work = () => {
             {...fadeInLeft}
             className='lg:col-span-6 col-span-12'>
             <h2 className='text-3xl sm:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6'>
-              Tamil Electricals Offers The Best{' '}
-              <span className='text-primary'>Electrical Products</span>
+              {t('work.title_start')}{' '}
+              <span className='text-primary'>{t('work.title_highlight')}</span>{' '}
+              {t('work.title_end')}
             </h2>
             <p className='text-muted text-base lg:text-lg mb-8 max-w-lg'>
-              We provide genuine electrical products from top brands at competitive prices.
-              Quality materials for all your electrical needs - wires, switches, fans, and more.
+              {t('work.description')}
             </p>
 
             {/* CTA Buttons - Exactly like reference */}
@@ -42,7 +44,7 @@ const Work = () => {
               <a
                 href='tel:+91XXXXXXXXXX'
                 className='bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-primary-dark transition-all'>
-                Contact Us
+                {t('work.contact_us')}
               </a>
               <a
                 href='#about'
@@ -50,7 +52,7 @@ const Work = () => {
                 <div className='w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center'>
                   <Icon icon='mdi:play' className='text-xl ml-0.5' />
                 </div>
-                View Video
+                {t('work.view_video')}
               </a>
             </div>
           </motion.div>
@@ -83,7 +85,14 @@ const Work = () => {
                     boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
                   }}
                 >
-                  <Icon icon='mdi:tools' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                  <div className='relative w-8 h-8'>
+                    <Image
+                      src='/images/perks/hammer.png'
+                      alt='Tools'
+                      fill
+                      className='object-contain'
+                    />
+                  </div>
                 </div>
 
                 {/* Floating Icon 2 - Power Plug (left side, on circle edge) */}
@@ -99,7 +108,14 @@ const Work = () => {
                     boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
                   }}
                 >
-                  <Icon icon='mdi:power-plug' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                  <div className='relative w-8 h-8'>
+                    <Image
+                      src='/images/perks/switch.png'
+                      alt='Switch'
+                      fill
+                      className='object-contain'
+                    />
+                  </div>
                 </div>
 
                 {/* Floating Icon 3 - Screwdriver (lower left, on circle edge) */}
@@ -115,7 +131,14 @@ const Work = () => {
                     boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
                   }}
                 >
-                  <Icon icon='mdi:screwdriver' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                  <div className='relative w-8 h-8'>
+                    <Image
+                      src='/images/perks/bulb.png'
+                      alt='Bulb'
+                      fill
+                      className='object-contain'
+                    />
+                  </div>
                 </div>
 
                 {/* Floating Icon 4 - Cog (bottom, on circle edge) */}
@@ -131,7 +154,14 @@ const Work = () => {
                     boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
                   }}
                 >
-                  <Icon icon='mdi:cog' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                  <div className='relative w-8 h-8'>
+                    <Image
+                      src='/images/perks/fan.png'
+                      alt='Fan'
+                      fill
+                      className='object-contain'
+                    />
+                  </div>
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { Icon } from '@iconify/react'
+import { useLanguage } from '@/context/LanguageContext'
 
 // Dynamically import slider to reduce initial JS bundle size
 const CardSlider = dynamic(() => import('./slider'), {
@@ -11,6 +12,7 @@ const CardSlider = dynamic(() => import('./slider'), {
 })
 
 const Hero = () => {
+  const { t } = useLanguage()
   return (
     <section
       className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-12 pb-6 overflow-hidden z-1'
@@ -19,50 +21,69 @@ const Hero = () => {
         <div className='grid grid-cols-12 gap-4 lg:gap-8 items-center'>
           {/* Left content - Original Text Style */}
           <div className='lg:col-span-5 col-span-12 animate-fade-in'>
-            <div className='flex gap-3 sm:gap-6 items-center lg:justify-start justify-center mb-3 sm:mb-4 mt-4 sm:mt-0.5 lg:mt-0.5'>
-              <p className='text-white text-base sm:text-xl lg:text-28 mb-0'>
-                Your Trusted <span className='text-primary'>Electrical</span> Partner
+            <div className='flex gap-3 sm:gap-6 items-center lg:justify-end justify-center mb-3 sm:mb-4 mt-4 sm:mt-0.5 lg:mt-0.5 lg:hidden'>
+              <p className='text-white text-base sm:text-xl lg:text-28 mb-0 text-right'>
+                {t('hero.your_trusted')} <span className='text-primary'>{t('hero.electrical')}</span> {t('hero.partner')}
               </p>
             </div>
-            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:text-start text-center text-white mb-3 sm:mb-4 leading-tight'>
-              All <span className='text-primary'>Electrical</span> Materials{' '}
-              <span className='text-primary'>Available</span> Here!
+            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:text-start text-center text-white mb-3 sm:mb-4 leading-tight lg:mt-16'>
+              {t('hero.all_materials')} <span className='text-primary'>{t('hero.electrical')}</span> {t('hero.materials')}{' '}
+              <span className='text-primary'>{t('hero.available')}</span> {t('hero.here')}
             </h1>
             <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-0'>
-              Wires • Switches • LED Lights • Fans • MCB • Industrial Electrical Items
+              {t('hero.items_list')}
             </p>
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-8'>
               <a
                 href='tel:+91XXXXXXXXXX'
                 className='w-full sm:w-auto bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary text-darkmode py-3 sm:py-2 px-6 sm:px-7 z-50 text-center transition-all'>
-                Call Now
+                {t('hero.call_now')}
               </a>
               <a
                 href='https://wa.me/91XXXXXXXXXX'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='w-full sm:w-auto bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-primary hover:text-darkmode text-primary py-3 sm:py-2 px-6 sm:px-7 text-center transition-all'>
-                WhatsApp Us
+                {t('hero.whatsapp_us')}
               </a>
             </div>
-            <div className='grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12 mt-8 sm:mt-12 lg:mt-12 md:justify-start justify-center'>
-              <div className='text-center'>
-                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>🎉</p>
-                <p className='text-muted text-xs sm:text-sm'>Grand Opening</p>
+            <div className='grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12 mt-8 sm:mt-12 lg:mt-12 md:justify-start justify-start'>
+              <div className='text-left group'>
+                <div className='flex justify-start mb-2'>
+                  <Icon icon='mdi:sparkles' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
+                </div>
+                <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.grand_opening')}</p>
               </div>
-              <div className='text-center'>
-                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>50+</p>
-                <p className='text-muted text-xs sm:text-sm'>Brands Available</p>
+              <div className='text-left group'>
+                <div className='flex justify-start mb-2'>
+                  <Icon icon='mdi:tag-multiple' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
+                </div>
+                <div className='flex items-center justify-start gap-1'>
+                  <span className='text-white font-bold text-lg sm:text-xl'>{t('hero.brands_count')}</span>
+                  <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.brands')}</p>
+                </div>
               </div>
-              <div className='text-center'>
-                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>100%</p>
-                <p className='text-muted text-xs sm:text-sm'>Quality Guaranteed</p>
+              <div className='text-left group'>
+                <div className='flex justify-start mb-2'>
+                  <Icon icon='mdi:shield-check' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
+                </div>
+                <div className='flex items-center justify-start gap-1'>
+                  <span className='text-white font-bold text-lg sm:text-xl'>{t('hero.quality_pct')}</span>
+                  <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.quality')}</p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right content - Creative Bento Grid */}
-          <div className='col-span-7 lg:block hidden animate-fade-in'>
+          <div className='col-span-12 lg:col-span-7 block animate-fade-in mt-8 lg:mt-0'>
+            <div className='flex justify-center mb-6'>
+              <div className='inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gray-100/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm'>
+                <Icon icon='mdi:shield-check' className='text-primary text-2xl' />
+                <p className='text-gray-900 dark:text-white text-lg lg:text-xl font-medium whitespace-nowrap'>
+                  {t('hero.your_trusted')} <span className='text-primary font-bold'>{t('hero.electrical')}</span> {t('hero.partner')}
+                </p>
+              </div>
+            </div>
             <div className='bento-hero'>
               {/* Card 1: Main Shop Image - Large */}
               <div className='bento-main bento-card overflow-hidden group'>
@@ -79,8 +100,8 @@ const Hero = () => {
               {/* Card 2: Primary CTA Card */}
               <div className='bento-cta bento-card bg-primary p-5 flex flex-col justify-center items-center text-center'>
                 <Icon icon='mdi:lightning-bolt' className='text-white text-3xl mb-2' />
-                <p className='text-white text-sm font-semibold'>Quality</p>
-                <p className='text-white/80 text-xs'>Guaranteed</p>
+                <p className='text-white text-sm font-semibold'>{t('hero.quality')}</p>
+                <p className='text-white/80 text-xs'>{t('hero.guaranteed')}</p>
               </div>
 
               {/* Card 3: Product Image */}
@@ -109,8 +130,8 @@ const Hero = () => {
 
               {/* Card 6: Stats Card */}
               <div className='bento-stats bento-card-themed p-4 flex flex-col items-center justify-center text-center'>
-                <p className='text-primary text-3xl xl:text-4xl font-bold'>50+</p>
-                <p className='bento-text-secondary text-xs'>Top Brands</p>
+                <p className='text-primary text-3xl xl:text-4xl font-bold'>{t('hero.brands_count')}</p>
+                <p className='bento-text-secondary text-xs'>{t('hero.brands')}</p>
               </div>
             </div>
           </div>
@@ -120,11 +141,12 @@ const Hero = () => {
 
       {/* Bento Grid Styles - Theme Aware */}
       <style jsx global>{`
+        /* Bento Grid Styles - Theme Aware */
         .bento-hero {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          grid-template-rows: repeat(3, 110px);
-          gap: 14px;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(4, 120px);
+          gap: 10px;
         }
         
         /* Base card styles */
@@ -167,30 +189,64 @@ const Hero = () => {
           color: var(--theme-text-muted);
         }
         
-        /* Grid positions */
+        /* Grid positions for Mobile (2 columns) */
         .bento-main {
           grid-column: 1 / 3;
           grid-row: 1 / 3;
         }
         
         .bento-cta {
-          grid-column: 3 / 4;
-          grid-row: 1 / 2;
+          grid-column: 1 / 2;
+          grid-row: 3 / 4;
         }
         
         .bento-img1 {
-          grid-column: 3 / 4;
-          grid-row: 2 / 3;
+          grid-column: 2 / 3;
+          grid-row: 3 / 4;
         }
         
         .bento-map {
-          grid-column: 1 / 3;
-          grid-row: 3 / 4;
+          grid-column: 1 / 2;
+          grid-row: 4 / 5;
         }
         
         .bento-stats {
-          grid-column: 3 / 4;
-          grid-row: 3 / 4;
+          grid-column: 2 / 3;
+          grid-row: 4 / 5;
+        }
+        
+        /* Desktop (lg) overrides - Restore Original 3-column Grid */
+        @media (min-width: 1024px) {
+          .bento-hero {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 110px);
+            gap: 14px;
+          }
+          
+          .bento-main {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+          }
+          
+          .bento-cta {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+          }
+          
+          .bento-img1 {
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
+          }
+          
+          .bento-map {
+            grid-column: 1 / 3;
+            grid-row: 3 / 4;
+          }
+          
+          .bento-stats {
+            grid-column: 3 / 4;
+            grid-row: 3 / 4;
+          }
         }
         
         /* Light theme specific overrides */

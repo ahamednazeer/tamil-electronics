@@ -46,7 +46,7 @@ const Perks = () => {
           </div>
         </div>
       </div>
-      <div className='bg-linear-to-br from-tealGreen to-charcoalGray sm:w-50 w-96 z-0 sm:h-50 h-96 rounded-full sm:-bottom-80 bottom-0 blur-400 absolute sm:-left-48 opacity-60'></div>
+
     </section>
   )
 }

@@ -3,46 +3,49 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { useLanguage } from '@/context/LanguageContext'
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-const productsData = [
-  {
-    image: '/images/products/led-lights.png',
-    title: 'LED Lights',
-    description: 'Energy-efficient lighting solutions for homes and businesses.',
-  },
-  {
-    image: '/images/products/wires-cables.png',
-    title: 'Wires & Cables',
-    description: 'High-quality wiring materials for safe electrical connections.',
-  },
-  {
-    image: '/images/products/switch-boards.png',
-    title: 'Switch Boards',
-    description: 'Modern and durable switch solutions.',
-  },
-  {
-    image: '/images/products/fans.png',
-    title: 'Fans & Appliances',
-    description: 'Ceiling fans and essential electrical appliances.',
-  },
-  {
-    image: '/images/products/mcb.png',
-    title: 'MCB & Accessories',
-    description: 'Circuit protection and safety devices.',
-  },
-  {
-    image: '/images/products/pipes.png',
-    title: 'Electrical Pipes & Fittings',
-    description: 'Complete wiring support materials.',
-  },
-]
-
 const Portfolio = () => {
+  const { t } = useLanguage()
+
+  const productsData = [
+    {
+      image: '/images/products/led-lights.png',
+      title: t('portfolio.items.led.title'),
+      description: t('portfolio.items.led.description'),
+    },
+    {
+      image: '/images/products/wires-cables.png',
+      title: t('portfolio.items.wires.title'),
+      description: t('portfolio.items.wires.description'),
+    },
+    {
+      image: '/images/products/switch-boards.png',
+      title: t('portfolio.items.switches.title'),
+      description: t('portfolio.items.switches.description'),
+    },
+    {
+      image: '/images/products/fans.png',
+      title: t('portfolio.items.fans.title'),
+      description: t('portfolio.items.fans.description'),
+    },
+    {
+      image: '/images/products/mcb.png',
+      title: t('portfolio.items.mcb.title'),
+      description: t('portfolio.items.mcb.description'),
+    },
+    {
+      image: '/images/products/pipes.png',
+      title: t('portfolio.items.pipes.title'),
+      description: t('portfolio.items.pipes.description'),
+    },
+  ]
+
   return (
     <section className='lg:pt-10 md:pt-8 sm:pt-6 pt-6 min-h-0 overflow-hidden' id='brands'>
       <div className='container px-4 sm:px-6'>
@@ -53,14 +56,14 @@ const Portfolio = () => {
           viewport={{ once: true, amount: 0.3 }}
           className='text-center mb-4 sm:mb-6 lg:mb-8'>
           <p className='text-lg sm:text-xl lg:text-28 text-muted mb-2 sm:mb-4'>
-            Our <span className='text-primary'>Products</span>
+            {t('portfolio.subheading_start')} <span className='text-primary'>{t('portfolio.subheading_highlight')}</span>
           </p>
           <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4 font-medium px-2'>
-            Quality Electrical Materials for{' '}
-            <span className='text-primary'>Every Need</span>
+            {t('portfolio.title_start')}{' '}
+            <span className='text-primary'>{t('portfolio.title_highlight')}</span>
           </h2>
           <p className='text-muted/60 text-sm sm:text-base lg:text-lg px-4'>
-            We provide a wide range of electrical products from trusted brands.
+            {t('portfolio.description')}
           </p>
         </motion.div>
 

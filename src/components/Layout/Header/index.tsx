@@ -6,11 +6,14 @@ import Logo from './Logo'
 import HeaderLink from '../Header/Navigation/HeaderLink'
 import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
 import ThemeToggle from '../ThemeToggle'
+import LanguageToggle from '../LanguageToggle'
+import { useLanguage } from '@/context/LanguageContext'
 
 
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
+  const { t } = useLanguage()
 
   const mobileMenuRef = useRef<HTMLDivElement>(null)
 
@@ -64,11 +67,12 @@ const Header: React.FC = () => {
           </nav>
           <div className='flex items-center gap-4'>
             <ThemeToggle />
+            <LanguageToggle />
             <Link
               href='tel:+91XXXXXXXXXX'
               className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary px-4 py-2 rounded-lg font-medium transition-colors'
               style={{ color: 'var(--theme-primary)' }}>
-              Call Now
+              {t('hero.call_now')}
             </Link>
             <Link
               href='https://wa.me/91XXXXXXXXXX'
@@ -76,7 +80,7 @@ const Header: React.FC = () => {
               rel='noopener noreferrer'
               className='hidden lg:block bg-primary px-4 py-2 rounded-lg hover:opacity-90 font-medium transition-all'
               style={{ backgroundColor: 'var(--theme-primary)', color: '#FFFFFF' }}>
-              WhatsApp
+              {t('hero.whatsapp_us')}
             </Link>
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
@@ -117,7 +121,7 @@ const Header: React.FC = () => {
                 onClick={() => {
                   setNavbarOpen(false)
                 }}>
-                Call Now
+                {t('hero.call_now')}
               </Link>
               <Link
                 href='https://wa.me/91XXXXXXXXXX'
@@ -127,7 +131,7 @@ const Header: React.FC = () => {
                 onClick={() => {
                   setNavbarOpen(false)
                 }}>
-                WhatsApp
+                {t('hero.whatsapp_us')}
               </Link>
             </div>
           </nav>

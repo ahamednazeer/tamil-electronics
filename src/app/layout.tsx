@@ -6,6 +6,8 @@ import { ThemeProvider } from 'next-themes'
 import ScrollToTop from '@/components/ScrollToTop'
 import Aoscompo from '@/utils/aos'
 import { Metadata, Viewport } from 'next'
+import ParticlesBackground from '@/components/ParticlesBackground'
+import { LanguageProvider } from '@/context/LanguageContext'
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -76,12 +78,15 @@ export default function RootLayout({
           attribute='data-theme'
           enableSystem={false}
           defaultTheme='light'>
-          <Aoscompo>
-            <Header />
-            {children}
-            <Footer />
-          </Aoscompo>
-          <ScrollToTop />
+          <LanguageProvider>
+            <Aoscompo>
+              <Header />
+              <ParticlesBackground />
+              {children}
+              <Footer />
+            </Aoscompo>
+            <ScrollToTop />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

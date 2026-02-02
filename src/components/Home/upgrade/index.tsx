@@ -1,35 +1,38 @@
 'use client'
 import { Icon } from '@iconify/react'
-
-const testimonials = [
-  {
-    quote: "Best electrical shop in town. Good quality materials and fair price.",
-    name: "Rajesh K.",
-    role: "Home Owner"
-  },
-  {
-    quote: "Very friendly service. All items available in one place.",
-    name: "Priya M.",
-    role: "Interior Designer"
-  },
-  {
-    quote: "Affordable price and genuine products. Highly recommended!",
-    name: "Kumar S.",
-    role: "Contractor"
-  },
-]
+import { useLanguage } from '@/context/LanguageContext'
 
 const Upgrade = () => {
+  const { t } = useLanguage()
+
+  const testimonials = [
+    {
+      quote: t('testimonials.items.0.quote'),
+      name: "Rajesh K.",
+      role: t('testimonials.items.0.role')
+    },
+    {
+      quote: t('testimonials.items.1.quote'),
+      name: "Priya M.",
+      role: t('testimonials.items.1.role')
+    },
+    {
+      quote: t('testimonials.items.2.quote'),
+      name: "Kumar S.",
+      role: t('testimonials.items.2.role')
+    },
+  ]
+
   return (
     <section className='lg:py-12 md:py-10 py-8' id='upgrade'>
       <div className='container px-4 sm:px-6'>
         <div className='text-center mb-6 sm:mb-8 lg:mb-10'>
-          <p className='text-primary text-lg sm:text-xl lg:text-28 mb-2 sm:mb-3'>Testimonials</p>
+          <p className='text-primary text-lg sm:text-xl lg:text-28 mb-2 sm:mb-3'>{t('testimonials.subheading')}</p>
           <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-5'>
-            What Our Customers Say
+            {t('testimonials.title')}
           </h2>
           <p className='text-muted/60 text-sm sm:text-base lg:text-lg'>
-            Trusted by hundreds of satisfied customers across the region.
+            {t('testimonials.description')}
           </p>
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
