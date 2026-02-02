@@ -2,99 +2,137 @@
 import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { Icon } from '@iconify/react'
 
 const Work = () => {
   const ref = useRef(null)
   const inView = useInView(ref)
 
-  const TopAnimation = {
-    initial: { y: '-100%', opacity: 0 },
-    animate: inView ? { y: 0, opacity: 1 } : { y: '-100%', opacity: 0 },
-    transition: { duration: 0.6, delay: 0.4 },
+  const fadeInLeft = {
+    initial: { x: -50, opacity: 0 },
+    animate: inView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 },
+    transition: { duration: 0.6, delay: 0.2 },
   }
 
-  const bottomAnimation = {
-    initial: { y: '100%', opacity: 0 },
-    animate: inView ? { y: 0, opacity: 1 } : { y: '100%', opacity: 0 },
+  const fadeInRight = {
+    initial: { x: 50, opacity: 0 },
+    animate: inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 },
     transition: { duration: 0.6, delay: 0.4 },
   }
-
-  const services = [
-    {
-      icon: '/images/icons/icon-consulting.svg',
-      text: 'Genuine Products',
-      desc: 'Original and quality electrical materials',
-    },
-    {
-      icon: '/images/icons/icon-blockchain.svg',
-      text: 'Affordable Prices',
-      desc: 'Competitive pricing for all needs',
-    },
-    {
-      icon: '/images/icons/icon-Services.svg',
-      text: 'All Major Brands',
-      desc: 'Trusted electrical brands available',
-    },
-    {
-      icon: '/images/icons/icon-consulting.svg',
-      text: 'Quick Service',
-      desc: 'Fast billing and friendly support',
-    },
-  ]
 
   return (
-    <section className='lg:pt-28 md:pt-20 pt-12' id='products'>
-      <div className='container px-4 sm:px-6 mx-auto lg:max-w-(--breakpoint-xl)'>
-        <div ref={ref} className='grid grid-cols-12 items-center gap-6 lg:gap-0'>
+    <section className='py-16 lg:py-24' id='products'>
+      <div className='container px-4 sm:px-6 mx-auto'>
+        <div ref={ref} className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
+          {/* Left Content */}
           <motion.div
-            {...bottomAnimation}
-            className='lg:col-span-7 col-span-12'>
-            <p className='text-lg sm:text-xl lg:text-28 text-white text-center lg:text-left'>
-              Why Choose <span className='text-primary'>Us</span>
-            </p>
-            <h2 className='text-2xl sm:text-3xl lg:text-4xl text-white lg:w-full md:w-70% font-medium text-center lg:text-left'>
-              Quality electrical materials for your every need.
+            {...fadeInLeft}
+            className='lg:col-span-6 col-span-12'>
+            <h2 className='text-3xl sm:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6'>
+              Tamil Electricals Offers The Best{' '}
+              <span className='text-primary'>Electrical Products</span>
             </h2>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-7 mt-6 sm:mt-8 lg:mt-11'>
-              {services.map((service, index) => (
-                <div key={index} className='flex items-center gap-3 sm:gap-4 lg:gap-5'>
-                  <div className='p-3 sm:p-4 lg:p-5 bg-light_grey/30 rounded-full flex-shrink-0'>
-                    <Image
-                      src={service.icon}
-                      alt={`${service.text} icon`}
-                      width={32}
-                      height={32}
-                      className='w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10'
-                    />
-                  </div>
-                  <div>
-                    <p className='text-base sm:text-lg lg:text-xl text-muted'>{service.text}</p>
-                    <p className='text-xs sm:text-sm text-muted/60'>{service.desc}</p>
-                  </div>
+            <p className='text-muted text-base lg:text-lg mb-8 max-w-lg'>
+              We provide genuine electrical products from top brands at competitive prices.
+              Quality materials for all your electrical needs - wires, switches, fans, and more.
+            </p>
+
+            {/* CTA Buttons - Exactly like reference */}
+            <div className='flex flex-wrap items-center gap-4'>
+              <a
+                href='tel:+91XXXXXXXXXX'
+                className='bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-primary-dark transition-all'>
+                Contact Us
+              </a>
+              <a
+                href='#about'
+                className='flex items-center gap-3 text-white font-medium py-3 px-4 hover:text-primary transition-all'>
+                <div className='w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center'>
+                  <Icon icon='mdi:play' className='text-xl ml-0.5' />
                 </div>
-              ))}
+                View Video
+              </a>
             </div>
           </motion.div>
-          <motion.div {...TopAnimation} className='lg:col-span-5 col-span-12'>
-            <div className='xl:-mr-40 mt-6 lg:mt-9 flex justify-center relative'>
-              {/* Creative card container with premium styling */}
-              <div className='relative p-3 sm:p-4 lg:p-5 border border-primary/10 rounded-3xl bg-gradient-to-br from-dark_grey/50 to-dark_grey/20 backdrop-blur-md shadow-2xl shadow-primary/5 group hover:border-primary/30 transition-all duration-500'>
-                {/* Decorative blur orbs - animated on hover */}
-                <div className='absolute -top-16 -right-16 w-32 h-32 bg-primary/25 rounded-full blur-3xl group-hover:bg-primary/35 transition-all duration-700'></div>
-                <div className='absolute -bottom-12 -left-12 w-28 h-28 bg-tealGreen/20 rounded-full blur-2xl group-hover:bg-tealGreen/30 transition-all duration-700'></div>
-                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/5 rounded-full blur-3xl'></div>
 
-                {/* Inner glow ring */}
-                <div className='absolute inset-1 rounded-2xl border border-white/5 pointer-events-none'></div>
+          {/* Right Content - Circular Image with Floating Icons */}
+          <motion.div {...fadeInRight} className='lg:col-span-6 col-span-12'>
+            <div className='relative flex justify-center lg:justify-end items-center'>
+              {/* Container for circle and floating icons */}
+              <div className='relative' style={{ width: '400px', height: '400px' }}>
+                {/* Main Circular Image */}
+                <div className='absolute inset-0 rounded-full border-8 border-white shadow-2xl overflow-hidden'>
+                  <Image
+                    src='/images/work/img-work-with-us.png'
+                    alt='Electrical Work'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
 
-                <Image
-                  src='/images/work/img-work-with-us.png'
-                  alt='Electrical Products Display'
-                  width={600}
-                  height={425}
-                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 500px'
-                  className='w-full max-w-md lg:max-w-none lg:w-full rounded-2xl relative z-10 shadow-lg group-hover:scale-[1.02] transition-transform duration-500'
-                />
+                {/* Floating Icon 1 - Tools (top left, on circle edge) */}
+                <div
+                  className='absolute flex items-center justify-center z-20'
+                  style={{
+                    width: '56px',
+                    height: '56px',
+                    top: '1px',
+                    left: '65px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
+                  }}
+                >
+                  <Icon icon='mdi:tools' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                </div>
+
+                {/* Floating Icon 2 - Power Plug (left side, on circle edge) */}
+                <div
+                  className='absolute flex items-center justify-center z-20'
+                  style={{
+                    width: '56px',
+                    height: '56px',
+                    top: '110px',
+                    left: '-15px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
+                  }}
+                >
+                  <Icon icon='mdi:power-plug' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                </div>
+
+                {/* Floating Icon 3 - Screwdriver (lower left, on circle edge) */}
+                <div
+                  className='absolute flex items-center justify-center z-20'
+                  style={{
+                    width: '56px',
+                    height: '56px',
+                    top: '275px',
+                    left: '3px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
+                  }}
+                >
+                  <Icon icon='mdi:screwdriver' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                </div>
+
+                {/* Floating Icon 4 - Cog (bottom, on circle edge) */}
+                <div
+                  className='absolute flex items-center justify-center z-20'
+                  style={{
+                    width: '56px',
+                    height: '56px',
+                    top: '360px',
+                    left: '95px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
+                  }}
+                >
+                  <Icon icon='mdi:cog' style={{ fontSize: '26px', color: '#1a1a2e' }} />
+                </div>
               </div>
             </div>
           </motion.div>

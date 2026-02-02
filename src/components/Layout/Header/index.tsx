@@ -5,6 +5,7 @@ import { headerData } from '../Header/Navigation/menuData'
 import Logo from './Logo'
 import HeaderLink from '../Header/Navigation/HeaderLink'
 import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
+import ThemeToggle from '../ThemeToggle'
 
 
 const Header: React.FC = () => {
@@ -40,14 +41,19 @@ const Header: React.FC = () => {
     if (navbarOpen) {
       document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
     }
   }, [navbarOpen])
 
+
   return (
     <header
-      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${sticky ? 'shadow-lg bg-darkmode/80 backdrop-blur-md pt-5' : 'shadow-none md:pt-14 pt-5 bg-transparent'
-        }`}>
+      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${sticky ? 'shadow-lg backdrop-blur-md pt-4' : 'shadow-none md:pt-8 pt-4 bg-transparent'
+        }`}
+      style={{ backgroundColor: sticky ? 'var(--theme-header-bg)' : 'transparent' }}>
       <div className='lg:py-0 py-2'>
         <div className='container px-4 flex items-center justify-between px-4'>
           <Logo />
@@ -57,25 +63,28 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div className='flex items-center gap-4'>
+            <ThemeToggle />
             <Link
               href='tel:+91XXXXXXXXXX'
-              className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary hover:text-darkmode px-4 py-2 rounded-lg font-medium transition-colors'>
+              className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary px-4 py-2 rounded-lg font-medium transition-colors'
+              style={{ color: 'var(--theme-primary)' }}>
               Call Now
             </Link>
             <Link
               href='https://wa.me/91XXXXXXXXXX'
               target='_blank'
               rel='noopener noreferrer'
-              className='hidden lg:block bg-primary text-darkmode hover:bg-transparent hover:text-primary border border-primary px-4 py-2 rounded-lg font-medium transition-colors'>
+              className='hidden lg:block bg-primary px-4 py-2 rounded-lg hover:opacity-90 font-medium transition-all'
+              style={{ backgroundColor: 'var(--theme-primary)', color: '#FFFFFF' }}>
               WhatsApp
             </Link>
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
               aria-label='Toggle mobile menu'>
-              <span className='block w-6 h-0.5 bg-white'></span>
-              <span className='block w-6 h-0.5 bg-white mt-1.5'></span>
-              <span className='block w-6 h-0.5 bg-white mt-1.5'></span>
+              <span className='block w-6 h-0.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+              <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+              <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
             </button>
           </div>
         </div>
@@ -84,8 +93,9 @@ const Header: React.FC = () => {
         )}
         <div
           ref={mobileMenuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-darkmode shadow-lg transform transition-transform duration-300 max-w-xs ${navbarOpen ? 'translate-x-0' : 'translate-x-full'
-            } z-50`}>
+          className={`lg:hidden fixed top-0 right-0 h-full w-full shadow-lg transform transition-transform duration-300 max-w-xs ${navbarOpen ? 'translate-x-0' : 'translate-x-full'
+            } z-50`}
+          style={{ backgroundColor: 'var(--theme-bg)' }}>
           <div className='flex items-center justify-between p-4'>
             <h2 className='text-lg font-bold text-midnight_text dark:text-midnight_text'>
               <Logo />

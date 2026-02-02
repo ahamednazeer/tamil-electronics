@@ -2,103 +2,234 @@
 
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { Icon } from '@iconify/react'
 
 // Dynamically import slider to reduce initial JS bundle size
 const CardSlider = dynamic(() => import('./slider'), {
-  ssr: false, // Slider is client-side mostly anyway
-  loading: () => <div className="h-24 w-full bg-transparent"></div> // Prevent layout shift
+  ssr: false,
+  loading: () => <div className="h-24 w-full bg-transparent"></div>
 })
 
 const Hero = () => {
   return (
     <section
-      className='relative md:pt-32 lg:pt-40 md:pb-20 lg:pb-28 pt-24 pb-12 overflow-hidden z-1'
+      className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-12 pb-6 overflow-hidden z-1'
       id='main-banner'>
-      <div className='container px-4 sm:px-6'>
-        <div className='grid grid-cols-12 gap-4'>
-          {/* Left content - no render-blocking animations */}
+      <div className='container px-4 sm:px-6 overflow-x-hidden'>
+        <div className='grid grid-cols-12 gap-4 lg:gap-8 items-center'>
+          {/* Left content - Original Text Style */}
           <div className='lg:col-span-5 col-span-12 animate-fade-in'>
-            <div className='flex gap-3 sm:gap-6 items-center lg:justify-start justify-center mb-4 sm:mb-5 mt-4 sm:mt-16 lg:mt-24'>
-              <Image
-                src='/images/icons/icon-bag.svg'
-                alt='icon'
-                width={32}
-                height={32}
-                priority
-                className='w-8 h-8 sm:w-10 sm:h-10'
-              />
+            <div className='flex gap-3 sm:gap-6 items-center lg:justify-start justify-center mb-3 sm:mb-4 mt-4 sm:mt-0.5 lg:mt-0.5'>
               <p className='text-white text-base sm:text-xl lg:text-28 mb-0'>
                 Your Trusted <span className='text-primary'>Electrical</span> Partner
               </p>
             </div>
-            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:text-start text-center text-white mb-4 sm:mb-5 leading-tight'>
+            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:text-start text-center text-white mb-3 sm:mb-4 leading-tight'>
               All <span className='text-primary'>Electrical</span> Materials{' '}
               <span className='text-primary'>Available</span> Here!
             </h1>
-            <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-4 sm:mb-8 lg:mb-10 px-2 sm:px-0'>
+            <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-0'>
               Wires • Switches • LED Lights • Fans • MCB • Industrial Electrical Items
             </p>
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-8'>
               <a
                 href='tel:+91XXXXXXXXXX'
-                className='w-full sm:w-auto bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary text-darkmode py-3 sm:py-2 px-6 sm:px-7 z-50 text-center'>
+                className='w-full sm:w-auto bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary text-darkmode py-3 sm:py-2 px-6 sm:px-7 z-50 text-center transition-all'>
                 Call Now
               </a>
               <a
                 href='https://wa.me/91XXXXXXXXXX'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='w-full sm:w-auto bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-primary hover:text-darkmode text-primary py-3 sm:py-2 px-6 sm:px-7 text-center'>
+                className='w-full sm:w-auto bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-primary hover:text-darkmode text-primary py-3 sm:py-2 px-6 sm:px-7 text-center transition-all'>
                 WhatsApp Us
               </a>
             </div>
-            <div className='grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12 mt-10 sm:mt-16 lg:mt-20 md:justify-start justify-center'>
+            <div className='grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12 mt-8 sm:mt-12 lg:mt-12 md:justify-start justify-center'>
               <div className='text-center'>
-                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>10+</p>
-                <p className='text-muted text-xs sm:text-sm'>Years Experience</p>
-              </div>
-              <div className='text-center'>
-                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>1000+</p>
-                <p className='text-muted text-xs sm:text-sm'>Happy Customers</p>
+                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>🎉</p>
+                <p className='text-muted text-xs sm:text-sm'>Grand Opening</p>
               </div>
               <div className='text-center'>
                 <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>50+</p>
                 <p className='text-muted text-xs sm:text-sm'>Brands Available</p>
               </div>
+              <div className='text-center'>
+                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold'>100%</p>
+                <p className='text-muted text-xs sm:text-sm'>Quality Guaranteed</p>
+              </div>
             </div>
           </div>
-          {/* Right content - hero image */}
+
+          {/* Right content - Creative Bento Grid */}
           <div className='col-span-7 lg:block hidden animate-fade-in'>
-            <div className='ml-10 xl:ml-20 -mr-32 xl:-mr-64 flex justify-center relative'>
-              {/* Creative card container with premium styling */}
-              <div className='relative p-3 sm:p-4 lg:p-5 border border-primary/10 rounded-3xl bg-gradient-to-br from-dark_grey/50 to-dark_grey/20 backdrop-blur-md shadow-2xl shadow-primary/5 group hover:border-primary/30 transition-all duration-500'>
-                {/* Decorative blur orbs - animated on hover */}
-                <div className='absolute -top-16 -right-16 w-32 h-32 bg-primary/25 rounded-full blur-3xl group-hover:bg-primary/35 transition-all duration-700'></div>
-                <div className='absolute -bottom-12 -left-12 w-28 h-28 bg-tealGreen/20 rounded-full blur-2xl group-hover:bg-tealGreen/30 transition-all duration-700'></div>
-                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/5 rounded-full blur-3xl'></div>
-
-                {/* Inner glow ring */}
-                <div className='absolute inset-1 rounded-2xl border border-white/5 pointer-events-none'></div>
-
-                {/* LCP Image with aggressive optimization */}
+            <div className='bento-hero'>
+              {/* Card 1: Main Shop Image - Large */}
+              <div className='bento-main bento-card overflow-hidden group'>
                 <Image
-                  src='/images/hero/banner-image.png'
-                  alt='Electrical Products'
-                  width={1150}
-                  height={1150}
+                  src='/images/hero/banner-image.webp'
+                  alt='Tamil Electricals Shop'
+                  fill
                   priority
-                  className='w-full h-auto rounded-2xl relative z-10 group-hover:scale-[1.02] transition-transform duration-500'
+                  className='object-cover transition-transform duration-500 group-hover:scale-105'
                 />
+                <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity' />
+              </div>
+
+              {/* Card 2: Primary CTA Card */}
+              <div className='bento-cta bento-card bg-primary p-5 flex flex-col justify-center items-center text-center'>
+                <Icon icon='mdi:lightning-bolt' className='text-white text-3xl mb-2' />
+                <p className='text-white text-sm font-semibold'>Quality</p>
+                <p className='text-white/80 text-xs'>Guaranteed</p>
+              </div>
+
+              {/* Card 3: Product Image */}
+              <div className='bento-img1 bento-card overflow-hidden group'>
+                <Image
+                  src='/images/portfolio/image1.jpeg'
+                  alt='Electrical Products'
+                  fill
+                  className='object-cover transition-transform duration-500 group-hover:scale-105'
+                />
+              </div>
+
+              {/* Card 4: Google Map - Spans 2 columns */}
+              <div className='bento-map bento-card overflow-hidden'>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5974!2d80.2707!3d13.0827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA0JzU3LjciTiA4MMKwMTYnMTQuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: '20px' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Tamil Electricals Location"
+                ></iframe>
+              </div>
+
+              {/* Card 6: Stats Card */}
+              <div className='bento-stats bento-card-themed p-4 flex flex-col items-center justify-center text-center'>
+                <p className='text-primary text-3xl xl:text-4xl font-bold'>50+</p>
+                <p className='bento-text-secondary text-xs'>Top Brands</p>
               </div>
             </div>
           </div>
         </div>
         <CardSlider />
       </div>
-      <div className='absolute w-50 h-50 bg-linear-to-bl from-tealGreen from-50% to-charcoalGray to-60% blur-400 rounded-full -top-64 -right-14 -z-1'></div>
+
+      {/* Bento Grid Styles - Theme Aware */}
+      <style jsx global>{`
+        .bento-hero {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(3, 110px);
+          gap: 14px;
+        }
+        
+        /* Base card styles */
+        .bento-card {
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+        }
+        
+        /* Theme-aware card background */
+        .bento-card-themed {
+          position: relative;
+          border-radius: 20px;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
+        }
+        
+        /* Icon button styling */
+        .bento-icon-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 12px;
+          background: var(--theme-bg-secondary);
+          color: var(--theme-text-muted);
+          transition: all 0.3s ease;
+          border: 1px solid transparent;
+        }
+        
+        .bento-icon-btn:hover {
+          background: var(--theme-primary);
+          color: white;
+          border-color: var(--theme-primary);
+        }
+        
+        /* Secondary text */
+        .bento-text-secondary {
+          color: var(--theme-text-muted);
+        }
+        
+        /* Grid positions */
+        .bento-main {
+          grid-column: 1 / 3;
+          grid-row: 1 / 3;
+        }
+        
+        .bento-cta {
+          grid-column: 3 / 4;
+          grid-row: 1 / 2;
+        }
+        
+        .bento-img1 {
+          grid-column: 3 / 4;
+          grid-row: 2 / 3;
+        }
+        
+        .bento-map {
+          grid-column: 1 / 3;
+          grid-row: 3 / 4;
+        }
+        
+        .bento-stats {
+          grid-column: 3 / 4;
+          grid-row: 3 / 4;
+        }
+        
+        /* Light theme specific overrides */
+        [data-theme="light"] .bento-card-themed {
+          background: #FFFFFF;
+          border-color: #E5E7EB;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        
+        [data-theme="light"] .bento-icon-btn {
+          background: #F3F4F6;
+          color: #6B7280;
+        }
+        
+        [data-theme="light"] .bento-icon-btn:hover {
+          background: var(--theme-primary);
+          color: white;
+        }
+        
+        [data-theme="light"] .bento-text-secondary {
+          color: #6B7280;
+        }
+        
+        @media (min-width: 1280px) {
+          .bento-hero {
+            grid-template-rows: repeat(3, 130px);
+            gap: 16px;
+          }
+        }
+        
+        @media (min-width: 1536px) {
+          .bento-hero {
+            grid-template-rows: repeat(3, 145px);
+            gap: 18px;
+          }
+        }
+      `}</style>
     </section>
   )
 }
 
 export default Hero
-

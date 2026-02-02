@@ -1,6 +1,13 @@
 'use client'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const productsData = [
   {
@@ -37,14 +44,14 @@ const productsData = [
 
 const Portfolio = () => {
   return (
-    <section className='lg:pt-48 md:pt-32 sm:pt-24 pt-16 min-h-0 sm:min-h-[400px] lg:min-h-[600px]' id='brands'>
+    <section className='lg:pt-10 md:pt-8 sm:pt-6 pt-6 min-h-0 overflow-hidden' id='brands'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}
           initial={{ y: -50, opacity: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.3 }}
-          className='text-center mb-8 sm:mb-12 lg:mb-16'>
+          className='text-center mb-4 sm:mb-6 lg:mb-8'>
           <p className='text-lg sm:text-xl lg:text-28 text-muted mb-2 sm:mb-4'>
             Our <span className='text-primary'>Products</span>
           </p>
@@ -62,30 +69,81 @@ const Portfolio = () => {
           initial={{ y: 50, opacity: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.2 }}
-          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
-          {productsData.map((item, index) => (
-            <div key={index} className='bg-light_grey/10 rounded-xl sm:rounded-2xl overflow-hidden hover:bg-light_grey/20 transition-all duration-300 group'>
-              <div className='relative h-40 sm:h-44 lg:h-48 overflow-hidden'>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                  className='object-cover group-hover:scale-105 transition-transform duration-300'
-                />
-              </div>
-              <div className='p-4 sm:p-5 lg:p-6'>
-                <h4 className='text-white text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 font-medium'>
-                  {item.title}
-                </h4>
-                <p className='text-muted/60 text-sm sm:text-base'>
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        >
+          <Swiper
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            spaceBetween={30}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            navigation={true}
+            pagination={{ clickable: true }}
+            modules={[Pagination, Navigation, Autoplay]}
+            className="mySwiper !pb-12 !px-4 fade-mask"
+          >
+            {productsData.map((item, index) => (
+              <SwiperSlide key={index} className="!w-[280px] sm:!w-[350px] lg:!w-[400px] !h-auto">
+                <div className='bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg h-full flex flex-col group'>
+                  <div className='relative h-60 sm:h-72 w-full overflow-hidden'>
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                      className='object-cover group-hover:scale-105 transition-transform duration-300'
+                    />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
+                      <span className="text-white/90 text-sm font-medium">@tamilelectricals</span>
+                    </div>
+                  </div>
+                  <div className='p-6 flex-1 flex flex-col justify-center bg-white'>
+                    <h4 className='text-charcoalGray text-xl font-bold mb-3'>
+                      {item.title}
+                    </h4>
+                    <p className='text-charcoalGray/70 text-base leading-relaxed'>
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </motion.div>
       </div>
+
+      <style jsx global>{`
+        .swiper-pagination-bullet {
+          background: #fff !important;
+          opacity: 0.5;
+        }
+        .swiper-pagination-bullet-active {
+          opacity: 1;
+          background: var(--color-primary) !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+          color: white !important;
+        }
+        .swiper-slide {
+            transition: transform 0.3s;
+        }
+        .swiper-slide-active {
+            transform: scale(1.05);
+        }
+        .swiper-slide:not(.swiper-slide-active) {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+        /* Fade Mask Effect */
+        .fade-mask {
+            mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+        }
+      `}</style>
     </section>
   )
 }

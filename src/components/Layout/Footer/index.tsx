@@ -7,7 +7,7 @@ import Logo from '../Header/Logo'
 
 const Footer: FC = () => {
   return (
-    <footer className='pt-10 sm:pt-12 lg:pt-16 bg-darkmode' id='contact'>
+    <footer className='pt-8 sm:pt-10 lg:pt-12 bg-darkmode' id='contact'>
       <div className='container px-4 sm:px-6'>
         <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-20 pb-10 sm:pb-12 lg:pb-16'>
           {/* Logo and About */}
@@ -15,7 +15,7 @@ const Footer: FC = () => {
             <Logo />
             <div className='mt-4 sm:mt-6'>
               <p className='text-muted/80 text-sm sm:text-base lg:text-lg mb-1 sm:mb-2'>Your Trusted Electrical Partner</p>
-              <p className='text-muted/60 text-xs sm:text-sm lg:text-base'>Serving quality electrical materials since 2015</p>
+              <p className='text-muted/60 text-xs sm:text-sm lg:text-base'>Now open! Quality electrical materials for all your needs.</p>
             </div>
             <div className='flex gap-4 sm:gap-6 items-center mt-5 sm:mt-8 relative z-1'>
               <Link href='#' className='group'>

@@ -1,10 +1,60 @@
 @import 'tailwindcss';
 
+/* ========================================
+   THEME SYSTEM: Dark (default) + Light Theme
+   Colors inspired by Saree Collection website
+   ======================================== */
+
+:root {
+  /* Primary Colors - Maroon Red from Saree Collection */
+  --theme-primary: #E31E24;
+  --theme-primary-dark: #B91C1C;
+  --theme-primary-light: #F87171;
+
+  /* Gold accent for elegance */
+  --theme-accent: #D4AF37;
+  --theme-accent-dark: #B8860B;
+
+  /* Dark Theme Colors (Default) */
+  --theme-bg: #000510;
+  --theme-bg-secondary: #0A0F1B;
+  --theme-bg-card: #111827;
+  --theme-text: #FFFFFF;
+  --theme-text-secondary: #9CA3AF;
+  --theme-text-muted: #6B7280;
+  --theme-border: #374151;
+  --theme-header-bg: rgba(0, 5, 16, 0.95);
+}
+
+/* Light Theme Variables - VIBRANT & CLEAN */
+[data-theme="light"] {
+  --theme-primary: #E31E24;
+  --theme-primary-dark: #B91C1C;
+  --theme-primary-light: #FEE2E2;
+
+  --theme-accent: #D4AF37;
+  --theme-accent-dark: #B8860B;
+
+  /* Pure whites for clean look */
+  --theme-bg: #FFFFFF;
+  --theme-bg-secondary: #FFFFFF;
+  --theme-bg-card: #FFFFFF;
+
+  /* Deep, rich text colors for contrast */
+  --theme-text: #111827;
+  --theme-text-secondary: #374151;
+  --theme-text-muted: #4B5563;
+  --theme-border: #E5E7EB;
+  --theme-header-bg: rgba(255, 255, 255, 0.98);
+}
+
 @theme {
   --container-screen-xl: 75rem;
   --container-screen-2xl: 83.75rem;
 
   --shadow-cause-shadow: 0px 4px 17px 0px #00000008;
+  --shadow-light: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
   --transition-duration-150: 150ms;
 
@@ -32,11 +82,14 @@
   --z-index-2: 2;
   --z-index-999: 999;
 
-  --color-primary: #99e39e;
-  --color-secondary: #1dc8cd;
-  --color-midnight_text: #263238;
+  /* Updated Primary Color - Maroon Red */
+  --color-primary: #E31E24;
+  --color-primary-dark: #B91C1C;
+  --color-primary-light: #F87171;
+  --color-secondary: #D4AF37;
+  --color-midnight_text: #333333;
   --color-muted: #d8dbdb;
-  --color-error: #cf3127;
+  --color-error: #E31E24;
   --color-warning: #f7931a;
   --color-light_grey: #505050;
   --color-grey: #f5f7fa;
@@ -45,12 +98,19 @@
   --color-success: #3cd278;
   --color-section: #737373;
   --color-darkmode: #000510;
-  --color-darklight: #0c372a;
-  --color-dark_border: #959595;
+  --color-darklight: #1A0A0A;
+  --color-dark_border: #374151;
   --color-tealGreen: #477e70;
   --color-charcoalGray: #666c78;
   --color-deepSlate: #282c36;
   --color-slateGray: #2f3543;
+
+  /* Light Theme Colors */
+  --color-lightmode: #FFFFFF;
+  --color-light-bg: #F9FAFB;
+  --color-light-card: #FFFFFF;
+  --color-light-text: #333333;
+  --color-light-border: #E5E7EB;
 
   --text-14: 0.875rem;
   --text-14--line-height: 1.225rem;
@@ -114,25 +174,331 @@
 @layer utilities {
   .container {
     @apply w-full max-w-8xl mx-auto;
+    box-sizing: border-box;
   }
 }
 
+/* Dark Theme (Default) */
 html,
 body {
   width: 100%;
   max-width: 100%;
-  background-color: #000510;
-  color: white;
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
   overscroll-behavior-y: none;
-  @apply bg-darkmode;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-y: auto;
 }
 
+
 section {
-  @apply bg-darkmode;
+  background-color: var(--theme-bg);
+  transition: background-color 0.3s ease;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Global box-sizing reset for mobile */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] body,
+[data-theme="light"] section {
+  background-color: var(--theme-bg);
+}
+
+[data-theme="light"] .bg-darkmode {
+  background-color: var(--theme-bg) !important;
+}
+
+/* ========================================
+   COMPREHENSIVE LIGHT THEME TEXT OVERRIDES
+   ======================================== */
+
+/* Primary text colors - Override white text to dark */
+[data-theme="light"] .text-white {
+  color: var(--theme-text) !important;
+}
+
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+  color: var(--theme-text);
+}
+
+[data-theme="light"] p {
+  color: var(--theme-text-secondary);
+}
+
+/* Navigation and header text */
+[data-theme="light"] nav a,
+[data-theme="light"] header a {
+  color: var(--theme-text);
+}
+
+[data-theme="light"] nav a:hover,
+[data-theme="light"] header a:hover {
+  color: var(--theme-primary);
+}
+
+/* Secondary and muted text - DEEP COLORS for visibility */
+[data-theme="light"] .text-section,
+[data-theme="light"] .text-muted,
+[data-theme="light"] [class*="text-muted"],
+[data-theme="light"] .text-gray-400,
+[data-theme="light"] .text-gray-300,
+[data-theme="light"] .text-gray-500 {
+  color: #1F2937 !important;
+}
+
+/* Card and section backgrounds - PURE WHITE for vibrant light theme */
+/* Override all dark background variants EXCEPT perks-card */
+[data-theme="light"] .bg-darklight:not(.perks-card),
+[data-theme="light"] .bg-dark_grey:not(.perks-card),
+[data-theme="light"] .bg-deepSlate:not(.perks-card),
+[data-theme="light"] .bg-slateGray:not(.perks-card),
+[data-theme="light"] [class*="bg-dark_grey"]:not(.perks-card),
+[data-theme="light"] [class*="bg-darklight"]:not(.perks-card),
+[data-theme="light"] [class*="bg-deepSlate"]:not(.perks-card) {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #E5E7EB !important;
+}
+
+/* Perks section specific override - GRADIENT STYLE like dark mode */
+/* Using both data-theme and .light class for maximum compatibility */
+[data-theme="light"] .perks-card,
+.light .perks-card,
+html[data-theme="light"] .perks-card,
+[data-theme="light"] section .rounded-2xl[class*="bg-dark"],
+[data-theme="light"] section .rounded-3xl[class*="bg-dark"],
+.light section .rounded-2xl[class*="bg-dark"],
+.light section .rounded-3xl[class*="bg-dark"] {
+  background: linear-gradient(135deg, #D4EDE7 0%, #E8F5F2 50%, #D4EDE7 100%) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #A8D5C9 !important;
+}
+
+/* Perks title and text in light mode */
+[data-theme="light"] .perks-title,
+.light .perks-title {
+  color: #111827 !important;
+}
+
+[data-theme="light"] .perks-item-title,
+.light .perks-item-title {
+  color: #1F2937 !important;
+}
+
+[data-theme="light"] .perks-item-desc,
+.light .perks-item-desc {
+  color: #374151 !important;
+}
+
+/* Perks graph background - light theme style - RED color */
+[data-theme="light"] .perks-bg-image,
+.light .perks-bg-image {
+  filter: brightness(0.9) saturate(1.2) hue-rotate(-40deg) sepia(0.3) !important;
+  opacity: 0.5 !important;
+  display: block !important;
+  z-index: 0 !important;
+  pointer-events: none;
+}
+
+/* Hero section - change tealGreen blur orbs to RED in light mode */
+[data-theme="light"] [class*="bg-tealGreen"],
+[data-theme="light"] [class*="from-tealGreen"],
+.light [class*="bg-tealGreen"],
+.light [class*="from-tealGreen"] {
+  background: rgba(220, 38, 38, 0.3) !important;
+}
+
+[data-theme="light"] [class*="bg-linear-to-bl"][class*="from-tealGreen"],
+.light [class*="bg-linear-to-bl"][class*="from-tealGreen"] {
+  background: linear-gradient(to bottom left, rgba(220, 38, 38, 0.4), rgba(220, 38, 38, 0.1)) !important;
+}
+
+/* Hero large blur orb - force RED in light mode */
+[data-theme="light"] .hero-blur-orb,
+.light .hero-blur-orb {
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.5) 0%, rgba(220, 38, 38, 0.2) 50%, transparent 80%) !important;
+}
+
+/* Timeline icons - change green to red in light mode */
+[data-theme="light"] .timeline-icon,
+.light .timeline-icon {
+  filter: hue-rotate(-120deg) saturate(2) brightness(0.9) !important;
+}
+
+/* Borders */
+[data-theme="light"] .border-dark_border,
+[data-theme="light"] .border-gray-700,
+[data-theme="light"] .border-gray-600 {
+  border-color: var(--theme-border) !important;
+}
+
+/* Cards and panels - pure white with subtle shadow instead of dull gradients */
+[data-theme="light"] .bg-gradient-to-br,
+[data-theme="light"] [class*="bg-gradient"] {
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Footer and dark sections */
+[data-theme="light"] footer {
+  background-color: #1F2937 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] footer p,
+[data-theme="light"] footer a,
+[data-theme="light"] footer h2,
+[data-theme="light"] footer h3,
+[data-theme="light"] footer h4,
+[data-theme="light"] footer span {
+  color: #FFFFFF !important;
+}
+
+/* Hero section specific */
+[data-theme="light"] .hero-title,
+[data-theme="light"] [class*="hero"] h1,
+[data-theme="light"] [class*="hero"] h2 {
+  color: var(--theme-text) !important;
+}
+
+[data-theme="light"] [class*="hero"] p {
+  color: var(--theme-text-secondary) !important;
+}
+
+/* Brand and product cards */
+[data-theme="light"] .brand-card,
+[data-theme="light"] .product-card,
+[data-theme="light"] [class*="card"] {
+  background-color: #FFFFFF !important;
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .brand-card h3,
+[data-theme="light"] .product-card h3,
+[data-theme="light"] [class*="card"] h3 {
+  color: var(--theme-text) !important;
+}
+
+/* Button styling for light mode */
+[data-theme="light"] .btn-primary,
+[data-theme="light"] button.bg-primary {
+  background-color: var(--theme-primary) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] .btn-secondary,
+[data-theme="light"] button.bg-transparent {
+  background-color: transparent !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
+}
+
+/* Input and form elements */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  background-color: #FFFFFF !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: var(--theme-text-muted) !important;
+}
+
+/* Specific text color overrides for common patterns */
+[data-theme="light"] .text-midnight_text {
+  color: var(--theme-text) !important;
+}
+
+[data-theme="light"] .text-charcoalGray,
+[data-theme="light"] .text-light_grey {
+  color: var(--theme-text-secondary) !important;
+}
+
+/* Note: Tailwind dark: prefixes are handled automatically */
+
+/* Announcement bar or top bar styling */
+[data-theme="light"] .announcement-bar,
+[data-theme="light"] .top-bar {
+  background-color: var(--theme-primary) !important;
+  color: #FFFFFF !important;
+}
+
+/* Ensure SVG icons are visible */
+[data-theme="light"] svg {
+  color: inherit;
+}
+
+[data-theme="light"] .text-white svg,
+[data-theme="light"] header svg {
+  color: var(--theme-text);
+}
+
+/* Gradient text (make it solid in light mode for visibility) */
+[data-theme="light"] .bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--theme-primary) !important;
+  background-image: none !important;
+}
+
+/* Mobile menu */
+[data-theme="light"] .mobile-menu,
+[data-theme="light"] [class*="mobile"] nav {
+  background-color: #FFFFFF !important;
+}
+
+[data-theme="light"] .mobile-menu a,
+[data-theme="light"] [class*="mobile"] nav a {
+  color: var(--theme-text) !important;
+}
+
+/* Hover states */
+[data-theme="light"] a:hover,
+[data-theme="light"] button:hover {
+  opacity: 0.9;
+}
+
+/* Separators and dividers */
+[data-theme="light"] hr,
+[data-theme="light"] .divider {
+  border-color: var(--theme-border) !important;
+}
+
+/* Badge and tag styling */
+[data-theme="light"] .badge,
+[data-theme="light"] .tag {
+  background-color: var(--theme-bg-secondary) !important;
+  color: var(--theme-text) !important;
+}
+
+/* Overlay adjustments for light mode */
+[data-theme="light"] .bg-black\/50 {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="light"] .backdrop-blur-md {
+  backdrop-filter: blur(12px);
 }
 
 .blog-details p,
@@ -183,4 +549,22 @@ section {
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }

@@ -51,7 +51,7 @@ export default function RootLayout({
         <link
           rel='preload'
           as='image'
-          href='/images/hero/banner-image.png'
+          href='/images/hero/banner-image.webp'
           fetchPriority='high'
         />
         {/* Preconnect to external resources for faster loading */}
@@ -59,12 +59,23 @@ export default function RootLayout({
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
         {/* DNS prefetch for performance */}
         <link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+        {/* Prevent theme flash - set theme before render */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var theme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${font.className}`}>
         <ThemeProvider
-          attribute='class'
-          enableSystem={true}
-          defaultTheme='system'>
+          attribute='data-theme'
+          enableSystem={false}
+          defaultTheme='light'>
           <Aoscompo>
             <Header />
             {children}

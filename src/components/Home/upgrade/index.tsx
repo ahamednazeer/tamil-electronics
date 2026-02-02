@@ -21,9 +21,9 @@ const testimonials = [
 
 const Upgrade = () => {
   return (
-    <section className='lg:py-40 md:py-28 py-16' id='upgrade'>
+    <section className='lg:py-12 md:py-10 py-8' id='upgrade'>
       <div className='container px-4 sm:px-6'>
-        <div className='text-center mb-8 sm:mb-12 lg:mb-16'>
+        <div className='text-center mb-6 sm:mb-8 lg:mb-10'>
           <p className='text-primary text-lg sm:text-xl lg:text-28 mb-2 sm:mb-3'>Testimonials</p>
           <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-5'>
             What Our Customers Say

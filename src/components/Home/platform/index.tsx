@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const Platform = () => {
   return (
-    <section className='lg:pt-44 md:pt-32 sm:pt-24 pt-12 relative z-1' id='contact'>
+    <section className='lg:pt-12 md:pt-10 sm:pt-8 pt-6 relative z-1' id='contact'>
       <div className='container px-4 sm:px-6'>
         <div className="bg-section/10 px-4 sm:px-8 lg:px-16 py-8 sm:py-10 lg:py-14 rounded-2xl sm:rounded-3xl border-2 border-section/20 grid grid-cols-12 items-center gap-4 before:content-[''] before:absolute relative before:w-96 before:h-64 before:bg-start before:bg-no-repeat before:-bottom-11 overflow-hidden lg:before:right-48 before:-z-1 before:opacity-10 ">
           <div className='lg:col-span-8 col-span-12 text-center lg:text-left'>

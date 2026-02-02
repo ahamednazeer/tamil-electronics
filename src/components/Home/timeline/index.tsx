@@ -31,7 +31,7 @@ const TimeLine = () => {
   ]
 
   return (
-    <section className='lg:pt-40 md:pt-28 pt-12' id='about'>
+    <section className='lg:pt-12 md:pt-10 pt-8' id='about'>
       <div className='container px-4 sm:px-6 lg:px-16'>
         <div className='text-center'>
           <motion.div
@@ -44,7 +44,7 @@ const TimeLine = () => {
             <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium lg:w-80% mx-auto mb-6 sm:mb-8 lg:mb-10 px-2'>
               Your trusted local electrical shop serving for over 10 years.
             </h2>
-            <p className='text-muted/60 text-sm sm:text-base lg:text-lg lg:w-70% mx-auto mb-10 sm:mb-14 lg:mb-20 px-2'>
+            <p className='text-muted/60 text-sm sm:text-base lg:text-lg lg:w-70% mx-auto mb-6 sm:mb-8 lg:mb-10 px-2'>
               Tamil Electricals provides quality wires, switches, LED lights, fans, MCBs,
               and all types of electrical materials for homes, shops, and industries.
               We are committed to offering genuine products at competitive prices with excellent customer service.
@@ -63,7 +63,7 @@ const TimeLine = () => {
                       alt={item.title}
                       width={32}
                       height={32}
-                      className='w-6 h-6 sm:w-8 sm:h-8 lg:w-11 lg:h-11'
+                      className='timeline-icon w-6 h-6 sm:w-8 sm:h-8 lg:w-11 lg:h-11'
                     />
                   </div>
                   <div className='text-center'>
