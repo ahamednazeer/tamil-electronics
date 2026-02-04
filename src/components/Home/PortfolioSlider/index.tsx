@@ -29,7 +29,7 @@ const PortfolioSlider = () => {
                     </h2>
                 </div>
 
-                <div className='flex items-center gap-6 overflow-hidden fade-mask'>
+                <div className='flex items-center gap-6 overflow-hidden fade-mask-soft'>
                     {/* Inner container for the scrolling animation - using inline styles for reliability */}
                     <div
                         className='flex items-center gap-6 w-max animate-scroll'
@@ -40,7 +40,7 @@ const PortfolioSlider = () => {
                         {[...portfolioImages, ...portfolioImages].map((src, index) => (
                             <div
                                 key={index}
-                                className='relative w-[280px] h-[200px] sm:w-[350px] sm:h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border border-border/20 group hover:scale-[1.02] transition-transform duration-300'
+                                className='relative w-[280px] h-[200px] sm:w-[350px] sm:h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.06)] group hover:scale-[1.02] transition-transform duration-300'
                             >
                                 <Image
                                     src={src}
@@ -65,9 +65,9 @@ const PortfolioSlider = () => {
                         transform: translateX(-50%);
                     }
                 }
-                .fade-mask {
-                    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-                    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+                .fade-mask-soft {
+                    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+                    -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
                 }
             `}</style>
 

@@ -16,6 +16,7 @@ const Header: React.FC = () => {
   const { t } = useLanguage()
 
   const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const showHeaderBg = sticky || navbarOpen
 
   const handleScroll = () => {
     setSticky(window.scrollY >= 80)
@@ -54,9 +55,9 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${sticky ? 'shadow-lg backdrop-blur-md pt-4' : 'shadow-none md:pt-8 pt-4 bg-transparent'
+      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${showHeaderBg ? 'shadow-lg backdrop-blur-md pt-4' : 'shadow-none md:pt-8 pt-4 bg-transparent'
         }`}
-      style={{ backgroundColor: sticky ? 'var(--theme-header-bg)' : 'transparent' }}>
+      style={{ backgroundColor: showHeaderBg ? 'var(--theme-header-bg)' : 'transparent' }}>
       <div className='lg:py-0 py-2'>
         <div className='container px-4 flex items-center justify-between px-4'>
           <Logo />
@@ -97,7 +98,7 @@ const Header: React.FC = () => {
         )}
         <div
           ref={mobileMenuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-full shadow-lg transform transition-transform duration-300 max-w-xs ${navbarOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`mobile-menu lg:hidden fixed top-0 right-0 h-full w-full shadow-lg transform transition-transform duration-300 max-w-xs ${navbarOpen ? 'translate-x-0' : 'translate-x-full'
             } z-50`}
           style={{ backgroundColor: 'var(--theme-bg)' }}>
           <div className='flex items-center justify-between p-4'>

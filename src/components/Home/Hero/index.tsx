@@ -15,17 +15,12 @@ const Hero = () => {
   const { t } = useLanguage()
   return (
     <section
-      className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-12 pb-6 overflow-hidden z-1'
+      className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-24 sm:pt-16 pb-6 overflow-hidden z-1'
       id='main-banner'>
       <div className='container px-4 sm:px-6 overflow-x-hidden'>
         <div className='grid grid-cols-12 gap-4 lg:gap-8 items-center'>
           {/* Left content - Original Text Style */}
           <div className='lg:col-span-5 col-span-12 animate-fade-in'>
-            <div className='flex gap-3 sm:gap-6 items-center lg:justify-end justify-center mb-3 sm:mb-4 mt-4 sm:mt-0.5 lg:mt-0.5 lg:hidden'>
-              <p className='text-white text-base sm:text-xl lg:text-28 mb-0 text-right'>
-                {t('hero.your_trusted')} <span className='text-primary'>{t('hero.electrical')}</span> {t('hero.partner')}
-              </p>
-            </div>
             <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:text-start text-center text-white mb-3 sm:mb-4 leading-tight lg:mt-16'>
               {t('hero.all_materials')} <span className='text-primary'>{t('hero.electrical')}</span> {t('hero.materials')}{' '}
               <span className='text-primary'>{t('hero.available')}</span> {t('hero.here')}
@@ -33,41 +28,41 @@ const Hero = () => {
             <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-0'>
               {t('hero.items_list')}
             </p>
-            <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-8'>
+            <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-3 sm:gap-6 lg:gap-8'>
               <a
                 href='tel:+919363897989'
-                className='w-full sm:w-auto bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary text-darkmode py-3 sm:py-2 px-6 sm:px-7 z-50 text-center transition-all'>
+                className='w-full sm:w-auto bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary text-darkmode py-2.5 sm:py-3 px-6 sm:px-7 z-50 text-center transition-all'>
                 {t('hero.call_now')}
               </a>
               <a
                 href='https://wa.me/919363897989'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='w-full sm:w-auto bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-primary hover:text-darkmode text-primary py-3 sm:py-2 px-6 sm:px-7 text-center transition-all'>
+                className='w-full sm:w-auto bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-primary hover:text-darkmode text-primary py-2.5 sm:py-3 px-6 sm:px-7 text-center transition-all'>
                 {t('hero.whatsapp_us')}
               </a>
             </div>
-            <div className='grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12 mt-8 sm:mt-12 lg:mt-12 md:justify-start justify-start'>
-              <div className='text-left group'>
-                <div className='flex justify-start mb-2'>
+            <div className='grid grid-cols-3 gap-3 sm:gap-8 lg:gap-12 mt-6 sm:mt-12 lg:mt-12 md:justify-start justify-center'>
+              <div className='text-center sm:text-left group'>
+                <div className='flex justify-center sm:justify-start mb-2'>
                   <Icon icon='mdi:sparkles' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
                 </div>
                 <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.grand_opening')}</p>
               </div>
-              <div className='text-left group'>
-                <div className='flex justify-start mb-2'>
+              <div className='text-center sm:text-left group'>
+                <div className='flex justify-center sm:justify-start mb-2'>
                   <Icon icon='mdi:tag-multiple' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
                 </div>
-                <div className='flex items-center justify-start gap-1'>
+                <div className='flex items-center justify-center sm:justify-start gap-1'>
                   <span className='text-white font-bold text-lg sm:text-xl'>{t('hero.brands_count')}</span>
                   <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.brands')}</p>
                 </div>
               </div>
-              <div className='text-left group'>
-                <div className='flex justify-start mb-2'>
+              <div className='text-center sm:text-left group'>
+                <div className='flex justify-center sm:justify-start mb-2'>
                   <Icon icon='mdi:shield-check' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
                 </div>
-                <div className='flex items-center justify-start gap-1'>
+                <div className='flex items-center justify-center sm:justify-start gap-1'>
                   <span className='text-white font-bold text-lg sm:text-xl'>{t('hero.quality_pct')}</span>
                   <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.quality')}</p>
                 </div>
@@ -76,10 +71,10 @@ const Hero = () => {
           </div>
 
           <div className='col-span-12 lg:col-span-7 block animate-fade-in mt-8 lg:mt-0'>
-            <div className='flex justify-center mb-6'>
-              <div className='inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gray-100/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm'>
+            <div className='hidden lg:flex justify-center mb-4 sm:mb-6'>
+              <div className='inline-flex items-center gap-2 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full bg-gray-100/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm'>
                 <Icon icon='mdi:shield-check' className='text-primary text-2xl' />
-                <p className='text-gray-900 dark:text-white text-lg lg:text-xl font-medium whitespace-nowrap'>
+                <p className='text-gray-900 dark:text-white text-sm sm:text-lg lg:text-xl font-medium whitespace-normal sm:whitespace-nowrap'>
                   {t('hero.your_trusted')} <span className='text-primary font-bold'>{t('hero.electrical')}</span> {t('hero.partner')}
                 </p>
               </div>
@@ -145,8 +140,8 @@ const Hero = () => {
         .bento-hero {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: repeat(4, 120px);
-          gap: 10px;
+          grid-template-rows: repeat(4, 110px);
+          gap: 8px;
         }
         
         /* Base card styles */

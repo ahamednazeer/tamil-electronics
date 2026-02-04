@@ -21,7 +21,12 @@ const Footer: FC = () => {
               <p className='text-muted/60 text-xs sm:text-sm lg:text-base'>{t('footer.now_open_desc')}</p>
             </div>
             <div className='flex gap-4 sm:gap-6 items-center mt-5 sm:mt-8 relative z-1'>
-              <Link href='#' className='group'>
+              <Link
+                href='https://www.facebook.com'
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Facebook'
+                className='group'>
                 <Icon
                   icon='fa6-brands:facebook-f'
                   width='20'
@@ -29,7 +34,12 @@ const Footer: FC = () => {
                   className='text-white group-hover:text-primary sm:w-6 sm:h-6'
                 />
               </Link>
-              <Link href='#' className='group'>
+              <Link
+                href='https://www.instagram.com'
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Instagram'
+                className='group'>
                 <Icon
                   icon='fa6-brands:instagram'
                   width='20'
@@ -37,7 +47,12 @@ const Footer: FC = () => {
                   className='text-white group-hover:text-primary sm:w-6 sm:h-6'
                 />
               </Link>
-              <Link href='https://wa.me/919363897989' className='group'>
+              <Link
+                href='https://wa.me/919363897989'
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='WhatsApp'
+                className='group'>
                 <Icon
                   icon='fa6-brands:whatsapp'
                   width='20'
@@ -84,28 +99,35 @@ const Footer: FC = () => {
           {/* Contact */}
           <div className='col-span-2 sm:col-span-2 md:col-span-12 lg:col-span-4'>
             <h3 className='text-white text-base sm:text-lg lg:text-xl font-medium mb-4 sm:mb-5'>{t('footer.contact_us')}</h3>
-            <div className='space-y-4 sm:space-y-6'>
-              <div className='flex items-start gap-3 sm:gap-4'>
-                <Icon icon='mdi:map-marker' className='text-primary mt-1 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6' />
-                <div className='flex flex-col gap-1'>
-                  <p className='text-muted/80 text-sm sm:text-base font-medium'>{t('footer.shop_address')}</p>
-                  <p className='text-muted/60 text-sm leading-relaxed'>805A, Junction Rd, College Nagar<br />Virudhachalam, Tamil Nadu, 606001</p>
-                </div>
+            <div className='flex flex-col gap-6'>
+
+              {/* Shop Address */}
+              <div className='flex flex-col gap-2'>
+                <p className='text-white text-base font-medium'>{t('footer.shop_address')}</p>
+                <p className='text-muted/60 text-sm leading-relaxed'>
+                  805A, Junction Rd, College Nagar<br />Virudhachalam, Tamil Nadu, 606001
+                </p>
               </div>
-              <div className='flex items-start gap-3 sm:gap-4'>
-                <Icon icon='mdi:phone' className='text-primary mt-1 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6' />
-                <div className='flex flex-col gap-1'>
-                  <p className='text-muted/80 text-sm sm:text-base font-medium'>{t('footer.phone')}</p>
-                  <Link href='tel:+919363897989' className='text-muted/60 hover:text-primary text-sm transition-colors'>+91 93638 97989</Link>
-                </div>
+
+              {/* Phone */}
+              <div className='flex flex-col gap-2'>
+                <p className='text-white text-base font-medium'>{t('footer.phone')}</p>
+                <Link
+                  href='tel:+919363897989'
+                  className='text-muted/60 hover:text-primary text-sm transition-colors'
+                >
+                  +91 93638 97989
+                </Link>
               </div>
-              <div className='flex items-start gap-3 sm:gap-4'>
-                <Icon icon='mdi:clock-outline' className='text-primary mt-1 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6' />
-                <div className='flex flex-col gap-1'>
-                  <p className='text-muted/80 text-sm sm:text-base font-medium'>{t('footer.working_hours')}</p>
-                  <p className='text-muted/60 text-sm'>9:00 AM – 9:00 PM</p>
-                </div>
+
+              {/* Working Hours */}
+              <div className='flex flex-col gap-2'>
+                <p className='text-white text-base font-medium'>{t('footer.working_hours')}</p>
+                <p className='text-muted/60 text-sm'>
+                  9:00 AM – 9:00 PM
+                </p>
               </div>
+
             </div>
           </div>
         </div>
