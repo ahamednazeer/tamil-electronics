@@ -24,9 +24,9 @@ const Upgrade = () => {
   ]
 
   return (
-    <section className='lg:py-12 md:py-10 py-8' id='upgrade'>
+    <section className='lg:py-10 md:py-8 py-6' id='upgrade'>
       <div className='container px-4 sm:px-6'>
-        <div className='text-center mb-6 sm:mb-8 lg:mb-10'>
+        <div className='text-center mb-4 sm:mb-6 lg:mb-7'>
           <p className='text-primary text-lg sm:text-xl lg:text-28 mb-2 sm:mb-3'>{t('testimonials.subheading')}</p>
           <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-5'>
             {t('testimonials.title')}

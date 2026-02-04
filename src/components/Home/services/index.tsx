@@ -107,9 +107,9 @@ const LocalServices = () => {
   ]
 
   return (
-    <section ref={sectionRef} className='py-10 sm:py-12 lg:py-16'>
+    <section ref={sectionRef} className='py-6 sm:py-8 lg:py-10'>
       <div className='container px-4 sm:px-6'>
-        <div className='text-center mb-6 sm:mb-8 lg:mb-10'>
+        <div className='text-center mb-4 sm:mb-6 lg:mb-7'>
           <p className='text-muted text-sm sm:text-base mb-2'>
             {t('services.subheading')}
           </p>
@@ -130,7 +130,7 @@ const LocalServices = () => {
         >
           <div
             ref={bandRef}
-            className='flex items-center gap-5 sm:gap-7 px-6 sm:px-8 lg:px-10 py-5 sm:py-6 will-change-transform justify-center'
+            className='flex items-center gap-5 sm:gap-7 px-6 sm:px-8 lg:px-10 py-4 sm:py-5 will-change-transform justify-center'
           >
             {services.map((item, index) => (
               <div key={index} className='flex items-center gap-4 min-w-[200px] sm:min-w-0'>

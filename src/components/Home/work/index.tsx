@@ -1,29 +1,14 @@
 'use client'
 import Image from 'next/image'
-import { motion, useInView } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/context/LanguageContext'
 
 const Work = () => {
-  const ref = useRef(null)
   const sectionRef = useRef<HTMLElement>(null)
   const circleRef = useRef<HTMLDivElement>(null)
   const orbitRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref)
   const { t } = useLanguage()
-
-  const fadeInLeft = {
-    initial: { x: -50, opacity: 0 },
-    animate: inView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 },
-    transition: { duration: 0.6, delay: 0.2 },
-  }
-
-  const fadeInRight = {
-    initial: { x: 50, opacity: 0 },
-    animate: inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 },
-    transition: { duration: 0.6, delay: 0.4 },
-  }
 
   const orbitItems = [
     { type: 'image', value: '/images/perks/hammer.png', alt: 'Tools' },
@@ -94,13 +79,11 @@ const Work = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className='py-16 lg:py-24 w-full overflow-hidden' id='products'>
+    <section ref={sectionRef} className='py-10 sm:py-12 lg:py-14 w-full overflow-hidden' id='products'>
       <div className='container px-4 sm:px-6 mx-auto'>
-        <div ref={ref} className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
+        <div className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
           {/* Left Content */}
-          <motion.div
-            {...fadeInLeft}
-            className='lg:col-span-6 col-span-12'>
+          <div className='lg:col-span-6 col-span-12'>
             <h2 className='text-3xl sm:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6'>
               {t('work.title_start')}{' '}
               <span className='text-primary'>{t('work.title_highlight')}</span>{' '}
@@ -126,10 +109,10 @@ const Work = () => {
                 {t('work.view_video')}
               </a>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Content - Circular Image with Floating Icons */}
-          <motion.div {...fadeInRight} className='lg:col-span-6 col-span-12'>
+          <div className='lg:col-span-6 col-span-12'>
             <div className='relative flex justify-center lg:justify-end items-center lg:pr-10'>
               {/* Container for circle and floating icons */}
               <div ref={circleRef} className='relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] will-change-transform'>
@@ -182,7 +165,7 @@ const Work = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

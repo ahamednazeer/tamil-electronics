@@ -47,8 +47,8 @@ const CardSlider = () => {
     ],
   }
   return (
-    <div className='mt-8 sm:mt-16 lg:mt-20 pt-6 sm:pt-8 lg:pt-10 overflow-hidden'>
-      <p className='text-muted text-center mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-base lg:text-lg'>
+    <div className='mt-6 sm:mt-10 lg:mt-12 pt-4 sm:pt-5 lg:pt-6 overflow-hidden'>
+      <p className='text-muted text-center mb-3 sm:mb-4 lg:mb-5 text-xs sm:text-base lg:text-lg'>
         Trusted Brands We Carry
       </p>
       <Slider {...settings}>
