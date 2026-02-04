@@ -1,5 +1,4 @@
 
-
 export const footerlabels: { label: string; herf: string }[] = [
   { label: "Working Hours: 9 AM - 9 PM", herf: "#" },
   // { label: "Serving Since 2015", herf: "#" },
@@ -65,3 +64,21 @@ export const timelineData: {
     },
   ];
 
+export const brandsData: { name: string; logo: string }[] = [
+  {
+    name: "Crompton Greaves",
+    logo: "/images/brands/crompton-greaves-logo.webp",
+  },
+  {
+    name: "Finolex",
+    logo: "/images/brands/Finolex_logo_header.svg",
+  },
+  {
+    name: "Havells",
+    logo: "/images/brands/Havells_Logo.svg",
+  },
+  {
+    name: "Orient",
+    logo: "/images/brands/Orient_Logo_2x_906fb550-c200-42e5-b9e7-f6375c0bcdab.avif",
+  },
+];
