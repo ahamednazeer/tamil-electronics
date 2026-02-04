@@ -15,7 +15,11 @@
         "brands": "Brands",
         "quality_pct": "100%",
         "quality": "Quality",
-        "guaranteed": "Guaranteed"
+        "guaranteed": "Guaranteed",
+        "newly_started": "Newly Started",
+        "shop": "Shop",
+        "now_open": "Now Open",
+        "visit_us": "Visit Us"
     },
     "work": {
         "title_start": "Tamil Electricals Offers The Best",

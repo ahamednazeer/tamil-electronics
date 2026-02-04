@@ -94,9 +94,9 @@ const Hero = () => {
 
               {/* Card 2: Primary CTA Card */}
               <div className='bento-cta bento-card bg-primary p-5 flex flex-col justify-center items-center text-center'>
-                <Icon icon='mdi:lightning-bolt' className='text-white text-3xl mb-2' />
-                <p className='text-white text-sm font-semibold'>{t('hero.quality')}</p>
-                <p className='text-white/80 text-xs'>{t('hero.guaranteed')}</p>
+                <Icon icon='mdi:storefront' className='text-white text-3xl mb-2' />
+                <p className='text-white text-sm font-semibold'>{t('hero.newly_started')}</p>
+                <p className='text-white/80 text-xs'>{t('hero.shop')}</p>
               </div>
 
               {/* Card 3: Product Image */}
@@ -125,8 +125,8 @@ const Hero = () => {
 
               {/* Card 6: Stats Card */}
               <div className='bento-stats bento-card-themed p-4 flex flex-col items-center justify-center text-center'>
-                <p className='text-primary text-3xl xl:text-4xl font-bold'>{t('hero.brands_count')}</p>
-                <p className='bento-text-secondary text-xs'>{t('hero.brands')}</p>
+                <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold leading-tight'>{t('hero.now_open')}</p>
+                <p className='bento-text-secondary text-xs'>{t('hero.visit_us')}</p>
               </div>
             </div>
           </div>
