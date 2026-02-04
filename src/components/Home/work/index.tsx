@@ -1,12 +1,15 @@
 'use client'
 import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/context/LanguageContext'
 
 const Work = () => {
   const ref = useRef(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const circleRef = useRef<HTMLDivElement>(null)
+  const orbitRef = useRef<HTMLDivElement>(null)
   const inView = useInView(ref)
   const { t } = useLanguage()
 
@@ -22,8 +25,76 @@ const Work = () => {
     transition: { duration: 0.6, delay: 0.4 },
   }
 
+  const orbitItems = [
+    { type: 'image', value: '/images/perks/hammer.png', alt: 'Tools' },
+    { type: 'image', value: '/images/perks/switch.png', alt: 'Switch' },
+    { type: 'image', value: '/images/perks/bulb.png', alt: 'Bulb' },
+    { type: 'image', value: '/images/perks/fan.png', alt: 'Fan' },
+    { type: 'icon', value: 'mdi:pipe', alt: 'Pipes' },
+    { type: 'icon', value: 'mdi:water-pump', alt: 'Pump' },
+    { type: 'icon', value: 'mdi:power-plug', alt: 'Plug' },
+    { type: 'icon', value: 'mdi:cable-data', alt: 'Cables' },
+  ]
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return
+
+    let lastY = window.scrollY
+    let angle = 0
+    let ticking = false
+    const rotationSpeed = 0.12
+
+    const update = () => {
+      const section = sectionRef.current
+      const orbit = orbitRef.current
+      if (!section || !orbit) {
+        ticking = false
+        return
+      }
+      const rect = section.getBoundingClientRect()
+      const viewportH = window.innerHeight
+      const sectionTop = window.scrollY + rect.top
+      const sectionBottom = sectionTop + rect.height
+      const viewStart = sectionTop - viewportH
+      const viewEnd = sectionBottom
+      const scrollY = window.scrollY
+
+      if (scrollY < viewStart || scrollY > viewEnd) {
+        orbit.style.setProperty('--orbit-rotate', '0deg')
+        orbit.style.setProperty('--orbit-rotate-neg', '0deg')
+        angle = 0
+        ticking = false
+        return
+      }
+
+      const delta = scrollY - lastY
+      lastY = scrollY
+      angle = (angle - delta * rotationSpeed) % 360
+      orbit.style.setProperty('--orbit-rotate', `${angle}deg`)
+      orbit.style.setProperty('--orbit-rotate-neg', `${-angle}deg`)
+      ticking = false
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update)
+        ticking = true
+      }
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
   return (
-    <section className='py-16 lg:py-24' id='products'>
+    <section ref={sectionRef} className='py-16 lg:py-24 w-full overflow-hidden' id='products'>
       <div className='container px-4 sm:px-6 mx-auto'>
         <div ref={ref} className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
           {/* Left Content */}
@@ -59,115 +130,110 @@ const Work = () => {
 
           {/* Right Content - Circular Image with Floating Icons */}
           <motion.div {...fadeInRight} className='lg:col-span-6 col-span-12'>
-            <div className='relative flex justify-center lg:justify-end items-center'>
+            <div className='relative flex justify-center lg:justify-end items-center lg:pr-10'>
               {/* Container for circle and floating icons */}
-              <div className='relative' style={{ width: '400px', height: '400px' }}>
+              <div ref={circleRef} className='relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] will-change-transform'>
                 {/* Main Circular Image */}
                 <div className='absolute inset-0 rounded-full border-8 border-white shadow-2xl overflow-hidden'>
                   <Image
                     src='/images/work/img-work-with-us.png'
                     alt='Electrical Work'
                     fill
+                    sizes='(max-width: 640px) 280px, 400px'
                     className='object-cover'
                   />
                 </div>
 
-                {/* Floating Icon 1 - Tools (top left, on circle edge) */}
                 <div
-                  className='absolute flex items-center justify-center z-20'
-                  style={{
-                    width: '56px',
-                    height: '56px',
-                    top: '1px',
-                    left: '65px',
-                    borderRadius: '50%',
-                    backgroundColor: 'white',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
-                  }}
+                  ref={orbitRef}
+                  className='absolute inset-0 orbit-ring'
+                  style={
+                    {
+                      '--orbit-rotate': '0deg',
+                      '--orbit-rotate-neg': '0deg',
+                      '--orbit-radius': '208px',
+                    } as React.CSSProperties
+                  }
                 >
-                  <div className='relative w-8 h-8'>
-                    <Image
-                      src='/images/perks/hammer.png'
-                      alt='Tools'
-                      fill
-                      className='object-contain'
-                    />
-                  </div>
-                </div>
-
-                {/* Floating Icon 2 - Power Plug (left side, on circle edge) */}
-                <div
-                  className='absolute flex items-center justify-center z-20'
-                  style={{
-                    width: '56px',
-                    height: '56px',
-                    top: '110px',
-                    left: '-15px',
-                    borderRadius: '50%',
-                    backgroundColor: 'white',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
-                  }}
-                >
-                  <div className='relative w-8 h-8'>
-                    <Image
-                      src='/images/perks/switch.png'
-                      alt='Switch'
-                      fill
-                      className='object-contain'
-                    />
-                  </div>
-                </div>
-
-                {/* Floating Icon 3 - Screwdriver (lower left, on circle edge) */}
-                <div
-                  className='absolute flex items-center justify-center z-20'
-                  style={{
-                    width: '56px',
-                    height: '56px',
-                    top: '275px',
-                    left: '3px',
-                    borderRadius: '50%',
-                    backgroundColor: 'white',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
-                  }}
-                >
-                  <div className='relative w-8 h-8'>
-                    <Image
-                      src='/images/perks/bulb.png'
-                      alt='Bulb'
-                      fill
-                      className='object-contain'
-                    />
-                  </div>
-                </div>
-
-                {/* Floating Icon 4 - Cog (bottom, on circle edge) */}
-                <div
-                  className='absolute flex items-center justify-center z-20'
-                  style={{
-                    width: '56px',
-                    height: '56px',
-                    top: '360px',
-                    left: '95px',
-                    borderRadius: '50%',
-                    backgroundColor: 'white',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.12)'
-                  }}
-                >
-                  <div className='relative w-8 h-8'>
-                    <Image
-                      src='/images/perks/fan.png'
-                      alt='Fan'
-                      fill
-                      className='object-contain'
-                    />
-                  </div>
+                  {orbitItems.map((item, index) => {
+                    const angle = `${(360 / orbitItems.length) * index}deg`
+                    return (
+                      <div
+                        key={index}
+                        className='orbit-item'
+                        style={{ '--item-angle': angle } as React.CSSProperties}
+                      >
+                        {item.type === 'image' ? (
+                          <Image
+                            src={item.value}
+                            alt={item.alt}
+                            width={32}
+                            height={32}
+                            sizes='(max-width: 640px) 24px, 32px'
+                            className='object-contain'
+                            quality={60}
+                          />
+                        ) : (
+                          <Icon icon={item.value} className='orbit-icon' />
+                        )}
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .orbit-ring {
+          transform: rotate(var(--orbit-rotate));
+          transform-origin: center;
+        }
+        .orbit-item {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 56px;
+          height: 56px;
+          margin-left: -28px;
+          margin-top: -28px;
+          border-radius: 9999px;
+          background: #ffffff;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transform:
+            rotate(var(--item-angle))
+            translateX(var(--orbit-radius))
+            rotate(calc(-1 * var(--item-angle)))
+            rotate(var(--orbit-rotate-neg));
+        }
+        .orbit-icon {
+          width: 28px;
+          height: 28px;
+          color: var(--theme-primary);
+        }
+        @media (max-width: 640px) {
+          .orbit-item {
+            width: 46px;
+            height: 46px;
+            margin-left: -23px;
+            margin-top: -23px;
+            transform:
+              rotate(var(--item-angle))
+              translateX(145px)
+              rotate(calc(-1 * var(--item-angle)))
+              rotate(var(--orbit-rotate-neg));
+          }
+          .orbit-icon {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      `}</style>
     </section>
   )
 }

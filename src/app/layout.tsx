@@ -56,11 +56,7 @@ export default function RootLayout({
           href='/images/hero/banner-image.webp'
           fetchPriority='high'
         />
-        {/* Preconnect to external resources for faster loading */}
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
-        {/* DNS prefetch for performance */}
-        <link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+        {/* next/font/google self-hosts; no external font preconnects needed */}
         {/* Prevent theme flash - set theme before render */}
         <script
           dangerouslySetInnerHTML={{

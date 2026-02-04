@@ -18,14 +18,14 @@ const Hero = () => {
       className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-24 sm:pt-16 pb-6 overflow-hidden z-1'
       id='main-banner'>
       <div className='container px-4 sm:px-6 overflow-x-hidden'>
-        <div className='grid grid-cols-12 gap-4 lg:gap-8 items-center'>
+        <div className='grid grid-cols-12 gap-4 lg:gap-8 items-start'>
           {/* Left content - Original Text Style */}
-          <div className='lg:col-span-5 col-span-12 animate-fade-in'>
-            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:text-start text-center text-white mb-3 sm:mb-4 leading-tight lg:mt-16'>
+          <div className='md:col-span-6 lg:col-span-5 col-span-12 animate-fade-in'>
+            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl md:text-start text-center text-white mb-3 sm:mb-4 leading-tight lg:mt-16 max-w-[680px] mx-auto md:mx-0'>
               {t('hero.all_materials')} <span className='text-primary'>{t('hero.electrical')}</span> {t('hero.materials')}{' '}
               <span className='text-primary'>{t('hero.available')}</span> {t('hero.here')}
             </h1>
-            <p className='text-muted/80 text-sm sm:text-base lg:text-lg lg:text-start text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-0'>
+            <p className='text-muted/80 text-sm sm:text-base lg:text-lg md:text-start text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-0 max-w-[560px] mx-auto md:mx-0'>
               {t('hero.items_list')}
             </p>
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-3 sm:gap-6 lg:gap-8'>
@@ -42,14 +42,14 @@ const Hero = () => {
                 {t('hero.whatsapp_us')}
               </a>
             </div>
-            <div className='grid grid-cols-3 gap-3 sm:gap-8 lg:gap-12 mt-6 sm:mt-12 lg:mt-12 md:justify-start justify-center'>
-              <div className='text-center sm:text-left group'>
+            <div className='grid grid-cols-3 gap-3 sm:gap-8 lg:gap-12 mt-6 sm:mt-12 lg:mt-12 justify-items-center md:justify-items-start'>
+              <div className='text-center md:text-left group'>
                 <div className='flex justify-center sm:justify-start mb-2'>
                   <Icon icon='mdi:sparkles' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
                 </div>
                 <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.grand_opening')}</p>
               </div>
-              <div className='text-center sm:text-left group'>
+              <div className='text-center md:text-left group'>
                 <div className='flex justify-center sm:justify-start mb-2'>
                   <Icon icon='mdi:tag-multiple' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
                 </div>
@@ -58,7 +58,7 @@ const Hero = () => {
                   <p className='text-muted text-xs sm:text-sm font-medium'>{t('hero.brands')}</p>
                 </div>
               </div>
-              <div className='text-center sm:text-left group'>
+              <div className='text-center md:text-left group'>
                 <div className='flex justify-center sm:justify-start mb-2'>
                   <Icon icon='mdi:shield-check' className='text-primary text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300' />
                 </div>
@@ -70,7 +70,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className='col-span-12 lg:col-span-7 block animate-fade-in mt-8 lg:mt-0'>
+          <div className='col-span-12 md:col-span-6 lg:col-span-7 block animate-fade-in mt-8 md:mt-8 lg:mt-12'>
             <div className='hidden lg:flex justify-center mb-4 sm:mb-6'>
               <div className='inline-flex items-center gap-2 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full bg-gray-100/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm'>
                 <Icon icon='mdi:shield-check' className='text-primary text-2xl' />
@@ -81,31 +81,33 @@ const Hero = () => {
             </div>
             <div className='bento-hero'>
               {/* Card 1: Main Shop Image - Large */}
-              <div className='bento-main bento-card overflow-hidden group'>
+              <div className='bento-main bento-card bento-float-soft bento-float-4 overflow-hidden'>
                 <Image
                   src='/images/hero/banner-image.webp'
                   alt='Tamil Electricals Shop'
                   fill
                   priority
-                  className='object-cover transition-transform duration-500 group-hover:scale-105'
+                  fetchPriority='high'
+                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 50vw'
+                  className='object-cover'
                 />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity' />
               </div>
 
               {/* Card 2: Primary CTA Card */}
-              <div className='bento-cta bento-card bg-primary p-5 flex flex-col justify-center items-center text-center'>
+              <div className='bento-cta bento-card bento-float bento-float-1 bg-primary p-5 flex flex-col justify-center items-center text-center'>
                 <Icon icon='mdi:storefront' className='text-white text-3xl mb-2' />
                 <p className='text-white text-sm font-semibold'>{t('hero.newly_started')}</p>
                 <p className='text-white/80 text-xs'>{t('hero.shop')}</p>
               </div>
 
               {/* Card 3: Product Image */}
-              <div className='bento-img1 bento-card overflow-hidden group'>
+              <div className='bento-img1 bento-card bento-float bento-float-2 overflow-hidden'>
                 <Image
                   src='/images/portfolio/image1.jpeg'
                   alt='Electrical Products'
                   fill
-                  className='object-cover transition-transform duration-500 group-hover:scale-105'
+                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw'
+                  className='object-cover'
                 />
               </div>
 
@@ -124,7 +126,7 @@ const Hero = () => {
               </div>
 
               {/* Card 6: Stats Card */}
-              <div className='bento-stats bento-card-themed p-4 flex flex-col items-center justify-center text-center'>
+              <div className='bento-stats bento-card-themed bento-float bento-float-3 p-4 flex flex-col items-center justify-center text-center'>
                 <p className='text-primary text-xl sm:text-2xl lg:text-3xl font-bold leading-tight'>{t('hero.now_open')}</p>
                 <p className='bento-text-secondary text-xs'>{t('hero.visit_us')}</p>
               </div>
@@ -182,6 +184,46 @@ const Hero = () => {
         /* Secondary text */
         .bento-text-secondary {
           color: var(--theme-text-muted);
+        }
+
+        /* Subtle floating animation for right-side cards */
+        .bento-float {
+          animation: bentoFloat 7s ease-in-out infinite;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+        }
+        .bento-float-soft {
+          animation: bentoFloatSoft 8s ease-in-out infinite;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+        }
+        .bento-float-1 { animation-duration: 6.5s; }
+        .bento-float-2 { animation-duration: 7.5s; animation-delay: 0.6s; }
+        .bento-float-3 { animation-duration: 6.8s; animation-delay: 1s; }
+        .bento-float-4 { animation-duration: 8.8s; animation-delay: 0.3s; }
+        .bento-float-5 { animation-duration: 9.4s; animation-delay: 0.9s; }
+
+        @keyframes bentoFloat {
+          0%   { transform: translate3d(0, 0, 0); }
+          50%  { transform: translate3d(0, -8px, 0); }
+          100% { transform: translate3d(0, 0, 0); }
+        }
+        @keyframes bentoFloatSoft {
+          0%   { transform: translate3d(0, 0, 0); }
+          50%  { transform: translate3d(0, -5px, 0); }
+          100% { transform: translate3d(0, 0, 0); }
+        }
+
+        .bento-map iframe {
+          transform: translateZ(0);
+          backface-visibility: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .bento-float { animation: none; }
+          .bento-float-soft { animation: none; }
         }
         
         /* Grid positions for Mobile (2 columns) */

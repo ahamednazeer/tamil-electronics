@@ -1,17 +1,119 @@
 'use client'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { useEffect, useRef } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
-
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
 const Portfolio = () => {
   const { t } = useLanguage()
+  const sectionRef = useRef<HTMLElement>(null)
+  const stripRef = useRef<HTMLDivElement>(null)
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const maxShiftRef = useRef(0)
+  const isProgrammaticRef = useRef(false)
+
+  useEffect(() => {
+    const updateMaxShift = () => {
+      const strip = stripRef.current
+      const viewport = viewportRef.current
+      if (!strip || !viewport) return
+      const viewportWidth = viewport.clientWidth
+      const maxShift = Math.max(0, strip.scrollWidth - viewportWidth)
+      maxShiftRef.current = maxShift
+    }
+    updateMaxShift()
+    const resizeTimer = window.setTimeout(updateMaxShift, 300)
+    window.addEventListener('resize', updateMaxShift)
+    window.addEventListener('load', updateMaxShift)
+    return () => {
+      window.clearTimeout(resizeTimer)
+      window.removeEventListener('resize', updateMaxShift)
+      window.removeEventListener('load', updateMaxShift)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return
+
+    let lastY = window.scrollY
+    let target = 0
+    let current = 0
+    const speed = 0.7
+    let isInView = false
+    let rafId: number | null = null
+
+    const inView = () => {
+      const section = sectionRef.current
+      if (!section) return false
+      const rect = section.getBoundingClientRect()
+      return rect.top < window.innerHeight && rect.bottom > 0
+    }
+
+    const animate = () => {
+      const viewport = viewportRef.current
+      if (!viewport) return
+      current = target
+      isProgrammaticRef.current = true
+      viewport.scrollLeft = current
+      isProgrammaticRef.current = false
+      rafId = window.requestAnimationFrame(animate)
+    }
+
+    const onScroll = () => {
+      const section = sectionRef.current
+      const viewport = viewportRef.current
+      if (!section || !viewport) return
+
+      const scrollY = window.scrollY
+      const delta = scrollY - lastY
+      lastY = scrollY
+
+      if (!inView()) {
+        if (isInView) {
+          target = 0
+          current = 0
+          viewport.scrollLeft = 0
+          isInView = false
+        }
+        return
+      }
+
+      if (!isInView) {
+        target = 0
+        current = 0
+        viewport.scrollLeft = 0
+        isInView = true
+        return
+      }
+
+      const maxShift = maxShiftRef.current
+      if (maxShift <= 0) return
+      const clampedDelta = Math.max(-120, Math.min(120, delta))
+      target = Math.max(0, Math.min(maxShift, target + clampedDelta * speed))
+    }
+
+    const onUserScroll = () => {
+      if (isProgrammaticRef.current) return
+      const viewport = viewportRef.current
+      if (!viewport) return
+      target = viewport.scrollLeft
+      current = target
+    }
+
+    onScroll()
+    animate()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    viewportRef.current?.addEventListener('scroll', onUserScroll, { passive: true })
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      viewportRef.current?.removeEventListener('scroll', onUserScroll)
+    }
+  }, [])
 
   const productsData = [
     {
@@ -47,7 +149,7 @@ const Portfolio = () => {
   ]
 
   return (
-    <section className='lg:pt-10 md:pt-8 sm:pt-6 pt-6 min-h-0 overflow-hidden' id='brands'>
+    <section ref={sectionRef} className='lg:pt-10 md:pt-8 sm:pt-6 pt-6 min-h-0 overflow-hidden' id='brands'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}
@@ -73,80 +175,39 @@ const Portfolio = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          <Swiper
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={'auto'}
-            spaceBetween={30}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            navigation={true}
-            pagination={{ clickable: true }}
-            modules={[Pagination, Navigation, Autoplay]}
-            className="mySwiper !pb-12 !px-4 fade-mask"
-          >
-            {productsData.map((item, index) => (
-              <SwiperSlide key={index} className="!w-[280px] sm:!w-[350px] lg:!w-[400px] !h-auto">
-                <div className='bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg h-full flex flex-col group'>
-                  <div className='relative h-60 sm:h-72 w-full overflow-hidden'>
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                      className='object-cover group-hover:scale-105 transition-transform duration-300'
-                    />
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
-                      <span className="text-white/90 text-sm font-medium">@tamilelectricals</span>
+          <div ref={viewportRef} className='overflow-x-auto overflow-y-hidden no-scrollbar'>
+            <div
+              ref={stripRef}
+              className='flex items-stretch gap-4 sm:gap-6 lg:gap-8 pb-6 sm:pb-8 will-change-transform'
+            >
+              {productsData.map((item, index) => (
+                <div key={index} className='flex-none w-[300px] sm:w-[380px] lg:w-[460px]'>
+                  <div className='bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg h-full flex flex-col group'>
+                    <div className='relative h-64 sm:h-80 w-full overflow-hidden'>
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes='(max-width: 640px) 300px, (max-width: 1024px) 380px, 460px'
+                        className='object-cover group-hover:scale-105 transition-transform duration-300'
+                      />
+                      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
+                        <span className="text-white/90 text-sm font-medium">@tamilelectricals</span>
+                      </div>
+                    </div>
+                    <div className='p-4 sm:p-5 bg-white'>
+                      <h4 className='text-charcoalGray text-lg sm:text-xl font-bold mb-2 sm:mb-3'>
+                        {item.title}
+                      </h4>
                     </div>
                   </div>
-                  <div className='p-6 flex-1 flex flex-col justify-center bg-white'>
-                    <h4 className='text-charcoalGray text-xl font-bold mb-3'>
-                      {item.title}
-                    </h4>
-                    <p className='text-charcoalGray/70 text-base leading-relaxed'>
-                      {item.description}
-                    </p>
-                  </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
 
-      <style jsx global>{`
-        .swiper-pagination-bullet {
-          background: #fff !important;
-          opacity: 0.5;
-        }
-        .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: var(--color-primary) !important;
-        }
-        .swiper-button-next, .swiper-button-prev {
-          color: white !important;
-        }
-        .swiper-slide {
-            transition: transform 0.3s;
-        }
-        .swiper-slide-active {
-            transform: scale(1.05);
-        }
-        .swiper-slide:not(.swiper-slide-active) {
-            transform: scale(0.95);
-            opacity: 0.8;
-        }
-        /* Fade Mask Effect */
-        .fade-mask {
-            mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
-        }
-      `}</style>
     </section>
   )
 }

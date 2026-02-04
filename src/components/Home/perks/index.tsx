@@ -7,10 +7,10 @@ const Perks = () => {
       <div className='container px-4 sm:px-6 relative z-2'>
         <div className='text-center'>
           <p className="text-muted text-lg sm:text-xl lg:text-28 mb-3 sm:mb-4 pb-4 sm:pb-6 relative after:content-[''] after:w-8 after:h-0.5 after:bg-primary after:absolute after:bottom-0 after:left-1/2">
-            Always By <span className='text-primary'>Your Side</span>
+            Local Service, <span className='text-primary'>Real Advice</span>
           </p>
           <h2 className='text-white dark:text-white text-2xl sm:text-3xl lg:text-4xl font-medium perks-title'>
-            Visit <span className='text-primary'>Tamil Electricals</span> Today!
+            Why Neighbors Choose <span className='text-primary'>Tamil Electricals</span>
           </h2>
           <div className='perks-card relative overflow-hidden mt-6 sm:mt-8 lg:mt-10 border border-border/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-6 sm:py-8 lg:py-10 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-8 lg:px-16 rounded-2xl sm:rounded-3xl bg-dark_grey/35'>
             {/* Background image - visible in both dark and light mode */}
@@ -31,7 +31,9 @@ const Perks = () => {
                     alt={item.title}
                     width={32}
                     height={32}
+                    sizes='(max-width: 640px) 32px, (max-width: 1024px) 40px, 44px'
                     className='w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11'
+                    quality={70}
                   />
                 </div>
                 <h4 className={`text-white perks-item-title text-lg sm:text-xl lg:text-2xl mb-2 sm:mb-4 ${item.space}`}>

@@ -27,6 +27,10 @@
 
   /* Dot Pattern Color - White dots for dark mode */
   --dot-color: rgba(255, 255, 255, 0.1);
+
+  /* Services strip */
+  --services-strip-bg: #0b1220;
+  --services-strip-border: #1f2937;
 }
 
 /* Light Theme Variables - VIBRANT & CLEAN */
@@ -52,6 +56,10 @@
 
   /* Dot Pattern Color - Black dots for light mode */
   --dot-color: rgba(0, 0, 0, 0.15);
+
+  /* Services strip */
+  --services-strip-bg: #f3f4f6;
+  --services-strip-border: #e5e7eb;
 }
 
 @theme {
@@ -179,8 +187,15 @@
 
 @layer utilities {
   .container {
-    @apply w-full max-w-8xl mx-auto;
+    @apply w-full max-w-[96rem] mx-auto;
     box-sizing: border-box;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 

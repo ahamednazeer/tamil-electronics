@@ -1,7 +1,7 @@
 import React from 'react'
 import Hero from '@/components/Home/Hero'
+import LocalServices from '@/components/Home/services'
 import Work from '@/components/Home/work'
-import Platform from '@/components/Home/platform'
 import Portfolio from '@/components/Home/portfolio'
 import Upgrade from '@/components/Home/upgrade'
 import PortfolioSlider from '@/components/Home/PortfolioSlider'
@@ -15,8 +15,8 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <LocalServices />
       <Work />
-      <Platform />
       <Portfolio />
       <Upgrade />
       <PortfolioSlider />

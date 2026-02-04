@@ -14,20 +14,20 @@ export const perksData: {
 }[] = [
     {
       icon: "/images/perks/icon-support.svg",
-      title: "Customer Support",
-      text: "Get expert advice and assistance for all your electrical needs.",
+      title: "Local Guidance",
+      text: "Friendly help to pick the right item for your home or shop.",
       space: "lg:mt-8",
     },
     {
       icon: "/images/perks/icon-community.svg",
-      title: "Wide Selection",
-      text: "Choose from 50+ trusted brands for all your requirements.",
+      title: "All Under One Roof",
+      text: "Wires, pipes, lights, fans, pumps, and more in one place.",
       space: "lg:mt-14",
     },
     {
       icon: "/images/perks/icon-academy.svg",
-      title: "Quality Guarantee",
-      text: "100% genuine products<br />with warranty support.",
+      title: "Honest Pricing",
+      text: "Fair local prices with genuine branded products.",
       space: "lg:mt-4",
     },
   ];
