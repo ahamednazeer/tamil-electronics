@@ -12,7 +12,7 @@ const CardSlider = dynamic(() => import('./slider'), {
 })
 
 const Hero = () => {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   return (
     <section
       className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-24 sm:pt-16 pb-6 overflow-hidden z-1'
@@ -21,9 +21,31 @@ const Hero = () => {
         <div className='grid grid-cols-12 gap-4 lg:gap-8 items-start'>
           {/* Left content - Original Text Style */}
           <div className='md:col-span-6 lg:col-span-5 col-span-12 animate-fade-in'>
-            <h1 className='font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl md:text-start text-center text-white mb-3 sm:mb-4 leading-tight lg:mt-16 max-w-[680px] mx-auto md:mx-0'>
-              {t('hero.all_materials')} <span className='text-primary'>{t('hero.electrical')}</span> {t('hero.materials')}{' '}
-              <span className='text-primary'>{t('hero.available')}</span> {t('hero.here')}
+            <h1 className='font-medium md:text-start text-center text-white mb-3 sm:mb-4 leading-tight lg:mt-16 max-w-[720px] mx-auto md:mx-0'>
+              <span className='sr-only'>
+                {t('hero.all_materials')} {t('hero.electrical')} {t('hero.materials')} {t('hero.available')} {t('hero.here')}
+              </span>
+              <span className='relative block w-full max-w-[720px] h-[180px] sm:h-[210px] md:h-[240px] lg:h-[270px] xl:h-[300px] mx-auto md:mx-0'>
+                <Image
+                  src={
+                    language === 'ta'
+                      ? '/images/hero/hero-wire-title-v2-tamil.png'
+                      : '/images/hero/hero-wire-title-v2.png'
+                  }
+                  alt={`${t('hero.all_materials')} ${t('hero.electrical')} ${t('hero.materials')} ${t('hero.available')} ${t('hero.here')}`}
+                  fill
+                  priority
+                  fetchPriority='high'
+                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 720px'
+                  className='object-contain'
+                  style={{
+                    filter:
+                      language === 'ta'
+                        ? 'brightness(1.18) contrast(1.06) saturate(1.08) drop-shadow(0 1px 0.6px rgba(0,0,0,0.7))'
+                        : 'brightness(1.18) contrast(1.06) saturate(1.08) drop-shadow(0 1px 0.6px rgba(0,0,0,0.7))',
+                  }}
+                />
+              </span>
             </h1>
             <p className='text-muted/80 text-sm sm:text-base lg:text-lg md:text-start text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-0 max-w-[560px] mx-auto md:mx-0'>
               {t('hero.items_list')}
