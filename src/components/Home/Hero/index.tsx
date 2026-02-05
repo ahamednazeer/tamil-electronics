@@ -13,6 +13,9 @@ const CardSlider = dynamic(() => import('./slider'), {
 
 const Hero = () => {
   const { t, language } = useLanguage()
+
+
+
   return (
     <section
       className='relative md:pt-16 lg:pt-20 md:pb-8 lg:pb-10 pt-24 sm:pt-16 pb-6 overflow-hidden z-1'
@@ -29,8 +32,8 @@ const Hero = () => {
                 <Image
                   src={
                     language === 'ta'
-                      ? '/images/hero/hero-wire-title-v2-tamil.png'
-                      : '/images/hero/hero-wire-title-v2.png'
+                      ? '/images/hero/hero-wire-title-v6-tamil.png'
+                      : '/images/hero/hero-wire-title-v6.png'
                   }
                   alt={`${t('hero.all_materials')} ${t('hero.electrical')} ${t('hero.materials')} ${t('hero.available')} ${t('hero.here')}`}
                   fill
@@ -39,10 +42,18 @@ const Hero = () => {
                   sizes='(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 720px'
                   className='object-contain'
                   style={{
+                    transform:
+                      language === 'ta'
+                        ? 'scale(1.2) translateX(-8%)'
+                        : language === 'en'
+                          ? 'scale(1.1) translateX(-5%)'
+                          : 'scale(1)',
+                    transformOrigin:
+                      language === 'ta' || language === 'en' ? 'left center' : 'center',
                     filter:
                       language === 'ta'
-                        ? 'brightness(1.18) contrast(1.06) saturate(1.08) drop-shadow(0 1px 0.6px rgba(0,0,0,0.7))'
-                        : 'brightness(1.18) contrast(1.06) saturate(1.08) drop-shadow(0 1px 0.6px rgba(0,0,0,0.7))',
+                        ? 'brightness(1.18) contrast(1.06) saturate(1.08) drop-shadow(0 1px 1px rgba(0,0,0,0.7))'
+                        : 'brightness(1.18) contrast(1.06) saturate(1.08) drop-shadow(0 1px 1px rgba(0,0,0,0.9))',
                   }}
                 />
               </span>
