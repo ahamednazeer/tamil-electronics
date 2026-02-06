@@ -1,5 +1,6 @@
 import React from 'react'
 import Hero from '@/components/Home/Hero'
+import IntroOverlay from '@/components/IntroOverlay'
 import LocalServices from '@/components/Home/services'
 import Work from '@/components/Home/work'
 import Portfolio from '@/components/Home/portfolio'
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
+      <IntroOverlay />
       <Hero />
       <LocalServices />
       <Work />

@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useTheme } from 'next-themes'
 
 const MapTilerMap = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<any>(null)
+  const { resolvedTheme } = useTheme()
   const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY
   const maptilerStyle = process.env.NEXT_PUBLIC_MAPTILER_STYLE || 'basic-v2'
+  const maptilerStyleDark = process.env.NEXT_PUBLIC_MAPTILER_STYLE_DARK || 'dataviz-dark'
   const center: [number, number] = [79.3236843607538, 11.521112888557493]
   const zoom = 16.2
 
@@ -16,11 +19,20 @@ const MapTilerMap = () => {
 
     const initMap = () => {
       const maplibregl = (window as any).maplibregl
-      if (!maplibregl || !containerRef.current || mapRef.current) return
+      if (!maplibregl || !containerRef.current) return
+
+      const styleId = (resolvedTheme === 'dark')
+        ? maptilerStyleDark
+        : maptilerStyle
+
+      if (mapRef.current) {
+        mapRef.current.setStyle(`https://api.maptiler.com/maps/${styleId}/style.json?key=${maptilerKey}`)
+        return
+      }
 
       const map = new maplibregl.Map({
         container: containerRef.current,
-        style: `https://api.maptiler.com/maps/${maptilerStyle}/style.json?key=${maptilerKey}`,
+        style: `https://api.maptiler.com/maps/${styleId}/style.json?key=${maptilerKey}`,
         center,
         zoom,
         interactive: false,
@@ -31,37 +43,45 @@ const MapTilerMap = () => {
 
       map.on('load', () => {
         if (disposed) return
-        map.addSource('mt-buildings', {
-          type: 'vector',
-          url: `https://api.maptiler.com/tiles/buildings/tiles.json?key=${maptilerKey}`,
-        })
-        map.addLayer({
-          id: 'mt-buildings-fill',
-          type: 'fill',
-          source: 'mt-buildings',
-          'source-layer': 'building',
-          paint: {
-            'fill-color': '#E31E24',
-            'fill-opacity': 0.16,
-          },
-        })
-        map.addLayer({
-          id: 'mt-buildings-outline',
-          type: 'line',
-          source: 'mt-buildings',
-          'source-layer': 'building',
-          paint: {
-            'line-color': '#E31E24',
-            'line-width': 0.7,
-            'line-opacity': 0.5,
-          },
-        })
+        if (!map.getSource('mt-buildings')) {
+          map.addSource('mt-buildings', {
+            type: 'vector',
+            url: `https://api.maptiler.com/tiles/buildings/tiles.json?key=${maptilerKey}`,
+          })
+        }
+        if (!map.getLayer('mt-buildings-fill')) {
+          map.addLayer({
+            id: 'mt-buildings-fill',
+            type: 'fill',
+            source: 'mt-buildings',
+            'source-layer': 'building',
+            paint: {
+              'fill-color': '#E31E24',
+              'fill-opacity': 0.16,
+            },
+          })
+        }
+        if (!map.getLayer('mt-buildings-outline')) {
+          map.addLayer({
+            id: 'mt-buildings-outline',
+            type: 'line',
+            source: 'mt-buildings',
+            'source-layer': 'building',
+            paint: {
+              'line-color': '#E31E24',
+              'line-width': 0.7,
+              'line-opacity': 0.5,
+            },
+          })
+        }
 
         const markerEl = document.createElement('div')
         markerEl.className = 'hero-map-marker'
-        new maplibregl.Marker({ element: markerEl })
-          .setLngLat(center)
-          .addTo(map)
+        if (!markerEl.parentElement) {
+          new maplibregl.Marker({ element: markerEl })
+            .setLngLat(center)
+            .addTo(map)
+        }
       })
     }
 
@@ -103,7 +123,7 @@ const MapTilerMap = () => {
         mapRef.current = null
       }
     }
-  }, [maptilerKey, maptilerStyle, center, zoom])
+  }, [maptilerKey, maptilerStyle, maptilerStyleDark, center, zoom, resolvedTheme])
 
   if (!maptilerKey) {
     return (

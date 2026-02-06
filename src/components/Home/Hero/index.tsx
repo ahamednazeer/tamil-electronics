@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { Icon } from '@iconify/react'
@@ -14,6 +15,37 @@ const CardSlider = dynamic(() => import('./slider'), {
 
 const Hero = () => {
   const { t, language } = useLanguage()
+  const [headlineReady, setHeadlineReady] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 10) {
+        setHeadlineReady(true)
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const renderTownText = () => {
+    const townText = t('hero.all_materials')
+    if (language !== 'en') {
+      return townText
+    }
+    const target = 'Town'
+    const index = townText.indexOf(target)
+    if (index === -1) {
+      return townText
+    }
+    const before = townText.slice(0, index)
+    const after = townText.slice(index + target.length)
+    return (
+      <>
+        {before}T<span className='hero-letter-pop'>o</span>wn{after}
+      </>
+    )
+  }
 
   return (
     <section
@@ -33,19 +65,20 @@ const Hero = () => {
                 <span>{t('hero.trusted_local')}</span>
               </div>
             </div>
-            <h1 className='md:text-start text-center mb-3 sm:mb-4 leading-tight max-w-[640px] mx-auto md:mx-0'>
-              <span className='block text-muted/80 text-xs sm:text-sm lg:text-base font-semibold tracking-wide uppercase'>
-                {t('hero.all_materials')}
+            <h1
+              className={`md:text-start text-center mb-3 sm:mb-4 leading-tight max-w-[640px] mx-auto md:mx-0 hero-headline ${headlineReady ? 'hero-headline-ready' : 'hero-headline-prepare'}`}>
+              <span className='hero-line hero-line-kicker block text-muted/80 text-xs sm:text-sm lg:text-base font-semibold tracking-wide uppercase'>
+                {renderTownText()}
               </span>
               <span
-                className={`block font-extrabold ${language === 'ta'
+                className={`hero-line hero-line-main block font-extrabold ${language === 'ta'
                   ? 'text-[2rem] sm:text-[2.45rem] md:text-[2.85rem] lg:text-[3.1rem] leading-[1.12]'
                   : 'text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'
                   }`}>
                 <span className='text-primary'>{t('hero.electrical')}</span>{' '}
                 <span className='text-white'>{t('hero.materials')}</span>
               </span>
-              <span className='block text-sm sm:text-base text-muted mt-2'>
+              <span className='hero-line hero-line-sub block text-sm sm:text-base text-muted mt-2'>
                 {t('hero.available')} {t('hero.here')}{' '}
                 {language === 'en' ? 'in' : ''} {t('hero.now_open')}
               </span>
@@ -173,6 +206,46 @@ const Hero = () => {
         .hero-tagline-icon {
           font-size: 1rem;
           color: var(--theme-primary);
+        }
+
+        .hero-headline-prepare .hero-line {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+
+        .hero-headline-prepare .hero-line-main {
+          transform: translateY(10px) scale(0.98);
+        }
+
+        .hero-headline-ready .hero-line {
+          opacity: 1;
+          transform: translateY(0);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hero-headline-ready .hero-line-kicker {
+          transition-delay: 0.05s;
+        }
+
+        .hero-headline-ready .hero-line-main {
+          transition-delay: 0.18s;
+        }
+
+        .hero-headline-ready .hero-line-sub {
+          transition-delay: 0.32s;
+        }
+
+        .hero-letter-pop {
+          display: inline-block;
+          opacity: 0;
+          transform: scale(0.6);
+          transition: opacity 0.45s ease, transform 0.45s ease;
+          transition-delay: 0.1s;
+        }
+
+        .hero-headline-ready .hero-letter-pop {
+          opacity: 1;
+          transform: scale(1);
         }
 
         .hero-trustline {
@@ -398,6 +471,19 @@ const Hero = () => {
           .hero-float,
           .hero-float-soft {
             animation: none;
+          }
+
+          .hero-headline-prepare .hero-line,
+          .hero-headline-ready .hero-line {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+
+          .hero-letter-pop {
+            opacity: 1;
+            transform: none;
+            transition: none;
           }
         }
 
