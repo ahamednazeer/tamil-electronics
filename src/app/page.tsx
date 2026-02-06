@@ -14,14 +14,18 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
-      <IntroOverlay />
-      <Hero />
-      <LocalServices />
-      <Work />
-      <Portfolio />
-      <Upgrade />
-      <PortfolioSlider />
+    <main className='intro-scene'>
+      <div className='intro-layer'>
+        <IntroOverlay />
+      </div>
+      <div className='site-layer'>
+        <Hero />
+        <LocalServices />
+        <Work />
+        <Portfolio />
+        <Upgrade />
+        <PortfolioSlider />
+      </div>
     </main>
   )
 }

@@ -573,3 +573,22 @@ html[data-theme="light"] .perks-card,
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
+/* ========================================
+   INTRO OVERLAY - CRITICAL ABOVE-FOLD CSS
+   This prevents main content flash before JS loads
+   ======================================== */
+
+/* Hide the main site content by default when intro-scene is present */
+.intro-scene .site-layer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Show site-layer when intro is done (class added by JS) */
+.intro-scene.intro-done .site-layer {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s ease-out;
+}
+
