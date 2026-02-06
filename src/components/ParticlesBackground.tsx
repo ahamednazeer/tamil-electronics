@@ -32,8 +32,17 @@ const ParticlesBackground = () => {
 
     const initParticles = () => {
         if (!(window as any).particlesJS) return;
+        const container = document.getElementById('particles-js');
+        if (!container) return;
 
         const isDark = resolvedTheme === 'dark';
+
+        if ((window as any).pJSDom?.length) {
+            (window as any).pJSDom.forEach((instance: any) => {
+                instance?.pJS?.fn?.vendors?.destroypJS?.();
+            });
+            (window as any).pJSDom = [];
+        }
 
         // Separate configurations for completely different feel in dark/light modes
         const darkConfig = {
@@ -145,14 +154,14 @@ const ParticlesBackground = () => {
         const lightConfig = {
             particles: {
                 number: {
-                    value: 40,
+                    value: 45,
                     density: {
                         enable: true,
-                        value_area: 800
+                        value_area: 900
                     }
                 },
                 color: {
-                    value: '#000000'
+                    value: '#111827'
                 },
                 shape: {
                     type: 'circle',
@@ -165,7 +174,7 @@ const ParticlesBackground = () => {
                     }
                 },
                 opacity: {
-                    value: 0.15,
+                    value: 0.18,
                     random: false,
                     anim: {
                         enable: false,
@@ -175,7 +184,7 @@ const ParticlesBackground = () => {
                     }
                 },
                 size: {
-                    value: 3,
+                    value: 2,
                     random: true,
                     anim: {
                         enable: false,
@@ -187,13 +196,13 @@ const ParticlesBackground = () => {
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: '#000000',
-                    opacity: 0.15,
+                    color: '#111827',
+                    opacity: 0.12,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 2,
+                    speed: 0.4,
                     direction: 'none',
                     random: false,
                     straight: false,

@@ -8,8 +8,8 @@
         "available": "Now",
         "here": "Open",
         "items_list": "Wires • Switches • LED • Fans • MCB • Pipes • Pumps • Stabilizers",
-        "call_now": "Call Now",
-        "whatsapp_us": "WhatsApp Us",
+        "call_now": "Call for Best Price",
+        "whatsapp_us": "Get Quote on WhatsApp",
         "grand_opening": "Local Support",
         "brands_count": "Quick",
         "brands": "Pickup",
@@ -19,7 +19,9 @@
         "newly_started": "Newly Opened",
         "shop": "Local Shop",
         "now_open": "Virudhachalam",
-        "visit_us": "College Nagar"
+        "visit_us": "College Nagar",
+        "open_map": "Open in Google Maps",
+        "trusted_local": "Trusted Local Shop"
     },
     "work": {
         "title_start": "Everything",

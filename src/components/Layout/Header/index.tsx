@@ -55,7 +55,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${showHeaderBg ? 'shadow-lg backdrop-blur-md pt-4' : 'shadow-none md:pt-8 pt-4 bg-transparent'
+      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${showHeaderBg ? 'shadow-[0_4px_20px_rgba(0,0,0,0.04)] backdrop-blur-md pt-4' : 'shadow-none md:pt-8 pt-4 bg-transparent'
         }`}
       style={{ backgroundColor: showHeaderBg ? 'var(--theme-header-bg)' : 'transparent' }}>
       <div className='lg:py-0 py-2'>
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
             <LanguageToggle />
             <Link
               href='tel:+919363897989'
-              className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary px-4 py-2 rounded-lg font-medium transition-colors'
+              className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary px-3 py-1.5 rounded-md font-semibold text-sm transition-colors'
               style={{ color: 'var(--theme-primary)' }}>
               {t('hero.call_now')}
             </Link>
@@ -79,8 +79,8 @@ const Header: React.FC = () => {
               href='https://wa.me/919363897989'
               target='_blank'
               rel='noopener noreferrer'
-              className='hidden lg:block bg-primary px-4 py-2 rounded-lg hover:opacity-90 font-medium transition-all'
-              style={{ backgroundColor: 'var(--theme-primary)', color: '#FFFFFF' }}>
+              className='hidden lg:block bg-transparent text-primary border border-primary px-3 py-1.5 rounded-md font-semibold text-sm transition-colors hover:bg-primary hover:text-darkmode'
+              style={{ color: 'var(--theme-primary)' }}>
               {t('hero.whatsapp_us')}
             </Link>
             <button
