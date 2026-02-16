@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/context/LanguageContext'
+import { storeInfo } from '@/data/storeInfo'
 
 const Work = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -96,12 +97,12 @@ const Work = () => {
             {/* CTA Buttons - Exactly like reference */}
             <div className='flex flex-wrap items-center gap-4'>
               <a
-                href='tel:+919363897989'
+                href={`tel:${storeInfo.phoneE164}`}
                 className='bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-primary-dark transition-all'>
                 {t('work.contact_us')}
               </a>
               <a
-                href='#about'
+                href='#gallery'
                 className='flex items-center gap-3 text-white font-medium py-3 px-4 hover:text-primary transition-all'>
                 <div className='w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center'>
                   <Icon icon='mdi:play' className='text-xl ml-0.5' />

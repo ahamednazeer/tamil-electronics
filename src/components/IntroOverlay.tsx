@@ -1,37 +1,123 @@
 'use client'
 
-import { useEffect, useState, useLayoutEffect } from 'react'
+import { useEffect, useState, useLayoutEffect, useMemo } from 'react'
 
 const INTRO_SEEN_KEY = 'intro_seen'
+const SCATTER_TERMS = [
+    'Wires',
+    'Cables',
+    'Switches',
+    'Sockets',
+    'MCB',
+    'ELCB',
+    'RCCB',
+    'DB Box',
+    'Panels',
+    'Panel Board',
+    'Distribution Box',
+    'Conduits',
+    'Trunking',
+    'Cable Tray',
+    'Cable Ties',
+    'Lugs',
+    'Ferrules',
+    'Connectors',
+    'Plugs',
+    'Adapters',
+    'Power Strip',
+    'Spike Guard',
+    'Surge Protector',
+    'LED',
+    'Bulbs',
+    'Tube Light',
+    'Downlight',
+    'Floodlight',
+    'Street Light',
+    'Ceiling Fan',
+    'Exhaust Fan',
+    'Regulators',
+    'Stabilizers',
+    'Inverter',
+    'Battery',
+    'UPS',
+    'Timers',
+    'Timer Switch',
+    'Sensors',
+    'Motion Sensor',
+    'Photo Sensor',
+    'Relays',
+    'Contactors',
+    'Starters',
+    'Isolators',
+    'Busbar',
+    'Earthing',
+    'Copper Wire',
+    'Aluminium Wire',
+    'PVC Pipe',
+    'UPVC',
+    'CPVC',
+    'GI Pipe',
+    'Cable Glands',
+    'Insulation Tape',
+    'Heat Shrink',
+    'Multimeter',
+    'Tester',
+    'Fuse',
+    'Junction Box',
+    'Switchgear',
+    'Flexible Cable',
+    'Armoured Cable',
+    'Floor Box',
+    'Modular Plate',
+    'Lamp Holder',
+    'Bell',
+]
 
 const IntroOverlay = () => {
     const [enabled, setEnabled] = useState(true)
     const [done, setDone] = useState(false)
     const [fadeOut, setFadeOut] = useState(false)
 
-    // Scattered words around the viewport
-    const scatteredWords = [
-        { text: 'Wires', top: '10%', left: '5%', range: '5% 15%' },
-        { text: 'Cables', top: '15%', left: '85%', range: '12% 22%' },
-        { text: 'Switches', top: '25%', left: '10%', range: '18% 28%' },
-        { text: 'Sockets', top: '20%', left: '75%', range: '8% 18%' },
-        { text: 'MCB', top: '35%', left: '3%', range: '25% 35%' },
-        { text: 'ELCB', top: '40%', left: '92%', range: '30% 40%' },
-        { text: 'Panels', top: '60%', left: '5%', range: '35% 45%' },
-        { text: 'Conduits', top: '55%', left: '88%', range: '40% 50%' },
-        { text: 'Fans', top: '70%', left: '8%', range: '45% 55%' },
-        { text: 'Lights', top: '75%', left: '85%', range: '50% 60%' },
-        { text: 'LEDs', top: '85%', left: '12%', range: '55% 65%' },
-        { text: 'Bulbs', top: '80%', left: '78%', range: '60% 70%' },
-        { text: 'Motors', top: '8%', left: '35%', range: '15% 25%' },
-        { text: 'Pumps', top: '12%', left: '60%', range: '22% 32%' },
-        { text: 'Meters', top: '88%', left: '30%', range: '65% 75%' },
-        { text: 'Fuses', top: '90%', left: '65%', range: '70% 80%' },
-        { text: 'Plugs', top: '30%', left: '20%', range: '28% 38%' },
-        { text: 'Tools', top: '65%', left: '75%', range: '48% 58%' },
-        { text: 'Pipes', top: '45%', left: '15%', range: '33% 43%' },
-        { text: 'Tapes', top: '50%', left: '80%', range: '38% 48%' },
-    ]
+    const buildScatter = (useRandom: boolean) => {
+        const rand = (seed: number) => {
+            if (useRandom) {
+                return () => Math.random()
+            }
+            let value = seed % 233280
+            return () => {
+                value = (value * 9301 + 49297) % 233280
+                return value / 233280
+            }
+        }
+
+        return SCATTER_TERMS.map((text, index) => {
+            const next = rand((index + 1) * 9973)
+            const pickPos = () => {
+                let top = 6 + next() * 86
+                let left = 6 + next() * 86
+                for (let i = 0; i < 6; i += 1) {
+                    if (!(top > 30 && top < 70 && left > 25 && left < 75)) {
+                        break
+                    }
+                    top = 6 + next() * 86
+                    left = 6 + next() * 86
+                }
+                return { top, left }
+            }
+
+            const { top, left } = pickPos()
+            const rangeStart = 5 + next() * 70
+            const rangeEnd = Math.min(95, rangeStart + 12 + next() * 10)
+            return {
+                text,
+                top: `${top.toFixed(1)}%`,
+                left: `${left.toFixed(1)}%`,
+                range: `${Math.round(rangeStart)}% ${Math.round(rangeEnd)}%`,
+            }
+        })
+    }
+
+    const [scatteredWords, setScatteredWords] = useState(() => buildScatter(false))
 
     useEffect(() => {
         let shouldShow = true

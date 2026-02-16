@@ -18,7 +18,7 @@ const portfolioImages = [
 const PortfolioSlider = () => {
     const { t } = useLanguage();
     return (
-        <section id='about' className='pb-6 sm:pb-8 lg:pb-10 relative'>
+        <section id='gallery' className='pb-6 sm:pb-8 lg:pb-10 relative'>
             <div className='container px-4 sm:px-6 relative z-2'>
                 <div className='text-center mb-4 sm:mb-6'>
                     <p className="text-muted text-lg sm:text-xl lg:text-28 mb-3 sm:mb-4 pb-4 sm:pb-6 relative after:content-[''] after:w-8 after:h-0.5 after:bg-primary after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2">

@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/context/LanguageContext'
 import MapTilerMap from './MapTilerMap'
+import { storeInfo } from '@/data/storeInfo'
 
 // Dynamically import slider to reduce initial JS bundle size
 const CardSlider = dynamic(() => import('./slider'), {
@@ -15,18 +15,7 @@ const CardSlider = dynamic(() => import('./slider'), {
 
 const Hero = () => {
   const { t, language } = useLanguage()
-  const [headlineReady, setHeadlineReady] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 10) {
-        setHeadlineReady(true)
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const headlineReady = true
 
   const renderTownText = () => {
     const townText = t('hero.all_materials')
@@ -59,7 +48,7 @@ const Hero = () => {
         <div className='grid grid-cols-12 gap-5 lg:gap-7 items-stretch'>
           {/* Left content */}
           <div className='md:col-span-5 lg:col-span-5 col-span-12 animate-fade-in'>
-            <div className='flex justify-start mb-2 sm:mb-3'>
+            <div className='flex justify-center md:justify-start mb-2 sm:mb-3'>
               <div className='hero-tagline'>
                 <Icon icon='mdi:check-decagram' className='hero-tagline-icon' />
                 <span>{t('hero.trusted_local')}</span>
@@ -88,13 +77,13 @@ const Hero = () => {
             </p>
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-6'>
               <a
-                href='tel:+919363897989'
+                href={`tel:${storeInfo.phoneE164}`}
                 className='w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium text-darkmode py-2.5 sm:py-3 px-6 sm:px-7 z-50 text-center transition-all shadow-[0_10px_24px_rgba(227,30,36,0.28)] hover:shadow-[0_14px_32px_rgba(227,30,36,0.35)] hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap'>
                 <Icon icon='mdi:phone' className='text-xl' />
                 {t('hero.call_now')}
               </a>
               <a
-                href='https://wa.me/919363897989'
+                href={`https://wa.me/${storeInfo.whatsappNumber}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium text-primary py-2.5 sm:py-3 px-6 sm:px-7 text-center transition-all hover:bg-primary hover:text-darkmode flex items-center justify-center gap-2 whitespace-nowrap'>
@@ -102,7 +91,7 @@ const Hero = () => {
                 {t('hero.whatsapp_us')}
               </a>
             </div>
-            <p className='hero-trustline mt-5 sm:mt-6'>
+            <p className='hero-trustline mt-5 sm:mt-6 text-center md:text-left'>
               {t('hero.grand_opening')} • {t('hero.brands_count')} {t('hero.brands')} • {t('hero.quality_pct')} {t('hero.quality')}
             </p>
           </div>
@@ -169,7 +158,8 @@ const Hero = () => {
         .hero-orb {
           position: absolute;
           border-radius: 999px;
-          opacity: 0.55;
+          opacity: 0.45;
+          filter: blur(20px);
         }
 
         .hero-orb-left {
@@ -177,7 +167,7 @@ const Hero = () => {
           height: 420px;
           left: -160px;
           top: 28%;
-          background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--theme-primary) 28%, transparent) 0%, transparent 70%);
+          background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--theme-primary) 20%, transparent) 0%, transparent 75%);
         }
 
         .hero-orb-right {
@@ -185,7 +175,7 @@ const Hero = () => {
           height: 520px;
           right: -200px;
           top: -180px;
-          background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--theme-accent) 32%, transparent) 0%, transparent 72%);
+          background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--theme-accent) 25%, transparent) 0%, transparent 75%);
         }
 
         .hero-tagline {
@@ -253,7 +243,13 @@ const Hero = () => {
           font-size: 0.85rem;
           font-weight: 500;
           letter-spacing: 0.02em;
-          text-align: left;
+          text-align: center;
+        }
+
+        @media (min-width: 768px) {
+          .hero-trustline {
+            text-align: left;
+          }
         }
 
         .hero-bold {

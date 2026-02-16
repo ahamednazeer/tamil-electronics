@@ -8,6 +8,8 @@ import Aoscompo from '@/utils/aos'
 import { Metadata, Viewport } from 'next'
 import ParticlesBackground from '@/components/ParticlesBackground'
 import { LanguageProvider } from '@/context/LanguageContext'
+import { storeInfo } from '@/data/storeInfo'
+import FloatingWhatsAppButton from '@/components/FloatingWhatsAppButton'
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -57,25 +59,56 @@ export default function RootLayout({
           fetchPriority='high'
         />
         {/* next/font/google self-hosts; no external font preconnects needed */}
-        {/* Prevent theme flash AND intro flash - set before any render */}
+        {/* Prevent theme flash - set before any render */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 var theme = localStorage.getItem('theme') || 'light';
                 document.documentElement.setAttribute('data-theme', theme);
-                // Check if intro should show (not seen before)
-                var introSeen = false;
-                try { introSeen = sessionStorage.getItem('intro_seen') === '1'; } catch(e) {}
-                if (!introSeen) {
-                  document.documentElement.classList.add('intro-loading');
-                }
               })();
             `,
           }}
         />
-        {/* Critical CSS to prevent intro flash - hide everything until CSS loads */}
-        <style dangerouslySetInnerHTML={{ __html: `html.intro-loading header, html.intro-loading .site-layer, html.intro-loading footer, html.intro-loading .intro-layer { visibility: hidden !important; } html.intro-loading { background: #fff; }` }} />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'LocalBusiness',
+              name: storeInfo.name,
+              description: storeInfo.description,
+              url: 'https://tamilelectricals.com',
+              telephone: storeInfo.phoneE164,
+              image: 'https://tamilelectricals.com/images/hero/banner-image.webp',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: storeInfo.address.streetAddress,
+                addressLocality: storeInfo.address.addressLocality,
+                addressRegion: storeInfo.address.addressRegion,
+                postalCode: storeInfo.address.postalCode,
+                addressCountry: storeInfo.address.addressCountry,
+              },
+              openingHoursSpecification: storeInfo.hours
+                .filter((hour) => !storeInfo.closedDays.includes(hour.day))
+                .map((hour) => ({
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: [
+                  'Sunday',
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday',
+                  'Saturday',
+                ][hour.day],
+                opens: hour.opens,
+                closes: hour.closes,
+              })),
+              sameAs: [storeInfo.googleMapsUrl],
+            }),
+          }}
+        />
       </head>
       <body className={`${font.className}`}>
         <ThemeProvider
@@ -89,6 +122,7 @@ export default function RootLayout({
               {children}
               <Footer />
             </Aoscompo>
+            <FloatingWhatsAppButton />
             <ScrollToTop />
           </LanguageProvider>
         </ThemeProvider>

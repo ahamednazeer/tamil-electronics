@@ -6,11 +6,15 @@ import { footerlabels } from '@/app/api/data'
 import { Icon } from '@iconify/react'
 import Logo from '../Header/Logo'
 import { useLanguage } from '@/context/LanguageContext'
+import { storeInfo } from '@/data/storeInfo'
+import { formatTime } from '@/utils/time'
 
 const Footer: FC = () => {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const locale = language === 'ta' ? 'ta-IN' : 'en-IN'
+  const firstHour = storeInfo.hours[0]
   return (
-    <footer className='pt-8 sm:pt-10 lg:pt-12 bg-darkmode' id='contact'>
+    <footer className='pt-8 sm:pt-10 lg:pt-12 bg-darkmode' id='footer'>
       <div className='container px-4 sm:px-6'>
         <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-20 pb-10 sm:pb-12 lg:pb-16'>
           {/* Logo and About */}
@@ -48,7 +52,7 @@ const Footer: FC = () => {
                 />
               </Link>
               <Link
-                href='https://wa.me/919363897989'
+                href={`https://wa.me/${storeInfo.whatsappNumber}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label='WhatsApp'
@@ -105,7 +109,10 @@ const Footer: FC = () => {
               <div className='flex flex-col gap-2'>
                 <p className='text-white text-base font-medium'>{t('footer.shop_address')}</p>
                 <p className='text-muted/60 text-sm leading-relaxed'>
-                  805A, Junction Rd, College Nagar<br />Virudhachalam, Tamil Nadu, 606001
+                  {storeInfo.address.streetAddress}
+                  <br />
+                  {storeInfo.address.addressLocality}, {storeInfo.address.addressRegion},{' '}
+                  {storeInfo.address.postalCode}
                 </p>
               </div>
 
@@ -113,10 +120,10 @@ const Footer: FC = () => {
               <div className='flex flex-col gap-2'>
                 <p className='text-white text-base font-medium'>{t('footer.phone')}</p>
                 <Link
-                  href='tel:+919363897989'
+                  href={`tel:${storeInfo.phoneE164}`}
                   className='text-muted/60 hover:text-primary text-sm transition-colors'
                 >
-                  +91 93638 97989
+                  {storeInfo.phoneDisplay}
                 </Link>
               </div>
 
@@ -124,7 +131,7 @@ const Footer: FC = () => {
               <div className='flex flex-col gap-2'>
                 <p className='text-white text-base font-medium'>{t('footer.working_hours')}</p>
                 <p className='text-muted/60 text-sm'>
-                  9:00 AM – 9:00 PM
+                  {formatTime(firstHour.opens, locale)} - {formatTime(firstHour.closes, locale)}
                 </p>
               </div>
 

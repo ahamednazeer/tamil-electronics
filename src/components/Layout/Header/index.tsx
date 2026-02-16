@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import { Icon } from '@iconify/react'
 import { headerData } from '../Header/Navigation/menuData'
 import Logo from './Logo'
 import HeaderLink from '../Header/Navigation/HeaderLink'
@@ -8,6 +9,7 @@ import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
 import ThemeToggle from '../ThemeToggle'
 import LanguageToggle from '../LanguageToggle'
 import { useLanguage } from '@/context/LanguageContext'
+import { storeInfo } from '@/data/storeInfo'
 
 
 const Header: React.FC = () => {
@@ -16,7 +18,8 @@ const Header: React.FC = () => {
   const { t } = useLanguage()
 
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-  const showHeaderBg = sticky || navbarOpen
+  const showHeaderBg = true
+  const showHeaderShadow = sticky || navbarOpen
 
   const handleScroll = () => {
     setSticky(window.scrollY >= 80)
@@ -55,34 +58,39 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${showHeaderBg ? 'shadow-[0_4px_20px_rgba(0,0,0,0.04)] backdrop-blur-md pt-4' : 'shadow-none md:pt-8 pt-4 bg-transparent'
+      className={`fixed top-0 z-40 w-full transition-all duration-300 backdrop-blur-md border-b border-white/5 ${showHeaderShadow ? 'shadow-[0_8px_30px_rgba(0,0,0,0.08)]' : 'shadow-[0_4px_16px_rgba(0,0,0,0.05)]'
         }`}
       style={{ backgroundColor: showHeaderBg ? 'var(--theme-header-bg)' : 'transparent' }}>
       <div className='lg:py-0 py-2'>
-        <div className='container px-4 flex items-center justify-between px-4'>
+        <div className='container px-4 flex items-center justify-between py-3 gap-3'>
           <Logo />
           <nav className='hidden lg:flex grow items-center gap-8 justify-center'>
             {headerData.map((item, index) => (
               <HeaderLink key={index} item={item} />
             ))}
           </nav>
-          <div className='flex items-center gap-4'>
-            <ThemeToggle />
-            <LanguageToggle />
+          <div className='flex items-center gap-2 sm:gap-3'>
             <Link
-              href='tel:+919363897989'
-              className='hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary px-3 py-1.5 rounded-md font-semibold text-sm transition-colors'
-              style={{ color: 'var(--theme-primary)' }}>
-              {t('hero.call_now')}
+              href={`tel:${storeInfo.phoneE164}`}
+              aria-label={t('header.call_short')}
+              className='header-cta flex items-center gap-2 rounded-full border border-primary/60 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors'>
+              <Icon icon='mdi:phone' className='text-sm sm:text-base' />
+              <span className='sm:hidden'>{t('header.call_short')}</span>
+              <span className='hidden sm:inline'>{storeInfo.phoneDisplay}</span>
             </Link>
             <Link
-              href='https://wa.me/919363897989'
+              href={`https://wa.me/${storeInfo.whatsappNumber}`}
               target='_blank'
               rel='noopener noreferrer'
-              className='hidden lg:block bg-transparent text-primary border border-primary px-3 py-1.5 rounded-md font-semibold text-sm transition-colors hover:bg-primary hover:text-darkmode'
-              style={{ color: 'var(--theme-primary)' }}>
-              {t('hero.whatsapp_us')}
+              className='header-cta flex items-center gap-2 rounded-full border border-primary/60 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors'>
+              <Icon icon='mdi:whatsapp' className='text-base' />
+              <span className='hidden sm:inline'>{t('header.whatsapp_short')}</span>
+              <span className='sm:hidden'>WA</span>
             </Link>
+            <div className='hidden md:flex items-center gap-2'>
+              <ThemeToggle />
+              <LanguageToggle />
+            </div>
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
@@ -115,24 +123,28 @@ const Header: React.FC = () => {
             {headerData.map((item, index) => (
               <MobileHeaderLink key={index} item={item} />
             ))}
+            <div className='flex items-center gap-2 mt-4'>
+              <ThemeToggle />
+              <LanguageToggle />
+            </div>
             <div className='mt-4 flex flex-col gap-4 w-full'>
               <Link
-                href='tel:+919363897989'
+                href={`tel:${storeInfo.phoneE164}`}
                 className='bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-darkmode font-medium text-center transition-colors'
                 onClick={() => {
                   setNavbarOpen(false)
                 }}>
-                {t('hero.call_now')}
+                {t('header.call_short')}
               </Link>
               <Link
-                href='https://wa.me/919363897989'
+                href={`https://wa.me/${storeInfo.whatsappNumber}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='bg-primary text-darkmode px-4 py-2 rounded-lg hover:bg-transparent hover:text-primary border border-primary font-medium text-center transition-colors'
                 onClick={() => {
                   setNavbarOpen(false)
                 }}>
-                {t('hero.whatsapp_us')}
+                {t('header.whatsapp_short')}
               </Link>
             </div>
           </nav>

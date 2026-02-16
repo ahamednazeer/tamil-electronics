@@ -242,6 +242,10 @@ section {
   /* background-color: var(--theme-bg); - Removed */
 }
 
+section[id] {
+  scroll-margin-top: 110px;
+}
+
 [data-theme="light"] .bg-darkmode {
   background-color: var(--theme-bg) !important;
 }
@@ -275,8 +279,20 @@ section {
 }
 
 [data-theme="light"] nav a:hover,
-[data-theme="light"] header a:hover {
+[data-theme="light"] header a:not(.header-cta):hover {
   color: var(--theme-primary);
+}
+
+header a.header-cta {
+  color: var(--theme-primary);
+}
+
+header a.header-cta:hover {
+  color: #ffffff !important;
+}
+
+header a.header-cta:hover svg {
+  color: #ffffff !important;
 }
 
 /* Secondary and muted text - DEEP COLORS for visibility */
@@ -591,4 +607,3 @@ html[data-theme="light"] .perks-card,
   pointer-events: auto;
   transition: opacity 0.5s ease-out;
 }
-

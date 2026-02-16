@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTheme } from 'next-themes'
 
 const MapTilerMap = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<any>(null)
   const { resolvedTheme } = useTheme()
+  const [shouldLoad, setShouldLoad] = useState(false)
   const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY
   const maptilerStyle = process.env.NEXT_PUBLIC_MAPTILER_STYLE || 'basic-v2'
   const maptilerStyleDark = process.env.NEXT_PUBLIC_MAPTILER_STYLE_DARK || 'dataviz-dark'
@@ -14,7 +15,25 @@ const MapTilerMap = () => {
   const zoom = 16.2
 
   useEffect(() => {
-    if (!maptilerKey || !containerRef.current) return
+    const node = containerRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShouldLoad(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldLoad || !maptilerKey || !containerRef.current) return
     let disposed = false
 
     const initMap = () => {
@@ -123,7 +142,7 @@ const MapTilerMap = () => {
         mapRef.current = null
       }
     }
-  }, [maptilerKey, maptilerStyle, maptilerStyleDark, center, zoom, resolvedTheme])
+  }, [shouldLoad, maptilerKey, maptilerStyle, maptilerStyleDark, center, zoom, resolvedTheme])
 
   if (!maptilerKey) {
     return (

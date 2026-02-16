@@ -60,6 +60,7 @@ const CardSlider = () => {
                 alt={item.name}
                 width={120}
                 height={50}
+                sizes='(max-width: 640px) 80px, (max-width: 1024px) 110px, 120px'
                 className='object-contain max-h-6 sm:max-h-10 lg:max-h-14 w-auto'
               />
             </div>

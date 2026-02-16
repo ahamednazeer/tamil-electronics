@@ -125,6 +125,30 @@
         "title_highlight": "Virudhachalam",
         "title_end": "Today"
     },
+    "about": {
+        "subheading_start": "About",
+        "subheading_highlight": "Tamil Electricals",
+        "title": "Your trusted local electrical shop serving for over 10 years.",
+        "description": "Tamil Electricals provides quality wires, switches, LED lights, fans, MCBs, and all types of electrical materials for homes, shops, and industries. We are committed to offering genuine products at competitive prices with excellent customer service.",
+        "features": [
+            {
+                "title": "Quality Products",
+                "text": "We provide only genuine and certified electrical materials."
+            },
+            {
+                "title": "Expert Guidance",
+                "text": "Our team helps you choose the right products."
+            },
+            {
+                "title": "Wide Range",
+                "text": "All types of electrical materials under one roof."
+            },
+            {
+                "title": "Local Trust",
+                "text": "Serving the community for over 10 years."
+            }
+        ]
+    },
     "footer": {
         "trusted_partner": "Your Local Electrical & Electronics Shop",
         "now_open_desc": "Newly opened in College Nagar, Virudhachalam.",
@@ -134,5 +158,63 @@
         "shop_address": "Shop Address",
         "phone": "Phone",
         "working_hours": "Working Hours"
+    },
+    "header": {
+        "call_short": "Call Now",
+        "whatsapp_short": "WhatsApp"
+    },
+    "store": {
+        "open_now": "We're Open Now",
+        "closed_now": "Closed Now"
+    },
+    "reviews": {
+        "subheading": "Google Reviews",
+        "title": "What Customers Say",
+        "description": "Live reviews from our Google Business profile.",
+        "view_on_google": "View on Google",
+        "based_on": "Based on {count} reviews",
+        "fallback_note": "Add Google Places API keys to show live reviews.",
+        "card_description": "Your trusted electrical & electronics shop in Virudhachalam.",
+        "card_stat": "{count} reviews",
+        "card_fallback": "Trusted local shop"
+    },
+    "contact": {
+        "subheading": "Contact & Enquiry",
+        "title": "Get a Quick Quote",
+        "description": "Call, WhatsApp, or send an enquiry for pricing and availability.",
+        "store_info": "Store Information",
+        "address": "Address",
+        "phone": "Phone",
+        "hours": "Store Hours",
+        "hours_daily": "Mon - Sun:",
+        "closed_days": "Closed",
+        "open_daily": "Open daily",
+        "closed": "Closed",
+        "form_title": "Send an Enquiry",
+        "form_description": "Share what you need. We'll reply on WhatsApp with price and availability.",
+        "form_labels": {
+            "name": "Name",
+            "phone": "Phone",
+            "product": "Product Needed"
+        },
+        "form_placeholders": {
+            "name": "Your name",
+            "phone": "Your phone number",
+            "product": "Eg: Fan, LED, Wire, Switch"
+        },
+        "form_submit": "Send on WhatsApp",
+        "form_call": "Call Instead",
+        "form_note": "Submitting opens WhatsApp with a pre-filled message.",
+        "form_success": "Opening WhatsApp...",
+        "whatsapp_button": "Chat"
+    },
+    "days": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
     }
 }

@@ -19,6 +19,7 @@ const Perks = () => {
               alt='Background'
               width={1600}
               height={400}
+              sizes='100vw'
               className='perks-bg-image absolute bottom-0 left-0 w-full h-auto z-0 hidden sm:block pointer-events-none'
             />
             {perksData.map((item, index) => (

@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
+import { storeInfo } from '@/data/storeInfo'
 
 const Platform = () => {
   const { t } = useLanguage()
@@ -21,7 +22,7 @@ const Platform = () => {
           <div className='lg:col-span-4 col-span-12'>
             <div className='flex lg:justify-end mt-4 lg:mt-0 justify-center gap-3 sm:gap-4'>
               <Link
-                href='tel:+919363897989'
+                href={`tel:${storeInfo.phoneE164}`}
                 className='text-darkmode bg-primary border border-primary py-2 sm:py-3 px-4 sm:px-5 rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary transition-colors'>
                 {t('platform.call_now')}
               </Link>

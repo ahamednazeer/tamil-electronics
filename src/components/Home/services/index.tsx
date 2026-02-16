@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 
 const LocalServices = () => {
@@ -10,6 +11,7 @@ const LocalServices = () => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+    if (window.innerWidth < 768) return
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) return
 
@@ -87,22 +89,27 @@ const LocalServices = () => {
     {
       title: t('services.items.support.title'),
       description: t('services.items.support.description'),
+      href: '#contact',
     },
     {
       title: t('services.items.lighting.title'),
       description: t('services.items.lighting.description'),
+      href: '#products',
     },
     {
       title: t('services.items.pipes.title'),
       description: t('services.items.pipes.description'),
+      href: '#products',
     },
     {
       title: t('services.items.pumps.title'),
       description: t('services.items.pumps.description'),
+      href: '#products',
     },
     {
       title: t('services.items.wiring.title'),
       description: t('services.items.wiring.description'),
+      href: '#products',
     },
   ]
 
@@ -126,19 +133,21 @@ const LocalServices = () => {
           style={{
             backgroundColor: 'var(--services-strip-bg)',
             borderColor: 'var(--services-strip-border)',
-          }}
-        >
+            WebkitOverflowScrolling: 'touch',
+          }}>
           <div
             ref={bandRef}
             className='flex items-center gap-5 sm:gap-7 px-6 sm:px-8 lg:px-10 py-4 sm:py-5 will-change-transform justify-center'
           >
             {services.map((item, index) => (
               <div key={index} className='flex items-center gap-4 min-w-[200px] sm:min-w-0'>
-                <div>
+                <Link
+                  href={item.href}
+                  className='flex items-center gap-3 px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors'>
                   <p className='text-charcoalGray dark:text-white text-base sm:text-lg font-semibold'>
                     {item.title}
                   </p>
-                </div>
+                </Link>
                 {index < services.length - 1 && (
                   <div
                     className='hidden sm:block h-10 w-px ml-4'
