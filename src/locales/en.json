@@ -173,7 +173,6 @@
         "description": "Live reviews from our Google Business profile.",
         "view_on_google": "View on Google",
         "based_on": "Based on {count} reviews",
-        "fallback_note": "Add Google Places API keys to show live reviews.",
         "card_description": "Your trusted electrical & electronics shop in Virudhachalam.",
         "card_stat": "{count} reviews",
         "card_fallback": "Trusted local shop"
