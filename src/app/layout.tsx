@@ -30,13 +30,21 @@ export const viewport: Viewport = {
   ],
 }
 
+const siteUrl = 'https://tamilelectricals.com'
+
 // Default metadata for the site
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tamilelectricals.com'),
+  metadataBase: new URL(siteUrl),
   robots: {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: '/',
+  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
     type: 'website',
     locale: 'en_IN',
@@ -60,6 +68,7 @@ export default function RootLayout({
           href='/images/hero/banner-image.webp'
           fetchPriority='high'
         />
+        <link rel='sitemap' type='application/xml' href='/sitemap.xml' />
         {/* next/font/google self-hosts; no external font preconnects needed */}
         {/* Prevent theme flash - set before any render */}
         <script

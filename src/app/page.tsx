@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     'MCB',
     'Electrical materials',
   ],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title:
       'Tamil Electricals - Electrical & Electronics Shop in Virudhachalam | Wires, Fans, LED, Switches',
