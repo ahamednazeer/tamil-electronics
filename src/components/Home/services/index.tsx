@@ -137,13 +137,13 @@ const LocalServices = () => {
           }}>
           <div
             ref={bandRef}
-            className='flex items-center gap-5 sm:gap-7 px-6 sm:px-8 lg:px-10 py-4 sm:py-5 will-change-transform justify-center'
+            className='flex items-center gap-3 sm:gap-6 px-3 sm:px-8 lg:px-10 py-3 sm:py-5 will-change-transform justify-start lg:justify-center'
           >
             {services.map((item, index) => (
-              <div key={index} className='flex items-center gap-4 min-w-[200px] sm:min-w-0'>
+              <div key={index} className='flex shrink-0 items-center gap-3 sm:gap-4 md:min-w-[200px]'>
                 <Link
                   href={item.href}
-                  className='flex items-center gap-3 px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors'>
+                  className='flex items-center gap-3 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors'>
                   <p className='text-charcoalGray dark:text-white text-base sm:text-lg font-semibold'>
                     {item.title}
                   </p>

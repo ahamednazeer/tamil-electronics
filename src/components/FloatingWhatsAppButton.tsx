@@ -12,7 +12,7 @@ const FloatingWhatsAppButton = () => {
       href={`https://wa.me/${storeInfo.whatsappNumber}`}
       target='_blank'
       rel='noopener noreferrer'
-      className='fixed bottom-5 right-5 z-50 lg:hidden group'
+      className='fixed bottom-4 right-4 z-50 group sm:bottom-5 sm:right-5 lg:hidden'
       aria-label={t('header.whatsapp_short')}>
       <span className='flex items-center gap-2 rounded-full bg-[#25D366] text-white px-4 py-3 shadow-[0_12px_30px_rgba(37,211,102,0.35)] transition-transform duration-200 group-hover:-translate-y-0.5'>
         <Icon icon='mdi:whatsapp' className='text-xl' />

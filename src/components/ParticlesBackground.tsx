@@ -1,51 +1,50 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 
+type ParticlesConfig = Record<string, unknown>;
+
+type ParticlesEngineInstance = {
+    pJS?: {
+        fn?: {
+            vendors?: {
+                destroypJS?: () => void;
+            };
+        };
+    };
+};
+
+type ParticlesWindow = Window & {
+    particlesJS?: (tagId: string, config: ParticlesConfig) => void;
+    pJSDom?: ParticlesEngineInstance[];
+};
+
 const ParticlesBackground = () => {
-    const { theme, resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
-    useEffect(() => {
-        if (!mounted) return;
-
-        const loadParticles = async () => {
-            // Dynamically load the script if it's not already loaded
-            if (!(window as any).particlesJS) {
-                const script = document.createElement('script');
-                script.src = '/js/particles.min.js';
-                script.async = true;
-                script.onload = () => initParticles();
-                document.body.appendChild(script);
-            } else {
-                initParticles();
-            }
-        };
-
-        loadParticles();
-    }, [mounted, theme, resolvedTheme]);
-
-    const initParticles = () => {
-        if (!(window as any).particlesJS) return;
+    const initParticles = useCallback(() => {
+        const particlesWindow = window as ParticlesWindow;
+        if (!particlesWindow.particlesJS) return;
         const container = document.getElementById('particles-js');
         if (!container) return;
 
         const isDark = resolvedTheme === 'dark';
 
-        if ((window as any).pJSDom?.length) {
-            (window as any).pJSDom.forEach((instance: any) => {
+        if (particlesWindow.pJSDom?.length) {
+            particlesWindow.pJSDom.forEach((instance) => {
                 instance?.pJS?.fn?.vendors?.destroypJS?.();
             });
-            (window as any).pJSDom = [];
+            particlesWindow.pJSDom = [];
         }
 
         // Separate configurations for completely different feel in dark/light modes
-        const darkConfig = {
+        const darkConfig: ParticlesConfig = {
             particles: {
                 number: {
                     value: 60, // Higher density for dark mode
@@ -151,7 +150,7 @@ const ParticlesBackground = () => {
             retina_detect: true
         };
 
-        const lightConfig = {
+        const lightConfig: ParticlesConfig = {
             particles: {
                 number: {
                     value: 45,
@@ -258,8 +257,24 @@ const ParticlesBackground = () => {
         };
 
         // particles.js config
-        (window as any).particlesJS('particles-js', isDark ? darkConfig : lightConfig);
-    };
+        particlesWindow.particlesJS('particles-js', isDark ? darkConfig : lightConfig);
+    }, [resolvedTheme]);
+
+    useEffect(() => {
+        if (!mounted) return;
+
+        const particlesWindow = window as ParticlesWindow;
+        if (!particlesWindow.particlesJS) {
+            const script = document.createElement('script');
+            script.src = '/js/particles.min.js';
+            script.async = true;
+            script.onload = initParticles;
+            document.body.appendChild(script);
+            return;
+        }
+
+        initParticles();
+    }, [mounted, initParticles]);
 
     if (!mounted) return null;
 

@@ -17,9 +17,39 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 import en from '@/locales/en.json';
 import ta from '@/locales/ta.json';
 
-const dictionaries: Record<Language, any> = {
+type JsonValue =
+    | string
+    | number
+    | boolean
+    | null
+    | JsonObject
+    | JsonValue[];
+
+interface JsonObject {
+    [key: string]: JsonValue;
+}
+
+const dictionaries: Record<Language, JsonObject> = {
     en,
     ta,
+};
+
+const getTranslation = (dictionary: JsonObject, key: string): string | undefined => {
+    const keys = key.split('.');
+    let value: JsonValue | undefined = dictionary;
+
+    for (const segment of keys) {
+        if (value === null || typeof value !== 'object') {
+            return undefined;
+        }
+        const nextValue: JsonValue | undefined = (value as Record<string, JsonValue>)[segment];
+        if (nextValue === undefined) {
+            return undefined;
+        }
+        value = nextValue;
+    }
+
+    return typeof value === 'string' ? value : undefined;
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
@@ -41,27 +71,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const t = (key: string) => {
-        const keys = key.split('.');
-        let value = dictionaries[language];
+        const localValue = getTranslation(dictionaries[language], key);
+        if (localValue) return localValue;
 
-        for (const k of keys) {
-            if (value && typeof value === 'object' && k in value) {
-                value = value[k];
-            } else {
-                // Fallback to English if translation missing
-                let fallback = dictionaries['en'];
-                for (const fk of keys) {
-                    if (fallback && typeof fallback === 'object' && fk in fallback) {
-                        fallback = fallback[fk];
-                    } else {
-                        return key;
-                    }
-                }
-                return fallback;
-            }
-        }
-
-        return typeof value === 'string' ? value : key;
+        const fallbackValue = getTranslation(dictionaries.en, key);
+        return fallbackValue ?? key;
     };
 
     return (

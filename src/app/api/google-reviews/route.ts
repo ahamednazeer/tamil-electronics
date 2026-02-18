@@ -3,6 +3,24 @@ import { NextResponse } from 'next/server'
 const GOOGLE_API_KEY = process.env.GOOGLE_PLACES_API_KEY
 const GOOGLE_PLACE_ID = process.env.GOOGLE_PLACE_ID
 
+type GoogleReview = {
+  author_name?: string
+  rating?: number
+  text?: string
+  relative_time_description?: string
+  profile_photo_url?: string
+}
+
+type GooglePlaceResult = {
+  rating?: number
+  user_ratings_total?: number
+  reviews?: GoogleReview[]
+}
+
+type GooglePlaceResponse = {
+  result?: GooglePlaceResult
+}
+
 export async function GET() {
   if (!GOOGLE_API_KEY || !GOOGLE_PLACE_ID) {
     return NextResponse.json({
@@ -26,11 +44,11 @@ export async function GET() {
       })
     }
 
-    const data = await response.json()
+    const data = (await response.json()) as GooglePlaceResponse
     const result = data?.result ?? {}
 
     const reviews = Array.isArray(result.reviews)
-      ? result.reviews.slice(0, 6).map((review: any) => ({
+      ? result.reviews.slice(0, 6).map((review) => ({
           author_name: review.author_name,
           rating: review.rating,
           text: review.text,
@@ -44,7 +62,7 @@ export async function GET() {
       userRatingsTotal: result.user_ratings_total ?? null,
       reviews,
     })
-  } catch (error) {
+  } catch {
     return NextResponse.json({
       rating: null,
       userRatingsTotal: null,

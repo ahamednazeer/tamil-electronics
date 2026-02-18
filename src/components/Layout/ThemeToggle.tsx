@@ -1,24 +1,20 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
 
 const ThemeToggle: React.FC = () => {
-    const [theme, setTheme] = useState<'dark' | 'light'>('light')
+    const { theme, resolvedTheme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
         setMounted(true)
-        // Check for saved theme preference or default to light
-        const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null
-        const themeToApply = savedTheme || 'light'
-        setTheme(themeToApply)
-        document.documentElement.setAttribute('data-theme', themeToApply)
     }, [])
 
+    const activeTheme = theme === 'system' ? resolvedTheme : theme
+    const isDark = activeTheme === 'dark'
+
     const toggleTheme = () => {
-        const newTheme = theme === 'dark' ? 'light' : 'dark'
-        setTheme(newTheme)
-        document.documentElement.setAttribute('data-theme', newTheme)
-        localStorage.setItem('theme', newTheme)
+        setTheme(isDark ? 'light' : 'dark')
     }
 
     // Prevent hydration mismatch
@@ -38,11 +34,11 @@ const ThemeToggle: React.FC = () => {
             onClick={toggleTheme}
             className="p-2 rounded-lg transition-all duration-300 hover:scale-110 group"
             style={{
-                backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
+                backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
             }}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
         >
-            {theme === 'dark' ? (
+            {isDark ? (
                 // Sun icon for switching to light mode
                 <svg
                     className="w-5 h-5 text-yellow-400 transition-transform duration-300 group-hover:rotate-12"

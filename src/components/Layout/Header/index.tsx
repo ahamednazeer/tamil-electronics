@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react'
 import { headerData } from '../Header/Navigation/menuData'
 import Logo from './Logo'
@@ -17,7 +17,6 @@ const Header: React.FC = () => {
   const [sticky, setSticky] = useState(false)
   const { t } = useLanguage()
 
-  const mobileMenuRef = useRef<HTMLDivElement>(null)
   const showHeaderBg = true
   const showHeaderShadow = sticky || navbarOpen
 
@@ -26,21 +25,24 @@ const Header: React.FC = () => {
   }
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target as Node) &&
-        navbarOpen
-      ) {
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
         setNavbarOpen(false)
       }
     }
-
-    window.addEventListener('scroll', handleScroll)
-    document.addEventListener('mousedown', handleClickOutside)
+    if (navbarOpen) {
+      window.addEventListener('keydown', onKeyDown)
+    }
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      document.removeEventListener('mousedown', handleClickOutside)
+      window.removeEventListener('keydown', onKeyDown)
     }
   }, [navbarOpen])
 
@@ -94,7 +96,9 @@ const Header: React.FC = () => {
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
-              aria-label='Toggle mobile menu'>
+              aria-label='Toggle mobile menu'
+              aria-expanded={navbarOpen}
+              aria-controls='mobile-navigation'>
               <span className='block w-6 h-0.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
               <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
               <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
@@ -102,53 +106,92 @@ const Header: React.FC = () => {
           </div>
         </div>
         {navbarOpen && (
-          <div className='fixed top-0 left-0 w-full h-full bg-black/50 z-40' />
+          <button
+            type='button'
+            onClick={() => setNavbarOpen(false)}
+            aria-label='Close menu overlay'
+            className='fixed inset-0 z-40 bg-black/55 backdrop-blur-[2px] lg:hidden'
+          />
         )}
-        <div
-          ref={mobileMenuRef}
-          className={`mobile-menu lg:hidden fixed top-0 right-0 h-full w-full shadow-lg transform transition-transform duration-300 max-w-xs ${navbarOpen ? 'translate-x-0' : 'translate-x-full'
-            } z-50`}
-          style={{ backgroundColor: 'var(--theme-bg)' }}>
-          <div className='flex items-center justify-between p-4'>
-            <h2 className='text-lg font-bold text-midnight_text dark:text-midnight_text'>
+        <aside
+          id='mobile-navigation'
+          className={`mobile-menu lg:hidden fixed top-0 right-0 z-50 h-[100dvh] w-[86vw] max-w-[360px] transform transition-transform duration-300 ${
+            navbarOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+          }`}
+          role='dialog'
+          aria-modal='true'
+          aria-label='Mobile navigation'
+          style={{
+            backgroundColor: 'var(--theme-bg)',
+            borderLeft: '1px solid var(--theme-border)',
+            boxShadow: '0 24px 60px rgba(0, 0, 0, 0.32)',
+          }}>
+          <div className='flex h-full flex-col'>
+            <div
+              className='flex items-center justify-between border-b px-5 pt-5 pb-4'
+              style={{ borderColor: 'var(--theme-border)' }}>
               <Logo />
-            </h2>
-
-            <button
-              onClick={() => setNavbarOpen(false)}
-              className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 absolute top-0 right-0 mr-8 mt-8 dark:invert"
-              aria-label='Close menu Modal'></button>
+              <button
+                type='button'
+                onClick={() => setNavbarOpen(false)}
+                className='inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-white/10'
+                aria-label='Close mobile menu'>
+                <Icon icon='mdi:close' className='text-2xl text-midnight_text dark:text-white' />
+              </button>
+            </div>
+            <nav className='flex-1 overflow-y-auto px-4 py-4'>
+              <div className='space-y-1'>
+                {headerData.map((item, index) => (
+                  <MobileHeaderLink
+                    key={index}
+                    item={item}
+                    onNavigate={() => setNavbarOpen(false)}
+                  />
+                ))}
+              </div>
+              <div
+                className='mt-5 rounded-xl border p-3'
+                style={{
+                  borderColor: 'var(--theme-border)',
+                  backgroundColor: 'var(--theme-bg-secondary)',
+                }}>
+                <p className='text-[11px] font-semibold uppercase tracking-[0.1em] text-muted/70'>
+                  Preferences
+                </p>
+                <div className='mt-2 flex items-center gap-2'>
+                  <ThemeToggle />
+                  <LanguageToggle />
+                </div>
+              </div>
+            </nav>
+            <div
+              className='border-t px-5 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]'
+              style={{ borderColor: 'var(--theme-border)' }}>
+              <div className='flex flex-col gap-3'>
+                <Link
+                  href={`tel:${storeInfo.phoneE164}`}
+                  className='mobile-menu-action inline-flex items-center justify-center gap-2 rounded-xl border border-primary/70 px-4 py-3 text-base font-semibold !text-primary hover:bg-primary/10 transition-colors'
+                  onClick={() => {
+                    setNavbarOpen(false)
+                  }}>
+                  <Icon icon='mdi:phone' className='text-lg' />
+                  {t('header.call_short')}
+                </Link>
+                <Link
+                  href={`https://wa.me/${storeInfo.whatsappNumber}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='mobile-menu-action inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-semibold !text-white shadow-[0_12px_30px_rgba(227,30,36,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(227,30,36,0.38)]'
+                  onClick={() => {
+                    setNavbarOpen(false)
+                  }}>
+                  <Icon icon='mdi:whatsapp' className='text-lg' />
+                  {t('header.whatsapp_short')}
+                </Link>
+              </div>
+            </div>
           </div>
-          <nav className='flex flex-col items-start p-4'>
-            {headerData.map((item, index) => (
-              <MobileHeaderLink key={index} item={item} />
-            ))}
-            <div className='flex items-center gap-2 mt-4'>
-              <ThemeToggle />
-              <LanguageToggle />
-            </div>
-            <div className='mt-4 flex flex-col gap-4 w-full'>
-              <Link
-                href={`tel:${storeInfo.phoneE164}`}
-                className='bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-darkmode font-medium text-center transition-colors'
-                onClick={() => {
-                  setNavbarOpen(false)
-                }}>
-                {t('header.call_short')}
-              </Link>
-              <Link
-                href={`https://wa.me/${storeInfo.whatsappNumber}`}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='bg-primary text-darkmode px-4 py-2 rounded-lg hover:bg-transparent hover:text-primary border border-primary font-medium text-center transition-colors'
-                onClick={() => {
-                  setNavbarOpen(false)
-                }}>
-                {t('header.whatsapp_short')}
-              </Link>
-            </div>
-          </nav>
-        </div>
+        </aside>
       </div>
     </header>
   )

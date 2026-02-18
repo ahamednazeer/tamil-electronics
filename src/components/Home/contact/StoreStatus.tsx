@@ -80,15 +80,15 @@ const StoreStatus = () => {
 
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs sm:text-sm font-semibold ${
+      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs sm:text-sm font-semibold border shadow-sm ${
         isOpen
-          ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-200'
-          : 'bg-rose-500/15 text-rose-700 dark:text-rose-200'
+          ? 'bg-emerald-600 text-white border-emerald-500 dark:bg-emerald-500 dark:border-emerald-400'
+          : 'bg-rose-600 text-white border-rose-500 dark:bg-rose-500 dark:border-rose-400'
       }`}
       aria-live='polite'>
       <span
-        className={`h-2 w-2 rounded-full ${
-          isOpen ? 'bg-emerald-500' : 'bg-rose-500'
+        className={`h-2.5 w-2.5 rounded-full ${
+          isOpen ? 'bg-emerald-100' : 'bg-rose-100'
         }`}
       />
       {isOpen ? t('store.open_now') : t('store.closed_now')}

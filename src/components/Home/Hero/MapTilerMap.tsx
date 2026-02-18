@@ -3,16 +3,61 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from 'next-themes'
 
+const MAP_CENTER: [number, number] = [79.3236843607538, 11.521112888557493]
+const MAP_ZOOM = 16.2
+
+type MapSource = {
+  type: 'vector'
+  url: string
+}
+
+type MapLayer = {
+  id: string
+  type: 'fill' | 'line'
+  source: string
+  'source-layer': string
+  paint: Record<string, string | number>
+}
+
+interface MapInstance {
+  setStyle: (style: string) => void
+  on: (event: 'load', callback: () => void) => void
+  getSource: (id: string) => unknown
+  addSource: (id: string, source: MapSource) => void
+  getLayer: (id: string) => unknown
+  addLayer: (layer: MapLayer) => void
+  remove: () => void
+}
+
+interface MarkerInstance {
+  setLngLat: (lngLat: [number, number]) => MarkerInstance
+  addTo: (map: MapInstance) => MarkerInstance
+}
+
+interface MapLibreGL {
+  Map: new (options: {
+    container: HTMLElement
+    style: string
+    center: [number, number]
+    zoom: number
+    interactive: boolean
+    attributionControl: boolean
+  }) => MapInstance
+  Marker: new (options: { element: HTMLElement }) => MarkerInstance
+}
+
+type MapWindow = Window & {
+  maplibregl?: MapLibreGL
+}
+
 const MapTilerMap = () => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const mapRef = useRef<any>(null)
+  const mapRef = useRef<MapInstance | null>(null)
   const { resolvedTheme } = useTheme()
   const [shouldLoad, setShouldLoad] = useState(false)
   const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY
   const maptilerStyle = process.env.NEXT_PUBLIC_MAPTILER_STYLE || 'basic-v2'
   const maptilerStyleDark = process.env.NEXT_PUBLIC_MAPTILER_STYLE_DARK || 'dataviz-dark'
-  const center: [number, number] = [79.3236843607538, 11.521112888557493]
-  const zoom = 16.2
 
   useEffect(() => {
     const node = containerRef.current
@@ -37,7 +82,7 @@ const MapTilerMap = () => {
     let disposed = false
 
     const initMap = () => {
-      const maplibregl = (window as any).maplibregl
+      const maplibregl = (window as MapWindow).maplibregl
       if (!maplibregl || !containerRef.current) return
 
       const styleId = (resolvedTheme === 'dark')
@@ -52,8 +97,8 @@ const MapTilerMap = () => {
       const map = new maplibregl.Map({
         container: containerRef.current,
         style: `https://api.maptiler.com/maps/${styleId}/style.json?key=${maptilerKey}`,
-        center,
-        zoom,
+        center: MAP_CENTER,
+        zoom: MAP_ZOOM,
         interactive: false,
         attributionControl: false,
       })
@@ -98,14 +143,14 @@ const MapTilerMap = () => {
         markerEl.className = 'hero-map-marker'
         if (!markerEl.parentElement) {
           new maplibregl.Marker({ element: markerEl })
-            .setLngLat(center)
+            .setLngLat(MAP_CENTER)
             .addTo(map)
         }
       })
     }
 
     const loadAssets = () => {
-      if ((window as any).maplibregl) {
+      if ((window as MapWindow).maplibregl) {
         initMap()
         return
       }
@@ -142,7 +187,7 @@ const MapTilerMap = () => {
         mapRef.current = null
       }
     }
-  }, [shouldLoad, maptilerKey, maptilerStyle, maptilerStyleDark, center, zoom, resolvedTheme])
+  }, [shouldLoad, maptilerKey, maptilerStyle, maptilerStyleDark, resolvedTheme])
 
   if (!maptilerKey) {
     return (

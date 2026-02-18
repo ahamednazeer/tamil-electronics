@@ -14,7 +14,7 @@ const Footer: FC = () => {
   const locale = language === 'ta' ? 'ta-IN' : 'en-IN'
   const firstHour = storeInfo.hours[0]
   return (
-    <footer className='pt-8 sm:pt-10 lg:pt-12 bg-darkmode' id='footer'>
+    <footer className='site-footer pt-8 sm:pt-10 lg:pt-12 bg-darkmode' id='footer'>
       <div className='container px-4 sm:px-6'>
         <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-20 pb-10 sm:pb-12 lg:pb-16'>
           {/* Logo and About */}

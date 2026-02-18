@@ -102,16 +102,18 @@ const Portfolio = () => {
       current = target
     }
 
+    const viewport = viewportRef.current
+
     onScroll()
     animate()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
-    viewportRef.current?.addEventListener('scroll', onUserScroll, { passive: true })
+    viewport?.addEventListener('scroll', onUserScroll, { passive: true })
     return () => {
       if (rafId) window.cancelAnimationFrame(rafId)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
-      viewportRef.current?.removeEventListener('scroll', onUserScroll)
+      viewport?.removeEventListener('scroll', onUserScroll)
     }
   }, [])
 

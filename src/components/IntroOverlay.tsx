@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useLayoutEffect, useMemo } from 'react'
+import { useEffect, useState, useLayoutEffect } from 'react'
 
 const INTRO_SEEN_KEY = 'intro_seen'
 const SCATTER_TERMS = [
@@ -117,7 +117,7 @@ const IntroOverlay = () => {
         })
     }
 
-    const [scatteredWords, setScatteredWords] = useState(() => buildScatter(false))
+    const [scatteredWords] = useState(() => buildScatter(false))
 
     useEffect(() => {
         let shouldShow = true

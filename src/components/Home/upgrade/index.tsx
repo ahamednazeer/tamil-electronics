@@ -13,6 +13,16 @@ type Review = {
   profile_photo_url?: string
 }
 
+type ReviewCard = {
+  author_name?: string
+  rating?: number
+  text?: string
+  relative_time_description?: string
+  name?: string
+  role?: string
+  quote?: string
+}
+
 const Upgrade = () => {
   const { t } = useLanguage()
   const [reviews, setReviews] = useState<Review[]>([])
@@ -20,7 +30,7 @@ const Upgrade = () => {
   const [total, setTotal] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const testimonials = [
+  const testimonials: ReviewCard[] = [
     {
       quote: t('testimonials.items.0.quote'),
       name: 'Rajesh K.',
@@ -48,7 +58,7 @@ const Upgrade = () => {
         setReviews(data.reviews ?? [])
         setRating(data.rating ?? null)
         setTotal(data.userRatingsTotal ?? null)
-      } catch (error) {
+      } catch {
         if (!active) return
         setReviews([])
       } finally {
@@ -64,7 +74,7 @@ const Upgrade = () => {
   }, [])
 
   const showFallback = !loading && reviews.length === 0
-  const displayReviews = reviews.length > 0 ? reviews : testimonials
+  const displayReviews: ReviewCard[] = reviews.length > 0 ? reviews : testimonials
   const displayStars = rating ? Math.round(rating) : 5
 
   return (
@@ -119,7 +129,7 @@ const Upgrade = () => {
           )}
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 reviews-spotlight-grid'>
-          {displayReviews.slice(0, 3).map((item: any, index: number) => (
+          {displayReviews.slice(0, 3).map((item, index) => (
             <div
               key={index}
               className={`reviews-spotlight-card ${

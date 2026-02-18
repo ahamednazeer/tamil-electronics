@@ -70,17 +70,6 @@ export default function RootLayout({
         />
         <link rel='sitemap' type='application/xml' href='/sitemap.xml' />
         {/* next/font/google self-hosts; no external font preconnects needed */}
-        {/* Prevent theme flash - set before any render */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var theme = localStorage.getItem('theme') || 'light';
-                document.documentElement.setAttribute('data-theme', theme);
-              })();
-            `,
-          }}
-        />
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
@@ -141,7 +130,9 @@ export default function RootLayout({
         <ThemeProvider
           attribute='data-theme'
           enableSystem={false}
-          defaultTheme='light'>
+          defaultTheme='light'
+          storageKey='theme'
+          disableTransitionOnChange>
           <LanguageProvider>
             <Aoscompo>
               <Header />

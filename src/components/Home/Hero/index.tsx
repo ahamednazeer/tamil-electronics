@@ -109,15 +109,6 @@ const Hero = () => {
                   sizes='(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 50vw'
                   className='hero-bold-image object-cover'
                 />
-                <div className='hero-bold-badge'>
-                  <div className='hero-chip'>
-                    <Icon icon='mdi:storefront' className='text-primary text-xl' />
-                    <div>
-                      <p className='text-white text-xs sm:text-sm font-semibold'>{t('hero.newly_started')}</p>
-                      <p className='text-muted text-[10px] sm:text-xs'>{t('hero.shop')}</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -126,16 +117,14 @@ const Hero = () => {
           <div className='hero-map-shell'>
             <div className='hero-map-body'>
               <div className='hero-map-frame-wrap'>
-                <div className='hero-map-chip hero-map-chip-floating'>
-                  <span className='hero-map-icon'>
-                    <Icon icon='mdi:map-marker-radius' className='text-primary text-xl' />
-                  </span>
-                  <div>
-                    <p className='hero-map-title'>{t('hero.now_open')}</p>
-                    <p className='hero-map-sub'>{t('hero.visit_us')}</p>
-                  </div>
-                </div>
                 <MapTilerMap />
+                <a
+                  href={storeInfo.googleMapsUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hero-map-link-overlay'
+                  aria-label={t('hero.open_map')}
+                />
                 <span className='hero-map-attrib'>
                   © MapTiler © OpenStreetMap contributors
                 </span>
@@ -270,25 +259,6 @@ const Hero = () => {
           filter: saturate(1.04);
         }
 
-        .hero-bold-badge {
-          position: absolute;
-          top: 16px;
-          left: 16px;
-          z-index: 2;
-        }
-
-        .hero-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 10px;
-          border-radius: 12px;
-          background: color-mix(in srgb, var(--theme-bg-card) 92%, transparent);
-          border: 1px solid color-mix(in srgb, var(--theme-border) 90%, transparent);
-          box-shadow: none;
-          backdrop-filter: none;
-        }
-
         .hero-map-section {
           margin-top: 12px;
         }
@@ -299,46 +269,6 @@ const Hero = () => {
           background: var(--theme-bg-card);
           border: 1px solid color-mix(in srgb, var(--theme-border) 90%, transparent);
           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .hero-map-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 8px 12px;
-          border-radius: 14px;
-          background: var(--theme-bg-card);
-          border: 1px solid var(--theme-border);
-          box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
-        }
-
-        .hero-map-chip-floating {
-          position: absolute;
-          top: 12px;
-          left: 12px;
-          z-index: 2;
-        }
-
-        .hero-map-icon {
-          width: 32px;
-          height: 32px;
-          border-radius: 10px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: color-mix(in srgb, var(--theme-primary) 12%, transparent);
-        }
-
-        .hero-map-title {
-          color: var(--theme-text);
-          font-size: 0.95rem;
-          font-weight: 600;
-          line-height: 1.2;
-        }
-
-        .hero-map-sub {
-          color: var(--theme-text-muted);
-          font-size: 0.75rem;
         }
 
         .hero-map-body {
@@ -358,6 +288,13 @@ const Hero = () => {
         .hero-map-canvas {
           width: 100%;
           height: 100%;
+        }
+
+        .hero-map-link-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          cursor: pointer;
         }
 
         .hero-map-marker {
@@ -397,6 +334,7 @@ const Hero = () => {
           position: absolute;
           right: 10px;
           bottom: 8px;
+          z-index: 3;
           font-size: 0.65rem;
           color: var(--theme-text-muted);
           background: color-mix(in srgb, var(--theme-bg-card) 86%, transparent);
