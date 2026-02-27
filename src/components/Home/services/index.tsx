@@ -120,7 +120,7 @@ const LocalServices = () => {
           <p className='text-muted text-sm sm:text-base mb-2'>
             {t('services.subheading')}
           </p>
-          <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-4'>
+          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-4'>
             {t('services.title')}
           </h2>
           <p className='text-muted/60 text-sm sm:text-base lg:text-lg'>
@@ -144,7 +144,7 @@ const LocalServices = () => {
                 <Link
                   href={item.href}
                   className='flex items-center gap-3 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors'>
-                  <p className='text-charcoalGray dark:text-white text-base sm:text-lg font-semibold'>
+                  <p className='text-theme text-base sm:text-lg font-semibold'>
                     {item.title}
                   </p>
                 </Link>

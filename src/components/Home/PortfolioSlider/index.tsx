@@ -24,7 +24,7 @@ const PortfolioSlider = () => {
                     <p className="text-muted text-lg sm:text-xl lg:text-28 mb-3 sm:mb-4 pb-4 sm:pb-6 relative after:content-[''] after:w-8 after:h-0.5 after:bg-primary after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2">
                         {t('portfolio_slider.subheading_start')} <span className='text-primary'>{t('portfolio_slider.subheading_highlight')}</span>
                     </p>
-                    <h2 className='text-white dark:text-white text-2xl sm:text-3xl lg:text-4xl font-medium perks-title'>
+                    <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium'>
                         {t('portfolio_slider.title_start')} <span className='text-primary'>{t('portfolio_slider.title_highlight')}</span> {t('portfolio_slider.title_end')}
                     </h2>
                 </div>
@@ -33,9 +33,6 @@ const PortfolioSlider = () => {
                     {/* Inner container for the scrolling animation - using inline styles for reliability */}
                     <div
                         className='flex items-center gap-6 w-max animate-scroll'
-                        style={{
-                            animation: 'scroll 40s linear infinite'
-                        }}
                     >
                         {[...portfolioImages, ...portfolioImages].map((src, index) => (
                             <div
@@ -54,24 +51,6 @@ const PortfolioSlider = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Inline styles related to this component only */}
-            <style jsx global>{`
-                @keyframes scroll {
-                    0% {
-                        transform: translateX(0);
-                    }
-                    100% {
-                        transform: translateX(-50%);
-                    }
-                }
-                .fade-mask-soft {
-                    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-                    -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-                }
-            `}</style>
-
-
         </section>
     );
 };

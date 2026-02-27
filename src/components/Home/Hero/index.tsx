@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { Icon } from '@iconify/react'
+import { LayoutTextFlip } from '@/components/ui/layout-text-flip'
 import { useLanguage } from '@/context/LanguageContext'
-import MapTilerMap from './MapTilerMap'
 import { storeInfo } from '@/data/storeInfo'
 
 // Dynamically import slider to reduce initial JS bundle size
@@ -59,14 +59,27 @@ const Hero = () => {
               <span className='hero-line hero-line-kicker block text-muted/80 text-xs sm:text-sm lg:text-base font-semibold tracking-wide uppercase'>
                 {renderTownText()}
               </span>
-              <span
-                className={`hero-line hero-line-main block font-extrabold ${language === 'ta'
-                  ? 'text-[2rem] sm:text-[2.45rem] md:text-[2.85rem] lg:text-[3.1rem] leading-[1.12]'
-                  : 'text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'
-                  }`}>
-                <span className='text-primary'>{t('hero.electrical')}</span>{' '}
-                <span className='text-white'>{t('hero.materials')}</span>
-              </span>
+              {language === 'en' ? (
+                <span className='hero-line hero-line-main block font-extrabold text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'>
+                  <span className='text-primary'>Electricals &amp;</span>{' '}
+                  <LayoutTextFlip
+                    simple
+                    words={['Electronics', 'Plumbing']}
+                    duration={3000}
+                    className='text-primary'
+                  />{' '}
+                  <span className='text-theme'>Hub</span>
+                </span>
+              ) : (
+                <span
+                  className={`hero-line hero-line-main block font-extrabold ${language === 'ta'
+                    ? 'text-[2rem] sm:text-[2.45rem] md:text-[2.85rem] lg:text-[3.1rem] leading-[1.12]'
+                    : 'text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'
+                    }`}>
+                  <span className='text-primary'>{t('hero.electrical')}</span>{' '}
+                  <span className='text-theme'>{t('hero.materials')}</span>
+                </span>
+              )}
               <span className='hero-line hero-line-sub block text-sm sm:text-base text-muted mt-2'>
                 {t('hero.available')} {t('hero.here')}{' '}
                 {language === 'en' ? 'in' : ''} {t('hero.now_open')}
@@ -78,7 +91,7 @@ const Hero = () => {
             <div className='flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 sm:gap-6 lg:gap-6'>
               <a
                 href={`tel:${storeInfo.phoneE164}`}
-                className='w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] bg-primary border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium text-darkmode py-2.5 sm:py-3 px-6 sm:px-7 z-50 text-center transition-all shadow-[0_10px_24px_rgba(227,30,36,0.28)] hover:shadow-[0_14px_32px_rgba(227,30,36,0.35)] hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap'>
+                className='btn btn-primary w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] text-base sm:text-lg lg:text-xl py-2.5 sm:py-3 px-6 sm:px-7 z-50 text-center whitespace-nowrap'>
                 <Icon icon='mdi:phone' className='text-xl' />
                 {t('hero.call_now')}
               </a>
@@ -86,7 +99,7 @@ const Hero = () => {
                 href={`https://wa.me/${storeInfo.whatsappNumber}`}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] bg-transparent border border-primary rounded-lg text-base sm:text-lg lg:text-xl font-medium text-primary py-2.5 sm:py-3 px-6 sm:px-7 text-center transition-all hover:bg-primary hover:text-darkmode flex items-center justify-center gap-2 whitespace-nowrap'>
+                className='btn btn-outline w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] text-base sm:text-lg lg:text-xl py-2.5 sm:py-3 px-6 sm:px-7 text-center whitespace-nowrap'>
                 <Icon icon='mdi:whatsapp' className='text-xl' />
                 {t('hero.whatsapp_us')}
               </a>
@@ -109,25 +122,6 @@ const Hero = () => {
                   sizes='(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 50vw'
                   className='hero-bold-image object-cover'
                 />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='hero-map-section'>
-          <div className='hero-map-shell'>
-            <div className='hero-map-body'>
-              <div className='hero-map-frame-wrap'>
-                <MapTilerMap />
-                <a
-                  href={storeInfo.googleMapsUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='hero-map-link-overlay'
-                  aria-label={t('hero.open_map')}
-                />
-                <span className='hero-map-attrib'>
-                  © MapTiler © OpenStreetMap contributors
-                </span>
               </div>
             </div>
           </div>
@@ -175,7 +169,7 @@ const Hero = () => {
           border-radius: 999px;
           background: color-mix(in srgb, var(--theme-bg-card) 95%, transparent);
           border: 1px solid color-mix(in srgb, var(--theme-border) 90%, transparent);
-          color: #6B7280;
+          color: var(--theme-text-muted);
           font-size: 0.75rem;
           font-weight: 600;
           letter-spacing: 0.04em;
@@ -228,7 +222,7 @@ const Hero = () => {
         }
 
         .hero-trustline {
-          color: #6B7280;
+          color: var(--theme-text-muted);
           font-size: 0.85rem;
           font-weight: 500;
           letter-spacing: 0.02em;
@@ -258,110 +252,6 @@ const Hero = () => {
         .hero-bold-image {
           filter: saturate(1.04);
         }
-
-        .hero-map-section {
-          margin-top: 12px;
-        }
-
-        .hero-map-shell {
-          border-radius: 16px;
-          padding: 10px;
-          background: var(--theme-bg-card);
-          border: 1px solid color-mix(in srgb, var(--theme-border) 90%, transparent);
-          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .hero-map-body {
-          height: 240px;
-        }
-
-        .hero-map-frame-wrap {
-          height: 100%;
-          position: relative;
-          border-radius: 14px;
-          overflow: hidden;
-          border: 1px solid color-mix(in srgb, var(--theme-border) 80%, transparent);
-          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-          background: color-mix(in srgb, var(--theme-bg-card) 92%, transparent);
-        }
-
-        .hero-map-canvas {
-          width: 100%;
-          height: 100%;
-        }
-
-        .hero-map-link-overlay {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          cursor: pointer;
-        }
-
-        .hero-map-marker {
-          position: relative;
-          width: 14px;
-          height: 14px;
-          background: var(--theme-primary);
-          border-radius: 50%;
-          box-shadow: 0 8px 18px rgba(227, 30, 36, 0.3);
-        }
-
-        .hero-map-marker::after {
-          content: '';
-          position: absolute;
-          left: 50%;
-          top: 10px;
-          width: 10px;
-          height: 10px;
-          background: var(--theme-primary);
-          transform: translateX(-50%) rotate(45deg);
-          border-radius: 2px;
-        }
-
-        .hero-map-marker::before {
-          content: '';
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          width: 34px;
-          height: 34px;
-          border-radius: 999px;
-          background: color-mix(in srgb, var(--theme-primary) 20%, transparent);
-          transform: translate(-50%, -50%);
-        }
-
-        .hero-map-attrib {
-          position: absolute;
-          right: 10px;
-          bottom: 8px;
-          z-index: 3;
-          font-size: 0.65rem;
-          color: var(--theme-text-muted);
-          background: color-mix(in srgb, var(--theme-bg-card) 86%, transparent);
-          padding: 4px 6px;
-          border-radius: 6px;
-        }
-
-        .hero-map-fallback {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          padding: 12px;
-          color: var(--theme-text-muted);
-          font-size: 0.85rem;
-          background: repeating-linear-gradient(
-            135deg,
-            color-mix(in srgb, var(--theme-bg-card) 92%, transparent),
-            color-mix(in srgb, var(--theme-bg-card) 92%, transparent) 12px,
-            color-mix(in srgb, var(--theme-bg-card) 86%, transparent) 12px,
-            color-mix(in srgb, var(--theme-bg-card) 86%, transparent) 24px
-          );
-        }
-
-        
 
         .hero-float {
           animation: heroFloat 7s ease-in-out infinite;
@@ -423,35 +313,19 @@ const Hero = () => {
 
         @media (min-width: 640px) {
           .hero-bold-photo {
-            height: 270px;
-          }
-
-          .hero-map-body {
-            height: 260px;
+            height: 280px;
           }
         }
 
         @media (min-width: 768px) {
           .hero-bold-photo {
-            height: 330px;
-          }
-
-          .hero-map-body {
-            height: 280px;
+            height: 340px;
           }
         }
 
         @media (min-width: 1024px) {
-          .hero-map-section {
-            margin-top: 16px;
-          }
-
           .hero-bold-photo {
-            height: 370px;
-          }
-
-          .hero-map-body {
-            height: 300px;
+            height: 380px;
           }
         }
 
@@ -459,19 +333,11 @@ const Hero = () => {
           .hero-bold-photo {
             height: 430px;
           }
-
-          .hero-map-body {
-            height: 320px;
-          }
         }
 
         @media (min-width: 1536px) {
           .hero-bold-photo {
             height: 470px;
-          }
-
-          .hero-map-body {
-            height: 340px;
           }
         }
       `}</style>

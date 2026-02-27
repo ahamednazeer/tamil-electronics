@@ -94,8 +94,24 @@
                 "description": "Circuit protection and safety devices."
             },
             "pipes": {
-                "title": "Electrical Pipes & Fittings",
+                "title": "PVC Pipes",
                 "description": "Complete wiring support materials."
+            },
+            "fittings": {
+                "title": "Bathroom Fittings",
+                "description": "Premium stainless steel bathroom and plumbing fittings."
+            },
+            "tanks": {
+                "title": "Water Tanks",
+                "description": "Durable and long-lasting plastic water storage tanks."
+            },
+            "agro_pumps": {
+                "title": "Agricultural Pumps",
+                "description": "Heavy-duty monoblock and submersible pumps for farming."
+            },
+            "heaters": {
+                "title": "Water Heaters",
+                "description": "Modern electric storage water heaters and geysers."
             }
         }
     },
@@ -181,6 +197,9 @@
         "subheading": "Contact & Enquiry",
         "title": "Get a Quick Quote",
         "description": "Call, WhatsApp, or send an enquiry for pricing and availability.",
+        "map_title": "Find Us on the Map",
+        "map_subtitle": "Tap to open directions in Google Maps.",
+        "open_in_maps": "Open in Maps",
         "store_info": "Store Information",
         "address": "Address",
         "phone": "Phone",

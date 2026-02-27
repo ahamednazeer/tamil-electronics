@@ -92,19 +92,19 @@ export default function RootLayout({
               openingHoursSpecification: storeInfo.hours
                 .filter((hour) => !storeInfo.closedDays.includes(hour.day))
                 .map((hour) => ({
-                '@type': 'OpeningHoursSpecification',
-                dayOfWeek: [
-                  'Sunday',
-                  'Monday',
-                  'Tuesday',
-                  'Wednesday',
-                  'Thursday',
-                  'Friday',
-                  'Saturday',
-                ][hour.day],
-                opens: hour.opens,
-                closes: hour.closes,
-              })),
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: [
+                    'Sunday',
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                  ][hour.day],
+                  opens: hour.opens,
+                  closes: hour.closes,
+                })),
               sameAs: [storeInfo.googleMapsUrl],
             }),
           }}
@@ -131,7 +131,7 @@ export default function RootLayout({
           attribute='data-theme'
           enableSystem={false}
           defaultTheme='light'
-          storageKey='theme'
+          storageKey='theme-v2'
           disableTransitionOnChange>
           <LanguageProvider>
             <Aoscompo>

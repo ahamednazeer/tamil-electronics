@@ -9,10 +9,10 @@ const Perks = () => {
           <p className="text-muted text-lg sm:text-xl lg:text-28 mb-3 sm:mb-4 pb-4 sm:pb-6 relative after:content-[''] after:w-8 after:h-0.5 after:bg-primary after:absolute after:bottom-0 after:left-1/2">
             Local Service, <span className='text-primary'>Real Advice</span>
           </p>
-          <h2 className='text-white dark:text-white text-2xl sm:text-3xl lg:text-4xl font-medium perks-title'>
+          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium perks-title'>
             Why Neighbors Choose <span className='text-primary'>Tamil Electricals</span>
           </h2>
-          <div className='perks-card relative overflow-hidden mt-6 sm:mt-8 lg:mt-10 border border-border/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-6 sm:py-8 lg:py-10 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-8 lg:px-16 rounded-2xl sm:rounded-3xl bg-dark_grey/35'>
+          <div className='perks-card relative overflow-hidden mt-6 sm:mt-8 lg:mt-10 border border-border/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-6 sm:py-8 lg:py-10 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-8 lg:px-16 rounded-2xl sm:rounded-3xl'>
             {/* Background image - visible in both dark and light mode */}
             <Image
               src='/images/perks/perk-bg.png'
@@ -37,7 +37,7 @@ const Perks = () => {
                     quality={70}
                   />
                 </div>
-                <h4 className={`text-white perks-item-title text-lg sm:text-xl lg:text-2xl mb-2 sm:mb-4 ${item.space}`}>
+                <h4 className={`text-theme perks-item-title text-lg sm:text-xl lg:text-2xl mb-2 sm:mb-4 ${item.space}`}>
                   {item.title}
                 </h4>
                 <div

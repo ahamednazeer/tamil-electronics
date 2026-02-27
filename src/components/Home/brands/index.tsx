@@ -13,7 +13,7 @@ const Brands = () => {
           <p className='text-muted text-lg sm:text-xl lg:text-28 mb-2'>
             {t('brands.subheading')}
           </p>
-          <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3'>
+          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3'>
             {t('brands.title')}
           </h2>
           <p className='text-muted/60 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto'>
@@ -24,7 +24,7 @@ const Brands = () => {
           {brandsData.map((brand) => (
             <div
               key={brand.name}
-              className='flex items-center justify-center rounded-xl border border-border/20 bg-white/5 p-4 transition-colors duration-300 hover:border-primary/50'
+              className='flex items-center justify-center p-2 sm:p-3'
             >
               <Image
                 src={brand.logo}

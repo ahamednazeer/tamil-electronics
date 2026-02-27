@@ -37,7 +37,7 @@ const TimeLine = () => {
             {t('about.subheading_start')}{' '}
             <span className='text-primary'>{t('about.subheading_highlight')}</span>
           </p>
-          <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-4'>
+          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-4'>
             {t('about.title')}
           </h2>
           <p className='text-muted/60 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto'>
@@ -65,7 +65,7 @@ const TimeLine = () => {
                         className='h-6 w-6 brightness-0 saturate-100 dark:brightness-100 dark:invert'
                       />
                     </div>
-                    <h4 className='text-white text-base sm:text-lg font-semibold'>
+                    <h4 className='text-theme text-base sm:text-lg font-semibold'>
                       {item.title}
                     </h4>
                   </div>

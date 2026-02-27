@@ -49,7 +49,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
       </Link>
       {submenuOpen && (
         <div
-          className={`absolute py-2 left-0 mt-0.5 w-60 bg-white dark:bg-darklight dark:text-white shadow-lg rounded-lg `}
+          className={`surface-card absolute left-0 mt-0.5 w-60 py-2 shadow-lg`}
           data-aos="fade-up"
           data-aos-duration="500"
         >
@@ -60,7 +60,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
               className={`block px-4 py-2   ${
                 path === subItem.href
                   ? "bg-primary text-white"
-                  : "text-black dark:text-white hover:bg-primary"
+                  : "text-theme hover:bg-primary hover:text-white"
               }`}
             >
               {subItem.label}

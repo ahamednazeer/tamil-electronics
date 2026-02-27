@@ -41,78 +41,76 @@ const InquiryForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='reviews-spotlight-card reviews-spotlight-card--soft h-full'>
-      <div className='reviews-spotlight-inner reviews-spotlight-inner--roomy h-full'>
-        <h3 className='text-white text-xl sm:text-2xl font-semibold mb-2'>
-          {t('contact.form_title')}
-        </h3>
-        <p className='text-muted/70 text-sm sm:text-base mb-5'>
-          {t('contact.form_description')}
-        </p>
-        <div className='grid grid-cols-1 gap-4'>
-          <label className='flex flex-col gap-2 text-sm text-muted/70'>
-            {t('contact.form_labels.name')}
-            <input
-              type='text'
-              name='name'
-              value={form.name}
-              onChange={handleChange}
-              required
-              autoComplete='name'
-              placeholder={t('contact.form_placeholders.name')}
-              className='rounded-lg bg-transparent border border-white/10 px-4 py-2.5 text-white focus:outline-none focus:border-primary'
-            />
-          </label>
-          <label className='flex flex-col gap-2 text-sm text-muted/70'>
-            {t('contact.form_labels.phone')}
-            <input
-              type='tel'
-              name='phone'
-              value={form.phone}
-              onChange={handleChange}
-              required
-              inputMode='tel'
-              autoComplete='tel'
-              pattern='[0-9+ ]{7,15}'
-              placeholder={t('contact.form_placeholders.phone')}
-              className='rounded-lg bg-transparent border border-white/10 px-4 py-2.5 text-white focus:outline-none focus:border-primary'
-            />
-          </label>
-          <label className='flex flex-col gap-2 text-sm text-muted/70'>
-            {t('contact.form_labels.product')}
-            <input
-              type='text'
-              name='product'
-              value={form.product}
-              onChange={handleChange}
-              required
-              autoComplete='off'
-              placeholder={t('contact.form_placeholders.product')}
-              className='rounded-lg bg-transparent border border-white/10 px-4 py-2.5 text-white focus:outline-none focus:border-primary'
-            />
-          </label>
-        </div>
-        <div className='mt-6 flex flex-col sm:flex-row gap-3'>
-          <button
-            type='submit'
-            className='flex-1 bg-primary text-darkmode font-semibold py-3 px-5 rounded-lg hover:bg-transparent hover:text-primary border border-primary transition-colors'>
-            {t('contact.form_submit')}
-          </button>
-          <a
-            href={`tel:${storeInfo.phoneE164}`}
-            className='flex-1 text-center border border-white/20 text-white font-semibold py-3 px-5 rounded-lg hover:border-primary hover:text-primary transition-colors'>
-            {t('contact.form_call')}
-          </a>
-        </div>
-        <p className='text-xs text-muted/60 mt-4'>
-          {t('contact.form_note')}
-        </p>
-        {submitted && (
-          <p className='text-xs text-emerald-200 mt-2' aria-live='polite'>
-            {t('contact.form_success')}
-          </p>
-        )}
+      className='surface-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:p-8 h-full'>
+      <h3 className='text-theme text-xl sm:text-2xl font-semibold mb-2'>
+        {t('contact.form_title')}
+      </h3>
+      <p className='text-muted/70 text-sm sm:text-base mb-5'>
+        {t('contact.form_description')}
+      </p>
+      <div className='grid grid-cols-1 gap-4'>
+        <label className='flex flex-col gap-2 text-sm text-muted/70'>
+          {t('contact.form_labels.name')}
+          <input
+            type='text'
+            name='name'
+            value={form.name}
+            onChange={handleChange}
+            required
+            autoComplete='name'
+            placeholder={t('contact.form_placeholders.name')}
+            className='form-input'
+          />
+        </label>
+        <label className='flex flex-col gap-2 text-sm text-muted/70'>
+          {t('contact.form_labels.phone')}
+          <input
+            type='tel'
+            name='phone'
+            value={form.phone}
+            onChange={handleChange}
+            required
+            inputMode='tel'
+            autoComplete='tel'
+            pattern='[0-9+ ]{7,15}'
+            placeholder={t('contact.form_placeholders.phone')}
+            className='form-input'
+          />
+        </label>
+        <label className='flex flex-col gap-2 text-sm text-muted/70'>
+          {t('contact.form_labels.product')}
+          <input
+            type='text'
+            name='product'
+            value={form.product}
+            onChange={handleChange}
+            required
+            autoComplete='off'
+            placeholder={t('contact.form_placeholders.product')}
+            className='form-input'
+          />
+        </label>
       </div>
+      <div className='mt-6 flex flex-col sm:flex-row gap-3'>
+        <button
+          type='submit'
+          className='btn btn-primary flex-1 py-3 px-5'>
+          {t('contact.form_submit')}
+        </button>
+        <a
+          href={`tel:${storeInfo.phoneE164}`}
+          className='btn btn-outline flex-1 py-3 px-5 text-center'>
+          {t('contact.form_call')}
+        </a>
+      </div>
+      <p className='text-xs text-muted/60 mt-4'>
+        {t('contact.form_note')}
+      </p>
+      {submitted && (
+        <p className='text-xs text-emerald-500 mt-2' aria-live='polite'>
+          {t('contact.form_success')}
+        </p>
+      )}
     </form>
   )
 }

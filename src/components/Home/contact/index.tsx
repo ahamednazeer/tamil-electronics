@@ -7,6 +7,7 @@ import { dayLabels, storeInfo } from '@/data/storeInfo'
 import { formatTime } from '@/utils/time'
 import StoreStatus from './StoreStatus'
 import InquiryForm from './InquiryForm'
+import LocationMapSection from './LocationMapSection'
 
 const orderedDays = [1, 2, 3, 4, 5, 6, 0]
 
@@ -32,7 +33,7 @@ const ContactSection = () => {
           <p className='text-primary text-sm sm:text-base mb-2'>
             {t('contact.subheading')}
           </p>
-          <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl font-medium mb-3'>
+          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3'>
             {t('contact.title')}
           </h2>
           <p className='text-muted/60 text-sm sm:text-base lg:text-lg'>
@@ -40,22 +41,26 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start'>
-          <div className='lg:col-span-5 reviews-spotlight-card reviews-spotlight-card--soft reviews-spotlight-card--no-glow'>
-            <div className='reviews-spotlight-inner reviews-spotlight-inner--roomy'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start'>
+          <div className='order-2 lg:order-1'>
+            <InquiryForm />
+          </div>
+
+          <div className='order-1 lg:order-2'>
+            <div className='surface-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:p-8 h-full'>
               <div className='flex items-center justify-between gap-3 flex-wrap'>
-                <h3 className='text-white text-xl font-semibold'>
+                <h3 className='text-theme text-xl font-semibold'>
                   {t('contact.store_info')}
                 </h3>
                 <StoreStatus />
               </div>
               <div className='mt-5 space-y-5'>
                 <div className='flex items-start gap-3'>
-                  <span className='p-2 rounded-lg bg-white/5 text-primary'>
+                  <span className='p-2 rounded-lg bg-black/5 dark:bg-white/5 text-primary'>
                     <Icon icon='mdi:map-marker-radius' className='text-lg' />
                   </span>
                   <div>
-                    <p className='text-white text-sm font-semibold'>
+                    <p className='text-theme text-sm font-semibold'>
                       {t('contact.address')}
                     </p>
                     <Link
@@ -72,11 +77,11 @@ const ContactSection = () => {
                 </div>
 
                 <div className='flex items-start gap-3'>
-                  <span className='p-2 rounded-lg bg-white/5 text-primary'>
+                  <span className='p-2 rounded-lg bg-black/5 dark:bg-white/5 text-primary'>
                     <Icon icon='mdi:phone' className='text-lg' />
                   </span>
                   <div>
-                    <p className='text-white text-sm font-semibold'>
+                    <p className='text-theme text-sm font-semibold'>
                       {t('contact.phone')}
                     </p>
                     <Link
@@ -88,11 +93,11 @@ const ContactSection = () => {
                 </div>
 
                 <div className='flex items-start gap-3'>
-                  <span className='p-2 rounded-lg bg-white/5 text-primary'>
+                  <span className='p-2 rounded-lg bg-black/5 dark:bg-white/5 text-primary'>
                     <Icon icon='mdi:clock-outline' className='text-lg' />
                   </span>
                   <div className='space-y-2'>
-                    <p className='text-white text-sm font-semibold'>
+                    <p className='text-theme text-sm font-semibold'>
                       {t('contact.hours')}
                     </p>
                     {allSameHours ? (
@@ -132,11 +137,8 @@ const ContactSection = () => {
               </div>
             </div>
           </div>
-
-          <div className='lg:col-span-7'>
-            <InquiryForm />
-          </div>
         </div>
+        <LocationMapSection />
       </div>
     </section>
   )

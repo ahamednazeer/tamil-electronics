@@ -6,7 +6,6 @@ import { headerData } from '../Header/Navigation/menuData'
 import Logo from './Logo'
 import HeaderLink from '../Header/Navigation/HeaderLink'
 import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
-import ThemeToggle from '../ThemeToggle'
 import LanguageToggle from '../LanguageToggle'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
@@ -75,24 +74,24 @@ const Header: React.FC = () => {
             <Link
               href={`tel:${storeInfo.phoneE164}`}
               aria-label={t('header.call_short')}
-              className='header-cta flex items-center gap-2 rounded-full border border-primary/60 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors'>
+              className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm'>
               <Icon icon='mdi:phone' className='text-sm sm:text-base' />
               <span className='sm:hidden'>{t('header.call_short')}</span>
               <span className='hidden sm:inline'>{storeInfo.phoneDisplay}</span>
             </Link>
+            {/* Language only (no theme toggle) */}
+            <div className='hidden md:flex items-center'>
+              <LanguageToggle />
+            </div>
             <Link
               href={`https://wa.me/${storeInfo.whatsappNumber}`}
               target='_blank'
               rel='noopener noreferrer'
-              className='header-cta flex items-center gap-2 rounded-full border border-primary/60 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors'>
+              className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm'>
               <Icon icon='mdi:whatsapp' className='text-base' />
               <span className='hidden sm:inline'>{t('header.whatsapp_short')}</span>
               <span className='sm:hidden'>WA</span>
             </Link>
-            <div className='hidden md:flex items-center gap-2'>
-              <ThemeToggle />
-              <LanguageToggle />
-            </div>
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
@@ -115,9 +114,8 @@ const Header: React.FC = () => {
         )}
         <aside
           id='mobile-navigation'
-          className={`mobile-menu lg:hidden fixed top-0 right-0 z-50 h-[100dvh] w-[86vw] max-w-[360px] transform transition-transform duration-300 ${
-            navbarOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
-          }`}
+          className={`mobile-menu lg:hidden fixed top-0 right-0 z-50 h-[100dvh] w-[86vw] max-w-[360px] transform transition-transform duration-300 ${navbarOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+            }`}
           role='dialog'
           aria-modal='true'
           aria-label='Mobile navigation'
@@ -149,17 +147,17 @@ const Header: React.FC = () => {
                   />
                 ))}
               </div>
+              {/* Mobile language toggle, soft rounded card */}
               <div
-                className='mt-5 rounded-xl border p-3'
+                className='mt-5 rounded-2xl border p-3'
                 style={{
                   borderColor: 'var(--theme-border)',
                   backgroundColor: 'var(--theme-bg-secondary)',
                 }}>
-                <p className='text-[11px] font-semibold uppercase tracking-[0.1em] text-muted/70'>
-                  Preferences
+                <p className='text-[11px] font-semibold uppercase tracking-[0.1em] text-muted/70 mb-2'>
+                  Language
                 </p>
-                <div className='mt-2 flex items-center gap-2'>
-                  <ThemeToggle />
+                <div className='flex items-center gap-2'>
                   <LanguageToggle />
                 </div>
               </div>

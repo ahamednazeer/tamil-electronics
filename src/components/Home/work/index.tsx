@@ -85,7 +85,7 @@ const Work = () => {
         <div className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
           {/* Left Content */}
           <div className='lg:col-span-6 col-span-12'>
-            <h2 className='text-3xl sm:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6'>
+            <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold leading-tight mb-6'>
               {t('work.title_start')}{' '}
               <span className='text-primary'>{t('work.title_highlight')}</span>{' '}
               {t('work.title_end')}
@@ -98,13 +98,13 @@ const Work = () => {
             <div className='flex flex-wrap items-center gap-4'>
               <a
                 href={`tel:${storeInfo.phoneE164}`}
-                className='bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-primary-dark transition-all'>
+                className='btn btn-primary py-3 px-8'>
                 {t('work.contact_us')}
               </a>
               <a
                 href='#gallery'
-                className='flex items-center gap-3 text-white font-medium py-3 px-4 hover:text-primary transition-all'>
-                <div className='w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center'>
+                className='flex items-center gap-3 text-theme font-medium py-3 px-4 hover:text-primary transition-all'>
+                <div className='w-12 h-12 rounded-full border-2 border-black/20 dark:border-white/30 flex items-center justify-center'>
                   <Icon icon='mdi:play' className='text-xl ml-0.5' />
                 </div>
                 {t('work.view_video')}
@@ -116,7 +116,7 @@ const Work = () => {
           <div className='lg:col-span-6 col-span-12'>
             <div className='relative flex justify-center lg:justify-end items-center lg:pr-10'>
               {/* Container for circle and floating icons */}
-              <div ref={circleRef} className='relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] will-change-transform'>
+              <div ref={circleRef} className='relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] will-change-transform'>
                 {/* Main Circular Image */}
                 <div className='absolute inset-0 rounded-full border-8 border-white shadow-2xl overflow-hidden'>
                   <Image
@@ -151,11 +151,11 @@ const Work = () => {
                           <Image
                             src={item.value}
                             alt={item.alt}
-                            width={32}
-                            height={32}
-                            sizes='(max-width: 640px) 24px, 32px'
+                            width={40}
+                            height={40}
+                            sizes='(max-width: 640px) 32px, 40px'
                             className='object-contain'
-                            quality={60}
+                            quality={70}
                           />
                         ) : (
                           <Icon icon={item.value} className='orbit-icon' />
@@ -179,10 +179,10 @@ const Work = () => {
           position: absolute;
           left: 50%;
           top: 50%;
-          width: 56px;
-          height: 56px;
-          margin-left: -28px;
-          margin-top: -28px;
+          width: 68px;
+          height: 68px;
+          margin-left: -34px;
+          margin-top: -34px;
           border-radius: 9999px;
           background: #ffffff;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
@@ -196,16 +196,16 @@ const Work = () => {
             rotate(var(--orbit-rotate-neg));
         }
         .orbit-icon {
-          width: 28px;
-          height: 28px;
+          width: 32px;
+          height: 32px;
           color: var(--theme-primary);
         }
         @media (max-width: 640px) {
           .orbit-item {
-            width: 46px;
-            height: 46px;
-            margin-left: -23px;
-            margin-top: -23px;
+            width: 56px;
+            height: 56px;
+            margin-left: -28px;
+            margin-top: -28px;
             transform:
               rotate(var(--item-angle))
               translateX(145px)
@@ -213,8 +213,8 @@ const Work = () => {
               rotate(var(--orbit-rotate-neg));
           }
           .orbit-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
           }
         }
       `}</style>

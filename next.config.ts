@@ -14,11 +14,6 @@ const nextConfig: NextConfig = {
     //   root: __dirname,
     // },
   },
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  turbopack: {
-    root: __dirname,
-  },
   // Enable compression
   compress: true,
   // Power headers for performance

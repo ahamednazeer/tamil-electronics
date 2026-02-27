@@ -14,7 +14,7 @@ const Footer: FC = () => {
   const locale = language === 'ta' ? 'ta-IN' : 'en-IN'
   const firstHour = storeInfo.hours[0]
   return (
-    <footer className='site-footer pt-8 sm:pt-10 lg:pt-12 bg-darkmode' id='footer'>
+    <footer className='site-footer pt-8 sm:pt-10 lg:pt-12' id='footer'>
       <div className='container px-4 sm:px-6'>
         <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-20 pb-10 sm:pb-12 lg:pb-16'>
           {/* Logo and About */}
@@ -35,7 +35,7 @@ const Footer: FC = () => {
                   icon='fa6-brands:facebook-f'
                   width='20'
                   height='20'
-                  className='text-white group-hover:text-primary sm:w-6 sm:h-6'
+                  className='text-theme group-hover:text-primary sm:w-6 sm:h-6'
                 />
               </Link>
               <Link
@@ -48,7 +48,7 @@ const Footer: FC = () => {
                   icon='fa6-brands:instagram'
                   width='20'
                   height='20'
-                  className='text-white group-hover:text-primary sm:w-6 sm:h-6'
+                  className='text-theme group-hover:text-primary sm:w-6 sm:h-6'
                 />
               </Link>
               <Link
@@ -61,24 +61,24 @@ const Footer: FC = () => {
                   icon='fa6-brands:whatsapp'
                   width='20'
                   height='20'
-                  className='text-white group-hover:text-primary sm:w-6 sm:h-6'
+                  className='text-theme group-hover:text-primary sm:w-6 sm:h-6'
                 />
               </Link>
             </div>
-            <h3 className='text-white text-sm sm:text-lg lg:text-xl font-medium mt-6 sm:mt-10 lg:mt-20'>
+            <h3 className='text-theme text-sm sm:text-lg lg:text-xl font-medium mt-6 sm:mt-10 lg:mt-20'>
               © 2025 Tamil Electricals
             </h3>
           </div>
 
           {/* Quick Links */}
           <div className='col-span-1 md:col-span-3 lg:col-span-2'>
-            <h4 className='text-white mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl'>{t('footer.quick_links')}</h4>
+            <h4 className='text-theme mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl'>{t('footer.quick_links')}</h4>
             <ul>
               {headerData.map((item, index) => (
                 <li key={index} className='pb-2 sm:pb-3 lg:pb-4'>
                   <Link
                     href={item.href}
-                    className='text-white hover:text-primary text-sm sm:text-base'>
+                    className='text-theme hover:text-primary text-sm sm:text-base'>
                     {item.label}
                   </Link>
                 </li>
@@ -88,7 +88,7 @@ const Footer: FC = () => {
 
           {/* Information */}
           <div className='col-span-1 md:col-span-3 lg:col-span-2'>
-            <h4 className='text-white mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl'>{t('footer.information')}</h4>
+            <h4 className='text-theme mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl'>{t('footer.information')}</h4>
             <ul>
               {footerlabels.map((item, index) => (
                 <li key={index} className='pb-2 sm:pb-3 lg:pb-4'>
@@ -102,13 +102,13 @@ const Footer: FC = () => {
 
           {/* Contact */}
           <div className='col-span-2 sm:col-span-2 md:col-span-12 lg:col-span-4'>
-            <h3 className='text-white text-base sm:text-lg lg:text-xl font-medium mb-4 sm:mb-5'>{t('footer.contact_us')}</h3>
+            <h3 className='text-theme text-base sm:text-lg lg:text-xl font-medium mb-4 sm:mb-5'>{t('footer.contact_us')}</h3>
             <div className='flex flex-col gap-6'>
 
               {/* Shop Address */}
               <div className='flex flex-col gap-2'>
-                <p className='text-white text-base font-medium'>{t('footer.shop_address')}</p>
-                <p className='text-muted/60 text-sm leading-relaxed'>
+                <p className='text-theme text-base font-medium'>{t('footer.shop_address')}</p>
+                <p className='text-muted/80 text-sm leading-relaxed'>
                   {storeInfo.address.streetAddress}
                   <br />
                   {storeInfo.address.addressLocality}, {storeInfo.address.addressRegion},{' '}
@@ -118,7 +118,7 @@ const Footer: FC = () => {
 
               {/* Phone */}
               <div className='flex flex-col gap-2'>
-                <p className='text-white text-base font-medium'>{t('footer.phone')}</p>
+                <p className='text-theme text-base font-medium'>{t('footer.phone')}</p>
                 <Link
                   href={`tel:${storeInfo.phoneE164}`}
                   className='text-muted/60 hover:text-primary text-sm transition-colors'
@@ -129,8 +129,8 @@ const Footer: FC = () => {
 
               {/* Working Hours */}
               <div className='flex flex-col gap-2'>
-                <p className='text-white text-base font-medium'>{t('footer.working_hours')}</p>
-                <p className='text-muted/60 text-sm'>
+                <p className='text-theme text-base font-medium'>{t('footer.working_hours')}</p>
+                <p className='text-muted/80 text-sm'>
                   {formatTime(firstHour.opens, locale)} - {formatTime(firstHour.closes, locale)}
                 </p>
               </div>

@@ -153,7 +153,7 @@ const ParticlesBackground = () => {
         const lightConfig: ParticlesConfig = {
             particles: {
                 number: {
-                    value: 45,
+                    value: 60,
                     density: {
                         enable: true,
                         value_area: 900
@@ -173,7 +173,7 @@ const ParticlesBackground = () => {
                     }
                 },
                 opacity: {
-                    value: 0.18,
+                    value: 0.16,
                     random: false,
                     anim: {
                         enable: false,
@@ -201,7 +201,7 @@ const ParticlesBackground = () => {
                 },
                 move: {
                     enable: true,
-                    speed: 0.4,
+                    speed: 1.5,
                     direction: 'none',
                     random: false,
                     straight: false,
@@ -287,14 +287,12 @@ const ParticlesBackground = () => {
                 left: 0,
                 width: '100%',
                 height: '100%',
-                zIndex: -1,
+                zIndex: 0,
                 pointerEvents: 'none', // Allow clicking through to content, but hover events might need this to be 'auto' or handled carefully. 
                 // Actually for particles.js interactivity to work, we need pointer-events: auto on the canvas. 
                 // But since it's a background, we don't want it blocking clicks.
                 // Compromise: We'll set the container to Z-index -1 so it's behind everything. 
-                // Interactivity (hover) usually works if the elements above it don't have a background, 
-                // but we made sections transparent.
-                backgroundColor: 'var(--theme-bg)' // Apply theme background here so particles are visible on top of it
+                // Interactivity (hover) usually works if the elements above it don't have a background.
             }}
         />
     );

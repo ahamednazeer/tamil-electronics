@@ -19,10 +19,10 @@ const LanguageToggle: React.FC = () => {
     return (
         <button
             onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')}
-            className="px-3 py-1.5 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105 border ml-2"
+            className="px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105 border ml-2 shadow-sm"
             style={{
-                backgroundColor: 'var(--theme-bg-secondary)',
-                borderColor: 'var(--theme-border)',
+                backgroundColor: 'var(--theme-bg-card)',
+                borderColor: 'color-mix(in srgb, var(--theme-border) 70%, transparent)',
                 color: 'var(--theme-text)'
             }}
             aria-label={`Switch to ${language === 'en' ? 'Tamil' : 'English'}`}

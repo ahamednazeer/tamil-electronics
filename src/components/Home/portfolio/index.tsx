@@ -144,9 +144,29 @@ const Portfolio = () => {
       description: t('portfolio.items.mcb.description'),
     },
     {
-      image: '/images/products/pipes.png',
+      image: '/images/products/pvc-pipes.png',
       title: t('portfolio.items.pipes.title'),
       description: t('portfolio.items.pipes.description'),
+    },
+    {
+      image: '/images/products/bathroom-fittings.png',
+      title: t('portfolio.items.fittings.title'),
+      description: t('portfolio.items.fittings.description'),
+    },
+    {
+      image: '/images/products/water-tanks.png',
+      title: t('portfolio.items.tanks.title'),
+      description: t('portfolio.items.tanks.description'),
+    },
+    {
+      image: '/images/products/agricultural-pumps.png',
+      title: t('portfolio.items.agro_pumps.title'),
+      description: t('portfolio.items.agro_pumps.description'),
+    },
+    {
+      image: '/images/products/water-heaters.png',
+      title: t('portfolio.items.heaters.title'),
+      description: t('portfolio.items.heaters.description'),
     },
   ]
 
@@ -162,7 +182,7 @@ const Portfolio = () => {
           <p className='text-lg sm:text-xl lg:text-28 text-muted mb-2 sm:mb-4'>
             {t('portfolio.subheading_start')} <span className='text-primary'>{t('portfolio.subheading_highlight')}</span>
           </p>
-          <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4 font-medium px-2'>
+          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4 font-medium px-2'>
             {t('portfolio.title_start')}{' '}
             <span className='text-primary'>{t('portfolio.title_highlight')}</span>
           </h2>
@@ -184,7 +204,7 @@ const Portfolio = () => {
             >
               {productsData.map((item, index) => (
                 <div key={index} className='flex-none w-[300px] sm:w-[380px] lg:w-[460px]'>
-                  <div className='bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg h-full flex flex-col group'>
+                  <div className='surface-card rounded-xl sm:rounded-2xl overflow-hidden h-full flex flex-col group'>
                     <div className='relative h-64 sm:h-80 w-full overflow-hidden'>
                       <Image
                         src={item.image}
@@ -193,12 +213,12 @@ const Portfolio = () => {
                         sizes='(max-width: 640px) 300px, (max-width: 1024px) 380px, 460px'
                         className='object-cover group-hover:scale-105 transition-transform duration-300'
                       />
-                      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
+                      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 via-black/40 to-transparent flex items-end p-4">
                         <span className="text-white/90 text-sm font-medium">@tamilelectricals</span>
                       </div>
                     </div>
-                    <div className='p-4 sm:p-5 bg-white'>
-                      <h4 className='text-charcoalGray text-lg sm:text-xl font-bold mb-2 sm:mb-3'>
+                    <div className='p-4 sm:p-5'>
+                      <h4 className='text-theme text-lg sm:text-xl font-bold mb-2 sm:mb-3'>
                         {item.title}
                       </h4>
                     </div>

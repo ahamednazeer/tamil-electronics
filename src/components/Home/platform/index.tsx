@@ -10,7 +10,7 @@ const Platform = () => {
       <div className='container px-4 sm:px-6'>
         <div className="bg-section/10 px-4 sm:px-8 lg:px-16 py-8 sm:py-10 lg:py-14 rounded-2xl sm:rounded-3xl border-2 border-section/20 grid grid-cols-12 items-center gap-4 before:content-[''] before:absolute relative before:w-96 before:h-64 before:bg-start before:bg-no-repeat before:-bottom-11 overflow-hidden lg:before:right-48 before:-z-1 before:opacity-10 ">
           <div className='lg:col-span-8 col-span-12 text-center lg:text-left'>
-            <h2 className='text-white text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4 lg:mb-6'>
+            <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4 lg:mb-6'>
               {t('platform.title_start')} <span className='text-primary'>{t('platform.title_highlight')}</span>{' '}
               {t('platform.title_end')}
             </h2>
@@ -23,7 +23,7 @@ const Platform = () => {
             <div className='flex lg:justify-end mt-4 lg:mt-0 justify-center gap-3 sm:gap-4'>
               <Link
                 href={`tel:${storeInfo.phoneE164}`}
-                className='text-darkmode bg-primary border border-primary py-2 sm:py-3 px-4 sm:px-5 rounded-lg text-base sm:text-lg lg:text-xl font-medium hover:bg-transparent hover:text-primary transition-colors'>
+                className='btn btn-primary py-2 sm:py-3 px-4 sm:px-5 text-base sm:text-lg lg:text-xl'>
                 {t('platform.call_now')}
               </Link>
             </div>
