@@ -1,4 +1,4 @@
-import { perksData } from '@/app/api/data'
+import { perksData } from '@/data/staticContent'
 import Image from 'next/image'
 
 const Perks = () => {

@@ -1,5 +1,5 @@
-import Work from '@/components/Home/work'
-import Portfolio from '@/components/Home/portfolio'
+import Work from '@/components/Home/Work'
+import Portfolio from '@/components/Home/Portfolio'
 import PortfolioSlider from '@/components/Home/PortfolioSlider'
 import { Metadata } from 'next'
 

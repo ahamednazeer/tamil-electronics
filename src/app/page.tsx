@@ -1,12 +1,12 @@
 import React from 'react'
 import Hero from '@/components/Home/Hero'
-import LocalServices from '@/components/Home/services'
-import Work from '@/components/Home/work'
-import Portfolio from '@/components/Home/portfolio'
-import Upgrade from '@/components/Home/upgrade'
+import LocalServices from '@/components/Home/Services'
+import Work from '@/components/Home/Work'
+import Portfolio from '@/components/Home/Portfolio'
+import Upgrade from '@/components/Home/Upgrade'
 import PortfolioSlider from '@/components/Home/PortfolioSlider'
-import ContactSection from '@/components/Home/contact'
-import TimeLine from '@/components/Home/timeline'
+import ContactSection from '@/components/Home/Contact'
+import TimeLine from '@/components/Home/Timeline'
 import { Metadata } from 'next'
 export const metadata: Metadata = {
   title:

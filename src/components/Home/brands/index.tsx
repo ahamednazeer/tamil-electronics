@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useLanguage } from '@/context/LanguageContext'
-import { brandsData } from '@/app/api/data'
+import { brandsData } from '@/data/staticContent'
 
 const Brands = () => {
   const { t } = useLanguage()

@@ -2,12 +2,12 @@
 import React, { FC } from 'react'
 import Link from 'next/link'
 import { headerData } from '../Header/Navigation/menuData'
-import { footerlabels } from '@/app/api/data'
+import { footerlabels } from '@/data/staticContent'
 import { Icon } from '@iconify/react'
 import Logo from '../Header/Logo'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
-import { formatTime } from '@/utils/time'
+import { formatTime } from '@/lib/time'
 
 const Footer: FC = () => {
   const { t, language } = useLanguage()

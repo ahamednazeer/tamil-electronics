@@ -1,5 +1,5 @@
-import TimeLine from '@/components/Home/timeline'
-import Perks from '@/components/Home/perks'
+import TimeLine from '@/components/Home/Timeline'
+import Perks from '@/components/Home/Perks'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
