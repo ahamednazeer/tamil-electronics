@@ -120,31 +120,37 @@ const Portfolio = () => {
   const productsData = [
     {
       image: '/images/products/led-lights.png',
+      video: '/images/products/led-lights.mp4',
       title: t('portfolio.items.led.title'),
       description: t('portfolio.items.led.description'),
     },
     {
       image: '/images/products/wires-cables.png',
+      video: '/images/products/wires-cables.mp4',
       title: t('portfolio.items.wires.title'),
       description: t('portfolio.items.wires.description'),
     },
     {
       image: '/images/products/switch-boards.png',
+      video: '/images/products/switch-boards.mp4',
       title: t('portfolio.items.switches.title'),
       description: t('portfolio.items.switches.description'),
     },
     {
       image: '/images/products/fans.png',
+      video: '/images/products/fans.mp4',
       title: t('portfolio.items.fans.title'),
       description: t('portfolio.items.fans.description'),
     },
     {
       image: '/images/products/mcb.png',
+      video: '/images/products/mcb.mp4',
       title: t('portfolio.items.mcb.title'),
       description: t('portfolio.items.mcb.description'),
     },
     {
       image: '/images/products/pvc-pipes.png',
+      video: '/images/products/pvc-pipes.mp4',
       title: t('portfolio.items.pipes.title'),
       description: t('portfolio.items.pipes.description'),
     },
@@ -155,11 +161,13 @@ const Portfolio = () => {
     },
     {
       image: '/images/products/water-tanks.png',
+      video: '/images/products/water-tanks.mp4',
       title: t('portfolio.items.tanks.title'),
       description: t('portfolio.items.tanks.description'),
     },
     {
       image: '/images/products/agricultural-pumps.png',
+      video: '/images/products/agricultural-pumps.mp4',
       title: t('portfolio.items.agro_pumps.title'),
       description: t('portfolio.items.agro_pumps.description'),
     },
@@ -206,13 +214,25 @@ const Portfolio = () => {
                 <div key={index} className='flex-none w-[300px] sm:w-[380px] lg:w-[460px]'>
                   <div className='surface-card rounded-xl sm:rounded-2xl overflow-hidden h-full flex flex-col group'>
                     <div className='relative h-64 sm:h-80 w-full overflow-hidden'>
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes='(max-width: 640px) 300px, (max-width: 1024px) 380px, 460px'
-                        className='object-cover group-hover:scale-105 transition-transform duration-300'
-                      />
+                      {item.video ? (
+                        <video
+                          src={item.video}
+                          poster={item.image}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className='absolute inset-0 object-cover w-full h-full group-hover:scale-105 transition-transform duration-300'
+                        />
+                      ) : (
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          sizes='(max-width: 640px) 300px, (max-width: 1024px) 380px, 460px'
+                          className='object-cover group-hover:scale-105 transition-transform duration-300'
+                        />
+                      )}
                       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 via-black/40 to-transparent flex items-end p-4">
                         <span className="text-white/90 text-sm font-medium">@tamilelectricals</span>
                       </div>
