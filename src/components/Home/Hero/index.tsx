@@ -38,7 +38,7 @@ const Hero = () => {
 
   return (
     <section
-      className='relative pt-24 sm:pt-22 md:pt-20 lg:pt-30 pb-6 md:pb-5 lg:pb-6 overflow-hidden z-1'
+      className='relative pt-32 sm:pt-36 lg:pt-48 pb-12 lg:pb-20 overflow-hidden z-[1]'
       id='main-banner'>
       <div className='hero-surface' aria-hidden='true'>
         <span className='hero-orb hero-orb-left'></span>
@@ -55,7 +55,7 @@ const Hero = () => {
               </div>
             </div>
             <h1
-              className={`md:text-start text-center mb-3 sm:mb-4 leading-tight max-w-[640px] mx-auto md:mx-0 hero-headline ${headlineReady ? 'hero-headline-ready' : 'hero-headline-prepare'}`}>
+              className={`md:text-start text-center mb-3 sm:mb-4 leading-tight max-w-[800px] mx-auto md:mx-0 hero-headline ${headlineReady ? 'hero-headline-ready' : 'hero-headline-prepare'}`}>
               <span className='hero-line hero-line-kicker block text-muted/80 text-xs sm:text-sm lg:text-base font-semibold tracking-wide uppercase'>
                 {renderTownText()}
               </span>

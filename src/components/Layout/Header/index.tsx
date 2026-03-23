@@ -11,6 +11,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
 
 
+
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
@@ -58,52 +59,67 @@ const Header: React.FC = () => {
 
 
   return (
-    <header
-      className={`fixed top-0 z-40 w-full transition-all duration-300 backdrop-blur-md border-b border-white/5 ${showHeaderShadow ? 'shadow-[0_8px_30px_rgba(0,0,0,0.08)]' : 'shadow-[0_4px_16px_rgba(0,0,0,0.05)]'
-        }`}
-      style={{ backgroundColor: showHeaderBg ? 'var(--theme-header-bg)' : 'transparent' }}>
-      <div className='lg:py-0 py-2'>
-        <div className='container px-4 flex items-center justify-between py-3 gap-3'>
-          <Logo />
-          <nav className='hidden lg:flex grow items-center gap-8 justify-center'>
-            {headerData.map((item, index) => (
-              <HeaderLink key={index} item={item} />
-            ))}
-          </nav>
-          <div className='flex items-center gap-2 sm:gap-3'>
-            <Link
-              href={`tel:${storeInfo.phoneE164}`}
-              aria-label={t('header.call_short')}
-              className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm'>
-              <Icon icon='mdi:phone' className='text-sm sm:text-base' />
-              <span className='sm:hidden'>{t('header.call_short')}</span>
-              <span className='hidden sm:inline'>{storeInfo.phoneDisplay}</span>
-            </Link>
-            {/* Language only (no theme toggle) */}
-            <div className='hidden md:flex items-center'>
-              <LanguageToggle />
-            </div>
-            <Link
-              href={`https://wa.me/${storeInfo.whatsappNumber}`}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm'>
-              <Icon icon='mdi:whatsapp' className='text-base' />
-              <span className='hidden sm:inline'>{t('header.whatsapp_short')}</span>
-              <span className='sm:hidden'>WA</span>
-            </Link>
-            <button
-              onClick={() => setNavbarOpen(!navbarOpen)}
-              className='block lg:hidden p-2 rounded-lg'
-              aria-label='Toggle mobile menu'
-              aria-expanded={navbarOpen}
-              aria-controls='mobile-navigation'>
-              <span className='block w-6 h-0.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
-              <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
-              <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
-            </button>
+    <>
+      <div className={`fixed top-0 w-full z-40 flex justify-center transition-all duration-300 pointer-events-none ${sticky ? 'p-3 sm:p-5' : 'p-0'}`}>
+        <header
+          className={`relative w-full pointer-events-auto transition-all duration-300 ${sticky
+            ? 'max-w-6xl'
+            : 'border-b border-white/5 shadow-[0_4px_16px_rgba(0,0,0,0.05)] backdrop-blur-md'
+            }`}
+          style={{ backgroundColor: (!sticky && showHeaderBg) ? 'var(--theme-header-bg)' : 'transparent' }}>
+
+          <div className={`absolute inset-0 w-full h-full transition-opacity duration-300 pointer-events-none overflow-hidden ${sticky ? 'opacity-100 rounded-[2rem] z-0 shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-black/5 dark:border-white/10' : 'opacity-0 -z-10'}`}>
+            <div className="w-full h-full absolute inset-0 rounded-[2rem] backdrop-blur-md bg-white/80 dark:bg-neutral-950/80" />
           </div>
-        </div>
+
+          <div className='relative z-10 w-full lg:py-0 py-2'>
+            <div className={`container mx-auto flex items-center justify-between py-3 gap-3 ${sticky ? 'px-6 sm:px-8' : 'px-4'}`}>
+              <div className="flex-1">
+                <Logo />
+              </div>
+              <nav className='hidden lg:flex items-center gap-8 justify-center min-w-max'>
+                {headerData.map((item, index) => (
+                  <HeaderLink key={index} item={item} />
+                ))}
+              </nav>
+              <div className='flex-1 flex items-center justify-end gap-2 sm:gap-3'>
+                <Link
+                  href={`tel:${storeInfo.phoneE164}`}
+                  aria-label={t('header.call_short')}
+                  className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
+                  <Icon icon='mdi:phone' className='text-sm sm:text-base' />
+                  <span className='sm:hidden'>{t('header.call_short')}</span>
+                  <span className='hidden sm:inline'>{storeInfo.phoneDisplay}</span>
+                </Link>
+                {/* Language only (no theme toggle) */}
+                <div className='hidden md:flex items-center'>
+                  <LanguageToggle />
+                </div>
+                <Link
+                  href={`https://wa.me/${storeInfo.whatsappNumber}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
+                  <Icon icon='mdi:whatsapp' className='text-base' />
+                  <span className='hidden sm:inline'>{t('header.whatsapp_short')}</span>
+                </Link>
+                <button
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='block lg:hidden p-2 rounded-lg'
+                  aria-label='Toggle mobile menu'
+                  aria-expanded={navbarOpen}
+                  aria-controls='mobile-navigation'>
+                  <span className='block w-6 h-0.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+                  <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+                  <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <div className="pointer-events-auto">
         {navbarOpen && (
           <button
             type='button'
@@ -155,7 +171,7 @@ const Header: React.FC = () => {
                   backgroundColor: 'var(--theme-bg-secondary)',
                 }}>
                 <p className='text-[11px] font-semibold uppercase tracking-[0.1em] text-muted/70 mb-2'>
-                  Language
+                  {t('menu.language')}
                 </p>
                 <div className='flex items-center gap-2'>
                   <LanguageToggle />
@@ -191,7 +207,7 @@ const Header: React.FC = () => {
           </div>
         </aside>
       </div>
-    </header>
+    </>
   )
 }
 

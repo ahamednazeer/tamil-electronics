@@ -27,16 +27,16 @@ const ContactSection = () => {
     .map((day) => t(`days.${dayLabels[day]}`))
 
   return (
-    <section className='py-10 sm:py-12 lg:py-14' id='contact'>
+    <section className='py-16 sm:py-20 lg:py-24' id='contact'>
       <div className='container px-4 sm:px-6'>
-        <div className='text-center mb-6 sm:mb-8'>
-          <p className='text-primary text-sm sm:text-base mb-2'>
+        <div className='text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto'>
+          <p className='text-primary text-sm sm:text-base font-semibold tracking-wider uppercase mb-2 sm:mb-3'>
             {t('contact.subheading')}
           </p>
-          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3'>
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold tracking-tight mb-4 sm:mb-5 lg:mb-6'>
             {t('contact.title')}
           </h2>
-          <p className='text-muted/60 text-sm sm:text-base lg:text-lg'>
+          <p className='text-muted/80 text-base sm:text-lg lg:text-xl'>
             {t('contact.description')}
           </p>
         </div>

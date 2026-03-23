@@ -618,6 +618,92 @@
   }
 }
 
+/* ========================================
+   Uiverse Hover Card
+   ======================================== */
+.uiverse-card {
+  position: relative;
+  height: 100%;
+  min-height: 260px;
+  background: var(--theme-bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--theme-border) 80%, transparent);
+  box-shadow: var(--shadow-card);
+}
+
+.uiverse-card::before,
+.uiverse-card::after {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color-mix(in srgb, var(--theme-primary) 70%, #71717a);
+  transition: all 0.5s;
+  z-index: 1;
+}
+
+.uiverse-card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 24px 0 100%;
+}
+
+.uiverse-card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 24px;
+}
+
+.uiverse-card:hover::before,
+.uiverse-card:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  border-radius: 24px;
+  transition: all 0.5s;
+}
+
+.uiverse-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  transition: all 0.5s;
+}
+
+.uiverse-card:hover .uiverse-card-content {
+  opacity: 0;
+}
+
+.uiverse-card-details {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: all 0.5s;
+  text-align: center;
+}
+
+.uiverse-card:hover .uiverse-card-details {
+  opacity: 1;
+}
+
 /* Dark Theme (Default) */
 html,
 body {

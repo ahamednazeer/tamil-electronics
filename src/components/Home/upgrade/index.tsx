@@ -78,16 +78,16 @@ const Upgrade = () => {
   const displayStars = rating ? Math.round(rating) : 5
 
   return (
-    <section className='lg:py-10 md:py-8 py-6' id='reviews'>
+    <section className='py-16 sm:py-20 lg:py-24' id='reviews'>
       <div className='container px-4 sm:px-6'>
-        <div className='text-center mb-4 sm:mb-6 lg:mb-7'>
-          <p className='text-primary text-lg sm:text-xl lg:text-28 mb-2 sm:mb-3'>
+        <div className='text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto'>
+          <p className='text-primary text-sm sm:text-base font-semibold tracking-wider uppercase mb-2 sm:mb-3'>
             {t('reviews.subheading')}
           </p>
-          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-5'>
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold tracking-tight mb-4 sm:mb-5 lg:mb-6'>
             {t('reviews.title')}
           </h2>
-          <p className='text-muted/60 text-sm sm:text-base lg:text-lg'>
+          <p className='text-muted/80 text-base sm:text-lg lg:text-xl'>
             {t('reviews.description')}
           </p>
           {rating && (
@@ -121,11 +121,6 @@ const Upgrade = () => {
                 {t('reviews.view_on_google')}
               </Link>
             </div>
-          )}
-          {showFallback && (
-            <p className='text-muted/60 text-xs sm:text-sm mt-3'>
-              {t('reviews.fallback_note')}
-            </p>
           )}
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 reviews-spotlight-grid'>

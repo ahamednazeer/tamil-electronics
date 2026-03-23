@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { HeaderItem } from "../../../../types/menu";
+import { useLanguage } from '@/context/LanguageContext';
 
 type MobileHeaderLinkProps = {
   item: HeaderItem;
@@ -8,6 +9,7 @@ type MobileHeaderLinkProps = {
 }
 
 const MobileHeaderLink: React.FC<MobileHeaderLinkProps> = ({ item, onNavigate }) => {
+  const { t } = useLanguage();
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
   const handleToggle = () => {
@@ -28,7 +30,7 @@ const MobileHeaderLink: React.FC<MobileHeaderLinkProps> = ({ item, onNavigate })
         }}
         className="flex items-center justify-between w-full rounded-xl px-3 py-3 text-lg font-semibold text-midnight_text dark:text-white hover:text-primary hover:bg-primary/10 transition-colors focus:outline-hidden"
       >
-        {item.label}
+        {t(`menu.${item.label.toLowerCase()}` as any)}
         {item.submenu && (
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -54,7 +54,7 @@ const CardSlider = () => {
       <Slider {...settings}>
         {brandsData.map((item, index) => (
           <div key={index} className='px-1 sm:px-3'>
-            <div className='surface-card px-2 sm:px-4 lg:px-6 py-2 sm:py-4 lg:py-5 rounded-lg sm:rounded-xl flex items-center justify-center h-12 sm:h-20 lg:h-24'>
+            <div className='px-2 sm:px-4 lg:px-6 py-2 sm:py-4 lg:py-5 flex items-center justify-center h-12 sm:h-20 lg:h-24'>
               <Image
                 src={item.logo}
                 alt={item.name}

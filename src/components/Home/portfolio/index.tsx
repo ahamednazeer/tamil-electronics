@@ -171,22 +171,22 @@ const Portfolio = () => {
   ]
 
   return (
-    <section ref={sectionRef} className='lg:pt-8 md:pt-6 sm:pt-5 pt-5 min-h-0 overflow-hidden' id='brands'>
+    <section ref={sectionRef} className='py-16 sm:py-20 lg:py-24 min-h-0 overflow-hidden' id='brands'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}
           initial={{ y: -50, opacity: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.3 }}
-          className='text-center mb-4 sm:mb-6 lg:mb-8'>
-          <p className='text-lg sm:text-xl lg:text-28 text-muted mb-2 sm:mb-4'>
-            {t('portfolio.subheading_start')} <span className='text-primary'>{t('portfolio.subheading_highlight')}</span>
+          className='text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto'>
+          <p className='text-primary text-sm sm:text-base font-semibold tracking-wider uppercase mb-2 sm:mb-3'>
+            {t('portfolio.subheading_start')} {t('portfolio.subheading_highlight')}
           </p>
-          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4 font-medium px-2'>
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold tracking-tight mb-4 sm:mb-5 lg:mb-6 px-2'>
             {t('portfolio.title_start')}{' '}
             <span className='text-primary'>{t('portfolio.title_highlight')}</span>
           </h2>
-          <p className='text-muted/60 text-sm sm:text-base lg:text-lg px-4'>
+          <p className='text-muted/80 text-base sm:text-lg lg:text-xl px-4'>
             {t('portfolio.description')}
           </p>
         </motion.div>
@@ -200,7 +200,7 @@ const Portfolio = () => {
           <div ref={viewportRef} className='overflow-x-auto overflow-y-hidden no-scrollbar'>
             <div
               ref={stripRef}
-              className='flex items-stretch gap-4 sm:gap-6 lg:gap-8 pb-6 sm:pb-8 will-change-transform'
+              className='flex items-stretch gap-4 sm:gap-6 lg:gap-8 will-change-transform'
             >
               {productsData.map((item, index) => (
                 <div key={index} className='flex-none w-[300px] sm:w-[380px] lg:w-[460px]'>
@@ -218,7 +218,7 @@ const Portfolio = () => {
                       </div>
                     </div>
                     <div className='p-4 sm:p-5'>
-                      <h4 className='text-theme text-lg sm:text-xl font-bold mb-2 sm:mb-3'>
+                      <h4 className='text-theme text-lg sm:text-xl font-bold mb-2 sm:mb-3 whitespace-normal break-words'>
                         {item.title}
                       </h4>
                     </div>

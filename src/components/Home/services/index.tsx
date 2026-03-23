@@ -114,16 +114,16 @@ const LocalServices = () => {
   ]
 
   return (
-    <section ref={sectionRef} className='py-6 sm:py-8 lg:py-10'>
+    <section ref={sectionRef} className='py-16 sm:py-20 lg:py-24'>
       <div className='container px-4 sm:px-6'>
-        <div className='text-center mb-4 sm:mb-6 lg:mb-7'>
-          <p className='text-muted text-sm sm:text-base mb-2'>
+        <div className='text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto'>
+          <p className='text-primary text-sm sm:text-base font-semibold tracking-wider uppercase mb-2 sm:mb-3'>
             {t('services.subheading')}
           </p>
-          <h2 className='text-theme text-2xl sm:text-3xl lg:text-4xl font-medium mb-3 sm:mb-4'>
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold tracking-tight mb-4 sm:mb-5 lg:mb-6'>
             {t('services.title')}
           </h2>
-          <p className='text-muted/60 text-sm sm:text-base lg:text-lg'>
+          <p className='text-muted/80 text-base sm:text-lg lg:text-xl'>
             {t('services.description')}
           </p>
         </div>

@@ -144,7 +144,7 @@
     "about": {
         "subheading_start": "About",
         "subheading_highlight": "Tamil Electricals",
-        "title": "Your trusted local electrical shop serving for over 10 years.",
+        "title": "Your trusted local electrical shop serving since last year.",
         "description": "Tamil Electricals provides quality wires, switches, LED lights, fans, MCBs, and all types of electrical materials for homes, shops, and industries. We are committed to offering genuine products at competitive prices with excellent customer service.",
         "features": [
             {
@@ -161,7 +161,7 @@
             },
             {
                 "title": "Local Trust",
-                "text": "Serving the community for over 10 years."
+                "text": "Serving the community for the past year."
             }
         ]
     },
@@ -234,5 +234,14 @@
         "thu": "Thu",
         "fri": "Fri",
         "sat": "Sat"
+    },
+    "menu": {
+        "home": "Home",
+        "products": "Products",
+        "brands": "Brands",
+        "reviews": "Reviews",
+        "about": "About",
+        "contact": "Contact",
+        "language": "Language"
     }
 }

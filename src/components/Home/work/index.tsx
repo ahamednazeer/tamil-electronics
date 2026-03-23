@@ -16,10 +16,10 @@ const Work = () => {
     { type: 'image', value: '/images/perks/switch.png', alt: 'Switch' },
     { type: 'image', value: '/images/perks/bulb.png', alt: 'Bulb' },
     { type: 'image', value: '/images/perks/fan.png', alt: 'Fan' },
-    { type: 'icon', value: 'mdi:pipe', alt: 'Pipes' },
-    { type: 'icon', value: 'mdi:water-pump', alt: 'Pump' },
-    { type: 'icon', value: 'mdi:power-plug', alt: 'Plug' },
-    { type: 'icon', value: 'mdi:cable-data', alt: 'Cables' },
+    { type: 'image', value: '/images/perks/pipe.png', alt: 'Pipes' },
+    { type: 'image', value: '/images/perks/pump.png', alt: 'Pump' },
+    { type: 'image', value: '/images/perks/plug.png', alt: 'Plug' },
+    { type: 'image', value: '/images/perks/cable.png', alt: 'Cables' },
   ]
 
   useEffect(() => {
@@ -80,17 +80,17 @@ const Work = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className='py-10 sm:py-12 lg:py-14 w-full overflow-hidden' id='products'>
+    <section ref={sectionRef} className='py-16 sm:py-20 lg:py-24 w-full overflow-hidden' id='products'>
       <div className='container px-4 sm:px-6 mx-auto'>
         <div className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
           {/* Left Content */}
           <div className='lg:col-span-6 col-span-12'>
-            <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold leading-tight mb-6'>
+            <h2 className='text-3xl sm:text-4xl lg:text-5xl text-theme font-bold tracking-tight mb-4 sm:mb-5 lg:mb-6'>
               {t('work.title_start')}{' '}
               <span className='text-primary'>{t('work.title_highlight')}</span>{' '}
               {t('work.title_end')}
             </h2>
-            <p className='text-muted text-base lg:text-lg mb-8 max-w-lg'>
+            <p className='text-muted/80 text-base sm:text-lg lg:text-xl mb-8 sm:mb-10 max-w-xl'>
               {t('work.description')}
             </p>
 

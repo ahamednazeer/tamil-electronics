@@ -61,13 +61,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
-        {/* Preload LCP image for faster rendering */}
-        <link
-          rel='preload'
-          as='image'
-          href='/images/hero/banner-image.webp'
-          fetchPriority='high'
-        />
+
         <link rel='sitemap' type='application/xml' href='/sitemap.xml' />
         {/* next/font/google self-hosts; no external font preconnects needed */}
         <script

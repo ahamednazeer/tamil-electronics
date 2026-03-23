@@ -3,8 +3,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { HeaderItem } from "../../../../types/menu";
 import { usePathname } from "next/navigation";
+import { useLanguage } from '@/context/LanguageContext';
 
 const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
+  const { t } = useLanguage();
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const path = usePathname();
   const handleMouseEnter = () => {
@@ -28,7 +30,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
           path === item.href ? "text-primary " : " text-muted "
         }`}
       >
-        {item.label}
+        {t(`menu.${item.label.toLowerCase()}` as any)}
         {item.submenu && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
