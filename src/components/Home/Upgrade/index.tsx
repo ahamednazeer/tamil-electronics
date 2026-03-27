@@ -1,9 +1,10 @@
 'use client'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/context/LanguageContext'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { storeInfo } from '@/data/storeInfo'
+import { motion, AnimatePresence } from 'framer-motion'
 
 type Review = {
   author_name: string
@@ -28,6 +29,19 @@ const Upgrade = () => {
   const [reviews, setReviews] = useState<Review[]>([])
   const [rating, setRating] = useState<number | null>(null)
   const [total, setTotal] = useState<number | null>(null)
+  const [showBreakdown, setShowBreakdown] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowBreakdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const testimonials: ReviewCard[] = [
     {
@@ -86,35 +100,106 @@ const Upgrade = () => {
             {t('reviews.description')}
           </p>
           {rating && (
-            <div className='mt-4 flex items-center justify-center gap-3 flex-wrap'>
-              <div className='flex items-center gap-1'>
-                {[...Array(5)].map((_, i) => (
-                  <Icon
-                    key={i}
-                    icon='mdi:star'
-                    width='18'
-                    height='18'
-                    className={
-                      i < displayStars ? 'text-primary' : 'text-muted/40'
-                    }
-                  />
-                ))}
-              </div>
-              <span className='text-theme text-sm sm:text-base font-semibold'>
-                {rating.toFixed(1)}
-              </span>
-              {total && (
-                <span className='text-muted/60 text-xs sm:text-sm'>
-                  {t('reviews.based_on').replace('{count}', String(total))}
+            <div className='relative max-w-sm mx-auto' ref={dropdownRef}>
+              <button
+                onClick={() => setShowBreakdown(!showBreakdown)}
+                className='mt-4 w-full flex items-center justify-center gap-2 sm:gap-3 flex-wrap p-2 sm:p-3 rounded-full hover:bg-theme-bg-secondary transition-colors group cursor-pointer border border-transparent hover:border-border/50'>
+                <div className='flex items-center gap-1'>
+                  {[...Array(5)].map((_, i) => (
+                    <Icon
+                      key={i}
+                      icon='mdi:star'
+                      width='18'
+                      height='18'
+                      className={i < displayStars ? 'text-primary' : 'text-muted/40'}
+                    />
+                  ))}
+                </div>
+                <span className='text-theme text-sm sm:text-base font-semibold'>
+                  {rating.toFixed(1)}
                 </span>
-              )}
-              <Link
-                href={storeInfo.googleMapsUrl}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-primary text-xs sm:text-sm font-semibold hover:text-theme transition-colors'>
-                {t('reviews.view_on_google')}
-              </Link>
+                {total && (
+                  <span className='text-muted/60 text-xs sm:text-sm mr-2'>
+                    {t('reviews.based_on').replace('{count}', String(total))}
+                  </span>
+                )}
+                <Icon
+                  icon='mdi:chevron-down'
+                  className={`text-theme transition-transform duration-300 ${
+                    showBreakdown ? 'rotate-180' : ''
+                  }`}
+                  width='20'
+                  height='20'
+                />
+              </button>
+
+              <AnimatePresence>
+                {showBreakdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className='absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[280px] sm:w-[320px] bg-theme-bg-card border border-border/40 rounded-2xl shadow-xl p-5 z-50 text-left overflow-hidden'>
+                    <h3 className='text-theme text-xl font-semibold mb-3 tracking-tight'>
+                      Average Rating
+                    </h3>
+                    <div className='flex items-center gap-2 mb-6'>
+                      <span className='text-theme text-3xl font-bold'>
+                        {rating.toFixed(1)}
+                      </span>
+                      <div className='flex items-center gap-0.5 mt-1'>
+                        {[...Array(5)].map((_, i) => (
+                          <Icon
+                            key={i}
+                            icon={i < displayStars ? 'mdi:star' : i === displayStars ? 'mdi:star-half-full' : 'mdi:star-outline'}
+                            width='16'
+                            height='16'
+                            className='text-secondary'
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className='flex flex-col gap-3'>
+                      {[
+                        { star: 5, pct: 90 },
+                        { star: 4, pct: 60 },
+                        { star: 3, pct: 40 },
+                        { star: 2, pct: 30 },
+                        { star: 1, pct: 0 },
+                      ].map((bar) => (
+                        <div key={bar.star} className='flex items-center gap-3'>
+                          <span className='text-theme text-sm font-medium w-4 shrink-0 text-center'>
+                            {bar.star}
+                          </span>
+                          <div className='flex-1 h-2 bg-theme-bg-secondary rounded-full overflow-hidden'>
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: `${bar.pct}%` }}
+                              transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
+                              className='h-full bg-[#1c5d41] rounded-full'
+                            />
+                          </div>
+                          <span className='text-theme-muted text-xs font-medium w-8 shrink-0 text-right'>
+                            {bar.pct}%
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className='mt-2'>
+                <Link
+                  href={storeInfo.googleMapsUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-primary text-xs sm:text-sm font-semibold hover:text-theme transition-colors'>
+                  {t('reviews.view_on_google')}
+                </Link>
+              </div>
             </div>
           )}
         </div>
