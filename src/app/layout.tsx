@@ -11,6 +11,7 @@ import { LanguageProvider } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton'
 import Script from 'next/script'
+import { LenisProvider } from '@/components/common/ReactLenis'
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -133,16 +134,18 @@ export default function RootLayout({
           defaultTheme='light'
           storageKey='theme-v2'
           disableTransitionOnChange>
-          <LanguageProvider>
-            <Aoscompo>
-              <Header />
-              <ParticlesBackgroundWrapper />
-              {children}
-              <Footer />
-            </Aoscompo>
-            <FloatingWhatsAppButton />
-            <ScrollToTop />
-          </LanguageProvider>
+          <LenisProvider>
+            <LanguageProvider>
+              <Aoscompo>
+                <Header />
+                <ParticlesBackgroundWrapper />
+                {children}
+                <Footer />
+              </Aoscompo>
+              <FloatingWhatsAppButton />
+              <ScrollToTop />
+            </LanguageProvider>
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>
