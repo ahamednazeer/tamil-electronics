@@ -78,8 +78,9 @@ const Footer: FC = () => {
                 <li key={index} className='pb-2 sm:pb-3 lg:pb-4'>
                   <Link
                     href={item.href}
-                    className='text-theme hover:text-primary text-sm sm:text-base'>
+                    className='group relative inline-flex text-theme hover:text-primary text-sm sm:text-base transition-colors'>
                     {t(`menu.${item.label.toLowerCase()}`)}
+                    <span className='absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 w-0 group-hover:w-full' />
                   </Link>
                 </li>
               ))}

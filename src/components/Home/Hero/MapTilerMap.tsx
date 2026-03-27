@@ -55,6 +55,7 @@ const MapTilerMap = () => {
   const mapRef = useRef<MapInstance | null>(null)
   const { resolvedTheme } = useTheme()
   const [shouldLoad, setShouldLoad] = useState(false)
+  const [mapLoaded, setMapLoaded] = useState(false)
   const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY
   const maptilerStyle = process.env.NEXT_PUBLIC_MAPTILER_STYLE || 'basic-v2'
   const maptilerStyleDark = process.env.NEXT_PUBLIC_MAPTILER_STYLE_DARK || 'dataviz-dark'
@@ -107,6 +108,7 @@ const MapTilerMap = () => {
 
       map.on('load', () => {
         if (disposed) return
+        setMapLoaded(true)
         if (!map.getSource('mt-buildings')) {
           map.addSource('mt-buildings', {
             type: 'vector',
@@ -197,7 +199,16 @@ const MapTilerMap = () => {
     )
   }
 
-  return <div ref={containerRef} className='hero-map-canvas' />
+  return (
+    <div className="relative w-full h-full">
+      {!mapLoaded && (
+        <div className="absolute inset-0 z-10 bg-gray-200 dark:bg-gray-800 animate-pulse flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 dark:via-white/10 mx-[-100%] animate-[shimmer_2s_infinite]" />
+        </div>
+      )}
+      <div ref={containerRef} className='hero-map-canvas' />
+    </div>
+  )
 }
 
 export default MapTilerMap

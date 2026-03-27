@@ -20,7 +20,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
 
   return (
     <div
-      className="relative"
+      className="relative group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -30,8 +30,15 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
           path === item.href ? "text-primary " : " text-muted "
         }`}
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        {t(`menu.${item.label.toLowerCase()}` as any)}
+        <span className="relative">
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          {t(`menu.${item.label.toLowerCase()}` as any)}
+          <span
+            className={`absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 ${
+              path === item.href ? "w-full" : "w-0 group-hover:w-full"
+            }`}
+          />
+        </span>
         {item.submenu && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
