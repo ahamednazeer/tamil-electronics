@@ -19,7 +19,7 @@
         "newly_started": "Newly Opened",
         "shop": "Local Shop",
         "now_open": "Virudhachalam",
-        "visit_us": "College Nagar",
+        "visit_us": "805/A, Junction Road",
         "open_map": "Open in Google Maps",
         "trusted_local": "Trusted Local Shop"
     },
@@ -45,24 +45,31 @@
         "description": "Quick guidance and ready stock for homes and small businesses.",
         "items": {
             "support": {
-                "title": "Local Guidance",
-                "description": "Friendly help for the right product"
+                "title": "Local Guidance"
             },
-            "wiring": {
-                "title": "Wiring & Switches",
-                "description": "Wires, sockets, MCB, DB"
+            "lights": {
+                "title": "Lights"
             },
-            "lighting": {
-                "title": "Lights & Fans",
-                "description": "LED, bulbs, ceiling and exhaust fans"
+            "fans": {
+                "title": "Fans"
             },
             "pipes": {
-                "title": "Pipes & Fittings",
-                "description": "PVC, UPVC, CPVC and accessories"
+                "title": "Pipes"
+            },
+            "fittings": {
+                "title": "Fittings"
             },
             "pumps": {
-                "title": "Pumps & Stabilizers",
-                "description": "Water pumps, stabilizers, safety items"
+                "title": "Pumps"
+            },
+            "stabilizers": {
+                "title": "Stabilizers"
+            },
+            "wiring": {
+                "title": "Wiring"
+            },
+            "switches": {
+                "title": "Switches"
             }
         }
     },
@@ -144,8 +151,8 @@
     "about": {
         "subheading_start": "About",
         "subheading_highlight": "Tamil Electricals",
-        "title": "Your trusted local electrical shop serving since last year.",
-        "description": "Tamil Electricals provides quality wires, switches, LED lights, fans, MCBs, and all types of electrical materials for homes, shops, and industries. We are committed to offering genuine products at competitive prices with excellent customer service.",
+        "title": "Quality electrical products. Honest prices. Trusted advice.",
+        "description": "Wires, switches, LED lights, fans, MCBs & more — everything your home, shop, or factory needs, all under one roof.",
         "features": [
             {
                 "title": "Quality Products",
@@ -167,13 +174,16 @@
     },
     "footer": {
         "trusted_partner": "Your Local Electrical & Electronics Shop",
-        "now_open_desc": "Newly opened in College Nagar, Virudhachalam.",
+        "now_open_desc": "Newly opened in 805/A, Junction Road, Virudhachalam.",
         "quick_links": "Quick Links",
         "information": "Information",
         "contact_us": "Contact Us",
         "shop_address": "Shop Address",
         "phone": "Phone",
-        "working_hours": "Working Hours"
+        "working_hours": "Working Hours",
+        "info_brands": "All Brands Available",
+        "info_genuine": "100% Genuine Products",
+        "info_wholesale": "Wholesale & Retail"
     },
     "header": {
         "call_short": "Call Now",

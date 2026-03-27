@@ -78,7 +78,7 @@ const Upgrade = () => {
   const displayStars = rating ? Math.round(rating) : 5
 
   return (
-    <section className='py-16 sm:py-20 lg:py-24' id='reviews'>
+    <section className='py-10 sm:py-14 lg:py-16' id='reviews'>
       <div className='container px-4 sm:px-6'>
         <div className='text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto'>
           <p className='text-primary text-sm sm:text-base font-semibold tracking-wider uppercase mb-2 sm:mb-3'>

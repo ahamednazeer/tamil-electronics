@@ -88,33 +88,50 @@ const LocalServices = () => {
   const services = [
     {
       title: t('services.items.support.title'),
-      description: t('services.items.support.description'),
       href: '#contact',
     },
     {
-      title: t('services.items.lighting.title'),
-      description: t('services.items.lighting.description'),
-      href: '#products',
+      title: t('services.items.lights.title'),
+      serviceKey: 'lights',
+    },
+    {
+      title: t('services.items.fans.title'),
+      serviceKey: 'fans',
     },
     {
       title: t('services.items.pipes.title'),
-      description: t('services.items.pipes.description'),
-      href: '#products',
+      serviceKey: 'pipes',
+    },
+    {
+      title: t('services.items.fittings.title'),
+      serviceKey: 'fittings',
     },
     {
       title: t('services.items.pumps.title'),
-      description: t('services.items.pumps.description'),
-      href: '#products',
+      serviceKey: 'pumps',
+    },
+    {
+      title: t('services.items.stabilizers.title'),
+      serviceKey: 'stabilizers',
     },
     {
       title: t('services.items.wiring.title'),
-      description: t('services.items.wiring.description'),
-      href: '#products',
+      serviceKey: 'wiring',
     },
+    {
+      title: t('services.items.switches.title'),
+      serviceKey: 'switches',
+    }
   ]
 
+  const handleServiceClick = (serviceKey: string) => {
+    window.dispatchEvent(
+      new CustomEvent('service-filter', { detail: { service: serviceKey } })
+    )
+  }
+
   return (
-    <section ref={sectionRef} className='py-16 sm:py-20 lg:py-24'>
+    <section ref={sectionRef} className='pt-8 sm:pt-10 lg:pt-12 pb-10 sm:pb-14 lg:pb-16'>
       <div className='container px-4 sm:px-6'>
         <div className='text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto'>
           <p className='text-primary text-sm sm:text-base font-semibold tracking-wider uppercase mb-2 sm:mb-3'>
@@ -140,14 +157,25 @@ const LocalServices = () => {
             className='flex items-center gap-3 sm:gap-6 px-3 sm:px-8 lg:px-10 py-3 sm:py-5 will-change-transform justify-start lg:justify-center'
           >
             {services.map((item, index) => (
-              <div key={index} className='flex shrink-0 items-center gap-3 sm:gap-4 md:min-w-[200px]'>
-                <Link
-                  href={item.href}
-                  className='flex items-center gap-3 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors'>
-                  <p className='text-theme text-base sm:text-lg font-semibold'>
-                    {item.title}
-                  </p>
-                </Link>
+              <div key={index} className='flex shrink-0 items-center gap-3 sm:gap-4'>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className='flex items-center gap-3 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors'>
+                    <p className='text-theme text-base sm:text-lg font-semibold'>
+                      {item.title}
+                    </p>
+                  </Link>
+                ) : (
+                  <button
+                    data-service-link
+                    onClick={() => item.serviceKey && handleServiceClick(item.serviceKey)}
+                    className='flex items-center gap-3 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full border border-transparent hover:border-primary/50 hover:bg-white/5 transition-colors cursor-pointer'>
+                    <p className='text-theme text-base sm:text-lg font-semibold'>
+                      {item.title}
+                    </p>
+                  </button>
+                )}
                 {index < services.length - 1 && (
                   <div
                     className='hidden sm:block h-10 w-px ml-4'

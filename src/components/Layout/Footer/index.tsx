@@ -2,7 +2,7 @@
 import React, { FC } from 'react'
 import Link from 'next/link'
 import { headerData } from '../Header/Navigation/menuData'
-import { footerlabels } from '@/data/staticContent'
+
 import { Icon } from '@iconify/react'
 import Logo from '../Header/Logo'
 import { useLanguage } from '@/context/LanguageContext'
@@ -72,14 +72,14 @@ const Footer: FC = () => {
 
           {/* Quick Links */}
           <div className='col-span-1 md:col-span-3 lg:col-span-2'>
-            <h4 className='text-theme mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl'>{t('footer.quick_links')}</h4>
+            <h4 className='text-theme mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl whitespace-nowrap'>{t('footer.quick_links')}</h4>
             <ul>
               {headerData.map((item, index) => (
                 <li key={index} className='pb-2 sm:pb-3 lg:pb-4'>
                   <Link
                     href={item.href}
                     className='text-theme hover:text-primary text-sm sm:text-base'>
-                    {item.label}
+                    {t(`menu.${item.label.toLowerCase()}`)}
                   </Link>
                 </li>
               ))}
@@ -88,15 +88,23 @@ const Footer: FC = () => {
 
           {/* Information */}
           <div className='col-span-1 md:col-span-3 lg:col-span-2'>
-            <h4 className='text-theme mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl'>{t('footer.information')}</h4>
+            <h4 className='text-theme mb-3 sm:mb-4 font-medium text-base sm:text-lg lg:text-xl whitespace-nowrap'>{t('footer.information')}</h4>
             <ul>
-              {footerlabels.map((item, index) => (
-                <li key={index} className='pb-2 sm:pb-3 lg:pb-4'>
-                  <span className='text-muted/80 text-sm sm:text-base'>
-                    {item.label}
-                  </span>
-                </li>
-              ))}
+              <li className='pb-2 sm:pb-3 lg:pb-4'>
+                <span className='text-muted/80 text-sm sm:text-base'>
+                  {t('footer.info_brands')}
+                </span>
+              </li>
+              <li className='pb-2 sm:pb-3 lg:pb-4'>
+                <span className='text-muted/80 text-sm sm:text-base'>
+                  {t('footer.info_genuine')}
+                </span>
+              </li>
+              <li className='pb-2 sm:pb-3 lg:pb-4'>
+                <span className='text-muted/80 text-sm sm:text-base'>
+                  {t('footer.info_wholesale')}
+                </span>
+              </li>
             </ul>
           </div>
 

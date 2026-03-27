@@ -619,13 +619,13 @@
 }
 
 /* ========================================
-   Uiverse Hover Card
+   Uiverse Hover Card (About Tamil Electricals)
    ======================================== */
 .uiverse-card {
   position: relative;
   height: 100%;
   min-height: 260px;
-  background: var(--theme-bg-card);
+  background: linear-gradient(180deg, var(--theme-bg-card) 0%, color-mix(in srgb, var(--theme-bg-card) 98%, var(--theme-primary) 2%) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -633,43 +633,60 @@
   border-radius: 24px;
   cursor: pointer;
   border: 1px solid color-mix(in srgb, var(--theme-border) 80%, transparent);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 4px 6px -1px color-mix(in srgb, var(--theme-text) 5%, transparent), 
+              0 2px 4px -2px color-mix(in srgb, var(--theme-text) 5%, transparent), 
+              inset 0 1px 0 0 color-mix(in srgb, var(--theme-text) 5%, transparent);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-.uiverse-card::before,
-.uiverse-card::after {
+[data-theme='light'] .uiverse-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fcfdfd 100%);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.uiverse-card-content .icon-wrap {
+  position: relative;
+  z-index: 10;
+}
+
+.uiverse-card-content .icon-wrap::before {
+  content: '';
   position: absolute;
-  content: "";
-  width: 0%;
-  height: 0%;
+  inset: -12px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary) 15%, transparent) 0%, transparent 60%);
+  border-radius: 50%;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.uiverse-card:hover .uiverse-card-content .icon-wrap::before {
   opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: color-mix(in srgb, var(--theme-primary) 70%, #71717a);
-  transition: all 0.5s;
-  z-index: 1;
+}
+
+.uiverse-card:hover,
+.uiverse-card:focus,
+.uiverse-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.15);
+  border-color: color-mix(in srgb, var(--theme-primary) 30%, transparent);
 }
 
 .uiverse-card::before {
-  top: 0;
-  right: 0;
-  border-radius: 0 24px 0 100%;
-}
-
-.uiverse-card::after {
-  bottom: 0;
-  left: 0;
-  border-radius: 0 100% 0 24px;
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: color-mix(in srgb, var(--theme-primary) 82%, black);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
 }
 
 .uiverse-card:hover::before,
-.uiverse-card:hover::after {
-  width: 100%;
-  height: 100%;
+.uiverse-card:focus::before,
+.uiverse-card:focus-within::before {
   opacity: 1;
-  border-radius: 24px;
-  transition: all 0.5s;
 }
 
 .uiverse-card-content {
@@ -679,11 +696,14 @@
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  transition: all 0.5s;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.uiverse-card:hover .uiverse-card-content {
+.uiverse-card:hover .uiverse-card-content,
+.uiverse-card:focus .uiverse-card-content,
+.uiverse-card:focus-within .uiverse-card-content {
   opacity: 0;
+  transform: scale(0.95);
 }
 
 .uiverse-card-details {
@@ -696,12 +716,16 @@
   justify-content: center;
   padding: 1.5rem;
   opacity: 0;
-  transition: all 0.5s;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
 }
 
-.uiverse-card:hover .uiverse-card-details {
+.uiverse-card:hover .uiverse-card-details,
+.uiverse-card:focus .uiverse-card-details,
+.uiverse-card:focus-within .uiverse-card-details {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Dark Theme (Default) */

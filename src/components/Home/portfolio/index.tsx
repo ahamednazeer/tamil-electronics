@@ -156,6 +156,7 @@ const Portfolio = () => {
     },
     {
       image: '/images/products/bathroom-fittings.png',
+      video: '/images/products/bathroom-fittings.mp4',
       title: t('portfolio.items.fittings.title'),
       description: t('portfolio.items.fittings.description'),
     },
@@ -173,13 +174,14 @@ const Portfolio = () => {
     },
     {
       image: '/images/products/water-heaters.png',
+      video: '/images/products/water-heaters.mp4',
       title: t('portfolio.items.heaters.title'),
       description: t('portfolio.items.heaters.description'),
     },
   ]
 
   return (
-    <section ref={sectionRef} className='py-16 sm:py-20 lg:py-24 min-h-0 overflow-hidden' id='brands'>
+    <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16 min-h-0 overflow-hidden' id='brands'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}
@@ -249,7 +251,6 @@ const Portfolio = () => {
           </div>
         </motion.div>
       </div>
-
     </section>
   )
 }

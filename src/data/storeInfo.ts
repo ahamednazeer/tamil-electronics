@@ -11,7 +11,7 @@ export const storeInfo = {
   phoneE164: '+919363897989',
   whatsappNumber: '919363897989',
   address: {
-    streetAddress: '805A, Junction Rd, College Nagar',
+    streetAddress: '805A, Junction Rd, 805/A, Junction Road',
     addressLocality: 'Virudhachalam',
     addressRegion: 'Tamil Nadu',
     postalCode: '606001',

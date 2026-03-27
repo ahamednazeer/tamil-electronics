@@ -80,7 +80,7 @@ const Work = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className='py-16 sm:py-20 lg:py-24 w-full overflow-hidden' id='products'>
+    <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16 w-full overflow-hidden' id='products'>
       <div className='container px-4 sm:px-6 mx-auto'>
         <div className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
           {/* Left Content */}
@@ -120,7 +120,7 @@ const Work = () => {
                 {/* Main Circular Image */}
                 <div className='absolute inset-0 rounded-full border-8 border-white shadow-2xl overflow-hidden'>
                   <Image
-                    src='/images/work/img-work-with-us.png'
+                    src='/images/work/img-work-with-us-v2.png'
                     alt='Electrical Work'
                     fill
                     sizes='(max-width: 640px) 280px, 400px'

@@ -61,7 +61,7 @@ const Hero = () => {
               </span>
               {language === 'en' ? (
                 <span className='hero-line hero-line-main block font-extrabold text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'>
-                  <span className='text-primary'>Electricals &amp;</span>{' '}
+                  <span className='text-primary block md:inline'>Electricals &amp;</span>{' '}
                   <LayoutTextFlip
                     simple
                     words={['Electronics', 'Plumbing']}
@@ -76,8 +76,14 @@ const Hero = () => {
                     ? 'text-[2rem] sm:text-[2.45rem] md:text-[2.85rem] lg:text-[3.1rem] leading-[1.12]'
                     : 'text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'
                     }`}>
-                  <span className='text-primary'>{t('hero.electrical')}</span>{' '}
-                  <span className='text-theme'>{t('hero.materials')}</span>
+                  <span className='text-primary block md:inline'>எலக்ட்ரிக்கல் &amp;</span>{' '}
+                  <LayoutTextFlip
+                    simple
+                    words={['எலெக்ட்ரானிக்ஸ்', 'பிளம்பிங்']}
+                    duration={3000}
+                    className='text-primary'
+                  />{' '}
+                  <span className='text-theme'>மையம்</span>
                 </span>
               )}
               <span className='hero-line hero-line-sub block text-sm sm:text-base text-muted mt-2'>
