@@ -3,16 +3,16 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
 const portfolioImages = [
-    '/images/portfolio/image1.jpeg',
-    '/images/portfolio/image2.jpeg',
-    '/images/portfolio/image3.jpeg',
-    '/images/portfolio/image4.jpeg',
-    '/images/portfolio/image5.jpeg',
-    '/images/portfolio/image6.jpeg',
-    '/images/portfolio/image7.jpeg',
-    '/images/portfolio/image8.jpeg',
-    '/images/portfolio/image9.jpeg',
-    '/images/portfolio/image10.jpeg',
+    '/images/portfolio/image1.webp',
+    '/images/portfolio/image2.webp',
+    '/images/portfolio/image3.webp',
+    '/images/portfolio/image4.webp',
+    '/images/portfolio/image5.webp',
+    '/images/portfolio/image6.webp',
+    '/images/portfolio/image7.webp',
+    '/images/portfolio/image8.webp',
+    '/images/portfolio/image9.webp',
+    '/images/portfolio/image10.webp',
 ];
 
 const PortfolioSlider = () => {
@@ -43,6 +43,7 @@ const PortfolioSlider = () => {
                                     src={src}
                                     alt={`Portfolio Image ${index % portfolioImages.length + 1}`}
                                     fill
+                                    loading='lazy'
                                     className='object-cover'
                                     sizes="(max-width: 640px) 280px, 350px"
                                 />

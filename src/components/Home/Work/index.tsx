@@ -12,14 +12,14 @@ const Work = () => {
   const { t } = useLanguage()
 
   const orbitItems = [
-    { type: 'image', value: '/images/perks/hammer.png', alt: 'Tools' },
-    { type: 'image', value: '/images/perks/switch.png', alt: 'Switch' },
-    { type: 'image', value: '/images/perks/bulb.png', alt: 'Bulb' },
-    { type: 'image', value: '/images/perks/fan.png', alt: 'Fan' },
-    { type: 'image', value: '/images/perks/pipe.png', alt: 'Pipes' },
-    { type: 'image', value: '/images/perks/pump.png', alt: 'Pump' },
-    { type: 'image', value: '/images/perks/plug.png', alt: 'Plug' },
-    { type: 'image', value: '/images/perks/cable.png', alt: 'Cables' },
+    { type: 'image', value: '/images/perks/hammer.webp', alt: 'Tools' },
+    { type: 'image', value: '/images/perks/switch.webp', alt: 'Switch' },
+    { type: 'image', value: '/images/perks/bulb.webp', alt: 'Bulb' },
+    { type: 'image', value: '/images/perks/fan.webp', alt: 'Fan' },
+    { type: 'image', value: '/images/perks/pipe.webp', alt: 'Pipes' },
+    { type: 'image', value: '/images/perks/pump.webp', alt: 'Pump' },
+    { type: 'image', value: '/images/perks/plug.webp', alt: 'Plug' },
+    { type: 'image', value: '/images/perks/cable.webp', alt: 'Cables' },
   ]
 
   useEffect(() => {
@@ -120,7 +120,8 @@ const Work = () => {
                 {/* Main Circular Image */}
                 <div className='absolute inset-0 rounded-full border-8 border-white shadow-2xl overflow-hidden'>
                   <Image
-                    src='/images/work/img-work-with-us-v2.png'
+                    src='/images/work/img-work-with-us-v2.webp'
+                    loading='lazy'
                     alt='Electrical Work'
                     fill
                     sizes='(max-width: 640px) 280px, 400px'

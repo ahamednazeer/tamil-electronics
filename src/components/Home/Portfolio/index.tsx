@@ -119,61 +119,61 @@ const Portfolio = () => {
 
   const productsData = [
     {
-      image: '/images/products/led-lights.png',
+      image: '/images/products/led-lights.webp',
       video: '/images/products/led-lights.mp4',
       title: t('portfolio.items.led.title'),
       description: t('portfolio.items.led.description'),
     },
     {
-      image: '/images/products/wires-cables.png',
+      image: '/images/products/wires-cables.webp',
       video: '/images/products/wires-cables.mp4',
       title: t('portfolio.items.wires.title'),
       description: t('portfolio.items.wires.description'),
     },
     {
-      image: '/images/products/switch-boards.png',
+      image: '/images/products/switch-boards.webp',
       video: '/images/products/switch-boards.mp4',
       title: t('portfolio.items.switches.title'),
       description: t('portfolio.items.switches.description'),
     },
     {
-      image: '/images/products/fans.png',
+      image: '/images/products/fans.webp',
       video: '/images/products/fans.mp4',
       title: t('portfolio.items.fans.title'),
       description: t('portfolio.items.fans.description'),
     },
     {
-      image: '/images/products/mcb.png',
+      image: '/images/products/mcb.webp',
       video: '/images/products/mcb.mp4',
       title: t('portfolio.items.mcb.title'),
       description: t('portfolio.items.mcb.description'),
     },
     {
-      image: '/images/products/pvc-pipes.png',
+      image: '/images/products/pvc-pipes.webp',
       video: '/images/products/pvc-pipes.mp4',
       title: t('portfolio.items.pipes.title'),
       description: t('portfolio.items.pipes.description'),
     },
     {
-      image: '/images/products/bathroom-fittings.png',
+      image: '/images/products/bathroom-fittings.webp',
       video: '/images/products/bathroom-fittings.mp4',
       title: t('portfolio.items.fittings.title'),
       description: t('portfolio.items.fittings.description'),
     },
     {
-      image: '/images/products/water-tanks.png',
+      image: '/images/products/water-tanks.webp',
       video: '/images/products/water-tanks.mp4',
       title: t('portfolio.items.tanks.title'),
       description: t('portfolio.items.tanks.description'),
     },
     {
-      image: '/images/products/agricultural-pumps.png',
+      image: '/images/products/agricultural-pumps.webp',
       video: '/images/products/agricultural-pumps.mp4',
       title: t('portfolio.items.agro_pumps.title'),
       description: t('portfolio.items.agro_pumps.description'),
     },
     {
-      image: '/images/products/water-heaters.png',
+      image: '/images/products/water-heaters.webp',
       video: '/images/products/water-heaters.mp4',
       title: t('portfolio.items.heaters.title'),
       description: t('portfolio.items.heaters.description'),
@@ -231,6 +231,7 @@ const Portfolio = () => {
                           src={item.image}
                           alt={item.title}
                           fill
+                          loading='lazy'
                           sizes='(max-width: 640px) 300px, (max-width: 1024px) 380px, 460px'
                           className='object-cover group-hover:scale-105 transition-transform duration-300'
                         />

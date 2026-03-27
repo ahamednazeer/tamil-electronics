@@ -6,7 +6,7 @@ import { ThemeProvider } from 'next-themes'
 import ScrollToTop from '@/components/ScrollToTop'
 import Aoscompo from '@/lib/aos'
 import { Metadata, Viewport } from 'next'
-import ParticlesBackground from '@/components/common/ParticlesBackground'
+import ParticlesBackgroundWrapper from '@/components/common/ParticlesBackgroundWrapper'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton'
@@ -61,7 +61,13 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
-
+        {/* Preload hero LCP image for faster rendering */}
+        <link
+          rel='preload'
+          as='image'
+          type='image/webp'
+          href='/images/hero/banner-image.webp'
+        />
         <link rel='sitemap' type='application/xml' href='/sitemap.xml' />
         {/* next/font/google self-hosts; no external font preconnects needed */}
         <script
@@ -130,7 +136,7 @@ export default function RootLayout({
           <LanguageProvider>
             <Aoscompo>
               <Header />
-              <ParticlesBackground />
+              <ParticlesBackgroundWrapper />
               {children}
               <Footer />
             </Aoscompo>

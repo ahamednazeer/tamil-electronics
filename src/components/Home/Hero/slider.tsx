@@ -11,7 +11,7 @@ const brandsData = [
   { name: 'Havells', logo: '/images/brands/Havells_Logo.svg' },
   { name: 'Orient', logo: '/images/brands/Orient_Logo_2x_906fb550-c200-42e5-b9e7-f6375c0bcdab.avif' },
   { name: 'Crompton', logo: '/images/brands/crompton-greaves-logo.webp' },
-  { name: 'Polycab', logo: '/images/brands/logo-gradient-trans.png' },
+  { name: 'Polycab', logo: '/images/brands/logo-gradient-trans.webp' },
 ]
 
 // Map service keys to brand names

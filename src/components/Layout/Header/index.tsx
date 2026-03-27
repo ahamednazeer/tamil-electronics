@@ -59,7 +59,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <div className={`fixed top-0 w-full z-40 flex justify-center transition-all duration-300 pointer-events-none ${sticky ? 'p-3 sm:p-5' : 'p-0'}`}>
+      <div className={`fixed top-0 w-full z-40 flex justify-center transition-all duration-300 pointer-events-none ${sticky ? 'p-2 sm:p-5' : 'p-0'}`}>
         <header
           className={`relative w-full pointer-events-auto transition-all duration-300 ${sticky
             ? (language === 'ta' ? 'max-w-[1300px]' : 'max-w-6xl')
@@ -67,12 +67,12 @@ const Header: React.FC = () => {
             }`}
           style={{ backgroundColor: (!sticky && showHeaderBg) ? 'var(--theme-header-bg)' : 'transparent' }}>
 
-          <div className={`absolute inset-0 w-full h-full transition-opacity duration-300 pointer-events-none overflow-hidden ${sticky ? 'opacity-100 rounded-[2rem] z-0 shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-black/5 dark:border-white/10' : 'opacity-0 -z-10'}`}>
-            <div className="w-full h-full absolute inset-0 rounded-[2rem] backdrop-blur-md bg-white/80 dark:bg-neutral-950/80" />
+          <div className={`absolute inset-0 w-full h-full transition-opacity duration-300 pointer-events-none overflow-hidden ${sticky ? 'opacity-100 rounded-2xl sm:rounded-[2rem] z-0 shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-black/5 dark:border-white/10' : 'opacity-0 -z-10'}`}>
+            <div className="w-full h-full absolute inset-0 rounded-2xl sm:rounded-[2rem] backdrop-blur-md bg-white/80 dark:bg-neutral-950/80" />
           </div>
 
           <div className='relative z-10 w-full lg:py-0 py-2'>
-            <div className={`container mx-auto flex items-center justify-between py-3 gap-3 ${sticky ? 'px-6 sm:px-8' : 'px-4'}`}>
+            <div className={`container mx-auto flex items-center justify-between py-2 sm:py-3 gap-1 sm:gap-3 ${sticky ? 'px-3 sm:px-8' : 'px-3 sm:px-4'}`}>
               <div className="flex shrink-0 justify-start min-w-max">
                 <Logo />
               </div>
@@ -81,13 +81,13 @@ const Header: React.FC = () => {
                   <HeaderLink key={index} item={item} />
                 ))}
               </nav>
-              <div className='flex shrink-0 items-center justify-end gap-2 xl:gap-3'>
+              <div className='flex shrink-0 items-center justify-end gap-1.5 sm:gap-2 xl:gap-3'>
                 <Link
                   href={`tel:${storeInfo.phoneE164}`}
                   aria-label={t('header.call_short')}
-                  className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
+                  className='btn btn-outline btn-pill flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
                   <Icon icon='mdi:phone' className='text-sm sm:text-base' />
-                  <span className='sm:hidden'>{t('header.call_short')}</span>
+                  <span className='hidden min-[400px]:inline sm:hidden'>{t('header.call_short')}</span>
                   <span className='hidden sm:inline lg:hidden xl:inline'>{storeInfo.phoneDisplay}</span>
                 </Link>
                 {/* Language only (no theme toggle) */}
@@ -98,19 +98,19 @@ const Header: React.FC = () => {
                   href={`https://wa.me/${storeInfo.whatsappNumber}`}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-outline btn-pill flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
-                  <Icon icon='mdi:whatsapp' className='text-base' />
+                  className='btn btn-outline btn-pill flex items-center gap-1 sm:gap-2 px-1.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
+                  <Icon icon='mdi:whatsapp' className='text-sm sm:text-base' />
                   <span className='hidden sm:inline lg:hidden xl:inline'>{t('header.whatsapp_short')}</span>
                 </Link>
                 <button
                   onClick={() => setNavbarOpen(!navbarOpen)}
-                  className='block lg:hidden p-2 rounded-lg'
+                  className='block lg:hidden p-1.5 sm:p-2 rounded-lg ml-0.5'
                   aria-label='Toggle mobile menu'
                   aria-expanded={navbarOpen}
                   aria-controls='mobile-navigation'>
-                  <span className='block w-6 h-0.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
-                  <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
-                  <span className='block w-6 h-0.5 mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+                  <span className='block w-5 sm:w-6 h-0.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+                  <span className='block w-5 sm:w-6 h-0.5 mt-1 sm:mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
+                  <span className='block w-5 sm:w-6 h-0.5 mt-1 sm:mt-1.5' style={{ backgroundColor: 'var(--theme-text)' }}></span>
                 </button>
               </div>
             </div>
