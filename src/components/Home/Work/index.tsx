@@ -27,55 +27,129 @@ const Work = () => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) return
 
-    let lastY = window.scrollY
     let angle = 0
+    let lastY = window.scrollY
     let ticking = false
     const rotationSpeed = 0.12
 
-    const update = () => {
-      const section = sectionRef.current
-      const orbit = orbitRef.current
-      if (!section || !orbit) {
-        ticking = false
-        return
-      }
-      const rect = section.getBoundingClientRect()
-      const viewportH = window.innerHeight
-      const sectionTop = window.scrollY + rect.top
-      const sectionBottom = sectionTop + rect.height
-      const viewStart = sectionTop - viewportH
-      const viewEnd = sectionBottom
+    let isDragging = false
+    let startAngleRad = 0
+    let cx = 0
+    let cy = 0
+    let angularVelocity = 0
+    let lastTime = 0
+    let inertiaFrameId: number
+
+    const orbit = orbitRef.current
+    const circle = circleRef.current
+    const section = sectionRef.current
+    if (!orbit || !circle || !section) return
+
+    // Helper to get angle from center
+    const getAngle = (clientX: number, clientY: number) => {
+      return Math.atan2(clientY - cy, clientX - cx)
+    }
+
+    const updateRotationUI = (newAngle: number) => {
+      orbit.style.setProperty('--orbit-rotate', `${newAngle}deg`)
+      orbit.style.setProperty('--orbit-rotate-neg', `${-newAngle}deg`)
+    }
+
+    // === SCROLL LOGIC ===
+    const onScrollUpdate = () => {
       const scrollY = window.scrollY
-
-      if (scrollY < viewStart || scrollY > viewEnd) {
-        orbit.style.setProperty('--orbit-rotate', '0deg')
-        orbit.style.setProperty('--orbit-rotate-neg', '0deg')
-        angle = 0
-        ticking = false
-        return
+      if (!isDragging) {
+        // Only let scroll drive if momentum is basically stopped
+        if (Math.abs(angularVelocity) < 0.05) {
+          const deltaScroll = scrollY - lastY
+          angle = (angle - deltaScroll * rotationSpeed) % 360
+          updateRotationUI(angle)
+        }
       }
-
-      const delta = scrollY - lastY
       lastY = scrollY
-      angle = (angle - delta * rotationSpeed) % 360
-      orbit.style.setProperty('--orbit-rotate', `${angle}deg`)
-      orbit.style.setProperty('--orbit-rotate-neg', `${-angle}deg`)
       ticking = false
     }
 
     const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(update)
+        window.requestAnimationFrame(onScrollUpdate)
         ticking = true
       }
     }
 
-    update()
+    // === INERTIA (MOMENTUM) LOOP ===
+    const applyInertia = () => {
+      if (!isDragging && Math.abs(angularVelocity) > 0.005) {
+        angle = (angle + angularVelocity * 16) % 360 // 16ms approx base frame
+        angularVelocity *= 0.988 // Lower friction for highly sustained lottery momentum
+        updateRotationUI(angle)
+        inertiaFrameId = requestAnimationFrame(applyInertia)
+      } else {
+        angularVelocity = 0
+      }
+    }
+
+    // === DRAG LOGIC ===
+    const onPointerDown = (e: PointerEvent) => {
+      isDragging = true
+      cancelAnimationFrame(inertiaFrameId)
+      angularVelocity = 0
+      
+      const rect = circle.getBoundingClientRect()
+      cx = rect.left + rect.width / 2
+      cy = rect.top + rect.height / 2
+      
+      startAngleRad = getAngle(e.clientX, e.clientY)
+      lastTime = performance.now()
+    }
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return
+      e.preventDefault() // Prevent page scroll on touch 
+      
+      const currentAngleRad = getAngle(e.clientX, e.clientY)
+      let deltaRad = currentAngleRad - startAngleRad
+      
+      // Handle wrapping at 180 / -180 degrees
+      if (deltaRad > Math.PI) deltaRad -= 2 * Math.PI
+      if (deltaRad < -Math.PI) deltaRad += 2 * Math.PI
+      
+      const deltaDeg = deltaRad * (180 / Math.PI)
+      angle = (angle + deltaDeg) % 360
+      updateRotationUI(angle)
+      
+      const now = performance.now()
+      const dt = now - lastTime
+      if (dt > 0) {
+        angularVelocity = deltaDeg / dt // Degrees per millisecond
+      }
+      
+      startAngleRad = currentAngleRad
+      lastTime = now
+    }
+
+    const onPointerUp = () => {
+      if (!isDragging) return
+      isDragging = false
+      lastY = window.scrollY // Sync scroll to prevent jitter
+      applyInertia()
+    }
+
+    circle.addEventListener('pointerdown', onPointerDown)
+    window.addEventListener('pointermove', onPointerMove, { passive: false })
+    window.addEventListener('pointerup', onPointerUp)
+    window.addEventListener('pointercancel', onPointerUp)
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
+
     return () => {
+      circle.removeEventListener('pointerdown', onPointerDown)
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+      window.removeEventListener('pointercancel', onPointerUp)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(inertiaFrameId)
     }
   }, [])
 
@@ -94,29 +168,14 @@ const Work = () => {
               {t('work.description')}
             </p>
 
-            {/* CTA Buttons - Exactly like reference */}
-            <div className='flex flex-wrap items-center gap-4'>
-              <a
-                href={`tel:${storeInfo.phoneE164}`}
-                className='btn btn-primary py-3 px-8'>
-                {t('work.contact_us')}
-              </a>
-              <a
-                href='#gallery'
-                className='flex items-center gap-3 text-theme font-medium py-3 px-4 hover:text-primary transition-all'>
-                <div className='w-12 h-12 rounded-full border-2 border-black/20 dark:border-white/30 flex items-center justify-center'>
-                  <Icon icon='mdi:play' className='text-xl ml-0.5' />
-                </div>
-                {t('work.view_video')}
-              </a>
-            </div>
+
           </div>
 
           {/* Right Content - Circular Image with Floating Icons */}
           <div className='lg:col-span-6 col-span-12'>
             <div className='relative flex justify-center lg:justify-end items-center lg:pr-10'>
               {/* Container for circle and floating icons */}
-              <div ref={circleRef} className='relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] will-change-transform'>
+              <div ref={circleRef} className='relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] will-change-transform cursor-grab active:cursor-grabbing touch-none select-none z-10'>
                 {/* Main Circular Image */}
                 <div className='absolute inset-0 rounded-full border-8 border-white shadow-2xl overflow-hidden'>
                   <Image
