@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useLanguage } from '@/context/LanguageContext'
 import { brandsData } from '@/data/staticContent'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 
 // Map each service key to the brand names it relates to
 const brandMappings: Record<string, string[]> = {

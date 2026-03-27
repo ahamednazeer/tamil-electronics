@@ -6,7 +6,7 @@ export type StoreHour = {
 
 export const storeInfo = {
   name: 'Tamil Electricals',
-  description: 'Electrical & Electronics Shop in Virudhachalam',
+  description: 'Electrical ,Plumbing,Hardware &Electronics Shop in Virudhachalam',
   phoneDisplay: '+91 93638 97989',
   phoneE164: '+919363897989',
   whatsappNumber: '919363897989',

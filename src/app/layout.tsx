@@ -62,6 +62,9 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
+        {/* DNS prefetch for third-party domains */}
+        <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
+        <link rel='dns-prefetch' href='https://www.google-analytics.com' />
         {/* Preload hero LCP image for faster rendering */}
         <link
           rel='preload'
