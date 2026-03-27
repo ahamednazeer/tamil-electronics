@@ -10,7 +10,7 @@ import ParticlesBackgroundWrapper from '@/components/common/ParticlesBackgroundW
 import { LanguageProvider } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton'
-import Script from 'next/script'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { LenisProvider } from '@/components/common/ReactLenis'
 
 // Optimize font loading with display swap and preload
@@ -115,22 +115,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${font.className}`}>
-        {gaId ? (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy='afterInteractive'
-            />
-            <Script id='gtag-init' strategy='afterInteractive'>
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaId}');
-              `}
-            </Script>
-          </>
-        ) : null}
+        {gaId && <GoogleAnalytics gaId={gaId} />}
         <ThemeProvider
           attribute='data-theme'
           enableSystem={false}
