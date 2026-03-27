@@ -6,10 +6,9 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    qualities: [25, 50, 70, 75, 80, 85, 90, 100],
     minimumCacheTTL: 31536000, // 1 year — Vercel edge caches optimized images
   },
-  // Vercel handles Brotli compression at the CDN edge — no need for `compress`
-  // Vercel handles serverless builds natively — no need for `output: 'standalone'`
   poweredByHeader: false,
   async headers() {
     return [

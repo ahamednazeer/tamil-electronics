@@ -8,14 +8,14 @@ import { motion, AnimatePresence } from 'motion/react'
 
 // Map each service key to the brand names it relates to
 const brandMappings: Record<string, string[]> = {
-  lights: ['Crompton Greaves', 'Havells', 'Orient'],
-  fans: ['Crompton Greaves', 'Havells', 'Orient'],
-  pipes: ['Finolex'],
-  fittings: ['Finolex'],
-  pumps: ['Crompton Greaves'],
-  stabilizers: ['Havells', 'Crompton Greaves'],
-  wiring: ['Finolex', 'Havells'],
-  switches: ['Havells', 'Orient'],
+  lights: ['Crompton', 'Havells', 'Orient', 'Polycab', 'Philips', 'Surya', 'Luker', 'Sturlite', 'CG'],
+  fans: ['Crompton', 'Havells', 'Orient', 'Atomberg', 'Luker', 'CG'],
+  pipes: ['Finolex', 'Ashirvad', 'Supreme', 'Aquatech'],
+  fittings: ['Finolex', 'Ashirvad', 'Parryware', 'Supreme'],
+  pumps: ['Crompton', 'Suguna', 'CG', 'Aquatech'],
+  stabilizers: ['Havells', 'Crompton', 'V-Guard', 'Venus'],
+  wiring: ['Finolex', 'Havells', 'Polycab', 'RR Kabel', 'Standard', 'V-Guard'],
+  switches: ['Havells', 'Orient', 'Norwood', 'Standard'],
 }
 
 const Brands = () => {

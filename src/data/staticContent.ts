@@ -65,20 +65,25 @@ export const timelineData: {
   ];
 
 export const brandsData: { name: string; logo: string }[] = [
-  {
-    name: "Crompton Greaves",
-    logo: "/images/brands/crompton-greaves-logo.webp",
-  },
-  {
-    name: "Finolex",
-    logo: "/images/brands/Finolex_logo_header.svg",
-  },
-  {
-    name: "Havells",
-    logo: "/images/brands/Havells_Logo.svg",
-  },
-  {
-    name: "Orient",
-    logo: "/images/brands/Orient_Logo_2x_906fb550-c200-42e5-b9e7-f6375c0bcdab.avif",
-  },
+  { name: 'Finolex', logo: '/images/brands/finolex.webp' },
+  { name: 'Havells', logo: '/images/brands/havells.webp' },
+  { name: 'Orient', logo: '/images/brands/orient.webp' },
+  { name: 'Crompton', logo: '/images/brands/crompton.webp' },
+  { name: 'Polycab', logo: '/images/brands/polycab.webp' },
+  { name: 'RR Kabel', logo: '/images/brands/rr-kabel.webp' },
+  { name: 'Luker', logo: '/images/brands/luker.webp' },
+  { name: 'Norwood', logo: '/images/brands/norwood.webp' },
+  { name: 'Philips', logo: '/images/brands/philips.webp' },
+  { name: 'Surya', logo: '/images/brands/surya.webp' },
+  { name: 'Sturlite', logo: '/images/brands/sturlite.webp' },
+  { name: 'Ashirvad', logo: '/images/brands/ashirvad.webp' },
+  { name: 'Aquatech', logo: '/images/brands/aquatech.webp' },
+  { name: 'Parryware', logo: '/images/brands/parryware.webp' },
+  { name: 'Supreme', logo: '/images/brands/supreme.webp' },
+  { name: 'V-Guard', logo: '/images/brands/v-guard.webp' },
+  { name: 'Atomberg', logo: '/images/brands/atomberg.webp' },
+  { name: 'Venus', logo: '/images/brands/venus.webp' },
+  { name: 'Standard', logo: '/images/brands/standard.webp' },
+  { name: 'Suguna', logo: '/images/brands/suguna.webp' },
+  { name: 'CG', logo: '/images/brands/cg.webp' },
 ];
