@@ -18,7 +18,6 @@ const Header: React.FC = () => {
   const { t, language } = useLanguage()
 
   const showHeaderBg = true
-  const showHeaderShadow = sticky || navbarOpen
 
   const handleScroll = () => {
     setSticky(window.scrollY >= 80)

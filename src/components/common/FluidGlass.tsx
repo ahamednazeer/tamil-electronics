@@ -1,8 +1,7 @@
-/* eslint-disable react/no-unknown-property */
 'use client'
 
 import * as THREE from 'three'
-import React, { Component, Suspense, memo, useEffect, useRef, useState, type ErrorInfo, type ReactNode } from 'react'
+import React, { Component, Suspense, memo, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Canvas, createPortal, useFrame, useThree, type ThreeElements } from '@react-three/fiber'
 import { Image, MeshTransmissionMaterial, Preload, Scroll, ScrollControls, Text, useFBO, useGLTF, useScroll } from '@react-three/drei'
 import { easing } from 'maath'
@@ -31,7 +30,7 @@ class R3FErrorBoundary extends Component<{ children: ReactNode; fallback?: React
         return { hasError: true }
     }
 
-    componentDidCatch(_error: unknown, _info: ErrorInfo) { }
+    componentDidCatch() { }
 
     render() {
         if (this.state.hasError) return this.props.fallback ?? null
@@ -107,7 +106,7 @@ interface ZoomMaterial extends THREE.Material {
     zoom: number
 }
 
-interface ZoomMesh extends THREE.Mesh<THREE.BufferGeometry, ZoomMaterial> { }
+type ZoomMesh = THREE.Mesh<THREE.BufferGeometry, ZoomMaterial>
 
 type ZoomGroup = THREE.Group & { children: ZoomMesh[] }
 
@@ -231,15 +230,14 @@ function NavItems({ items }: { items: NavItem[] }) {
         desktop: { max: Infinity, spacing: 0.3, fontSize: 0.045 },
     }
 
-    const getDevice = () => {
-        if (typeof window === 'undefined') return 'desktop' as const
-        const w = window.innerWidth
-        return w <= DEVICE.mobile.max ? 'mobile' : w <= DEVICE.tablet.max ? 'tablet' : 'desktop'
-    }
-
     const [device, setDevice] = useState<keyof typeof DEVICE>('desktop')
 
     useEffect(() => {
+        const getDevice = () => {
+            if (typeof window === 'undefined') return 'desktop' as const
+            const w = window.innerWidth
+            return w <= DEVICE.mobile.max ? 'mobile' : w <= DEVICE.tablet.max ? 'tablet' : 'desktop'
+        }
         const update = () => setDevice(getDevice())
         update()
         window.addEventListener('resize', update)
@@ -260,7 +258,11 @@ function NavItems({ items }: { items: NavItem[] }) {
 
     const handleNavigate = (link: string) => {
         if (!link) return
-        link.startsWith('#') ? (window.location.hash = link) : (window.location.href = link)
+        if (link.startsWith('#')) {
+            window.location.hash = link
+        } else {
+            window.location.href = link
+        }
     }
 
     return (
@@ -310,10 +312,15 @@ function Images() {
 
     return (
         <group ref={group}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image position={[-2, 0, 0]} scale={[3, height / 1.1]} url='/assets/demo/cs1.webp' />
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image position={[2, 0, 3]} scale={3} url='/assets/demo/cs2.webp' />
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image position={[-2.05, -height, 6]} scale={[1, 3]} url='/assets/demo/cs3.webp' />
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image position={[-0.6, -height, 9]} scale={[1, 2]} url='/assets/demo/cs1.webp' />
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image position={[0.75, -height, 10.5]} scale={1.5} url='/assets/demo/cs2.webp' />
         </group>
     )

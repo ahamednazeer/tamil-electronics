@@ -28,7 +28,6 @@ const Upgrade = () => {
   const [reviews, setReviews] = useState<Review[]>([])
   const [rating, setRating] = useState<number | null>(null)
   const [total, setTotal] = useState<number | null>(null)
-  const [loading, setLoading] = useState(true)
 
   const testimonials: ReviewCard[] = [
     {
@@ -61,9 +60,6 @@ const Upgrade = () => {
       } catch {
         if (!active) return
         setReviews([])
-      } finally {
-        if (!active) return
-        setLoading(false)
       }
     }
 
@@ -73,7 +69,6 @@ const Upgrade = () => {
     }
   }, [])
 
-  const showFallback = !loading && reviews.length === 0
   const displayReviews: ReviewCard[] = reviews.length > 0 ? reviews : testimonials
   const displayStars = rating ? Math.round(rating) : 5
 

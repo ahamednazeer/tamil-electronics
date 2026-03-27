@@ -30,6 +30,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
           path === item.href ? "text-primary " : " text-muted "
         }`}
       >
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {t(`menu.${item.label.toLowerCase()}` as any)}
         {item.submenu && (
           <svg

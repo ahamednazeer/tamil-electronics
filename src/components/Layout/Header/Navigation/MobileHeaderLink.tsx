@@ -30,6 +30,7 @@ const MobileHeaderLink: React.FC<MobileHeaderLinkProps> = ({ item, onNavigate })
         }}
         className="flex items-center justify-between w-full rounded-xl px-3 py-3 text-lg font-semibold text-midnight_text dark:text-white hover:text-primary hover:bg-primary/10 transition-colors focus:outline-hidden"
       >
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {t(`menu.${item.label.toLowerCase()}` as any)}
         {item.submenu && (
           <svg
