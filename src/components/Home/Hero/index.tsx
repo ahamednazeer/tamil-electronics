@@ -64,7 +64,7 @@ const Hero = () => {
                   <span className='text-primary block md:inline'>Electricals &amp;</span>{' '}
                   <LayoutTextFlip
                     simple
-                    words={['Electronics', 'Plumbing']}
+                    words={['Electronics', 'Plumbing', 'Hardware']}
                     duration={3000}
                     className='text-primary'
                   />{' '}
@@ -79,7 +79,7 @@ const Hero = () => {
                   <span className='text-primary block md:inline'>எலக்ட்ரிக்கல் &amp;</span>{' '}
                   <LayoutTextFlip
                     simple
-                    words={['எலெக்ட்ரானிக்ஸ்', 'பிளம்பிங்']}
+                    words={['எலெக்ட்ரானிக்ஸ்', 'பிளம்பிங்', 'ஹார்ட்வேர்']}
                     duration={3000}
                     className='text-primary'
                   />{' '}

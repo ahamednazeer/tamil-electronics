@@ -673,21 +673,7 @@
   border-color: color-mix(in srgb, var(--theme-primary) 30%, transparent);
 }
 
-.uiverse-card::before {
-  position: absolute;
-  content: "";
-  inset: 0;
-  background: color-mix(in srgb, var(--theme-primary) 82%, black);
-  opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
-}
-
-.uiverse-card:hover::before,
-.uiverse-card:focus::before,
-.uiverse-card:focus-within::before {
-  opacity: 1;
-}
+/* Removed solid overlay from uiverse-card */
 
 .uiverse-card-content {
   position: relative;
@@ -702,21 +688,21 @@
 .uiverse-card:hover .uiverse-card-content,
 .uiverse-card:focus .uiverse-card-content,
 .uiverse-card:focus-within .uiverse-card-content {
-  opacity: 0;
-  transform: scale(0.95);
+  opacity: 1;
+  transform: translateY(-25px);
 }
 
 .uiverse-card-details {
   position: absolute;
-  inset: 0;
+  inset: auto 0 0 0;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
+  justify-content: flex-end;
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
 }

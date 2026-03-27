@@ -50,7 +50,7 @@ const TimeLine = () => {
           viewport={{ once: true, amount: 0.2 }}>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
             {features.map((item, index) => (
-              <div key={index} className='uiverse-card focus:outline-none' tabIndex={0}>
+              <div key={index} className='uiverse-card group focus:outline-none' tabIndex={0}>
                 <div className='uiverse-card-content'>
                   <div className='icon-wrap relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 shadow-sm transition-colors'>
                     <div className="absolute inset-x-0 -top-px h-px w-full bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
@@ -72,14 +72,14 @@ const TimeLine = () => {
                   <h4 className='text-theme text-lg sm:text-xl font-bold text-center'>
                     {item.title}
                   </h4>
-                  <div className='mt-1 opacity-50 flex items-center justify-center animate-bounce transition-opacity'>
+                  <div className='mt-1 opacity-50 flex items-center justify-center animate-bounce transition-opacity group-hover:opacity-0'>
                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
                        <path d="m6 9 6 6 6-6"/>
                      </svg>
                   </div>
                 </div>
                 <div className='uiverse-card-details'>
-                  <p className='text-white text-base sm:text-lg font-medium text-center leading-relaxed drop-shadow-md'>
+                  <p className='text-muted text-sm sm:text-base font-medium text-center leading-relaxed max-w-[90%]'>
                     {item.text}
                   </p>
                 </div>
