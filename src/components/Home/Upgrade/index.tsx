@@ -1,10 +1,9 @@
 'use client'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/context/LanguageContext'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { storeInfo } from '@/data/storeInfo'
-import { motion, AnimatePresence } from 'framer-motion'
 
 type Review = {
   author_name: string
@@ -22,6 +21,7 @@ type ReviewCard = {
   name?: string
   role?: string
   quote?: string
+  profile_photo_url?: string
 }
 
 const Upgrade = () => {
@@ -29,19 +29,6 @@ const Upgrade = () => {
   const [reviews, setReviews] = useState<Review[]>([])
   const [rating, setRating] = useState<number | null>(null)
   const [total, setTotal] = useState<number | null>(null)
-  const [showBreakdown, setShowBreakdown] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setShowBreakdown(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
 
   const testimonials: ReviewCard[] = [
     {
@@ -100,144 +87,87 @@ const Upgrade = () => {
             {t('reviews.description')}
           </p>
           {rating && (
-            <div className='relative max-w-sm mx-auto' ref={dropdownRef}>
-              <button
-                onClick={() => setShowBreakdown(!showBreakdown)}
-                className='mt-4 w-full flex items-center justify-center gap-2 sm:gap-3 flex-wrap p-2 sm:p-3 rounded-full hover:bg-theme-bg-secondary transition-colors group cursor-pointer border border-transparent hover:border-border/50'>
-                <div className='flex items-center gap-1'>
-                  {[...Array(5)].map((_, i) => (
-                    <Icon
-                      key={i}
-                      icon='mdi:star'
-                      width='18'
-                      height='18'
-                      className={i < displayStars ? 'text-primary' : 'text-muted/40'}
-                    />
-                  ))}
-                </div>
-                <span className='text-theme text-sm sm:text-base font-semibold'>
-                  {rating.toFixed(1)}
-                </span>
-                {total && (
-                  <span className='text-muted/60 text-xs sm:text-sm mr-2'>
-                    {t('reviews.based_on').replace('{count}', String(total))}
-                  </span>
-                )}
-                <Icon
-                  icon='mdi:chevron-down'
-                  className={`text-theme transition-transform duration-300 ${
-                    showBreakdown ? 'rotate-180' : ''
-                  }`}
-                  width='20'
-                  height='20'
-                />
-              </button>
-
-              <AnimatePresence>
-                {showBreakdown && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
-                    className='absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[280px] sm:w-[320px] bg-theme-bg-card border border-border/40 rounded-2xl shadow-xl p-5 z-50 text-left overflow-hidden'>
-                    <h3 className='text-theme text-xl font-semibold mb-3 tracking-tight'>
-                      Average Rating
-                    </h3>
-                    <div className='flex items-center gap-2 mb-6'>
-                      <span className='text-theme text-3xl font-bold'>
-                        {rating.toFixed(1)}
-                      </span>
-                      <div className='flex items-center gap-0.5 mt-1'>
-                        {[...Array(5)].map((_, i) => (
-                          <Icon
-                            key={i}
-                            icon={i < displayStars ? 'mdi:star' : i === displayStars ? 'mdi:star-half-full' : 'mdi:star-outline'}
-                            width='16'
-                            height='16'
-                            className='text-secondary'
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className='flex flex-col gap-3'>
-                      {[
-                        { star: 5, pct: 90 },
-                        { star: 4, pct: 60 },
-                        { star: 3, pct: 40 },
-                        { star: 2, pct: 30 },
-                        { star: 1, pct: 0 },
-                      ].map((bar) => (
-                        <div key={bar.star} className='flex items-center gap-3'>
-                          <span className='text-theme text-sm font-medium w-4 shrink-0 text-center'>
-                            {bar.star}
-                          </span>
-                          <div className='flex-1 h-2 bg-theme-bg-secondary rounded-full overflow-hidden'>
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${bar.pct}%` }}
-                              transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-                              className='h-full bg-[#1c5d41] rounded-full'
-                            />
-                          </div>
-                          <span className='text-theme-muted text-xs font-medium w-8 shrink-0 text-right'>
-                            {bar.pct}%
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className='mt-2'>
-                <Link
-                  href={storeInfo.googleMapsUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='text-primary text-xs sm:text-sm font-semibold hover:text-theme transition-colors'>
-                  {t('reviews.view_on_google')}
-                </Link>
+            <div className='mt-4 flex items-center justify-center gap-3 flex-wrap'>
+              <div className='flex items-center gap-1'>
+                {[...Array(5)].map((_, i) => (
+                  <Icon
+                    key={i}
+                    icon='mdi:star'
+                    width='18'
+                    height='18'
+                    className={
+                      i < displayStars ? 'text-primary' : 'text-muted/40'
+                    }
+                  />
+                ))}
               </div>
+              <span className='text-theme text-sm sm:text-base font-semibold'>
+                {rating.toFixed(1)}
+              </span>
+              {total && (
+                <span className='text-muted/60 text-xs sm:text-sm'>
+                  {t('reviews.based_on').replace('{count}', String(total))}
+                </span>
+              )}
+              <Link
+                href={storeInfo.googleMapsUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-primary text-xs sm:text-sm font-semibold hover:text-theme transition-colors'>
+                {t('reviews.view_on_google')}
+              </Link>
             </div>
           )}
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 reviews-spotlight-grid'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
           {displayReviews.slice(0, 3).map((item, index) => (
             <div
               key={index}
-              className={`reviews-spotlight-card ${
-                index === 1 ? 'reviews-spotlight-card--active' : ''
-              }`.trim()}>
-              <div className='reviews-spotlight-inner'>
-                <div className='reviews-spotlight-top'>
-                  <div>
-                    <h4 className='reviews-spotlight-title'>
-                      {item.author_name ?? item.name}
-                    </h4>
-                    <p className='reviews-spotlight-role'>
-                      {item.relative_time_description ?? item.role}
-                    </p>
+              className='uiverse-card group focus:outline-none'
+              tabIndex={0}>
+              <div className='uiverse-card-content !gap-3 sm:!gap-4 mt-4'>
+                <div className='icon-wrap relative flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-full overflow-hidden border border-primary/20 shadow-[0_4px_12px_rgba(227,30,36,0.15)] transition-colors'>
+                  {item.profile_photo_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={item.profile_photo_url} alt={item.author_name ?? item.name ?? ''} className='w-full h-full object-cover' />
+                  ) : (
+                    <div className='w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center'>
+                      <Icon icon='mdi:account-circle' className='text-3xl sm:text-4xl text-primary' />
+                    </div>
+                  )}
+                </div>
+                <div className='flex flex-col items-center gap-1 px-2'>
+                  <h4 className='text-theme text-lg sm:text-xl font-bold text-center line-clamp-1'>
+                    {item.author_name ?? item.name}
+                  </h4>
+                  <div className='flex items-center justify-center gap-1'>
+                    {[...Array(5)].map((_, i) => (
+                      <Icon
+                        key={i}
+                        icon='mdi:star'
+                        width='16'
+                        height='16'
+                        className={
+                          i < (item.rating ?? 5)
+                            ? 'text-primary'
+                            : 'text-muted/40'
+                        }
+                      />
+                    ))}
                   </div>
                 </div>
-                <div className='reviews-spotlight-stars'>
-                  {[...Array(5)].map((_, i) => (
-                    <Icon
-                      key={i}
-                      icon='mdi:star'
-                      width='18'
-                      height='18'
-                      className={
-                        i < (item.rating ?? 5)
-                          ? 'reviews-spotlight-star'
-                          : 'reviews-spotlight-star-muted'
-                      }
-                    />
-                  ))}
+                <div className='mt-2 opacity-50 flex items-center justify-center animate-bounce transition-opacity group-hover:opacity-0'>
+                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                     <path d="m6 9 6 6 6-6"/>
+                   </svg>
                 </div>
-                <p className='reviews-spotlight-quote'>
+              </div>
+              <div className='uiverse-card-details !justify-center !px-4 sm:!px-6'>
+                <p className='text-muted text-[13px] sm:text-[15px] font-medium text-center leading-relaxed italic line-clamp-4'>
                   &quot;{item.text ?? item.quote}&quot;
+                </p>
+                <p className='text-primary text-xs sm:text-sm mt-3 font-semibold'>
+                  {item.relative_time_description ?? item.role}
                 </p>
               </div>
             </div>
