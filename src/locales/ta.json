@@ -47,29 +47,47 @@
             "support": {
                 "title": "உள்ளூர் வழிகாட்டல்"
             },
-            "lights": {
-                "title": "லைட்ஸ்"
+            "wiring": {
+                "title": "வயரிங் & கேபிள்ஸ்"
             },
-            "fans": {
-                "title": "ஃபேன்கள்"
+            "switches": {
+                "title": "ஸ்விட்ச் & சாக்கெட்"
+            },
+            "switchgear": {
+                "title": "ஸ்விட்ச் கியர்"
+            },
+            "lights": {
+                "title": "லைட்டிங் சிஸ்டம்"
+            },
+            "conduits": {
+                "title": "கான்டூட் & ஃபிட்டிங்ஸ்"
             },
             "pipes": {
-                "title": "பைப்"
+                "title": "பைப் & ஃபிட்டிங்ஸ்"
             },
             "fittings": {
-                "title": "ஃபிட்டிங்ஸ்"
+                "title": "குளியல் ஃபிட்டிங்ஸ்"
+            },
+            "tanks": {
+                "title": "நீர் தொட்டி"
             },
             "pumps": {
                 "title": "பம்ப்கள்"
             },
+            "fans": {
+                "title": "ஃபேன்"
+            },
+            "bldc": {
+                "title": "BLDC ஃபேன்"
+            },
             "stabilizers": {
                 "title": "ஸ்டேபிலைஸர்"
             },
-            "wiring": {
-                "title": "வயரிங்"
+            "cooler": {
+                "title": "ஏர் கூலர்"
             },
-            "switches": {
-                "title": "சுவிட்சுகள்"
+            "heater": {
+                "title": "வாட்டர் ஹீட்டர்"
             }
         }
     },

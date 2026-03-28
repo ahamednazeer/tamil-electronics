@@ -47,29 +47,47 @@
             "support": {
                 "title": "Local Guidance"
             },
-            "lights": {
-                "title": "Lights"
+            "wiring": {
+                "title": "Wiring & Cables"
             },
-            "fans": {
-                "title": "Fans"
+            "switches": {
+                "title": "Switch & Sockets"
+            },
+            "switchgear": {
+                "title": "Switch Gear"
+            },
+            "lights": {
+                "title": "Lighting System"
+            },
+            "conduits": {
+                "title": "Conduits & Fittings"
             },
             "pipes": {
-                "title": "Pipes"
+                "title": "Pipe & Fittings"
             },
             "fittings": {
-                "title": "Fittings"
+                "title": "Bathroom Fittings"
+            },
+            "tanks": {
+                "title": "Water Tanks"
             },
             "pumps": {
                 "title": "Pumps"
             },
+            "fans": {
+                "title": "Fan"
+            },
+            "bldc": {
+                "title": "BLDC Fan"
+            },
             "stabilizers": {
                 "title": "Stabilizers"
             },
-            "wiring": {
-                "title": "Wiring"
+            "cooler": {
+                "title": "Air Cooler"
             },
-            "switches": {
-                "title": "Switches"
+            "heater": {
+                "title": "Water Heater"
             }
         }
     },

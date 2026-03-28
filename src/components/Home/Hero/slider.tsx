@@ -4,7 +4,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 
 const brandsData = [
   { name: 'Finolex', logo: '/images/brands/finolex.webp' },
@@ -27,19 +27,28 @@ const brandsData = [
   { name: 'Venus', logo: '/images/brands/venus.webp' },
   { name: 'Standard', logo: '/images/brands/standard.webp' },
   { name: 'Suguna', logo: '/images/brands/suguna.webp' },
-  { name: 'CG', logo: '/images/brands/cg.webp' }
+  { name: 'CG', logo: '/images/brands/cg.webp' },
+  { name: 'GM', logo: '/images/brands/gm-modular.webp' },
+  { name: 'Legrand', logo: '/images/brands/legrand.webp' },
+  { name: 'Fybros', logo: '/images/brands/fybros.webp' },
+  { name: 'Kundan', logo: '/images/brands/kundan.webp' },
 ]
 
 // Map service keys to brand names
 const serviceToBrands: Record<string, string[]> = {
-  lights: ['Crompton', 'Havells', 'Orient', 'Polycab', 'Philips', 'Surya', 'Luker', 'Sturlite', 'CG'],
-  fans: ['Crompton', 'Havells', 'Orient', 'Atomberg', 'Luker', 'CG'],
-  pipes: ['Finolex', 'Ashirvad', 'Supreme', 'Aquatech'],
-  fittings: ['Finolex', 'Ashirvad', 'Parryware', 'Supreme'],
-  pumps: ['Crompton', 'Suguna', 'CG', 'Aquatech'],
-  stabilizers: ['Havells', 'Crompton', 'V-Guard', 'Venus'],
-  wiring: ['Finolex', 'Havells', 'Polycab', 'RR Kabel', 'Standard', 'V-Guard'],
-  switches: ['Havells', 'Orient', 'Norwood', 'Standard'],
+  wiring: ['RR Kabel', 'Finolex', 'Kundan', 'Luker', 'Norwood'],
+  switches: ['GM', 'Legrand', 'Fybros'],
+  switchgear: ['Legrand', 'GM', 'Polycab', 'Havells'],
+  lights: ['Philips', 'GM', 'Fybros', 'Luker', 'Sturlite', 'Surya'],
+  conduits: ['Finolex', 'Ashirvad'],
+  pipes: ['Ashirvad', 'Aquatech'],
+  fittings: ['Parryware', 'Supreme'],
+  pumps: ['V-Guard', 'Crompton', 'Suguna'],
+  fans: ['Philips', 'Orient', 'Crompton', 'GM', 'V-Guard', 'CG', 'Fybros', 'Luker', 'Standard', 'Havells'],
+  bldc: ['Philips', 'Atomberg', 'V-Guard', 'Luker', 'Standard', 'GM'],
+  stabilizers: ['V-Guard'],
+  cooler: ['V-Guard'],
+  heater: ['V-Guard', 'Venus', 'Standard'],
 }
 
 const CardSlider = () => {
@@ -48,6 +57,7 @@ const CardSlider = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const lastFilterTimeRef = useRef(0)
   const sliderRef = useRef<Slider>(null)
+  const wheelThrottleRef = useRef(0)
 
   const clearFilter = useCallback(() => {
     setActiveFilter(null)
@@ -59,8 +69,13 @@ const CardSlider = () => {
 
   useEffect(() => {
     if (activeFilter) {
-      // Pause autoplay when filtering
-      sliderRef.current?.slickPause()
+      const matched = serviceToBrands[activeFilter]
+      if (matched && matched.length > 5) {
+        // More than 5 brands: let slider scroll
+        setTimeout(() => sliderRef.current?.slickPlay(), 200)
+      } else {
+        sliderRef.current?.slickPause()
+      }
     } else {
       // Resume autoplay when cleared
       sliderRef.current?.slickPlay()
@@ -87,15 +102,15 @@ const CardSlider = () => {
       // Scroll the brands section into view
       containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
+      // Go to first slide after remount
       setTimeout(() => {
-        if (window.innerWidth >= 1024) {
-          sliderRef.current?.slickGoTo(0)
-        } else if (window.innerWidth >= 640) {
-          sliderRef.current?.slickGoTo(0)
-        } else {
-          sliderRef.current?.slickGoTo(1)
+        sliderRef.current?.slickGoTo(0)
+        // If more than 5 matched, start autoplay after going to slide 0
+        const matched = serviceToBrands[detail.service]
+        if (matched && matched.length > 5) {
+          setTimeout(() => sliderRef.current?.slickPlay(), 300)
         }
-      }, 50)
+      }, 100)
     }
 
     const handleOutsideClick = (e: MouseEvent) => {
@@ -116,15 +131,50 @@ const CardSlider = () => {
     }
   }, [clearFilter])
 
+  const [slidesToShowUI, setSlidesToShowUI] = useState(5)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) setSlidesToShowUI(3)
+      else if (window.innerWidth <= 1024) setSlidesToShowUI(4)
+      else setSlidesToShowUI(5)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const matchedBrandNames = activeFilter && serviceToBrands[activeFilter]
     ? serviceToBrands[activeFilter]
     : null
+  const displayBrands = useMemo(() => {
+    if (!matchedBrandNames) return brandsData
+
+    const matched = brandsData.filter((b) => matchedBrandNames.includes(b.name))
+    const unmatched = brandsData.filter((b) => !matchedBrandNames.includes(b.name))
+
+    if (matched.length > 0 && matched.length < slidesToShowUI) {
+      const padCount = Math.floor((slidesToShowUI - matched.length) / 2)
+      return [
+        ...unmatched.slice(0, padCount), // Left padding (grayed out)
+        ...matched, // Centered matched brands
+        ...unmatched.slice(padCount), // Right padding (grayed out)
+      ]
+    }
+
+    return [
+      ...matched,
+      ...unmatched,
+    ]
+  }, [matchedBrandNames, slidesToShowUI])
 
   const settings = {
-    autoplay: !activeFilter, // Pause autoplay when filtering
+    autoplay: !activeFilter || (matchedBrandNames !== null && matchedBrandNames.length > 5),
     dots: false,
     arrows: false,
     infinite: true,
+    swipeToSlide: true,
+    touchMove: true,
     autoplaySpeed: 2000,
     speed: 500,
     slidesToShow: 5,
@@ -155,68 +205,43 @@ const CardSlider = () => {
     ],
   }
 
-  // When filtered, only show the matched brands
-  const filteredBrands = matchedBrandNames
-    ? brandsData.filter((b) => matchedBrandNames.includes(b.name))
-    : null
-
   return (
     <div ref={containerRef} className='mt-6 sm:mt-10 lg:mt-12 pt-4 sm:pt-5 lg:pt-6 overflow-hidden'>
       <p className='text-muted text-center mb-3 sm:mb-4 lg:mb-5 text-xs sm:text-base lg:text-lg'>
         Trusted Brands We Carry
       </p>
 
-      {/* When filtered: show a plain flex grid (bypasses react-slick cloning) */}
-      {filteredBrands ? (
-        <div className='flex flex-wrap items-center justify-center gap-4 sm:gap-6 lg:gap-8 py-2'>
-          {filteredBrands.map((item) => (
-            <div
-              key={item.name}
-              className='px-3 sm:px-5 lg:px-6 py-3 sm:py-4 lg:py-5 flex items-center justify-center h-14 sm:h-20 lg:h-24'
-              style={{
-                animation: 'brandPopIn 0.4s ease forwards',
-              }}
-            >
-              <Image
-                src={item.logo}
-                alt={item.name}
-                width={160}
-                height={80}
-                sizes='(max-width: 640px) 100px, (max-width: 1024px) 140px, 160px'
-                className='object-contain max-h-10 sm:max-h-14 lg:max-h-16 w-auto'
-                style={{
-                  filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.15))',
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        /* When no filter: normal auto-scrolling slider */
-        <Slider ref={sliderRef} {...settings} className="outline-none focus:outline-none">
-          {brandsData.map((item) => (
+      <Slider key={activeFilter || 'all'} ref={sliderRef} {...settings} className="outline-none focus:outline-none">
+        {displayBrands.map((item) => {
+          const isMatch = !matchedBrandNames || matchedBrandNames.includes(item.name)
+          const isDimmed = matchedBrandNames !== null && !matchedBrandNames.includes(item.name)
+          return (
             <div key={item.name} className='px-1 sm:px-3 outline-none focus:outline-none'>
-              <div className='px-2 sm:px-4 lg:px-6 py-2 sm:py-4 lg:py-5 flex items-center justify-center h-12 sm:h-20 lg:h-24'>
+              <div
+                className='flex items-center justify-center w-[80px] h-[40px] sm:w-[120px] sm:h-[50px] lg:w-[150px] lg:h-[60px] mx-auto'
+                style={{
+                  opacity: isDimmed ? 0.15 : 1,
+                  transform: isDimmed ? 'scale(0.85)' : (isMatch && matchedBrandNames) ? 'scale(1.1)' : 'scale(1)',
+                  filter: isDimmed ? 'grayscale(100%)' : 'none',
+                }}
+              >
                 <Image
                   src={item.logo}
                   alt={item.name}
-                  width={160}
-                  height={80}
-                  sizes='(max-width: 640px) 100px, (max-width: 1024px) 140px, 160px'
-                  className='object-contain max-h-8 sm:max-h-12 lg:max-h-16 w-auto pointer-events-none'
+                  width={150}
+                  height={60}
+                  sizes='(max-width: 640px) 80px, (max-width: 1024px) 120px, 150px'
+                  className='object-contain w-full h-full pointer-events-none'
+                  style={{
+                    filter: (isMatch && matchedBrandNames) ? 'drop-shadow(0 4px 12px rgba(0,0,0,0.15))' : 'none',
+                  }}
                 />
               </div>
             </div>
-          ))}
-        </Slider>
-      )}
+          )
+        })}
+      </Slider>
 
-      <style jsx>{`
-        @keyframes brandPopIn {
-          from { opacity: 0; transform: scale(0.7); }
-          to { opacity: 1; transform: scale(1.05); }
-        }
-      `}</style>
     </div>
   )
 }

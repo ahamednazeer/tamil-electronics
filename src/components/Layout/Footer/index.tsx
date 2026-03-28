@@ -8,6 +8,7 @@ import Logo from '../Header/Logo'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
 import { formatTime } from '@/lib/time'
+import VisitorCounter from '@/components/common/VisitorCounter'
 
 const socialLinks = [
   {
@@ -170,10 +171,7 @@ const Footer: FC = () => {
           <p className='text-[var(--theme-text-muted)] text-xs sm:text-sm'>
             © {new Date().getFullYear()} Tamil Electricals. {t('footer.trusted_partner') ? 'All rights reserved.' : ''}
           </p>
-          <div className='flex items-center gap-2 text-[var(--theme-text-muted)] text-xs sm:text-sm'>
-            <span className='footer-status-dot' />
-            Proudly serving since 2024
-          </div>
+          <VisitorCounter />
         </div>
       </div>
     </footer>

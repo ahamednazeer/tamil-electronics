@@ -9,6 +9,7 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@google-analytics/data": "^5.2.1",
     "@iconify/icons-ion": "^1.2.10",
     "@iconify/react": "^5.2.1",
     "@next/third-parties": "^16.2.1",

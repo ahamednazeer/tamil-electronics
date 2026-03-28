@@ -86,42 +86,21 @@ const LocalServices = () => {
   }, [])
 
   const services = [
-    {
-      title: t('services.items.support.title'),
-      href: '#contact',
-    },
-    {
-      title: t('services.items.lights.title'),
-      serviceKey: 'lights',
-    },
-    {
-      title: t('services.items.fans.title'),
-      serviceKey: 'fans',
-    },
-    {
-      title: t('services.items.pipes.title'),
-      serviceKey: 'pipes',
-    },
-    {
-      title: t('services.items.fittings.title'),
-      serviceKey: 'fittings',
-    },
-    {
-      title: t('services.items.pumps.title'),
-      serviceKey: 'pumps',
-    },
-    {
-      title: t('services.items.stabilizers.title'),
-      serviceKey: 'stabilizers',
-    },
-    {
-      title: t('services.items.wiring.title'),
-      serviceKey: 'wiring',
-    },
-    {
-      title: t('services.items.switches.title'),
-      serviceKey: 'switches',
-    }
+    { title: t('services.items.support.title'), href: '#contact' },
+    { title: t('services.items.wiring.title'), serviceKey: 'wiring' },
+    { title: t('services.items.switches.title'), serviceKey: 'switches' },
+    { title: t('services.items.switchgear.title'), serviceKey: 'switchgear' },
+    { title: t('services.items.lights.title'), serviceKey: 'lights' },
+    { title: t('services.items.conduits.title'), serviceKey: 'conduits' },
+    { title: t('services.items.pipes.title'), serviceKey: 'pipes' },
+    { title: t('services.items.fittings.title'), serviceKey: 'fittings' },
+    { title: t('services.items.tanks.title'), serviceKey: 'tanks' },
+    { title: t('services.items.pumps.title'), serviceKey: 'pumps' },
+    { title: t('services.items.fans.title'), serviceKey: 'fans' },
+    { title: t('services.items.bldc.title'), serviceKey: 'bldc' },
+    { title: t('services.items.stabilizers.title'), serviceKey: 'stabilizers' },
+    { title: t('services.items.cooler.title'), serviceKey: 'cooler' },
+    { title: t('services.items.heater.title'), serviceKey: 'heater' },
   ]
 
   const handleServiceClick = (serviceKey: string) => {
@@ -146,15 +125,16 @@ const LocalServices = () => {
         </div>
 
         <div
-          className='rounded-2xl border shadow-sm overflow-x-auto lg:overflow-hidden no-scrollbar'
+          className='rounded-2xl border shadow-sm overflow-x-auto'
           style={{
             backgroundColor: 'var(--services-strip-bg)',
             borderColor: 'var(--services-strip-border)',
             WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'thin',
           }}>
           <div
             ref={bandRef}
-            className='flex items-center gap-3 sm:gap-6 px-3 sm:px-8 lg:px-10 py-3 sm:py-5 will-change-transform justify-start lg:justify-center'
+            className='flex items-center gap-3 sm:gap-6 px-3 sm:px-8 lg:px-10 py-3 sm:py-5 will-change-transform justify-start flex-nowrap'
           >
             {services.map((item, index) => (
               <div key={index} className='flex shrink-0 items-center gap-3 sm:gap-4'>
