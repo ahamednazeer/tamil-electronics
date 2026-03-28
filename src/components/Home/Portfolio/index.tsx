@@ -207,7 +207,15 @@ const Portfolio = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          <div ref={viewportRef} className='overflow-x-auto overflow-y-hidden no-scrollbar'>
+          <div
+            ref={viewportRef}
+            className='overflow-x-auto overflow-y-hidden no-scrollbar w-full relative'
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+            }}
+          >
             <div
               ref={stripRef}
               className='flex items-stretch gap-4 sm:gap-6 lg:gap-8 will-change-transform'

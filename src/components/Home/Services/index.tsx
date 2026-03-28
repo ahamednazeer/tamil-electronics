@@ -125,19 +125,25 @@ const LocalServices = () => {
         </div>
 
         <div
-          className='rounded-2xl border shadow-sm overflow-x-auto'
+          className='rounded-2xl border shadow-sm relative overflow-hidden'
           style={{
             backgroundColor: 'var(--services-strip-bg)',
             borderColor: 'var(--services-strip-border)',
-            WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'thin',
           }}>
           <div
-            ref={bandRef}
-            className='flex items-center gap-3 sm:gap-6 px-3 sm:px-8 lg:px-10 py-3 sm:py-5 will-change-transform justify-start flex-nowrap'
+            className='overflow-x-auto no-scrollbar w-full relative'
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+            }}
           >
-            {services.map((item, index) => (
-              <div key={index} className='flex shrink-0 items-center gap-3 sm:gap-4'>
+            <div
+              ref={bandRef}
+              className='flex items-center gap-3 sm:gap-6 px-3 sm:px-8 lg:px-10 py-3 sm:py-5 will-change-transform justify-start flex-nowrap'
+            >
+              {services.map((item, index) => (
+                <div key={index} className='flex shrink-0 items-center gap-3 sm:gap-4'>
                 {item.href ? (
                   <Link
                     href={item.href}
@@ -168,6 +174,7 @@ const LocalServices = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>
