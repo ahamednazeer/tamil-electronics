@@ -1,13 +1,16 @@
 import React from 'react'
 import Hero from '@/components/Home/Hero'
-import LocalServices from '@/components/Home/Services'
-import Work from '@/components/Home/Work'
-import Portfolio from '@/components/Home/Portfolio'
-import Upgrade from '@/components/Home/Upgrade'
-import PortfolioSlider from '@/components/Home/PortfolioSlider'
-import ContactSection from '@/components/Home/Contact'
-import TimeLine from '@/components/Home/Timeline'
+import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
+
+const LocalServices = dynamic(() => import('@/components/Home/Services'))
+const Work = dynamic(() => import('@/components/Home/Work'))
+const Portfolio = dynamic(() => import('@/components/Home/Portfolio'))
+const Upgrade = dynamic(() => import('@/components/Home/Upgrade'))
+const PortfolioSlider = dynamic(() => import('@/components/Home/PortfolioSlider'))
+const ContactSection = dynamic(() => import('@/components/Home/Contact'))
+const TimeLine = dynamic(() => import('@/components/Home/Timeline'))
+const Faq = dynamic(() => import('@/components/Home/Faq'))
 export const metadata: Metadata = {
   title:
     'Tamil Electricals - Electrical & Electronics Shop in Virudhachalam | Wires, Fans, LED, Switches',
@@ -62,6 +65,7 @@ export default function Home() {
       <TimeLine />
       <PortfolioSlider />
       <Upgrade />
+      <Faq />
       <ContactSection />
     </main>
   )

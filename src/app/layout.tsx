@@ -65,13 +65,7 @@ export default function RootLayout({
         {/* DNS prefetch for third-party domains */}
         <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
         <link rel='dns-prefetch' href='https://www.google-analytics.com' />
-        {/* Preload hero LCP image for faster rendering */}
-        <link
-          rel='preload'
-          as='image'
-          type='image/webp'
-          href='/images/hero/banner-image.webp'
-        />
+
         <link rel='sitemap' type='application/xml' href='/sitemap.xml' />
         {/* next/font/google self-hosts; no external font preconnects needed */}
         <script
@@ -109,6 +103,16 @@ export default function RootLayout({
                   opens: hour.opens,
                   closes: hour.closes,
                 })),
+              areaServed: [
+                { '@type': 'City', name: 'Virudhachalam' },
+                { '@type': 'City', name: 'Kallakurichi' },
+                { '@type': 'City', name: 'Ulundurpet' },
+              ],
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: storeInfo.rating.ratingValue,
+                reviewCount: storeInfo.rating.reviewCount,
+              },
               sameAs: [storeInfo.googleMapsUrl],
             }),
           }}

@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react'
 import Logo from '../Header/Logo'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
+import { locationsData } from '@/data/locations'
 import { formatTime } from '@/lib/time'
 import VisitorCounter from '@/components/common/VisitorCounter'
 
@@ -117,6 +118,19 @@ const Footer: FC = () => {
                 <span>{t('footer.info_wholesale')}</span>
               </li>
             </ul>
+
+            <h4 className='footer-heading mt-6 pt-2 border-t border-[var(--theme-border)]/50'>Service Areas</h4>
+            <div className='mt-4 flex flex-wrap gap-2'>
+              {locationsData.map((location) => (
+                <Link 
+                  key={location.slug} 
+                  href={`/locations/${location.slug}`}
+                  className='text-[var(--theme-text-muted)] hover:text-primary hover:border-primary/40 text-[11px] font-medium bg-[var(--theme-bg-card)] border border-[var(--theme-border)] transition-colors px-2.5 py-1 rounded-full whitespace-nowrap'
+                >
+                  {location.name}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Contact */}

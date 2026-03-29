@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className='pt-24 sm:pt-26'>
+      <h1 className="sr-only">Contact Tamil Electricals | Hardware & Electronics in Virudhachalam</h1>
       <ContactSection />
     </main>
   )

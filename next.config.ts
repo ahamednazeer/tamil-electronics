@@ -13,16 +13,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Static assets — immutable, cached forever
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
         // Image assets — aggressive caching
         source: '/(.*).(svg|png|jpg|jpeg|gif|webp|avif|ico)',
         headers: [

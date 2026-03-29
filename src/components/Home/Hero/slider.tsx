@@ -6,33 +6,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 
-const brandsData = [
-  { name: 'Finolex', logo: '/images/brands/finolex.webp' },
-  { name: 'Havells', logo: '/images/brands/havells.webp' },
-  { name: 'Orient', logo: '/images/brands/orient.webp' },
-  { name: 'Crompton', logo: '/images/brands/crompton.webp' },
-  { name: 'Polycab', logo: '/images/brands/polycab.webp' },
-  { name: 'RR Kabel', logo: '/images/brands/rr-kabel.webp' },
-  { name: 'Luker', logo: '/images/brands/luker.webp' },
-  { name: 'Norwood', logo: '/images/brands/norwood.webp' },
-  { name: 'Philips', logo: '/images/brands/philips.webp' },
-  { name: 'Surya', logo: '/images/brands/surya.webp' },
-  { name: 'Sturlite', logo: '/images/brands/sturlite.webp' },
-  { name: 'Ashirvad', logo: '/images/brands/ashirvad.webp' },
-  { name: 'Aquatech', logo: '/images/brands/aquatech.webp' },
-  { name: 'Parryware', logo: '/images/brands/parryware.webp' },
-  { name: 'Supreme', logo: '/images/brands/supreme.webp' },
-  { name: 'V-Guard', logo: '/images/brands/v-guard.webp' },
-  { name: 'Atomberg', logo: '/images/brands/atomberg.webp' },
-  { name: 'Venus', logo: '/images/brands/venus.webp' },
-  { name: 'Standard', logo: '/images/brands/standard.webp' },
-  { name: 'Suguna', logo: '/images/brands/suguna.webp' },
-  { name: 'CG', logo: '/images/brands/cg.webp' },
-  { name: 'GM', logo: '/images/brands/gm-modular.webp' },
-  { name: 'Legrand', logo: '/images/brands/legrand.webp' },
-  { name: 'Fybros', logo: '/images/brands/fybros.webp' },
-  { name: 'Kundan', logo: '/images/brands/kundan.webp' },
-]
+import { brandsData } from '@/data/brands'
 
 // Map service keys to brand names
 const serviceToBrands: Record<string, string[]> = {
@@ -227,7 +201,7 @@ const CardSlider = () => {
               >
                 <Image
                   src={item.logo}
-                  alt={item.name}
+                  alt={`Authorized ${item.name} Dealer in Virudhachalam`}
                   width={150}
                   height={60}
                   sizes='(max-width: 640px) 80px, (max-width: 1024px) 120px, 150px'

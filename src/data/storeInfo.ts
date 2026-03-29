@@ -30,6 +30,10 @@ export const storeInfo = {
   closedDays: [] as number[],
   googleMapsUrl:
     'https://www.google.com/maps/search/?api=1&query=Tamil%20Electricals%20Virudhachalam',
+  rating: {
+    ratingValue: '4.9',
+    reviewCount: '158',
+  },
 }
 
 export const dayLabels = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className='pt-24 sm:pt-26'>
+      <h1 className="sr-only">About Tamil Electricals - Virudhachalam's Trusted Electrical Shop</h1>
       <TimeLine />
       <Perks />
     </main>

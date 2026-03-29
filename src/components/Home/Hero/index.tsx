@@ -10,7 +10,7 @@ import { storeInfo } from '@/data/storeInfo'
 // Dynamically import slider to reduce initial JS bundle size
 const CardSlider = dynamic(() => import('./slider'), {
   ssr: false,
-  loading: () => <div className="h-24 w-full bg-transparent"></div>
+  loading: () => <div className="min-h-[110px] sm:min-h-[150px] lg:min-h-[180px] w-full bg-transparent"></div>
 })
 
 const Hero = () => {

@@ -3,16 +3,16 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
 const portfolioImages = [
-    '/images/portfolio/image1.webp',
-    '/images/portfolio/image2.webp',
-    '/images/portfolio/image3.webp',
-    '/images/portfolio/image4.webp',
-    '/images/portfolio/image5.webp',
-    '/images/portfolio/image6.webp',
-    '/images/portfolio/image7.webp',
-    '/images/portfolio/image8.webp',
-    '/images/portfolio/image9.webp',
-    '/images/portfolio/image10.webp',
+    { src: '/images/portfolio/image1.webp', alt: 'Electrical wiring and PVC pipes installation project in Virudhachalam' },
+    { src: '/images/portfolio/image2.webp', alt: 'Premium LED lighting and chandelier setup for home' },
+    { src: '/images/portfolio/image3.webp', alt: 'Commercial switchgear and MCB distribution board' },
+    { src: '/images/portfolio/image4.webp', alt: 'Finolex and RR Kabel wire bundles display at Tamil Electricals' },
+    { src: '/images/portfolio/image5.webp', alt: 'High quality ceiling fans and exhaust fans collection' },
+    { src: '/images/portfolio/image6.webp', alt: 'Bathroom plumbing fittings and Ashirvad CPVC pipes' },
+    { src: '/images/portfolio/image7.webp', alt: 'V-Guard stabilizers and water heaters installation' },
+    { src: '/images/portfolio/image8.webp', alt: 'Agricultural water pumps and motors by Suguna and Crompton' },
+    { src: '/images/portfolio/image9.webp', alt: 'Modular switches and sockets from GM and Legrand' },
+    { src: '/images/portfolio/image10.webp', alt: 'Complete electrical and plumbing materials supplied by Tamil Electricals' },
 ];
 
 const PortfolioSlider = () => {
@@ -34,14 +34,14 @@ const PortfolioSlider = () => {
                     <div
                         className='flex items-center gap-6 w-max animate-scroll'
                     >
-                        {[...portfolioImages, ...portfolioImages].map((src, index) => (
+                        {[...portfolioImages, ...portfolioImages].map((item, index) => (
                             <div
                                 key={index}
                                 className='relative w-[280px] h-[200px] sm:w-[350px] sm:h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.06)] group hover:scale-[1.02] transition-transform duration-300'
                             >
                                 <Image
-                                    src={src}
-                                    alt={`Portfolio Image ${index % portfolioImages.length + 1}`}
+                                    src={item.src}
+                                    alt={item.alt}
                                     fill
                                     loading='lazy'
                                     className='object-cover'
