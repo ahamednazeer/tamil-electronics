@@ -13,6 +13,7 @@ import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { LenisProvider } from '@/components/common/ReactLenis'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/react'
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -149,6 +150,7 @@ export default function RootLayout({
               </Aoscompo>
               <FloatingWhatsAppButton />
               <ScrollToTop />
+              <Analytics />
             </LanguageProvider>
           </LenisProvider>
         </ThemeProvider>
