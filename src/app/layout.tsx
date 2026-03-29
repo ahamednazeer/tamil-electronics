@@ -12,6 +12,7 @@ import { storeInfo } from '@/data/storeInfo'
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { LenisProvider } from '@/components/common/ReactLenis'
+import Script from 'next/script'
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -59,6 +60,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID
+  const clarityId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
@@ -120,6 +122,17 @@ export default function RootLayout({
       </head>
       <body className={`${font.className}`}>
         {gaId && <GoogleAnalytics gaId={gaId} />}
+        {clarityId && (
+          <Script id="clarity-script" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${clarityId}");
+            `}
+          </Script>
+        )}
         <ThemeProvider
           attribute='data-theme'
           enableSystem={false}
