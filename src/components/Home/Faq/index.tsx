@@ -73,8 +73,6 @@ export default function Faq() {
             return (
               <div 
                 key={index}
-                data-aos="fade-up"
-                data-aos-delay={300 + (index * 50)}
                 className={`border rounded-2xl transition-all duration-300 ${
                   isOpen 
                     ? 'border-primary/30 bg-[var(--theme-bg-card)] shadow-[0_8px_30px_rgb(0,0,0,0.06)]' 
