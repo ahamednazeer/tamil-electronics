@@ -9,6 +9,7 @@ import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
 import LanguageToggle from '../LanguageToggle'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
+import posthog from 'posthog-js'
 
 
 
@@ -85,6 +86,7 @@ const Header: React.FC = () => {
                 <Link
                   href={`tel:${storeInfo.phoneE164}`}
                   aria-label={t('header.call_short')}
+                  onClick={() => posthog.capture('header_call_clicked')}
                   className='btn btn-outline btn-pill flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
                   <Icon icon='mdi:phone' className='text-sm sm:text-base' />
                   <span className='hidden min-[400px]:inline sm:hidden'>{t('header.call_short')}</span>
@@ -98,12 +100,16 @@ const Header: React.FC = () => {
                   href={`https://wa.me/${storeInfo.whatsappNumber}`}
                   target='_blank'
                   rel='noopener noreferrer'
+                  onClick={() => posthog.capture('header_whatsapp_clicked')}
                   className='btn btn-outline btn-pill flex items-center gap-1 sm:gap-2 px-1.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
                   <Icon icon='mdi:whatsapp' className='text-sm sm:text-base' />
                   <span className='hidden sm:inline lg:hidden xl:inline'>{t('header.whatsapp_short')}</span>
                 </Link>
                 <button
-                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  onClick={() => {
+                    if (!navbarOpen) posthog.capture('mobile_menu_opened')
+                    setNavbarOpen(!navbarOpen)
+                  }}
                   className='block lg:hidden p-1.5 sm:p-2 rounded-lg ml-0.5'
                   aria-label='Toggle mobile menu'
                   aria-expanded={navbarOpen}
@@ -185,6 +191,7 @@ const Header: React.FC = () => {
                   href={`tel:${storeInfo.phoneE164}`}
                   className='mobile-menu-action inline-flex items-center justify-center gap-2 rounded-xl border border-primary/70 px-4 py-3 text-base font-semibold !text-primary hover:bg-primary/10 transition-colors'
                   onClick={() => {
+                    posthog.capture('header_call_clicked')
                     setNavbarOpen(false)
                   }}>
                   <Icon icon='mdi:phone' className='text-lg' />
@@ -196,6 +203,7 @@ const Header: React.FC = () => {
                   rel='noopener noreferrer'
                   className='mobile-menu-action inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-semibold !text-white shadow-[0_12px_30px_rgba(227,30,36,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(227,30,36,0.38)]'
                   onClick={() => {
+                    posthog.capture('header_whatsapp_clicked')
                     setNavbarOpen(false)
                   }}>
                   <Icon icon='mdi:whatsapp' className='text-lg' />

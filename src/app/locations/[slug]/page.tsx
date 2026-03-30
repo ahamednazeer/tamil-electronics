@@ -3,8 +3,9 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Breadcrumbs from '@/components/common/Breadcrumbs'
 import ContactSection from '@/components/Home/Contact'
-import { storeInfo } from '@/data/storeInfo'
 import { Icon } from '@iconify/react'
+import LocationCtaButton from '@/components/locations/LocationCtaButton'
+import { storeInfo } from '@/data/storeInfo'
 
 export function generateStaticParams() {
   return locationsData.map((location) => ({
@@ -77,26 +78,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
               ))}
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a 
-                href={`https://wa.me/${storeInfo.whatsappNumber}?text=Hi, I need electrical/plumbing supplies delivered to ${location.name}.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary flex items-center justify-center gap-2 py-3.5 px-7 text-lg font-medium shadow-xl shadow-primary/20"
-              >
-                <Icon icon="mdi:whatsapp" className="text-2xl" />
-                WhatsApp us for {location.name} Supply
-              </a>
-              <a 
-                href={storeInfo.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline flex items-center justify-center gap-2 py-3.5 px-7 text-lg font-medium bg-[var(--theme-bg)]"
-              >
-                <Icon icon="mdi:map-marker-path" className="text-2xl" />
-                Navigate to Warehouse
-              </a>
-            </div>
+            <LocationCtaButton locationName={location.name} googleMapsUrl={storeInfo.googleMapsUrl} />
           </div>
         </div>
       </div>

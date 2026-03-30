@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/common/Breadcrumbs'
 import ContactSection from '@/components/Home/Contact'
-import { storeInfo } from '@/data/storeInfo'
 import { Icon } from '@iconify/react'
+import BrandCtaButtons from '@/components/brands/BrandCtaButtons'
 
 export function generateStaticParams() {
   return brandsData.map((brand) => ({
@@ -75,24 +75,7 @@ export default async function BrandPage({ params }: { params: Promise<{ slug: st
               {brand.seoDescription} Visit Tamil Electricals to explore our extensive catalog of authentic {brand.name} electrical goods packed with complete manufacturer warranties.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full">
-              <a 
-                href={`https://wa.me/${storeInfo.whatsappNumber}?text=Hi, I am looking for ${brand.name} products in your shop.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary flex items-center justify-center gap-2 py-3.5 px-7 text-base sm:text-lg font-medium shadow-lg shadow-primary/25"
-              >
-                <Icon icon="mdi:whatsapp" className="text-xl" />
-                Inquire on WhatsApp
-              </a>
-              <a 
-                href={`tel:${storeInfo.phoneE164}`}
-                className="btn btn-outline flex items-center justify-center gap-2 py-3.5 px-7 text-base sm:text-lg font-medium bg-[var(--theme-bg)]"
-              >
-                <Icon icon="mdi:phone" className="text-xl" />
-                Call for Pricing
-              </a>
-            </div>
+            <BrandCtaButtons brandName={brand.name} />
           </div>
         </div>
         

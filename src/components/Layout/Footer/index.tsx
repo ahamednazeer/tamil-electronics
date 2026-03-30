@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react'
 import Logo from '../Header/Logo'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
+import posthog from 'posthog-js'
 import { locationsData } from '@/data/locations'
 import { formatTime } from '@/lib/time'
 import VisitorCounter from '@/components/common/VisitorCounter'
@@ -152,7 +153,7 @@ const Footer: FC = () => {
               </div>
 
               {/* Phone */}
-              <Link href={`tel:${storeInfo.phoneE164}`} className='footer-contact-card group cursor-pointer'>
+              <Link href={`tel:${storeInfo.phoneE164}`} className='footer-contact-card group cursor-pointer' onClick={() => posthog.capture('footer_phone_clicked')}>
                 <div className='footer-contact-icon-wrap'>
                   <Icon icon='mdi:phone-outline' width='20' height='20' />
                 </div>

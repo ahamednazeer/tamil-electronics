@@ -1,0 +1,67 @@
+[
+  {
+    "event": "inquiry_form_submitted",
+    "description": "User submits the product inquiry form, triggering a WhatsApp message. Primary conversion event.",
+    "file": "src/components/Home/Contact/InquiryForm.tsx"
+  },
+  {
+    "event": "whatsapp_button_clicked",
+    "description": "User clicks the floating WhatsApp button in the bottom-right corner of the page.",
+    "file": "src/components/common/FloatingWhatsAppButton.tsx"
+  },
+  {
+    "event": "header_call_clicked",
+    "description": "User clicks the phone call link in the sticky header navigation.",
+    "file": "src/components/Layout/Header/index.tsx"
+  },
+  {
+    "event": "header_whatsapp_clicked",
+    "description": "User clicks the WhatsApp link in the sticky header navigation.",
+    "file": "src/components/Layout/Header/index.tsx"
+  },
+  {
+    "event": "mobile_menu_opened",
+    "description": "User opens the mobile navigation hamburger menu.",
+    "file": "src/components/Layout/Header/index.tsx"
+  },
+  {
+    "event": "footer_phone_clicked",
+    "description": "User clicks the phone number link in the footer contact section.",
+    "file": "src/components/Layout/Footer/index.tsx"
+  },
+  {
+    "event": "category_card_clicked",
+    "description": "User clicks a product category card on the products listing page. Includes category name and slug.",
+    "file": "src/app/products/page.tsx"
+  },
+  {
+    "event": "brand_card_clicked",
+    "description": "User clicks a brand logo card on the products listing page. Includes brand name and slug.",
+    "file": "src/app/products/page.tsx"
+  },
+  {
+    "event": "brand_whatsapp_clicked",
+    "description": "User clicks the WhatsApp inquiry CTA on a brand detail page. Includes brand name.",
+    "file": "src/app/brands/[slug]/page.tsx"
+  },
+  {
+    "event": "brand_call_clicked",
+    "description": "User clicks the call CTA on a brand detail page. Includes brand name.",
+    "file": "src/app/brands/[slug]/page.tsx"
+  },
+  {
+    "event": "category_whatsapp_clicked",
+    "description": "User clicks the WhatsApp inquiry CTA on a category detail page. Includes category name.",
+    "file": "src/app/categories/[slug]/page.tsx"
+  },
+  {
+    "event": "category_call_clicked",
+    "description": "User clicks the call CTA on a category detail page. Includes category name.",
+    "file": "src/app/categories/[slug]/page.tsx"
+  },
+  {
+    "event": "location_whatsapp_clicked",
+    "description": "User clicks the WhatsApp supply request CTA on a service area location page. Includes location name.",
+    "file": "src/app/locations/[slug]/page.tsx"
+  }
+]
