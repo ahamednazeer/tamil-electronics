@@ -14,6 +14,8 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { LenisProvider } from '@/components/common/ReactLenis'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/react'
+import { PostHogProvider } from '@/providers/PostHogProvider'
+
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -140,8 +142,9 @@ export default function RootLayout({
           defaultTheme='light'
           storageKey='theme-v2'
           disableTransitionOnChange>
-          <LenisProvider>
-            <LanguageProvider>
+          <PostHogProvider>
+            <LenisProvider>
+              <LanguageProvider>
               <Aoscompo>
                 <Header />
                 <ParticlesBackgroundWrapper />
@@ -153,6 +156,7 @@ export default function RootLayout({
               <Analytics />
             </LanguageProvider>
           </LenisProvider>
+          </PostHogProvider>
         </ThemeProvider>
       </body>
     </html>
