@@ -11,6 +11,7 @@ import { LanguageProvider } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton'
 import Script from 'next/script'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 // Optimize font loading with display swap and preload
 const font = DM_Sans({
@@ -138,6 +139,7 @@ export default function RootLayout({
             <ScrollToTop />
           </LanguageProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
