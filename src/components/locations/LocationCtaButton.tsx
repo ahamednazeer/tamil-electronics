@@ -27,6 +27,7 @@ export default function LocationCtaButton({ locationName, googleMapsUrl }: Locat
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-outline flex items-center justify-center gap-2 py-3.5 px-7 text-lg font-medium bg-[var(--theme-bg)]"
+        onClick={() => posthog.capture('location_maps_clicked', { location_name: locationName })}
       >
         <Icon icon="mdi:map-marker-path" className="text-2xl" />
         Navigate to Warehouse

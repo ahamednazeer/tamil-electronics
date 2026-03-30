@@ -72,6 +72,7 @@ const Footer: FC = () => {
                   aria-label={social.label}
                   className='footer-social-icon group'
                   style={{ '--social-hover': social.hoverColor } as React.CSSProperties}
+                  onClick={() => posthog.capture('footer_social_clicked', { platform: social.label })}
                 >
                   <Icon
                     icon={social.icon}

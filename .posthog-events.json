@@ -63,5 +63,30 @@
     "event": "location_whatsapp_clicked",
     "description": "User clicks the WhatsApp supply request CTA on a service area location page. Includes location name.",
     "file": "src/app/locations/[slug]/page.tsx"
+  },
+  {
+    "event": "hero_call_clicked",
+    "description": "User clicks the 'Call Now' button in the hero section.",
+    "file": "src/components/Home/Hero/index.tsx"
+  },
+  {
+    "event": "hero_whatsapp_clicked",
+    "description": "User clicks the 'WhatsApp Us' button in the hero section.",
+    "file": "src/components/Home/Hero/index.tsx"
+  },
+  {
+    "event": "faq_question_toggled",
+    "description": "User expands or collapses an FAQ item. Properties: question_index, question_text, is_open.",
+    "file": "src/components/Home/Faq/index.tsx"
+  },
+  {
+    "event": "footer_social_clicked",
+    "description": "User clicks a social media link in the footer. Properties: platform (e.g. Facebook, Instagram, WhatsApp).",
+    "file": "src/components/Layout/Footer/index.tsx"
+  },
+  {
+    "event": "location_maps_clicked",
+    "description": "User clicks 'Navigate to Warehouse' map link on a location page. Properties: location_name.",
+    "file": "src/components/locations/LocationCtaButton.tsx"
   }
 ]
