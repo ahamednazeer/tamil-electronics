@@ -14,6 +14,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { LenisProvider } from '@/components/common/ReactLenis'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 // Optimize font loading with display swap and preload
@@ -152,6 +153,7 @@ export default function RootLayout({
               <FloatingWhatsAppButton />
               <ScrollToTop />
               <Analytics />
+              <SpeedInsights />
             </LanguageProvider>
           </LenisProvider>
         </ThemeProvider>
