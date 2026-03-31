@@ -63,7 +63,7 @@ const Header: React.FC = () => {
       <div className={`fixed top-0 w-full z-40 flex justify-center transition-all duration-300 pointer-events-none ${sticky ? 'p-2 sm:p-5' : 'p-0'}`}>
         <header
           className={`relative w-full pointer-events-auto transition-all duration-300 ${sticky
-            ? (language === 'ta' ? 'max-w-[1300px]' : 'max-w-6xl')
+            ? (language === 'ta' ? 'max-w-[1380px]' : 'max-w-6xl')
             : 'border-b border-white/5 shadow-[0_4px_16px_rgba(0,0,0,0.05)] backdrop-blur-md'
             }`}
           style={{ backgroundColor: (!sticky && showHeaderBg) ? 'var(--theme-header-bg)' : 'transparent' }}>
@@ -73,11 +73,11 @@ const Header: React.FC = () => {
           </div>
 
           <div className='relative z-10 w-full lg:py-0 py-2'>
-            <div className={`container mx-auto flex items-center justify-between py-2 sm:py-3 gap-1 sm:gap-3 ${sticky ? 'px-3 sm:px-8' : 'px-3 sm:px-4'}`}>
+            <div className={`${sticky ? 'w-full' : 'container mx-auto'} flex items-center justify-between py-2 sm:py-3 gap-1 lg:gap-2 ${sticky ? 'px-3 sm:px-6 lg:px-6 xl:px-8' : 'px-3 sm:px-4'}`}>
               <div className="flex shrink-0 justify-start min-w-max">
                 <Logo />
               </div>
-              <nav className='hidden lg:flex items-center gap-2 xl:gap-5 2xl:gap-8 justify-center flex-none px-2'>
+              <nav className={`hidden lg:flex items-center justify-center flex-1 px-1 lg:px-0 ${language === 'ta' ? 'gap-1.5 xl:gap-3 2xl:gap-6' : 'gap-2 xl:gap-5 2xl:gap-8'}`}>
                 {headerData.map((item, index) => (
                   <HeaderLink key={index} item={item} />
                 ))}
@@ -87,10 +87,8 @@ const Header: React.FC = () => {
                   href={`tel:${storeInfo.phoneE164}`}
                   aria-label={t('header.call_short')}
                   onClick={() => posthog.capture('header_call_clicked')}
-                  className='btn btn-outline btn-pill flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
-                  <Icon icon='mdi:phone' className='text-sm sm:text-base' />
-                  <span className='hidden min-[400px]:inline sm:hidden'>{t('header.call_short')}</span>
-                  <span className='hidden sm:inline lg:hidden xl:inline'>{storeInfo.phoneDisplay}</span>
+                  className='btn btn-outline btn-pill flex items-center justify-center shrink-0 w-[42px] sm:w-[54px] lg:w-[58px] h-[34px] sm:h-[38px]'>
+                  <Icon icon='mdi:phone' className='text-[18px] sm:text-[20px] shrink-0' />
                 </Link>
                 {/* Language only (no theme toggle) */}
                 <div className='hidden md:flex items-center'>
@@ -100,10 +98,10 @@ const Header: React.FC = () => {
                   href={`https://wa.me/${storeInfo.whatsappNumber}`}
                   target='_blank'
                   rel='noopener noreferrer'
+                  aria-label={t('header.whatsapp_short')}
                   onClick={() => posthog.capture('header_whatsapp_clicked')}
-                  className='btn btn-outline btn-pill flex items-center gap-1 sm:gap-2 px-1.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm whitespace-nowrap'>
-                  <Icon icon='mdi:whatsapp' className='text-sm sm:text-base' />
-                  <span className='hidden sm:inline lg:hidden xl:inline'>{t('header.whatsapp_short')}</span>
+                  className='btn btn-outline btn-pill flex items-center justify-center shrink-0 w-[42px] sm:w-[54px] lg:w-[58px] h-[34px] sm:h-[38px]'>
+                  <Icon icon='mdi:whatsapp' className='text-[20px] sm:text-[22px] shrink-0' />
                 </Link>
                 <button
                   onClick={() => {

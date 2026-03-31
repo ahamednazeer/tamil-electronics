@@ -35,7 +35,7 @@ const Brands = () => {
   useEffect(() => {
     // Listen for the custom event dispatched by LocalServices
     const handleServiceFilter = (e: Event) => {
-      const detail = (e as CustomEvent<{ service: string }>).detail
+      const detail = (e as CustomEvent<{ service: string, source?: string }>).detail
       if (!detail?.service) return
 
       setActiveFilter(detail.service)
@@ -49,8 +49,10 @@ const Brands = () => {
         timerRef.current = null
       }, 10000)
 
-      // Scroll the brands section into view
-      sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      // Scroll the brands section into view only if triggered directly via a click
+      if (detail.source === 'click') {
+        sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
     }
 
     // Outside click: clear filter when tapping anywhere outside the brands section

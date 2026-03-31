@@ -105,7 +105,7 @@ const LocalServices = () => {
 
   const handleServiceClick = (serviceKey: string) => {
     window.dispatchEvent(
-      new CustomEvent('service-filter', { detail: { service: serviceKey } })
+      new CustomEvent('service-filter', { detail: { service: serviceKey, source: 'click' } })
     )
   }
 

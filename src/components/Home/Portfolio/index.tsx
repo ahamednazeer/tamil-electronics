@@ -137,10 +137,20 @@ const Portfolio = () => {
       description: t('portfolio.items.switches.description'),
     },
     {
+      image: '/images/products/switch-gear.png',
+      title: t('portfolio.items.switchgear.title'),
+      description: t('portfolio.items.switchgear.description'),
+    },
+    {
       image: '/images/products/fans.webp',
       video: '/images/products/fans.mp4',
       title: t('portfolio.items.fans.title'),
       description: t('portfolio.items.fans.description'),
+    },
+    {
+      image: '/images/products/bldc-fans.png',
+      title: t('portfolio.items.bldc.title'),
+      description: t('portfolio.items.bldc.description'),
     },
     {
       image: '/images/products/mcb.webp',
@@ -177,6 +187,16 @@ const Portfolio = () => {
       video: '/images/products/water-heaters.mp4',
       title: t('portfolio.items.heaters.title'),
       description: t('portfolio.items.heaters.description'),
+    },
+    {
+      image: '/images/products/stabilizers.png',
+      title: t('portfolio.items.stabilizers.title'),
+      description: t('portfolio.items.stabilizers.description'),
+    },
+    {
+      image: '/images/products/air-coolers.png',
+      title: t('portfolio.items.coolers.title'),
+      description: t('portfolio.items.coolers.description'),
     },
   ]
 
@@ -241,7 +261,7 @@ const Portfolio = () => {
                           fill
                           loading='lazy'
                           sizes='(max-width: 640px) 300px, (max-width: 1024px) 380px, 460px'
-                          className='object-cover group-hover:scale-105 transition-transform duration-300'
+                          className='object-contain bg-white group-hover:scale-105 transition-transform duration-300'
                         />
                       )}
                       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 via-black/40 to-transparent flex items-end p-4">

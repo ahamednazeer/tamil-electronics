@@ -107,8 +107,12 @@
                 "description": "High-quality wiring materials for safe electrical connections."
             },
             "switches": {
-                "title": "Switch Boards",
+                "title": "Switches & Sockets",
                 "description": "Modern and durable switch solutions."
+            },
+            "switchgear": {
+                "title": "Switch Gear",
+                "description": "Heavy duty switchgear and distribution boards."
             },
             "fans": {
                 "title": "Fans & Appliances",
@@ -119,7 +123,7 @@
                 "description": "Circuit protection and safety devices."
             },
             "pipes": {
-                "title": "PVC Pipes",
+                "title": "PVC Pipes & Conduits",
                 "description": "Complete wiring support materials."
             },
             "fittings": {
@@ -137,6 +141,18 @@
             "heaters": {
                 "title": "Water Heaters",
                 "description": "Modern electric storage water heaters and geysers."
+            },
+            "bldc": {
+                "title": "BLDC Fan",
+                "description": "Energy-efficient and remote-controlled BLDC ceiling fans."
+            },
+            "stabilizers": {
+                "title": "Stabilizers",
+                "description": "Voltage stabilizers for AC, TV, and home appliances."
+            },
+            "coolers": {
+                "title": "Air Cooler",
+                "description": "High-performance air coolers for comfortable summers."
             }
         }
     },
@@ -266,10 +282,27 @@
     "menu": {
         "home": "Home",
         "products": "Products",
-        "brands": "Brands",
-        "reviews": "Reviews",
+        "electrical": "Electrical",
+        "plumbing": "Plumbing",
+        "appliances": "Appliances",
         "about": "About",
         "contact": "Contact",
-        "language": "Language"
+        "language": "Language",
+        "submenus": {
+            "wiring_cables": "Wiring & Cables",
+            "switch_sockets": "Switch & Sockets",
+            "switch_gear": "Switch Gear",
+            "lighting_system": "Lighting System",
+            "conduits_fittings": "Electrical Conduits & Fittings",
+            "pipe_fittings": "Pipe & Fittings",
+            "bathroom_fittings": "Bathroom Tap & Fittings",
+            "water_tanks": "Water Tanks",
+            "pumps": "Pumps",
+            "fan": "Fan",
+            "bldc_fan": "BLDC Fan",
+            "stabilizers": "Stabilizers",
+            "air_cooler": "Air Cooler",
+            "water_heater": "Water Heater"
+        }
     }
 }
