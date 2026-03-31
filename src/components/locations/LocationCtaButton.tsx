@@ -2,7 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { storeInfo } from '@/data/storeInfo'
-import posthog from 'posthog-js'
+import { trackEvent } from '@/lib/analytics'
 
 interface LocationCtaButtonProps {
   locationName: string
@@ -17,17 +17,25 @@ export default function LocationCtaButton({ locationName, googleMapsUrl }: Locat
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-primary flex items-center justify-center gap-2 py-3.5 px-7 text-lg font-medium shadow-xl shadow-primary/20"
-        onClick={() => posthog.capture('location_whatsapp_clicked', { location_name: locationName })}
+        onClick={() => trackEvent('location_whatsapp_clicked', { location_name: locationName })}
       >
         <Icon icon="mdi:whatsapp" className="text-2xl" />
         WhatsApp us for {locationName} Supply
+      </a>
+      <a
+        href={`tel:${storeInfo.phoneE164}`}
+        className="btn btn-outline flex items-center justify-center gap-2 py-3.5 px-7 text-lg font-medium bg-[var(--theme-bg)]"
+        onClick={() => trackEvent('location_call_clicked', { location_name: locationName })}
+      >
+        <Icon icon="mdi:phone" className="text-2xl" />
+        Call for {locationName} Supply
       </a>
       <a
         href={googleMapsUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-outline flex items-center justify-center gap-2 py-3.5 px-7 text-lg font-medium bg-[var(--theme-bg)]"
-        onClick={() => posthog.capture('location_maps_clicked', { location_name: locationName })}
+        onClick={() => trackEvent('location_maps_clicked', { location_name: locationName })}
       >
         <Icon icon="mdi:map-marker-path" className="text-2xl" />
         Navigate to Warehouse
@@ -35,3 +43,4 @@ export default function LocationCtaButton({ locationName, googleMapsUrl }: Locat
     </div>
   )
 }
+

@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Icon } from '@iconify/react'
-import posthog from 'posthog-js'
+import { trackEvent } from '@/lib/analytics'
 
 const faqs = [
   {
@@ -84,7 +84,7 @@ export default function Faq() {
                   onClick={() => {
                     const willOpen = !isOpen
                     setOpenIndex(isOpen ? null : index)
-                    posthog.capture('faq_question_toggled', { question_index: index, question_text: faq.question, is_open: willOpen })
+                    trackEvent('faq_question_toggled', { question_index: index, question_text: faq.question, is_open: willOpen })
                   }}
                   className="w-full text-left px-5 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 focus:outline-none rounded-2xl"
                   aria-expanded={isOpen}

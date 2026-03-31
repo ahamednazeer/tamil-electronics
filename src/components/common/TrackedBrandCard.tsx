@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import posthog from 'posthog-js'
+import { trackEvent } from '@/lib/analytics'
 
 interface Brand {
   slug: string
@@ -22,7 +22,7 @@ export default function TrackedBrandCard({ brand, idx }: TrackedBrandCardProps) 
       className="bg-white rounded-2xl p-6 flex flex-col items-center justify-center border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 group"
       data-aos="fade-up"
       data-aos-delay={(idx % 6) * 50}
-      onClick={() => posthog.capture('brand_card_clicked', { brand_name: brand.name, brand_slug: brand.slug })}
+      onClick={() => trackEvent('brand_card_clicked', { brand_name: brand.name, brand_slug: brand.slug })}
     >
       <div className="relative w-full aspect-[4/3] mb-3">
         <Image

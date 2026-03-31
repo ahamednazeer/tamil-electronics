@@ -1,6 +1,7 @@
 'use client'
 import { useLanguage } from '@/context/LanguageContext'
 import { useEffect, useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 const LanguageToggle: React.FC = () => {
     const { language, setLanguage } = useLanguage()
@@ -18,7 +19,11 @@ const LanguageToggle: React.FC = () => {
 
     return (
         <button
-            onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')}
+            onClick={() => {
+                const newLang = language === 'en' ? 'ta' : 'en'
+                setLanguage(newLang)
+                trackEvent('language_switched', { from: language, to: newLang })
+            }}
             className="px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105 border ml-2 shadow-sm text-primary border-primary/50"
             style={{
                 backgroundColor: 'var(--theme-bg-card)',

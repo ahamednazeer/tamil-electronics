@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
-import posthog from 'posthog-js'
+import { trackEvent } from '@/lib/analytics'
 
 const InquiryForm = () => {
   const { t } = useLanguage()
@@ -30,7 +30,7 @@ const InquiryForm = () => {
       message
     )}`
     window.open(url, '_blank', 'noopener,noreferrer')
-    posthog.capture('inquiry_form_submitted', { name: form.name, product: form.product })
+    trackEvent('inquiry_form_submitted', { product: form.product })
     setSubmitted(true)
   }
 

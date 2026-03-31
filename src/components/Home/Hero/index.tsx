@@ -6,7 +6,7 @@ import { Icon } from '@iconify/react'
 import { LayoutTextFlip } from '@/components/ui/layout-text-flip'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
-import posthog from 'posthog-js'
+import { trackEvent } from '@/lib/analytics'
 
 // Dynamically import slider to reduce initial JS bundle size
 const CardSlider = dynamic(() => import('./slider'), {
@@ -99,7 +99,7 @@ const Hero = () => {
               <a
                 href={`tel:${storeInfo.phoneE164}`}
                 className='btn btn-primary w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] text-base sm:text-lg lg:text-xl py-2.5 sm:py-3 px-6 sm:px-7 z-50 text-center whitespace-nowrap'
-                onClick={() => posthog.capture('hero_call_clicked')}>
+                onClick={() => trackEvent('hero_call_clicked')}>
                 <Icon icon='mdi:phone' className='text-xl' />
                 {t('hero.call_now')}
               </a>
@@ -108,7 +108,7 @@ const Hero = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='btn btn-outline w-full sm:w-auto sm:min-w-[230px] lg:min-w-[250px] text-base sm:text-lg lg:text-xl py-2.5 sm:py-3 px-6 sm:px-7 text-center whitespace-nowrap'
-                onClick={() => posthog.capture('hero_whatsapp_clicked')}>
+                onClick={() => trackEvent('hero_whatsapp_clicked')}>
                 <Icon icon='mdi:whatsapp' className='text-xl' />
                 {t('hero.whatsapp_us')}
               </a>

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Icon } from '@iconify/react'
-import posthog from 'posthog-js'
+import { trackEvent } from '@/lib/analytics'
 
 interface Category {
   slug: string
@@ -25,7 +25,7 @@ export default function TrackedCategoryCard({ category, idx }: TrackedCategoryCa
       className="group block bg-[var(--theme-bg-card)] rounded-3xl overflow-hidden border border-[var(--theme-border)] shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1"
       data-aos="fade-up"
       data-aos-delay={(idx % 4) * 50}
-      onClick={() => posthog.capture('category_card_clicked', { category_name: category.name, category_slug: category.slug })}
+      onClick={() => trackEvent('category_card_clicked', { category_name: category.name, category_slug: category.slug })}
     >
       <div className="relative h-48 sm:h-56 w-full overflow-hidden">
         <Image
