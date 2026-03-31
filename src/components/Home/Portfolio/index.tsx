@@ -4,6 +4,44 @@ import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 
+const VideoPlayer = ({ src, poster }: { src: string, poster: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoRef.current?.play().catch(() => {})
+          } else {
+            videoRef.current?.pause()
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      preload="none"
+      loop
+      muted
+      playsInline
+      className='absolute inset-0 object-cover w-full h-full group-hover:scale-105 transition-transform duration-300'
+    />
+  )
+}
+
 const Portfolio = () => {
   const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
@@ -247,15 +285,7 @@ const Portfolio = () => {
                   <div className='surface-card rounded-xl sm:rounded-2xl overflow-hidden h-full flex flex-col group'>
                     <div className='relative h-64 sm:h-80 w-full overflow-hidden'>
                       {item.video ? (
-                        <video
-                          src={item.video}
-                          poster={item.image}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className='absolute inset-0 object-cover w-full h-full group-hover:scale-105 transition-transform duration-300'
-                        />
+                        <VideoPlayer src={item.video} poster={item.image} />
                       ) : (
                         <Image
                           src={item.image}
