@@ -150,6 +150,7 @@ const Portfolio = () => {
     {
       image: '/images/products/bldc-fans.png',
       title: t('portfolio.items.bldc.title'),
+      video: '/images/products/bldc-fans.mp4',
       description: t('portfolio.items.bldc.description'),
     },
     {
@@ -196,6 +197,7 @@ const Portfolio = () => {
     {
       image: '/images/products/air-coolers.png',
       title: t('portfolio.items.coolers.title'),
+      video: '/images/products/air-coolers.mp4',
       description: t('portfolio.items.coolers.description'),
     },
   ]
