@@ -241,7 +241,7 @@ const Portfolio = () => {
   ]
 
   return (
-    <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16 min-h-0 overflow-hidden' id='brands'>
+    <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16 min-h-0 overflow-hidden' id='products'>
       <div className='container px-4 sm:px-6'>
         <motion.div
           whileInView={{ y: 0, opacity: 1 }}

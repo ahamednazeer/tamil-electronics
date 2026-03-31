@@ -154,7 +154,7 @@ const Work = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16 w-full overflow-hidden' id='products'>
+    <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16 w-full overflow-hidden' id='work'>
       <div className='container px-4 sm:px-6 mx-auto'>
         <div className='grid grid-cols-12 items-center gap-8 lg:gap-12'>
           {/* Left Content */}
