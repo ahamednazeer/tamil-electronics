@@ -11,6 +11,7 @@ import { trackEvent } from '@/lib/analytics'
 import { locationsData } from '@/data/locations'
 import { formatTime } from '@/lib/time'
 import VisitorCounter from '@/components/common/VisitorCounter'
+import StoreStatus from '@/components/Home/Contact/StoreStatus'
 
 const socialLinks = [
   {
@@ -167,15 +168,20 @@ const Footer: FC = () => {
               </Link>
 
               {/* Working Hours */}
-              <div className='footer-contact-card group'>
-                <div className='footer-contact-icon-wrap'>
+              <div className='footer-contact-card group items-start sm:items-center'>
+                <div className='footer-contact-icon-wrap shrink-0'>
                   <Icon icon='mdi:clock-outline' width='20' height='20' />
                 </div>
-                <div>
-                  <p className='text-[var(--theme-text)] text-sm font-medium mb-1'>{t('footer.working_hours')}</p>
-                  <p className='text-[var(--theme-text-muted)] text-xs sm:text-sm'>
-                    {formatTime(firstHour.opens, locale)} – {formatTime(firstHour.closes, locale)}
-                  </p>
+                <div className='flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full'>
+                  <div>
+                    <p className='text-[var(--theme-text)] text-sm font-medium mb-1'>{t('footer.working_hours')}</p>
+                    <p className='text-[var(--theme-text-muted)] text-xs sm:text-sm'>
+                      {formatTime(firstHour.opens, locale)} – {formatTime(firstHour.closes, locale)}
+                    </p>
+                  </div>
+                  <div className='mt-1 sm:mt-0'>
+                    <StoreStatus />
+                  </div>
                 </div>
               </div>
             </div>

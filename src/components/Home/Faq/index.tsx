@@ -53,9 +53,9 @@ export default function Faq() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      
-      <div className="container px-4 sm:px-6 relative z-10 max-w-4xl mx-auto">
-        <div className="text-center mb-10 sm:mb-14 fade-mask-soft">
+
+      <div className="w-full px-4 sm:px-6 relative z-10 max-w-4xl mx-auto">
+        <div className="text-center mb-10 sm:mb-14 fade-mask-soft flex flex-col items-center">
           <p className="text-primary font-bold tracking-wider uppercase text-sm sm:text-base mb-3" data-aos="fade-up">
             Got Questions?
           </p>
@@ -67,18 +67,14 @@ export default function Faq() {
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-1">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index
 
             return (
-              <div 
+              <div
                 key={index}
-                className={`border rounded-2xl transition-all duration-300 ${
-                  isOpen 
-                    ? 'border-primary/30 bg-[var(--theme-bg-card)] shadow-[0_8px_30px_rgb(0,0,0,0.06)]' 
-                    : 'border-[var(--theme-border)] bg-[var(--theme-bg-card)]/40 hover:border-primary/20 hover:bg-[var(--theme-bg-card)] hover:shadow-sm'
-                }`}
+                className="border-b border-[var(--theme-border)] transition-colors duration-300"
               >
                 <button
                   onClick={() => {
@@ -86,17 +82,38 @@ export default function Faq() {
                     setOpenIndex(isOpen ? null : index)
                     trackEvent('faq_question_toggled', { question_index: index, question_text: faq.question, is_open: willOpen })
                   }}
-                  className="w-full text-left px-5 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 focus:outline-none rounded-2xl"
+                  className="w-full text-left py-6 sm:py-8 flex items-center justify-between gap-4 focus:outline-none group"
                   aria-expanded={isOpen}
                 >
-                  <span className={`font-bold text-[1.1rem] sm:text-xl transition-colors pr-4 ${isOpen ? 'text-primary' : 'text-theme group-hover:text-primary/80'}`}>
+                  <span className={`font-semibold text-[1.1rem] sm:text-xl leading-snug pr-4 transition-colors ${isOpen ? 'text-primary' : 'text-theme group-hover:text-primary/80'}`}>
                     {faq.question}
                   </span>
-                  <div className={`shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors ${isOpen ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}`}>
-                    <Icon 
-                      icon="mdi:chevron-down" 
-                      className={`text-xl sm:text-2xl transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
-                    />
+                  <div className={`relative shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center transition-colors ${isOpen ? 'text-primary' : 'text-theme-muted group-hover:text-primary/80'}`}>
+                    <AnimatePresence initial={false}>
+                      {isOpen ? (
+                        <motion.div
+                          key="minus"
+                          initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                          exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="absolute inset-0 flex items-center justify-center"
+                        >
+                          <Icon icon="ph:minus-light" className="text-2xl sm:text-[1.75rem]" />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="plus"
+                          initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                          exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="absolute inset-0 flex items-center justify-center"
+                        >
+                          <Icon icon="ph:plus-light" className="text-2xl sm:text-[1.75rem]" />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </button>
 
@@ -106,10 +123,10 @@ export default function Faq() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-5 sm:px-8 pb-6 sm:pb-8 pt-0 text-muted/90 text-base sm:text-[1.1rem] leading-relaxed max-w-3xl">
+                      <div className="pb-8 pt-2 sm:pt-4 text-theme-muted text-base sm:text-[1.1rem] leading-relaxed max-w-3xl">
                         {faq.answer}
                       </div>
                     </motion.div>
