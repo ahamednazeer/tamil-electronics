@@ -118,5 +118,11 @@
     "description": "User toggles the language between English and Tamil.",
     "properties": ["from", "to", "page_path"],
     "file": "src/components/Layout/LanguageToggle.tsx"
+  },
+  {
+    "event": "app_error_boundary_triggered",
+    "description": "Captured automatic application error from React Error Boundary.",
+    "properties": ["error_message", "digest", "page_path", "type"],
+    "file": "src/app/error.tsx"
   }
 ]

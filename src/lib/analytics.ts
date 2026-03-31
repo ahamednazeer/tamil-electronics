@@ -26,6 +26,7 @@ export type PostHogEvent =
   | 'hero_whatsapp_clicked'
   | 'faq_question_toggled'
   | 'language_switched'
+  | 'app_error_boundary_triggered'
 
 /**
  * Centralized event tracking wrapper.

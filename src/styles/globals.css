@@ -555,7 +555,14 @@
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1.25rem 0 1.5rem 0;
+    padding-right: 9rem;
     border-top: 1px solid var(--theme-border);
+  }
+
+  @media (min-width: 1024px) {
+    .footer-bottom-bar {
+      padding-right: 0;
+    }
   }
 
   /* Status dot pulse */
