@@ -129,7 +129,7 @@ const Hero = () => {
                   priority
                   fetchPriority='high'
                   sizes='(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 50vw'
-                  className='hero-bold-image object-cover'
+                  className='hero-bold-image object-contain'
                 />
               </div>
             </div>

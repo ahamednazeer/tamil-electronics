@@ -4,6 +4,7 @@ import Link from 'next/link'
 import MapTilerMap from '@/components/Home/Hero/MapTilerMap'
 import { useLanguage } from '@/context/LanguageContext'
 import { storeInfo } from '@/data/storeInfo'
+import { Icon } from '@iconify/react'
 
 const LocationMapSection = () => {
   const { t } = useLanguage()
@@ -11,7 +12,7 @@ const LocationMapSection = () => {
   return (
     <section className='pt-4 sm:pt-6 lg:pt-8'>
       <div className='container px-4 sm:px-6'>
-        <div className='mb-4 sm:mb-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2'>
+        <div className='mb-4 sm:mb-5'>
           <div>
             <h3 className='text-theme text-lg sm:text-xl lg:text-2xl font-semibold'>
               {t('contact.map_title')}
@@ -20,18 +21,11 @@ const LocationMapSection = () => {
               {t('contact.map_subtitle')}
             </p>
           </div>
-          <Link
-            href={storeInfo.googleMapsUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='btn btn-outline text-sm sm:text-base px-4 py-2 whitespace-nowrap'>
-            {t('contact.open_in_maps')}
-          </Link>
         </div>
         <div className='hero-map-section'>
           <div className='hero-map-shell'>
             <div className='hero-map-body'>
-              <div className='hero-map-frame-wrap'>
+              <div className='hero-map-frame-wrap group/map'>
                 <MapTilerMap />
                 <Link
                   href={storeInfo.googleMapsUrl}
@@ -40,6 +34,17 @@ const LocationMapSection = () => {
                   aria-label={t('hero.open_map')}
                   className='hero-map-link-overlay'
                 />
+                
+                <Link
+                  href={storeInfo.googleMapsUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={t('hero.open_map')}
+                  className='absolute top-3 right-3 z-10 flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-[var(--theme-bg-card)]/90 backdrop-blur-sm border border-[var(--theme-border)]/50 rounded-full shadow-md text-[var(--theme-text)] transition-all duration-300 hover:scale-105 hover:text-[var(--theme-primary)] hover:border-[var(--theme-primary)] dark:bg-white/10 dark:text-white/80 dark:hover:text-white'
+                >
+                  <Icon icon='lucide:external-link' width='18' height='18' />
+                </Link>
+
                 <span className='hero-map-attrib'>
                   © MapTiler © OpenStreetMap contributors
                 </span>
