@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { motion } from 'motion/react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 
 const VideoPlayer = ({ src, poster }: { src: string, poster: string }) => {
@@ -49,6 +49,80 @@ const Portfolio = () => {
   const viewportRef = useRef<HTMLDivElement>(null)
   const maxShiftRef = useRef(0)
   const isProgrammaticRef = useRef(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [hasDragged, setHasDragged] = useState(false)
+  const startXRef = useRef(0)
+  const scrollLeftRef = useRef(0)
+  const velXRef = useRef(0)
+  const lastXRef = useRef(0)
+  const lastTimeRef = useRef(0)
+  const dragRafRef = useRef<number | null>(null)
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!viewportRef.current) return
+    setIsDragging(true)
+    setHasDragged(false)
+    startXRef.current = e.pageX - viewportRef.current.offsetLeft
+    scrollLeftRef.current = viewportRef.current.scrollLeft
+    lastXRef.current = e.pageX
+    lastTimeRef.current = performance.now()
+    velXRef.current = 0
+    if (dragRafRef.current) cancelAnimationFrame(dragRafRef.current)
+  }
+
+  const momentumLoop = () => {
+    if (!viewportRef.current) return
+    if (Math.abs(velXRef.current) > 0.5) {
+      viewportRef.current.scrollLeft -= velXRef.current
+      velXRef.current *= 0.92 // friction
+      dragRafRef.current = requestAnimationFrame(momentumLoop)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false)
+      momentumLoop()
+    }
+  }
+
+  const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false)
+      momentumLoop()
+    }
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !viewportRef.current) return
+    e.preventDefault()
+
+    const x = e.pageX - viewportRef.current.offsetLeft
+    const dx = e.pageX - lastXRef.current
+    const dt = performance.now() - lastTimeRef.current
+
+    if (dt > 0) {
+      // Calculate velocity as pixels per frame roughly
+      velXRef.current = (dx / dt) * 16 
+    }
+    
+    if (Math.abs(e.pageX - viewportRef.current.offsetLeft - startXRef.current) > 5) {
+      setHasDragged(true)
+    }
+
+    lastXRef.current = e.pageX
+    lastTimeRef.current = performance.now()
+
+    const walk = (x - startXRef.current) // 1:1 tracking
+    viewportRef.current.scrollLeft = scrollLeftRef.current - walk
+  }
+
+  const handleContainerClickCapture = (e: React.MouseEvent) => {
+    if (hasDragged) {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+  }
 
   useEffect(() => {
     const updateMaxShift = () => {
@@ -269,7 +343,12 @@ const Portfolio = () => {
         >
           <div
             ref={viewportRef}
-            className='overflow-x-auto overflow-y-hidden no-scrollbar w-full relative'
+            className={`overflow-x-auto overflow-y-hidden no-scrollbar w-full relative select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onClickCapture={handleContainerClickCapture}
             style={{
               WebkitOverflowScrolling: 'touch',
               maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',

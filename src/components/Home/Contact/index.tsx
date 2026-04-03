@@ -22,7 +22,7 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className='max-w-3xl mx-auto'>
+        <div className='max-w-xl lg:max-w-2xl mx-auto'>
           <InquiryForm />
         </div>
         <LocationMapSection />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 
@@ -8,6 +8,82 @@ const LocalServices = () => {
   const { t } = useLanguage()
   const bandRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const [isDragging, setIsDragging] = useState(false)
+  const [hasDragged, setHasDragged] = useState(false)
+  const startXRef = useRef(0)
+  const scrollLeftRef = useRef(0)
+  const velXRef = useRef(0)
+  const lastXRef = useRef(0)
+  const lastTimeRef = useRef(0)
+  const rafRef = useRef<number | null>(null)
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return
+    setIsDragging(true)
+    setHasDragged(false)
+    startXRef.current = e.pageX - scrollContainerRef.current.offsetLeft
+    scrollLeftRef.current = scrollContainerRef.current.scrollLeft
+    lastXRef.current = e.pageX
+    lastTimeRef.current = performance.now()
+    velXRef.current = 0
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+  }
+
+  const momentumLoop = () => {
+    if (!scrollContainerRef.current) return
+    if (Math.abs(velXRef.current) > 0.5) {
+      scrollContainerRef.current.scrollLeft -= velXRef.current
+      velXRef.current *= 0.92 // friction
+      rafRef.current = requestAnimationFrame(momentumLoop)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false)
+      momentumLoop()
+    }
+  }
+
+  const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false)
+      momentumLoop()
+    }
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollContainerRef.current) return
+    e.preventDefault()
+
+    const x = e.pageX - scrollContainerRef.current.offsetLeft
+    const dx = e.pageX - lastXRef.current
+    const dt = performance.now() - lastTimeRef.current
+
+    if (dt > 0) {
+      // Calculate velocity as pixels per frame roughly
+      velXRef.current = (dx / dt) * 16 
+    }
+    
+    if (Math.abs(e.pageX - scrollContainerRef.current.offsetLeft - startXRef.current) > 5) {
+      setHasDragged(true)
+    }
+
+    lastXRef.current = e.pageX
+    lastTimeRef.current = performance.now()
+
+    const walk = (x - startXRef.current) // 1:1 tracking
+    scrollContainerRef.current.scrollLeft = scrollLeftRef.current - walk
+  }
+
+  const handleContainerClickCapture = (e: React.MouseEvent) => {
+    if (hasDragged) {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -131,7 +207,13 @@ const LocalServices = () => {
             borderColor: 'var(--services-strip-border)',
           }}>
           <div
-            className='overflow-x-auto no-scrollbar w-full relative'
+            ref={scrollContainerRef}
+            className={`overflow-x-auto no-scrollbar w-full relative select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onClickCapture={handleContainerClickCapture}
             style={{
               WebkitOverflowScrolling: 'touch',
               maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
