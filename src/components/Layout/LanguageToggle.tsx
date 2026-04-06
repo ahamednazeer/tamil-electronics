@@ -24,10 +24,7 @@ const LanguageToggle: React.FC = () => {
                 setLanguage(newLang)
                 trackEvent('language_switched', { from: language, to: newLang })
             }}
-            className="px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105 border ml-2 shadow-sm text-primary border-primary/50"
-            style={{
-                backgroundColor: 'var(--theme-bg-card)',
-            }}
+            className="language-toggle-btn"
             aria-label={`Switch to ${language === 'en' ? 'Tamil' : 'English'}`}
         >
             {language === 'en' ? 'TA' : 'EN'}

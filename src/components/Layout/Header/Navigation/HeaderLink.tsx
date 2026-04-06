@@ -76,6 +76,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
                 <Link
                   key={index}
                   href={subItem.href}
+                  data-service-link
                   onMouseEnter={handleSubItemHover}
                   className={`group/link relative flex items-center justify-between px-3 py-2.5 rounded-[10px] transition-all duration-200 overflow-hidden ${
                     isActive

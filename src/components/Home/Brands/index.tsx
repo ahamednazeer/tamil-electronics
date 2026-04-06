@@ -49,7 +49,8 @@ const Brands = () => {
         timerRef.current = null
       }, 10000)
 
-      // Scroll the brands section into view only if triggered directly via a click
+      // Scroll the brands section into view only if triggered via a direct click on the service strip
+      // (source: 'click' as opposed to 'menu' or 'hover')
       if (detail.source === 'click') {
         sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
       }

@@ -166,19 +166,17 @@ const Header: React.FC = () => {
                   />
                 ))}
               </div>
-              {/* Mobile language toggle, soft rounded card */}
+              {/* Mobile language toggle */}
               <div
-                className='mt-5 rounded-2xl border p-3'
+                className='mt-4 flex items-center justify-between rounded-xl px-3 py-2.5'
                 style={{
                   borderColor: 'var(--theme-border)',
                   backgroundColor: 'var(--theme-bg-secondary)',
                 }}>
-                <p className='text-[11px] font-semibold uppercase tracking-[0.1em] text-muted/70 mb-2'>
+                <span className='text-xs font-medium uppercase tracking-wider' style={{ color: 'var(--theme-text-muted)' }}>
                   {t('menu.language')}
-                </p>
-                <div className='flex items-center gap-2'>
-                  <LanguageToggle />
-                </div>
+                </span>
+                <LanguageToggle />
               </div>
             </nav>
             <div

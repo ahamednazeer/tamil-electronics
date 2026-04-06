@@ -56,10 +56,22 @@ const MobileHeaderLink: React.FC<MobileHeaderLinkProps> = ({ item, onNavigate })
             <Link
               key={index}
               href={subItem.href}
-              onClick={() => onNavigate?.()}
+              data-service-link
+              onClick={(e) => {
+                // Prevent default anchor jump to allow clean smooth scroll to brands
+                e.preventDefault();
+                
+                // Dispatch the same service-filter event that desktop uses
+                if (subItem.serviceKey && typeof window !== 'undefined') {
+                  window.dispatchEvent(
+                    new CustomEvent('service-filter', { detail: { service: subItem.serviceKey, source: 'menu' } })
+                  );
+                }
+                onNavigate?.();
+              }}
               className="block rounded-lg px-3 py-2 text-sm font-medium text-midnight_text dark:text-white hover:text-primary hover:bg-primary/10 transition-colors"
             >
-              {subItem.label}
+              {subItem.translationKey ? (t(`menu.submenus.${subItem.translationKey}` as any) as string) : subItem.label}
             </Link>
           ))}
         </div>

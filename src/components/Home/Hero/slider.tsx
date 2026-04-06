@@ -58,7 +58,7 @@ const CardSlider = () => {
 
   useEffect(() => {
     const handleServiceFilter = (e: Event) => {
-      const detail = (e as CustomEvent<{ service: string }>).detail
+      const detail = (e as CustomEvent<{ service: string, source?: string }>).detail
       if (!detail?.service) return
 
       lastFilterTimeRef.current = Date.now()
@@ -73,8 +73,16 @@ const CardSlider = () => {
         timerRef.current = null
       }, 10000)
 
-      // Scroll the brands section into view
-      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      // Scroll the brands section into view on both hover (desktop) and menu click (mobile)
+      if (detail.source === 'hover' || detail.source === 'menu') {
+        const target = containerRef.current
+        if (target) {
+          // Small delay to ensure the mobile menu drawer has started closing
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }, 100)
+        }
+      }
 
       // Go to first slide after remount
       setTimeout(() => {

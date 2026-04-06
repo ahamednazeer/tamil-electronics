@@ -168,20 +168,18 @@ const Footer: FC = () => {
               </Link>
 
               {/* Working Hours */}
-              <div className='footer-contact-card group items-start sm:items-center'>
+              <div className='footer-contact-card group'>
                 <div className='footer-contact-icon-wrap shrink-0'>
                   <Icon icon='mdi:clock-outline' width='20' height='20' />
                 </div>
-                <div className='flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full'>
-                  <div>
-                    <p className='text-[var(--theme-text)] text-sm font-medium mb-1'>{t('footer.working_hours')}</p>
-                    <p className='text-[var(--theme-text-muted)] text-xs sm:text-sm'>
-                      {formatTime(firstHour.opens, locale)} – {formatTime(firstHour.closes, locale)}
-                    </p>
-                  </div>
-                  <div className='mt-1 sm:mt-0'>
+                <div className='flex-1 min-w-0'>
+                  <div className='flex items-center justify-between gap-3'>
+                    <p className='text-[var(--theme-text)] text-sm font-medium'>{t('footer.working_hours')}</p>
                     <StoreStatus />
                   </div>
+                  <p className='text-[var(--theme-text-muted)] text-xs sm:text-sm leading-relaxed mt-1'>
+                    {formatTime(firstHour.opens, locale)} – {formatTime(firstHour.closes, locale)}
+                  </p>
                 </div>
               </div>
             </div>
