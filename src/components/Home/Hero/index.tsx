@@ -18,25 +18,6 @@ const Hero = () => {
   const { t, language } = useLanguage()
   const headlineReady = true
 
-  const renderTownText = () => {
-    const townText = t('hero.all_materials')
-    if (language !== 'en') {
-      return townText
-    }
-    const target = 'Town'
-    const index = townText.indexOf(target)
-    if (index === -1) {
-      return townText
-    }
-    const before = townText.slice(0, index)
-    const after = townText.slice(index + target.length)
-    return (
-      <>
-        {before}T<span className='hero-letter-pop'>o</span>wn{after}
-      </>
-    )
-  }
-
   return (
     <section
       className='relative pt-32 sm:pt-36 lg:pt-48 pb-12 lg:pb-20 overflow-hidden z-[1]'
@@ -58,7 +39,7 @@ const Hero = () => {
             <h1
               className={`md:text-start text-center mb-3 sm:mb-4 leading-tight max-w-[800px] mx-auto md:mx-0 hero-headline ${headlineReady ? 'hero-headline-ready' : 'hero-headline-prepare'}`}>
               <span className='hero-line hero-line-kicker block text-muted/80 text-xs sm:text-sm lg:text-base font-semibold tracking-wide uppercase'>
-                {renderTownText()}
+                {t('hero.all_materials')}
               </span>
               {language === 'en' ? (
                 <span className='hero-line hero-line-main block font-extrabold text-[2.3rem] sm:text-[2.85rem] md:text-[3.2rem] lg:text-[3.6rem] leading-[1.06]'>
@@ -87,10 +68,6 @@ const Hero = () => {
                   <span className='text-theme'>மையம்</span>
                 </span>
               )}
-              <span className='hero-line hero-line-sub block text-sm sm:text-base text-muted mt-2'>
-                {t('hero.available')} {t('hero.here')}{' '}
-                {language === 'en' ? 'in' : ''} {t('hero.now_open')}
-              </span>
             </h1>
             <p className='text-muted/80 text-sm sm:text-base lg:text-lg md:text-start text-center mb-4 sm:mb-6 lg:mb-7 px-2 sm:px-0 max-w-[520px] mx-auto md:mx-0'>
               {t('hero.items_list')}
