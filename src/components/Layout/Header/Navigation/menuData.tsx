@@ -20,14 +20,14 @@ export const headerData: HeaderItem[] = [
     submenu: [
       { label: "Pipe & Fittings", translationKey: "pipe_fittings", href: "/#products?category=pipe-fittings", serviceKey: "pipes" },
       { label: "Bathroom Tap & Fittings", translationKey: "bathroom_fittings", href: "/#products?category=bathroom-tap-fittings", serviceKey: "fittings" },
-      { label: "Water Tanks", translationKey: "water_tanks", href: "/#products?category=water-tanks", serviceKey: "tanks" }
+      { label: "Water Tanks", translationKey: "water_tanks", href: "/#products?category=water-tanks", serviceKey: "tanks" },
+      { label: "Pumps", translationKey: "pumps", href: "/#products?category=pumps", serviceKey: "pumps" }
     ]
   },
   { 
     label: "Appliances", 
     href: "/#products",
     submenu: [
-      { label: "Pumps", translationKey: "pumps", href: "/#products?category=pumps", serviceKey: "pumps" },
       { label: "Fan", translationKey: "fan", href: "/#products?category=fan", serviceKey: "fans" },
       { label: "BLDC Fan", translationKey: "bldc_fan", href: "/#products?category=bldc-fan", serviceKey: "bldc" },
       { label: "Stabilizers", translationKey: "stabilizers", href: "/#products?category=stabilizers", serviceKey: "stabilizers" },

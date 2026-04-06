@@ -40,7 +40,7 @@
         "call_now": "Call Now"
     },
     "services": {
-        "subheading": "Local Services",
+        "subheading": "Shop by Category",
         "title": "Everyday Electrical Help",
         "description": "Quick guidance and ready stock for homes and small businesses.",
         "items": {
@@ -92,8 +92,8 @@
         }
     },
     "portfolio": {
-        "subheading_start": "Local",
-        "subheading_highlight": "Essentials",
+        "subheading_start": "Featured",
+        "subheading_highlight": "Products",
         "title_start": "Everything for",
         "title_highlight": "Home & Industry",
         "description": "Wires, pipes, switches, lights, fans, pumps, and more — all in one place.",
