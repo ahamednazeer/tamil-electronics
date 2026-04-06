@@ -16,9 +16,8 @@ const FloatingWhatsAppButton = () => {
       className='fixed bottom-4 right-4 z-50 group sm:bottom-5 sm:right-5 lg:hidden'
       aria-label={t('header.whatsapp_short')}
       onClick={() => trackEvent('whatsapp_button_clicked')}>
-      <span className='flex items-center gap-2 rounded-full bg-[#25D366] text-white px-4 py-3 shadow-[0_12px_30px_rgba(37,211,102,0.35)] transition-transform duration-200 group-hover:-translate-y-0.5'>
-        <Icon icon='mdi:whatsapp' className='text-xl' />
-        <span className='text-sm font-semibold'>{t('contact.whatsapp_button')}</span>
+      <span className='flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_30px_rgba(37,211,102,0.35)] transition-transform duration-200 group-hover:-translate-y-0.5'>
+        <Icon icon='mdi:whatsapp' className='text-3xl' />
       </span>
     </Link>
   )
