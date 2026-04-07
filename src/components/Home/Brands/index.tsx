@@ -2,25 +2,38 @@
 
 import Image from 'next/image'
 import { useLanguage } from '@/context/LanguageContext'
-import { brandsData } from '@/data/staticContent'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { brandsData } from '@/data/brands'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 
 // Map each service key to the brand names it relates to
 const brandMappings: Record<string, string[]> = {
-  lights: ['Crompton', 'Havells', 'Orient', 'Polycab', 'Philips', 'Surya', 'Luker', 'Sturlite', 'CG'],
-  fans: ['Crompton', 'Havells', 'Orient', 'Atomberg', 'Luker', 'CG'],
-  pipes: ['Finolex', 'Ashirvad', 'Supreme', 'Aquatech'],
-  fittings: ['Finolex', 'Ashirvad', 'Parryware', 'Supreme'],
-  pumps: ['Crompton', 'Suguna', 'CG', 'Aquatech'],
-  stabilizers: ['Havells', 'Crompton', 'V-Guard', 'Venus'],
-  wiring: ['Finolex', 'Havells', 'Polycab', 'RR Kabel', 'Standard', 'V-Guard'],
-  switches: ['Havells', 'Orient', 'Norwood', 'Standard'],
+  wiring: ['RR Kabel', 'Finolex', 'Kundan', 'Luker', 'Norwood'],
+  switches: ['GM', 'Legrand', 'Fybros'],
+  switchgear: ['Legrand', 'GM', 'Polycab', 'Havells'],
+  lights: ['Philips', 'GM', 'Fybros', 'Luker', 'Sturlite', 'Surya'],
+  conduits: ['Finolex', 'Ashirvad'],
+  pipes: ['Ashirvad', 'Aquatech'],
+  fittings: ['Parryware', 'Supreme'],
+  tanks: ['Aquatech'],
+  pumps: ['V-Guard', 'Crompton', 'Suguna'],
+  fans: ['Philips', 'Orient', 'Crompton', 'GM', 'V-Guard', 'CG', 'Fybros', 'Luker', 'Standard', 'Havells'],
+  bldc: ['Philips', 'Atomberg', 'V-Guard', 'Luker', 'Standard', 'GM'],
+  stabilizers: ['V-Guard'],
+  cooler: ['V-Guard'],
+  heater: ['V-Guard', 'Venus', 'Standard'],
 }
+
+const TIMELINE_COLUMN_COUNT = 4
+const TIMELINE_ROTATION_MS = 2000
+const TIMELINE_STAGGER_MS = 100
 
 const Brands = () => {
   const { t } = useLanguage()
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
+  const [timelineIndices, setTimelineIndices] = useState<number[]>(
+    Array(TIMELINE_COLUMN_COUNT).fill(0),
+  )
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -85,6 +98,49 @@ const Brands = () => {
 
   const visibleBrands = matchedBrands && matchedBrands.length > 0 ? matchedBrands : brandsData
   const isFiltered = matchedBrands !== null && matchedBrands.length > 0
+  const shouldUseTimeline = isFiltered && visibleBrands.length > TIMELINE_COLUMN_COUNT
+
+  const timelineColumns = useMemo(() => {
+    if (!shouldUseTimeline) return []
+
+    return Array.from({ length: TIMELINE_COLUMN_COUNT }, (_, columnIndex) =>
+      visibleBrands.filter((_, brandIndex) => brandIndex % TIMELINE_COLUMN_COUNT === columnIndex),
+    )
+  }, [shouldUseTimeline, visibleBrands])
+
+  useEffect(() => {
+    setTimelineIndices(Array(TIMELINE_COLUMN_COUNT).fill(0))
+  }, [activeFilter])
+
+  useEffect(() => {
+    if (!shouldUseTimeline) return
+
+    const timeoutIds: ReturnType<typeof setTimeout>[] = []
+    const intervalIds: ReturnType<typeof setInterval>[] = []
+
+    timelineColumns.forEach((column, columnIndex) => {
+      if (column.length <= 1) return
+
+      const timeoutId = setTimeout(() => {
+        const intervalId = setInterval(() => {
+          setTimelineIndices((current) =>
+            current.map((value, index) =>
+              index === columnIndex ? (value + 1) % column.length : value,
+            ),
+          )
+        }, TIMELINE_ROTATION_MS)
+
+        intervalIds.push(intervalId)
+      }, columnIndex * TIMELINE_STAGGER_MS)
+
+      timeoutIds.push(timeoutId)
+    })
+
+    return () => {
+      timeoutIds.forEach(clearTimeout)
+      intervalIds.forEach(clearInterval)
+    }
+  }, [shouldUseTimeline, timelineColumns])
 
   return (
     <section ref={sectionRef} className='py-10 sm:py-14 lg:py-16' id='brands'>
@@ -101,41 +157,86 @@ const Brands = () => {
           </p>
         </div>
 
-        <div className='mt-8 flex flex-wrap justify-center gap-6 items-center min-h-[80px]'>
-          <AnimatePresence mode='popLayout'>
-            {visibleBrands.map((brand) => (
-              <motion.div
-                key={brand.name}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{
-                  opacity: 1,
-                  scale: isFiltered ? 1.1 : 1,
-                  transition: { duration: 0.35 },
-                }}
-                exit={{ opacity: 0, scale: 0.6, transition: { duration: 0.2 } }}
-                className={`flex items-center justify-center p-3 sm:p-5 rounded-xl transition-shadow duration-300 ${
-                  isFiltered
-                    ? 'surface-card border-2 border-primary/40 shadow-lg shadow-primary/10'
-                    : 'surface-card border'
-                }`}
+        {shouldUseTimeline ? (
+          <div className='logo-grid mt-8 grid grid-cols-2 gap-4 md:grid-cols-4'>
+            {timelineColumns.map((column, columnIndex) => (
+              <div
+                key={`timeline-column-${columnIndex}`}
+                className='column surface-card rounded-xl border-2 border-primary/40 p-3 shadow-lg shadow-primary/10 sm:p-4'
               >
-                <Image
-                  src={brand.logo}
-                  alt={`${brand.name} logo`}
-                  width={160}
-                  height={80}
-                  className='brand-logo h-10 w-auto object-contain'
-                  sizes='(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px'
-                />
-              </motion.div>
+                <div className='grid-logo-wrapper relative h-20 sm:h-24'>
+                  {column.map((brand, brandIndex) => (
+                    <div
+                      key={brand.name}
+                      className={`grid-logo absolute inset-0 flex items-center justify-center ${
+                        brandIndex === timelineIndices[columnIndex] ? 'active' : ''
+                      }`}
+                    >
+                      <Image
+                        src={brand.logo}
+                        alt={`${brand.name} logo`}
+                        width={180}
+                        height={90}
+                        className='h-10 w-auto object-contain sm:h-12'
+                        sizes='(max-width: 640px) 140px, (max-width: 1024px) 180px, 220px'
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             ))}
-          </AnimatePresence>
-        </div>
+          </div>
+        ) : (
+          <div className='mt-8 flex flex-wrap justify-center gap-6 items-center min-h-[80px]'>
+            <AnimatePresence mode='popLayout'>
+              {visibleBrands.map((brand) => (
+                <motion.div
+                  key={brand.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: 1,
+                    scale: isFiltered ? 1.1 : 1,
+                    transition: { duration: 0.35 },
+                  }}
+                  exit={{ opacity: 0, scale: 0.6, transition: { duration: 0.2 } }}
+                  className={`flex items-center justify-center p-3 sm:p-5 rounded-xl transition-shadow duration-300 ${
+                    isFiltered
+                      ? 'surface-card border-2 border-primary/40 shadow-lg shadow-primary/10'
+                      : 'surface-card border'
+                  }`}
+                >
+                  <Image
+                    src={brand.logo}
+                    alt={`${brand.name} logo`}
+                    width={160}
+                    height={80}
+                    className='brand-logo h-10 w-auto object-contain'
+                    sizes='(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px'
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
+
+      <style jsx>{`
+        .logo-grid .grid-logo {
+          transform: translateY(-30px);
+          transition: all 0.3s ease-in-out;
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        .logo-grid .grid-logo.active {
+          transform: translateY(0);
+          visibility: visible;
+          opacity: 1;
+        }
+      `}</style>
     </section>
   )
 }
 
 export default Brands
-

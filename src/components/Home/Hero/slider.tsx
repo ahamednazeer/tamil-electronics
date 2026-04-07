@@ -25,8 +25,12 @@ const serviceToBrands: Record<string, string[]> = {
   heater: ['V-Guard', 'Venus', 'Standard'],
 }
 
+const TIMELINE_ROTATION_MS = 2000
+const TIMELINE_STAGGER_MS = 100
+
 const CardSlider = () => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
+  const [timelineTick, setTimelineTick] = useState(0)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const lastFilterTimeRef = useRef(0)
@@ -42,13 +46,7 @@ const CardSlider = () => {
 
   useEffect(() => {
     if (activeFilter) {
-      const matched = serviceToBrands[activeFilter]
-      if (matched && matched.length > 5) {
-        // More than 5 brands: let slider scroll
-        setTimeout(() => sliderRef.current?.slickPlay(), 200)
-      } else {
-        sliderRef.current?.slickPause()
-      }
+      sliderRef.current?.slickPause()
     } else {
       // Resume autoplay when cleared
       sliderRef.current?.slickPlay()
@@ -86,11 +84,6 @@ const CardSlider = () => {
       // Go to first slide after remount
       setTimeout(() => {
         sliderRef.current?.slickGoTo(0)
-        // If more than 5 matched, start autoplay after going to slide 0
-        const matched = serviceToBrands[detail.service]
-        if (matched && matched.length > 5) {
-          setTimeout(() => sliderRef.current?.slickPlay(), 300)
-        }
       }, 100)
     }
 
@@ -128,6 +121,33 @@ const CardSlider = () => {
   const matchedBrandNames = activeFilter && serviceToBrands[activeFilter]
     ? serviceToBrands[activeFilter]
     : null
+  const matchedBrands = matchedBrandNames
+    ? brandsData.filter((brand) => matchedBrandNames.includes(brand.name))
+    : []
+  const timelineColumnCount = Math.min(slidesToShowUI, Math.max(matchedBrands.length, 1))
+  const shouldUseTimeline = matchedBrands.length > timelineColumnCount
+
+  const timelineColumns = useMemo(() => {
+    if (!shouldUseTimeline) return []
+
+    const totalSlots = Math.max(matchedBrands.length, timelineColumnCount * 2)
+    const cycledBrands = Array.from({ length: totalSlots }, (_, index) =>
+      matchedBrands[index % matchedBrands.length],
+    )
+
+    return Array.from({ length: timelineColumnCount }, (_, columnIndex) => {
+      const column: typeof matchedBrands = []
+
+      cycledBrands.forEach((brand, brandIndex) => {
+        if (brandIndex % timelineColumnCount === columnIndex) {
+          column.push(brand)
+        }
+      })
+
+      return column
+    })
+  }, [matchedBrands, shouldUseTimeline, timelineColumnCount])
+
   const displayBrands = useMemo(() => {
     if (!matchedBrandNames) return brandsData
 
@@ -149,8 +169,24 @@ const CardSlider = () => {
     ]
   }, [matchedBrandNames, slidesToShowUI])
 
+  useEffect(() => {
+    setTimelineTick(0)
+  }, [activeFilter])
+
+  useEffect(() => {
+    if (!shouldUseTimeline) return
+
+    const intervalId = setInterval(() => {
+      setTimelineTick((current) => current + 1)
+    }, TIMELINE_ROTATION_MS)
+
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [shouldUseTimeline])
+
   const settings = {
-    autoplay: !activeFilter || (matchedBrandNames !== null && matchedBrandNames.length > 5),
+    autoplay: !activeFilter,
     dots: false,
     arrows: false,
     infinite: true,
@@ -196,36 +232,86 @@ const CardSlider = () => {
         Trusted Brands We Carry
       </p>
 
-      <Slider key={activeFilter || 'all'} ref={sliderRef} {...settings} className="outline-none focus:outline-none">
-        {displayBrands.map((item) => {
-          const isMatch = !matchedBrandNames || matchedBrandNames.includes(item.name)
-          const isDimmed = matchedBrandNames !== null && !matchedBrandNames.includes(item.name)
-          return (
-            <div key={item.name} className='px-1 sm:px-3 outline-none focus:outline-none'>
-              <div
-                className='flex items-center justify-center w-[80px] h-[40px] sm:w-[120px] sm:h-[50px] lg:w-[150px] lg:h-[60px] mx-auto'
-                style={{
-                  opacity: isDimmed ? 0.15 : 1,
-                  transform: isDimmed ? 'scale(0.85)' : (isMatch && matchedBrandNames) ? 'scale(1.1)' : 'scale(1)',
-                  filter: isDimmed ? 'grayscale(100%)' : 'none',
-                }}
-              >
-                <Image
-                  src={item.logo}
-                  alt={`Authorized ${item.name} Dealer in Virudhachalam`}
-                  width={150}
-                  height={60}
-                  sizes='(max-width: 640px) 80px, (max-width: 1024px) 120px, 150px'
-                  className='object-contain w-full h-full pointer-events-none'
-                  style={{
-                    filter: (isMatch && matchedBrandNames) ? 'drop-shadow(0 4px 12px rgba(0,0,0,0.15))' : 'none',
-                  }}
-                />
+      {shouldUseTimeline ? (
+        <div
+          className='logo-grid grid gap-3 sm:gap-4'
+          style={{ gridTemplateColumns: `repeat(${timelineColumnCount}, minmax(0, 1fr))` }}
+        >
+          {timelineColumns.map((column, columnIndex) => (
+            <div
+              key={`timeline-column-${columnIndex}`}
+              className='column flex items-center justify-center'
+            >
+              <div className='grid-logo-wrapper relative w-[80px] h-[40px] sm:w-[120px] sm:h-[50px] lg:w-[150px] lg:h-[60px] mx-auto'>
+                {column.map((brand, brandIndex) => (
+                  <div
+                    key={`${brand.name}-${brandIndex}`}
+                    className={`grid-logo absolute inset-0 flex items-center justify-center ${
+                      brandIndex === ((timelineTick + columnIndex) % column.length) ? 'active' : ''
+                    }`}
+                    style={{ transitionDelay: `${columnIndex * TIMELINE_STAGGER_MS}ms` }}
+                  >
+                    <Image
+                      src={brand.logo}
+                      alt={`Authorized ${brand.name} Dealer in Virudhachalam`}
+                      width={150}
+                      height={60}
+                      sizes='(max-width: 640px) 110px, (max-width: 1024px) 130px, 150px'
+                      className='object-contain w-full h-full pointer-events-none'
+                    />
+                  </div>
+                ))}
               </div>
             </div>
-          )
-        })}
-      </Slider>
+          ))}
+        </div>
+      ) : (
+        <Slider key={activeFilter || 'all'} ref={sliderRef} {...settings} className="outline-none focus:outline-none">
+          {displayBrands.map((item) => {
+            const isMatch = !matchedBrandNames || matchedBrandNames.includes(item.name)
+            const isDimmed = matchedBrandNames !== null && !matchedBrandNames.includes(item.name)
+            return (
+              <div key={item.name} className='px-1 sm:px-3 outline-none focus:outline-none'>
+                <div
+                  className='flex items-center justify-center w-[80px] h-[40px] sm:w-[120px] sm:h-[50px] lg:w-[150px] lg:h-[60px] mx-auto'
+                  style={{
+                    opacity: isDimmed ? 0.15 : 1,
+                    transform: isDimmed ? 'scale(0.85)' : 'scale(1)',
+                    filter: isDimmed ? 'grayscale(100%)' : 'none',
+                  }}
+                >
+                  <Image
+                    src={item.logo}
+                    alt={`Authorized ${item.name} Dealer in Virudhachalam`}
+                    width={150}
+                    height={60}
+                    sizes='(max-width: 640px) 80px, (max-width: 1024px) 120px, 150px'
+                    className='object-contain w-full h-full pointer-events-none'
+                    style={{
+                      filter: (isMatch && matchedBrandNames) ? 'drop-shadow(0 4px 12px rgba(0,0,0,0.15))' : 'none',
+                    }}
+                  />
+                </div>
+              </div>
+            )
+          })}
+        </Slider>
+      )}
+
+      <style jsx>{`
+        .logo-grid .grid-logo {
+          transform: translateY(-30px);
+          transition: all 0.3s ease-in-out;
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        .logo-grid .grid-logo.active {
+          transform: translateY(0);
+          visibility: visible;
+          opacity: 1;
+        }
+      `}</style>
 
     </div>
   )
