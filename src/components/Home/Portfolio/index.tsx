@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { Bebas_Neue, DM_Mono } from 'next/font/google'
 import { useEffect, useRef, useState } from 'react'
-import { useTheme } from 'next-themes'
 import { useLanguage } from '@/context/LanguageContext'
 
 const bebasNeue = Bebas_Neue({
@@ -36,7 +35,6 @@ const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)
 
 const Portfolio = () => {
   const { t, language } = useLanguage()
-  const { resolvedTheme, setTheme } = useTheme()
   const storyRef = useRef<HTMLDivElement>(null)
   const panelRefs = useRef<Array<HTMLElement | null>>([])
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([])
@@ -49,7 +47,6 @@ const Portfolio = () => {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   const isEnglish = language === 'en'
-  const isDark = resolvedTheme === 'dark'
 
   const featuredProducts = [
     {
@@ -260,34 +257,6 @@ const Portfolio = () => {
             </div>
             <div className='portfolio-cube-hud-label'>{activeProduct.title}</div>
           </div>
-
-          <button
-            type='button'
-            className='portfolio-cube-theme-toggle'
-            aria-label={t('portfolio.toggle_theme')}
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}>
-            <svg
-              className={`portfolio-cube-theme-icon ${
-                isDark ? 'portfolio-cube-theme-icon-hidden' : ''
-              }`}
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='1.5'>
-              <circle cx='12' cy='12' r='4' />
-              <path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41' />
-            </svg>
-            <svg
-              className={`portfolio-cube-theme-icon ${
-                isDark ? '' : 'portfolio-cube-theme-icon-hidden'
-              }`}
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='1.5'>
-              <path d='M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z' />
-            </svg>
-          </button>
         </div>
 
         <div className='portfolio-cube-panels'>
@@ -487,43 +456,6 @@ const Portfolio = () => {
           text-wrap: balance;
         }
 
-        .portfolio-cube-theme-toggle {
-          position: absolute;
-          left: 1.5rem;
-          bottom: 1.5rem;
-          width: 2.75rem;
-          height: 2.75rem;
-          border-radius: 999px;
-          border: 1px solid color-mix(in srgb, var(--theme-border) 78%, transparent);
-          background: color-mix(in srgb, var(--theme-bg-card) 76%, transparent);
-          color: var(--theme-text);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          pointer-events: auto;
-          cursor: pointer;
-          backdrop-filter: blur(16px);
-          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
-          transition: transform 200ms ease, background 200ms ease;
-        }
-
-        .portfolio-cube-theme-toggle:hover {
-          transform: translateY(-2px);
-          background: color-mix(in srgb, var(--theme-bg-card) 88%, transparent);
-        }
-
-        .portfolio-cube-theme-icon {
-          position: absolute;
-          width: 1rem;
-          height: 1rem;
-          transition: opacity 200ms ease, transform 200ms ease;
-        }
-
-        .portfolio-cube-theme-icon-hidden {
-          opacity: 0;
-          transform: rotate(90deg);
-        }
-
         .portfolio-cube-panels {
           position: relative;
           z-index: 1;
@@ -559,11 +491,6 @@ const Portfolio = () => {
             top: 1rem;
             right: 1rem;
             width: min(9rem, calc(100vw - 2rem));
-          }
-
-          .portfolio-cube-theme-toggle {
-            left: 1rem;
-            bottom: 1rem;
           }
 
           .portfolio-cube-object {
