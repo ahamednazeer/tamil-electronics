@@ -13,6 +13,11 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (item.serviceKey && typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('service-filter', { detail: { service: item.serviceKey, source: 'hover' } })
+      );
+    }
     if (item.submenu) {
       setSubmenuOpen(true);
     }
@@ -34,6 +39,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
     >
       <Link
         href={item.href}
+        data-service-link={item.serviceKey ? true : undefined}
         className={`flex items-center font-medium hover:text-primary whitespace-nowrap capitalized ${
           language === 'ta' ? 'text-[14px] 2xl:text-[15.5px]' : 'text-[15.5px]'
         } ${path === item.href ? "text-primary " : " text-muted "}`}

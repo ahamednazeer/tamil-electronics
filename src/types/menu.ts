@@ -5,8 +5,9 @@ export type SubmenuItem = {
     serviceKey?: string;
   };    
   
-  export type HeaderItem = {
+export type HeaderItem = {
     label: string;
     href: string;
+    serviceKey?: string;
     submenu?: SubmenuItem[];
   };

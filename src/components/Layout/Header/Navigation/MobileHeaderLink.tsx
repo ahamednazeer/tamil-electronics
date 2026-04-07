@@ -20,11 +20,18 @@ const MobileHeaderLink: React.FC<MobileHeaderLinkProps> = ({ item, onNavigate })
     <div className="relative w-full">
       <Link
         href={item.href}
+        data-service-link={item.serviceKey ? true : undefined}
         onClick={(event) => {
           if (item.submenu) {
             event.preventDefault();
             handleToggle();
             return;
+          }
+          if (item.serviceKey && typeof window !== 'undefined') {
+            event.preventDefault();
+            window.dispatchEvent(
+              new CustomEvent('service-filter', { detail: { service: item.serviceKey, source: 'menu' } })
+            );
           }
           onNavigate?.();
         }}
