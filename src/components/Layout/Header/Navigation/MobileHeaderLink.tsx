@@ -78,6 +78,7 @@ const MobileHeaderLink: React.FC<MobileHeaderLinkProps> = ({ item, onNavigate })
               }}
               className="block rounded-lg px-3 py-2 text-sm font-medium text-midnight_text dark:text-white hover:text-primary hover:bg-primary/10 transition-colors"
             >
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               {subItem.translationKey ? (t(`menu.submenus.${subItem.translationKey}` as any) as string) : subItem.label}
             </Link>
           ))}

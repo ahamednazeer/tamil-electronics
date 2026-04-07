@@ -31,7 +31,6 @@ const CardSlider = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const lastFilterTimeRef = useRef(0)
   const sliderRef = useRef<Slider>(null)
-  const wheelThrottleRef = useRef(0)
 
   const clearFilter = useCallback(() => {
     setActiveFilter(null)
@@ -188,7 +187,11 @@ const CardSlider = () => {
   }
 
   return (
-    <div ref={containerRef} className='mt-6 sm:mt-10 lg:mt-12 pt-4 sm:pt-5 lg:pt-6 overflow-hidden'>
+    <div
+      id='trusted-brands'
+      ref={containerRef}
+      className='mt-6 sm:mt-10 lg:mt-12 pt-4 sm:pt-5 lg:pt-6 overflow-hidden scroll-mt-28'
+    >
       <p className='text-muted text-center mb-3 sm:mb-4 lg:mb-5 text-xs sm:text-base lg:text-lg'>
         Trusted Brands We Carry
       </p>

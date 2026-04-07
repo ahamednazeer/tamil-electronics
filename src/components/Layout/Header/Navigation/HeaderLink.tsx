@@ -11,12 +11,17 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const path = usePathname();
 
+  const dispatchServiceFilter = (serviceKey: string, source: 'hover' | 'menu') => {
+    if (typeof window === 'undefined') return;
+    window.dispatchEvent(
+      new CustomEvent('service-filter', { detail: { service: serviceKey, source } })
+    );
+  };
+
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    if (item.serviceKey && typeof window !== 'undefined') {
-      window.dispatchEvent(
-        new CustomEvent('service-filter', { detail: { service: item.serviceKey, source: 'hover' } })
-      );
+    if (item.serviceKey) {
+      dispatchServiceFilter(item.serviceKey, 'hover');
     }
     if (item.submenu) {
       setSubmenuOpen(true);
@@ -40,6 +45,11 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
       <Link
         href={item.href}
         data-service-link={item.serviceKey ? true : undefined}
+        onClick={(event) => {
+          if (!item.serviceKey || item.submenu) return;
+          event.preventDefault();
+          dispatchServiceFilter(item.serviceKey, 'menu');
+        }}
         className={`flex items-center font-medium hover:text-primary whitespace-nowrap capitalized ${
           language === 'ta' ? 'text-[14px] 2xl:text-[15.5px]' : 'text-[15.5px]'
         } ${path === item.href ? "text-primary " : " text-muted "}`}
@@ -71,10 +81,8 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
               const isActive = path === subItem.href; 
               
               const handleSubItemHover = () => {
-                if (subItem.serviceKey && typeof window !== 'undefined') {
-                  window.dispatchEvent(
-                    new CustomEvent('service-filter', { detail: { service: subItem.serviceKey, source: 'hover' } })
-                  );
+                if (subItem.serviceKey) {
+                  dispatchServiceFilter(subItem.serviceKey, 'hover');
                 }
               };
 
@@ -89,9 +97,15 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
                       ? "bg-primary/10 text-primary font-semibold"
                       : "text-muted hover:bg-black/5 dark:hover:bg-white/10 hover:text-midnight_text dark:hover:text-white"
                   }`}
-                  onClick={() => setSubmenuOpen(false)}
+                  onClick={(event) => {
+                    setSubmenuOpen(false);
+                    if (!subItem.serviceKey) return;
+                    event.preventDefault();
+                    dispatchServiceFilter(subItem.serviceKey, 'menu');
+                  }}
                 >
                   <span className="text-[14px] font-medium transition-transform duration-200 group-hover/link:translate-x-1">
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {subItem.translationKey ? (t(`menu.submenus.${subItem.translationKey}` as any) as string) : subItem.label}
                   </span>
                   
