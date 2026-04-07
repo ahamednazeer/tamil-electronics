@@ -97,6 +97,11 @@
         "title_start": "Everything for",
         "title_highlight": "Home & Industry",
         "description": "Wires, pipes, switches, lights, fans, pumps, and more — all in one place.",
+        "feature_label": "Featured Product",
+        "nav_back": "Back",
+        "nav_next": "Turn",
+        "view_catalog": "View Catalog",
+        "toggle_theme": "Toggle light and dark mode",
         "items": {
             "led": {
                 "title": "LED Lights",

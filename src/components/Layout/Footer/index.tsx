@@ -12,6 +12,7 @@ import { locationsData } from '@/data/locations'
 import { formatTime } from '@/lib/time'
 import VisitorCounter from '@/components/common/VisitorCounter'
 import StoreStatus from '@/components/Home/Contact/StoreStatus'
+import InteractiveFooterLine from './InteractiveFooterLine'
 
 const socialLinks = [
   {
@@ -45,12 +46,11 @@ const Footer: FC = () => {
       <div className='footer-orb footer-orb--primary' aria-hidden='true' />
       <div className='footer-orb footer-orb--accent' aria-hidden='true' />
 
-      {/* Top accent line */}
-      <div className='footer-accent-line' aria-hidden='true' />
+      <InteractiveFooterLine />
 
       <div className='container px-4 sm:px-6 relative z-[1]'>
         {/* Main footer grid */}
-        <div className='grid grid-cols-2 md:grid-cols-12 gap-6 lg:gap-10 pt-8 sm:pt-10 pb-6 sm:pb-8'>
+        <div className='grid grid-cols-2 md:grid-cols-12 gap-6 lg:gap-10 pt-16 sm:pt-20 pb-6 sm:pb-8'>
 
           {/* Brand Column */}
           <div className='col-span-2 md:col-span-6 lg:col-span-4'>
