@@ -9,13 +9,13 @@ import { motion, AnimatePresence } from 'motion/react'
 // Map each service key to the brand names it relates to
 const brandMappings: Record<string, string[]> = {
   wiring: ['RR Kabel', 'Finolex', 'Kundan', 'Luker', 'Norwood'],
-  switches: ['GM', 'Legrand', 'Fybros'],
+  switches: ['GM', 'Legrand', 'Fybros', 'Hi-Fi'],
   switchgear: ['Legrand', 'GM', 'Polycab', 'Havells'],
-  lights: ['Philips', 'GM', 'Fybros', 'Luker', 'Sturlite', 'Surya'],
+  lights: ['Philips', 'GM', 'Fybros', 'Luker', 'Sturlite', 'Surya', 'MAC 9'],
   conduits: ['Finolex', 'Ashirvad'],
   pipes: ['Ashirvad', 'Aquatech'],
-  fittings: ['Parryware', 'Supreme'],
-  tanks: ['Aquatech'],
+  fittings: ['Parryware', 'Supreme', 'Watertech', 'Danis'],
+  tanks: ['Ashirvad', 'Aquatech'],
   pumps: ['V-Guard', 'Crompton', 'Suguna'],
   fans: ['Philips', 'Orient', 'Crompton', 'GM', 'V-Guard', 'CG', 'Fybros', 'Luker', 'Standard', 'Havells'],
   bldc: ['Philips', 'Atomberg', 'V-Guard', 'Luker', 'Standard', 'GM'],

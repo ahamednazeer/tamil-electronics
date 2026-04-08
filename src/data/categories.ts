@@ -16,7 +16,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'Electrical Wires & Cables Shop in Virudhachalam | Top Brands',
     seoDescription: 'Shop high-quality, fire-resistant residential and commercial electrical wires in Virudhachalam. We stock RR Kabel, Finolex, Polycab, and Kundan Cab.',
     keyFeatures: ['Fire Resistant (FR)', 'Industrial Cables', 'House Wiring', 'Copper Wires', 'Affordable Pricing'],
-    brands: ['RR Kabel', 'Finolex', 'Polycab', 'Kundan']
+    brands: ['RR Kabel', 'Finolex', 'Kundan', 'Luker', 'Norwood']
   },
   {
     name: 'Modular Switches & Sockets',
@@ -25,7 +25,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'Modular Switches & Sockets Dealer in Virudhachalam',
     seoDescription: 'Upgrade your home with modern, designer modular switches and durable electrical sockets. Best prices on GM, Legrand, and Fybros in Virudhachalam.',
     keyFeatures: ['Designer Switches', 'Child Safe Sockets', 'Smart Home Integration', 'Durable Build', 'Luxury Finishes'],
-    brands: ['GM Modular', 'Legrand', 'Norwood', 'Fybros']
+    brands: ['GM', 'Legrand', 'Fybros', 'Hi-Fi']
   },
   {
     name: 'Switchgear & MCBs',
@@ -34,7 +34,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'Switchgear, MCBs & Distribution Boards in Virudhachalam',
     seoDescription: 'Ensure safety with premium MCBs, RCCBs, and distribution boards. Buy commercial and residential switchgear components from Tamil Electricals.',
     keyFeatures: ['Short-Circuit Protection', 'Heavy Duty Distribution Boards', 'RCCB & Isolators', 'Industrial Grade', 'Official Warranty'],
-    brands: ['Legrand', 'Havells', 'Standard', 'GM Modular']
+    brands: ['Legrand', 'GM', 'Polycab', 'Havells']
   },
   {
     name: 'LED Lighting',
@@ -43,7 +43,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'LED Lighting, Bulbs & Commercial Fixtures in Virudhachalam',
     seoDescription: 'Brighten your space with energy-efficient LED panels, tube lights, and outdoor fixtures. Visit Tamil Electricals for Philips, Surya, and Luker lighting.',
     keyFeatures: ['Energy Saving', 'Indoor & Outdoor Panels', 'Decorative Chandelier Lights', 'Street Lights', 'Long Lifespan'],
-    brands: ['Philips', 'Surya', 'Luker', 'Sturlite']
+    brands: ['Philips', 'GM', 'Fybros', 'Luker', 'Sturlite', 'Surya', 'MAC 9']
   },
   {
     name: 'Ceiling Fans & Exhausts',
@@ -52,7 +52,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'Ceiling Fans, BLDC & Exhaust Fans Shop in Virudhachalam',
     seoDescription: 'Buy high-speed designer ceiling fans, industrial exhausts, and energy-saving BLDC fans at Tamil Electricals in Virudhachalam.',
     keyFeatures: ['Energy Saving BLDC', 'Remote Controlled Fans', 'Silent Operation', 'Decorative Finishes', 'Heavy Duty Exhausts'],
-    brands: ['Atomberg', 'Orient', 'Crompton', 'Philips']
+    brands: ['Philips', 'Orient', 'Crompton', 'GM', 'V-Guard', 'CG', 'Fybros', 'Luker', 'Standard', 'Havells', 'Atomberg']
   },
   {
     name: 'PVC & Plumbing Pipes',
@@ -61,7 +61,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'PVC, CPVC & UPVC Plumbing Pipes Dealer in Virudhachalam',
     seoDescription: 'Buy highly durable, leak-proof electrical conduits and agricultural plumbing pipes from Ashirvad and Supreme at Tamil Electricals.',
     keyFeatures: ['Corrosion Free CPVC', 'Underground Wiring PVC', 'Agriculture Pipes', 'Leak-Proof Joints', 'High Pressure Rating'],
-    brands: ['Ashirvad', 'Supreme', 'Finolex']
+    brands: ['Ashirvad', 'Aquatech', 'Finolex']
   },
   {
     name: 'Water Pumps & Motors',
@@ -70,7 +70,7 @@ export const categoriesData: CategoryData[] = [
     seoTitle: 'Water Motors & Agricultural Borewell Pumps in Virudhachalam',
     seoDescription: 'Get robust agricultural borewell motors, domestic water pumps, and pressure boosters. Authorized dealer for Crompton, Suguna, and V-Guard.',
     keyFeatures: ['Heavy Duty Borewell', 'Domestic Monoblock', 'Submersible Pumps', 'Low Voltage Start', 'High Efficiency'],
-    brands: ['Crompton', 'Suguna', 'V-Guard', 'CG']
+    brands: ['V-Guard', 'Crompton', 'Suguna']
   },
   {
     name: 'Water Heaters & Geysers',

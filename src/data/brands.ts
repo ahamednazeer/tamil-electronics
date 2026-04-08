@@ -14,7 +14,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/finolex.webp',
     seoTitle: 'Authorized Finolex Wires & Cables Dealer in Virudhachalam | Tamil Electricals',
     seoDescription: 'Get genuine Finolex wires, cables, and conduits at Tamil Electricals in Virudhachalam. Trusted dealer for residential and commercial electrical wiring.',
-    categories: ['Wires & Cables', 'Conduits']
+    categories: ['Wires & Cables', 'Electrical Conduits & Fittings']
   },
   { 
     name: 'Havells', 
@@ -22,7 +22,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/havells.webp',
     seoTitle: 'Havells Electrical Products & Switchgear Shop in Virudhachalam',
     seoDescription: 'Buy Havells fans, switchgear, MCBs, and home appliances at Tamil Electricals, Virudhachalam. Premium quality electricals with warranty.',
-    categories: ['Fans', 'Switchgear', 'Appliances']
+    categories: ['Fan', 'Switch Gear']
   },
   { 
     name: 'Orient', 
@@ -30,7 +30,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/orient.webp',
     seoTitle: 'Orient Electric Fans & Lighting Dealer in Virudhachalam',
     seoDescription: 'Explore a wide range of Orient ceiling fans, exhaust fans, and LED lighting solutions at Tamil Electricals in Virudhachalam.',
-    categories: ['Fans', 'Lighting']
+    categories: ['Fan']
   },
   { 
     name: 'Crompton', 
@@ -38,7 +38,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/crompton.webp',
     seoTitle: 'Crompton Water Pumps & Fans Distributor in Virudhachalam',
     seoDescription: 'Top-quality Crompton agricultural pumps, domestic water motors, and ceiling fans available at Tamil Electricals, Virudhachalam.',
-    categories: ['Pumps', 'Fans']
+    categories: ['Pumps', 'Fan']
   },
   { 
     name: 'Polycab', 
@@ -46,7 +46,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/polycab.webp',
     seoTitle: 'Polycab Wires & Switchgear Retailer in Virudhachalam',
     seoDescription: 'Original Polycab electrical wires, cables, and switchgear available at Tamil Electricals for safe and reliable power distribution.',
-    categories: ['Wires & Cables', 'Switchgear']
+    categories: ['Switch Gear']
   },
   { 
     name: 'RR Kabel', 
@@ -62,7 +62,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/luker.webp',
     seoTitle: 'Luker LED Lights & Electricals Dealer in Virudhachalam',
     seoDescription: 'Energy-efficient Luker LED lighting, panels, and strictly tested electrical wires available at Tamil Electricals, Virudhachalam.',
-    categories: ['Lighting', 'Wires & Cables']
+    categories: ['Lighting System', 'Wiring & Cables', 'Fan', 'BLDC Fan']
   },
   { 
     name: 'Norwood', 
@@ -70,7 +70,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/norwood.webp',
     seoTitle: 'Norwood Modular Switches & Wiring in Virudhachalam',
     seoDescription: 'Upgrade your home with Norwood modular switches and safe wiring solutions, widely available at Tamil Electricals, Virudhachalam.',
-    categories: ['Switches', 'Wires & Cables']
+    categories: ['Wiring & Cables']
   },
   { 
     name: 'Philips', 
@@ -78,7 +78,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/philips.webp',
     seoTitle: 'Philips Lighting & Home Appliances Dealer in Virudhachalam',
     seoDescription: 'Brighten your space with Philips LED bulbs, tube lights, and fixtures from Tamil Electricals in Virudhachalam.',
-    categories: ['Lighting']
+    categories: ['Lighting System', 'Fan', 'BLDC Fan']
   },
   { 
     name: 'Surya', 
@@ -86,7 +86,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/surya.webp',
     seoTitle: 'Surya LED Lights & Home Appliances Shop in Virudhachalam',
     seoDescription: 'Buy Surya Roshni LED panels, bulbs, and home electrical solutions at the most competitive local prices in Virudhachalam from Tamil Electricals.',
-    categories: ['Lighting', 'Appliances']
+    categories: ['Lighting System']
   },
   { 
     name: 'Sturlite', 
@@ -94,7 +94,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/sturlite.webp',
     seoTitle: 'Sturlite Electrical Fittings in Virudhachalam',
     seoDescription: 'Tamil Electricals is your trusted local source for high-quality Sturlite electrical fittings and commercial lighting solutions in Virudhachalam.',
-    categories: ['Lighting']
+    categories: ['Lighting System']
   },
   { 
     name: 'Ashirvad', 
@@ -102,7 +102,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/ashirvad.webp',
     seoTitle: 'Ashirvad CPVC & UPVC Pipes Dealer in Virudhachalam',
     seoDescription: 'Durable and leak-proof Ashirvad plumbing pipes, CPVC, and UPVC fittings available for all water line needs at Tamil Electricals.',
-    categories: ['Pipes', 'Plumbing']
+    categories: ['Electrical Conduits & Fittings', 'Pipe & Fittings', 'Water Tanks']
   },
   { 
     name: 'Aquatech', 
@@ -110,7 +110,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/aquatech.webp',
     seoTitle: 'Aquatech Water Tanks & Plumbing Solutions in Virudhachalam',
     seoDescription: 'Heavy-duty Aquatech water storage tanks and reliable plumbing products. Visit Tamil Electricals in Virudhachalam today.',
-    categories: ['Water Tanks', 'Plumbing']
+    categories: ['Pipe & Fittings', 'Water Tanks']
   },
   { 
     name: 'Parryware', 
@@ -118,7 +118,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/parryware.webp',
     seoTitle: 'Parryware Bathroom Fittings & Sanitaryware in Virudhachalam',
     seoDescription: 'Find premium Parryware bathroom fittings, taps, and sanitary plumbing solutions at Tamil Electricals, Virudhachalam.',
-    categories: ['Bathroom Fittings']
+    categories: ['Bathroom Tap & Fittings']
   },
   { 
     name: 'Supreme', 
@@ -126,7 +126,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/supreme.webp',
     seoTitle: 'Supreme PVC Pipes & Plumbing Dealer in Virudhachalam',
     seoDescription: 'Buy Supreme PVC pipes and plumbing fittings for agriculture and housing at Tamil Electricals in Virudhachalam.',
-    categories: ['Pipes', 'Plumbing']
+    categories: ['Bathroom Tap & Fittings']
   },
   { 
     name: 'V-Guard', 
@@ -134,7 +134,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/v-guard.webp',
     seoTitle: 'V-Guard Stabilizers, Water Heaters & Pumps in Virudhachalam',
     seoDescription: 'Protect your appliances with V-Guard voltage stabilizers, and shop V-Guard water heaters and pumps at Tamil Electricals.',
-    categories: ['Stabilizers', 'Heaters', 'Pumps']
+    categories: ['Pumps', 'Fan', 'BLDC Fan', 'Stabilizers', 'Air Cooler', 'Water Heater']
   },
   { 
     name: 'Atomberg', 
@@ -142,7 +142,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/atomberg.webp',
     seoTitle: 'Atomberg BLDC Energy Saving Fans in Virudhachalam',
     seoDescription: 'Save heavily on your electricity bill with Atomberg remote-controlled BLDC ceiling fans, available at Tamil Electricals dealer in Virudhachalam.',
-    categories: ['Fans', 'BLDC Fans']
+    categories: ['BLDC Fan']
   },
   { 
     name: 'Venus', 
@@ -150,7 +150,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/venus.webp',
     seoTitle: 'Venus Water Heaters & Geysers Shop in Virudhachalam',
     seoDescription: 'Reliable, instant, and storage Venus water heaters (geysers) sold with official local warranty at Tamil Electricals in Virudhachalam.',
-    categories: ['Heaters']
+    categories: ['Water Heater']
   },
   { 
     name: 'Standard', 
@@ -158,7 +158,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/standard.webp',
     seoTitle: 'Standard Electricals Switchgear & Fans in Virudhachalam',
     seoDescription: 'Buy trusted Standard electrical products, durable switchgear components, and modern fans at Tamil Electricals.',
-    categories: ['Switchgear', 'Fans']
+    categories: ['Fan', 'BLDC Fan', 'Water Heater']
   },
   { 
     name: 'Suguna', 
@@ -174,7 +174,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/cg.webp',
     seoTitle: 'Crompton Greaves (CG) Fans & Motors Dealer in Virudhachalam',
     seoDescription: 'Shop heavy-duty industrial and domestic CG fans and powerful commercial motors at Tamil Electricals.',
-    categories: ['Fans', 'Motors']
+    categories: ['Fan']
   },
   { 
     name: 'GM', 
@@ -182,7 +182,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/gm-modular.webp',
     seoTitle: 'GM Modular Switches & Smart Home Solutions in Virudhachalam',
     seoDescription: 'Upgrade to designer GM modular switches, sockets, and LED lighting fixtures safely at Tamil Electricals in Virudhachalam.',
-    categories: ['Switches', 'Lighting']
+    categories: ['Switch & Sockets', 'Switch Gear', 'Lighting System', 'Fan', 'BLDC Fan']
   },
   { 
     name: 'Legrand', 
@@ -190,7 +190,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/legrand.webp',
     seoTitle: 'Legrand Premium Modular Switches & MCBs in Virudhachalam',
     seoDescription: 'Shop world-class Legrand electrical switches, robust MCBs, and safe distribution boards imported at Tamil Electricals.',
-    categories: ['Switches', 'Switchgear']
+    categories: ['Switch & Sockets', 'Switch Gear']
   },
   { 
     name: 'Fybros', 
@@ -198,7 +198,7 @@ export const brandsData: BrandData[] = [
     logo: '/images/brands/fybros.webp',
     seoTitle: 'Fybros Wires, Switches & Electricals in Virudhachalam',
     seoDescription: 'Tamil Electricals supplies highly rated Fybros electrical house wires, modular switches, and consumer lighting in Virudhachalam.',
-    categories: ['Wires & Cables', 'Switches', 'Lighting']
+    categories: ['Switch & Sockets', 'Lighting System', 'Fan']
   },
   { 
     name: 'Kundan', 
